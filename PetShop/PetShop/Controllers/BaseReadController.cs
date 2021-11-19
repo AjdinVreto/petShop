@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace PetShop.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class BaseReadController<T, TSearch> : ControllerBase where T: class where TSearch: class
     {
         protected readonly IReadService<T, TSearch> _service;
@@ -22,6 +22,12 @@ namespace PetShop.Controllers
         public virtual IList<T> Get([FromQuery]TSearch search)
         {
             return _service.Get(search);
+        }
+
+        [HttpGet("{id}")]
+        public virtual T GetById(int id)
+        {
+            return _service.GetById(id);
         }
     }
 }

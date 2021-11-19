@@ -25,5 +25,14 @@ namespace PetShop.Services
 
             return _mapper.Map<List<T>>(list);
         }
+
+        public virtual T GetById(int id)
+        {
+            var entity = ctx.Set<Tdb>();
+
+            var result = entity.Find(id);
+
+            return _mapper.Map<T>(result);
+        }
     }
 }

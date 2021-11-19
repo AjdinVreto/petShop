@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShop", "PetShop\PetShop.csproj", "{FA2C18C8-EF2F-4679-884D-2CDC8693AF58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShop.Model", "PetShop.Model\PetShop.Model.csproj", "{412F3A19-8270-48F7-9380-3CB471E9A122}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShop.Model", "PetShop.Model\PetShop.Model.csproj", "{412F3A19-8270-48F7-9380-3CB471E9A122}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShop.WinUI", "PetShop.WinUI\PetShop.WinUI.csproj", "{935DDBAF-F5C9-4609-9A37-5A0C39F5A208}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{412F3A19-8270-48F7-9380-3CB471E9A122}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{412F3A19-8270-48F7-9380-3CB471E9A122}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{412F3A19-8270-48F7-9380-3CB471E9A122}.Release|Any CPU.Build.0 = Release|Any CPU
+		{935DDBAF-F5C9-4609-9A37-5A0C39F5A208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{935DDBAF-F5C9-4609-9A37-5A0C39F5A208}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{935DDBAF-F5C9-4609-9A37-5A0C39F5A208}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{935DDBAF-F5C9-4609-9A37-5A0C39F5A208}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -16,7 +16,7 @@ namespace PetShop.Mapping
             CreateMap<Database.Kategorija, Model.Kategorija>();
             CreateMap<Database.Komentar, Model.Komentar>();
             CreateMap<Database.Kontakt, Model.Kontakt>();
-            CreateMap<Database.Korisnik, Model.Korisnik>();
+            CreateMap<Database.Korisnik, Model.Korisnik>().ReverseMap();
             CreateMap<Database.KorisnikRola, Model.KorisnikRola>();
             CreateMap<Database.Narudzba, Model.Narudzba>();
             CreateMap<Database.NarudzbaProizvod, Model.NarudzbaProizvod>();

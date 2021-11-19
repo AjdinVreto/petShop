@@ -41,8 +41,9 @@ namespace PetShop
 
             services.AddSwaggerGen();
 
-            services.AddScoped<IDrzaveTest, DrzaveService>();
             services.AddScoped<IProizvodService, ProizvodService>();
+            services.AddScoped<IKorisnikService, KorisnikService>();
+            services.AddScoped<IReadService<Model.Rola, object>, BaseReadService<Model.Rola, Database.Rola, object>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
