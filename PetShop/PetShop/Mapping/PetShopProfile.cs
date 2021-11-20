@@ -21,7 +21,6 @@ namespace PetShop.Mapping
             CreateMap<Database.Narudzba, Model.Narudzba>();
             CreateMap<Database.NarudzbaProizvod, Model.NarudzbaProizvod>();
             CreateMap<Database.Novost, Model.Novost>();
-            CreateMap<Database.Osoba, Model.Osoba>();
             CreateMap<Database.PopustKupon, Model.PopustKupon>();
             CreateMap<Database.Poslovnica, Model.Poslovnica>();
             CreateMap<Database.Proizvod, Model.Proizvod>();

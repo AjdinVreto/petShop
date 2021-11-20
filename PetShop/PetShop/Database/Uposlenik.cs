@@ -10,10 +10,10 @@ namespace PetShop.Database
         public int Id { get; set; }
         public DateTime DatumZaposlenja { get; set; }
         public bool Aktivan { get; set; }
-        public int OsobaId { get; set; }
+        public int KorisnikId { get; set; }
         public int PoslovnicaId { get; set; }
 
-        public virtual Osoba Osoba { get; set; }
+        public virtual Korisnik Korisnik { get; set; }
         public virtual Poslovnica Poslovnica { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace PetShop.Database
     {
         public Grad()
         {
-            Osobas = new HashSet<Osoba>();
+            Korisniks = new HashSet<Korisnik>();
             Poslovnicas = new HashSet<Poslovnica>();
         }
 
@@ -18,7 +18,7 @@ namespace PetShop.Database
         public int DrzavaId { get; set; }
 
         public virtual Drzava Drzava { get; set; }
-        public virtual ICollection<Osoba> Osobas { get; set; }
+        public virtual ICollection<Korisnik> Korisniks { get; set; }
         public virtual ICollection<Poslovnica> Poslovnicas { get; set; }
     }
 }

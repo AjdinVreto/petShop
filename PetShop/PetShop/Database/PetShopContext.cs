@@ -27,7 +27,6 @@ namespace PetShop.Database
         public virtual DbSet<Narudzba> Narudzbas { get; set; }
         public virtual DbSet<NarudzbaProizvod> NarudzbaProizvods { get; set; }
         public virtual DbSet<Novost> Novosts { get; set; }
-        public virtual DbSet<Osoba> Osobas { get; set; }
         public virtual DbSet<PopustKupon> PopustKupons { get; set; }
         public virtual DbSet<Poslovnica> Poslovnicas { get; set; }
         public virtual DbSet<Proizvod> Proizvods { get; set; }
@@ -43,7 +42,7 @@ namespace PetShop.Database
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=localhost,1433;Initial Catalog=PetShop; user=sa; Password=Asroma11927");
+                optionsBuilder.UseSqlServer("Data Source=localhost, 1433;Initial Catalog=PetShop; user=sa; Password=Asroma11927");
             }
         }
 
@@ -86,11 +85,11 @@ namespace PetShop.Database
 
                 entity.Property(e => e.Tekst).IsRequired();
 
-                entity.HasOne(d => d.Osoba)
+                entity.HasOne(d => d.Korisnik)
                     .WithMany(p => p.Komentars)
-                    .HasForeignKey(d => d.OsobaId)
+                    .HasForeignKey(d => d.KorisnikId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Komentar_Osoba");
+                    .HasConstraintName("FK_Komentar_Korisnik");
 
                 entity.HasOne(d => d.Proizvod)
                     .WithMany(p => p.Komentars)
@@ -109,18 +108,26 @@ namespace PetShop.Database
 
                 entity.Property(e => e.Tekst).IsRequired();
 
-                entity.HasOne(d => d.Osoba)
+                entity.HasOne(d => d.Korisnik)
                     .WithMany(p => p.Kontakts)
-                    .HasForeignKey(d => d.OsobaId)
+                    .HasForeignKey(d => d.KorisnikId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Kontakt_Osoba");
+                    .HasConstraintName("FK_Kontakt_Korisnik");
             });
 
             modelBuilder.Entity<Korisnik>(entity =>
             {
                 entity.ToTable("Korisnik");
 
+                entity.Property(e => e.DatumRodjenja).IsRequired();
+
                 entity.Property(e => e.Email).IsRequired();
+
+                entity.Property(e => e.Ime).IsRequired();
+
+                entity.Property(e => e.Jmbg)
+                    .IsRequired()
+                    .HasColumnName("JMBG");
 
                 entity.Property(e => e.KorisnickoIme).IsRequired();
 
@@ -128,13 +135,19 @@ namespace PetShop.Database
 
                 entity.Property(e => e.PasswordSalt).IsRequired();
 
+                entity.Property(e => e.Prezime).IsRequired();
+
+                entity.Property(e => e.Spol)
+                    .IsRequired()
+                    .HasMaxLength(1);
+
                 entity.Property(e => e.Token).IsRequired();
 
-                entity.HasOne(d => d.Osoba)
+                entity.HasOne(d => d.Grad)
                     .WithMany(p => p.Korisniks)
-                    .HasForeignKey(d => d.OsobaId)
+                    .HasForeignKey(d => d.GradId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Korisnik_Osoba");
+                    .HasConstraintName("FK_Korisnik_Grad");
             });
 
             modelBuilder.Entity<KorisnikRola>(entity =>
@@ -162,11 +175,11 @@ namespace PetShop.Database
 
                 entity.Property(e => e.Datum).HasColumnType("date");
 
-                entity.HasOne(d => d.Osoba)
+                entity.HasOne(d => d.Korisnik)
                     .WithMany(p => p.Narudzbas)
-                    .HasForeignKey(d => d.OsobaId)
+                    .HasForeignKey(d => d.KorisnikId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Narudzba_Osoba");
+                    .HasConstraintName("FK_Narudzba_Korisnik");
             });
 
             modelBuilder.Entity<NarudzbaProizvod>(entity =>
@@ -198,42 +211,17 @@ namespace PetShop.Database
 
                 entity.Property(e => e.Tekst).IsRequired();
 
-                entity.HasOne(d => d.Osoba)
+                entity.HasOne(d => d.Korisnik)
                     .WithMany(p => p.Novosts)
-                    .HasForeignKey(d => d.OsobaId)
+                    .HasForeignKey(d => d.KorisnikId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Novost_Osoba");
+                    .HasConstraintName("FK_Novost_Korisnik");
 
                 entity.HasOne(d => d.Slika)
                     .WithMany(p => p.Novosts)
                     .HasForeignKey(d => d.SlikaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Novost_Slika");
-            });
-
-            modelBuilder.Entity<Osoba>(entity =>
-            {
-                entity.ToTable("Osoba");
-
-                entity.Property(e => e.DatumRodjenja).IsRequired();
-
-                entity.Property(e => e.Ime).IsRequired();
-
-                entity.Property(e => e.Jmbg)
-                    .IsRequired()
-                    .HasColumnName("JMBG");
-
-                entity.Property(e => e.Prezime).IsRequired();
-
-                entity.Property(e => e.Spol)
-                    .IsRequired()
-                    .HasMaxLength(1);
-
-                entity.HasOne(d => d.Grad)
-                    .WithMany(p => p.Osobas)
-                    .HasForeignKey(d => d.GradId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Osoba_Grad");
             });
 
             modelBuilder.Entity<PopustKupon>(entity =>
@@ -306,11 +294,11 @@ namespace PetShop.Database
 
                 entity.Property(e => e.Datum).HasColumnType("date");
 
-                entity.HasOne(d => d.Osoba)
+                entity.HasOne(d => d.Korisnik)
                     .WithMany(p => p.Recenzijas)
-                    .HasForeignKey(d => d.OsobaId)
+                    .HasForeignKey(d => d.KorisnikId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Recenzija_Osoba");
+                    .HasConstraintName("FK_Recenzija_Korisnik");
 
                 entity.HasOne(d => d.Proizvod)
                     .WithMany(p => p.Recenzijas)
@@ -362,11 +350,11 @@ namespace PetShop.Database
 
                 entity.Property(e => e.DatumZaposlenja).HasColumnType("date");
 
-                entity.HasOne(d => d.Osoba)
+                entity.HasOne(d => d.Korisnik)
                     .WithMany(p => p.Uposleniks)
-                    .HasForeignKey(d => d.OsobaId)
+                    .HasForeignKey(d => d.KorisnikId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Uposlenik_Osoba");
+                    .HasConstraintName("FK_Uposlenik_Korisnik");
 
                 entity.HasOne(d => d.Poslovnica)
                     .WithMany(p => p.Uposleniks)

@@ -10,8 +10,8 @@ namespace PetShop.Model
         public bool Aktivna { get; set; }
         public bool Zavrsena { get; set; }
         public DateTime Datum { get; set; }
-        public int OsobaId { get; set; }
+        public int KorisnikId { get; set; }
 
-        public virtual Osoba Osoba { get; set; }
+        public virtual Korisnik Korisnik { get; set; }
     }
 }

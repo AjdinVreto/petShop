@@ -6,10 +6,12 @@ namespace PetShop.Model
 {
     public class Korisnik
     {
+        public string Ime { get; set; }
+        public string Prezime { get; set; }
+        public string DatumRodjenja { get; set; }
+        public string JMBG { get; set; }
+        public string Spol { get; set; }
         public string Email { get; set; }
         public string KorisnickoIme { get; set; }
-        public int OsobaId { get; set; }
-
-        public virtual Osoba Osoba { get; set; }
     }
 }

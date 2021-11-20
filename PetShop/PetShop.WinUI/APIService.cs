@@ -1,4 +1,4 @@
-﻿using eProdaja.Model;
+﻿using PetShop.Model;
 using Flurl.Http;
 using System;
 using System.Collections.Generic;

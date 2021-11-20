@@ -12,8 +12,8 @@ namespace PetShop.Database
         public string Email { get; set; }
         public string Tekst { get; set; }
         public bool Odgovoreno { get; set; }
-        public int OsobaId { get; set; }
+        public int KorisnikId { get; set; }
 
-        public virtual Osoba Osoba { get; set; }
+        public virtual Korisnik Korisnik { get; set; }
     }
 }
