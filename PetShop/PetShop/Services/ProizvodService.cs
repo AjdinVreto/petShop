@@ -50,5 +50,15 @@ namespace PetShop.Services
             return _mapper.Map<List<Model.Proizvod>>(list);
         }
 
+        public override Model.Proizvod Insert(ProizvodInsertRequest request)
+        {
+            var entity = _mapper.Map<Database.Proizvod>(request);
+            ctx.Add(entity);
+
+            ctx.SaveChanges();
+
+            return _mapper.Map<Model.Proizvod>(entity);
+        }
+
     }
 }

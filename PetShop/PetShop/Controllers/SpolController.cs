@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace PetShop.Controllers
 {
-    public class GradController : BaseReadController<Model.Drzava, object>
+    public class SpolController : BaseReadController<Model.Spol, object>
     {
-        public GradController(IReadService<Drzava, object> service) : base(service)
+        public SpolController(IReadService<Spol, object> service) : base(service)
         {
         }
     }

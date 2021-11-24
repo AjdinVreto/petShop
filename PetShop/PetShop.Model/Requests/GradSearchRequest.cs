@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PetShop.Model
+namespace PetShop.Model.Requests
 {
-    public class Slika
+    public class GradSearchRequest
     {
         public int Id { get; set; }
-        public string Putanja { get; set; }
     }
 }

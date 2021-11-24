@@ -27,12 +27,14 @@ namespace PetShop.Mapping
             CreateMap<Database.Proizvodjac, Model.Proizvodjac>();
             CreateMap<Database.Recenzija, Model.Recenzija>();
             CreateMap<Database.Rola, Model.Rola>();
-            CreateMap<Database.Slika, Model.Slika>();
             CreateMap<Database.Transkacija, Model.Transakcija>();
             CreateMap<Database.Uposlenik, Model.Uposlenik>();
+            CreateMap<Database.Spol, Model.Spol>().ReverseMap();
 
             CreateMap<ProizvodInsertRequest, Database.Proizvod>();
             CreateMap<ProizvodUpdateRequest, Database.Proizvod>();
+            CreateMap<KorisnikInsertRequest, Database.Korisnik>();
+            CreateMap<KorisnikUpdateRequest, Database.Korisnik>();
         }
     }
 }

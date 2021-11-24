@@ -44,6 +44,11 @@ namespace PetShop
             services.AddScoped<IProizvodService, ProizvodService>();
             services.AddScoped<IKorisnikService, KorisnikService>();
             services.AddScoped<IReadService<Model.Rola, object>, BaseReadService<Model.Rola, Database.Rola, object>>();
+            services.AddScoped<IReadService<Model.Spol, object>, BaseReadService<Model.Spol, Database.Spol, object>>();
+            services.AddScoped<IReadService<Model.Drzava, object>, BaseReadService<Model.Drzava, Database.Drzava, object>>();
+            services.AddScoped<IReadService<Model.Grad, object>, BaseReadService<Model.Grad, Database.Grad, object>>();
+            services.AddScoped<IReadService<Model.Kategorija, object>, BaseReadService<Model.Kategorija, Database.Kategorija, object>>();
+            services.AddScoped<IReadService<Model.Proizvodjac, object>, BaseReadService<Model.Proizvodjac, Database.Proizvodjac, object>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

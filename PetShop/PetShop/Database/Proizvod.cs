@@ -18,13 +18,12 @@ namespace PetShop.Database
         public string Naziv { get; set; }
         public decimal Cijena { get; set; }
         public string Opis { get; set; }
-        public int SlikaId { get; set; }
+        public byte[] Slika { get; set; }
         public int KategorijaId { get; set; }
         public int ProizvodjacId { get; set; }
 
         public virtual Kategorija Kategorija { get; set; }
         public virtual Proizvodjac Proizvodjac { get; set; }
-        public virtual Slika Slika { get; set; }
         public virtual ICollection<Komentar> Komentars { get; set; }
         public virtual ICollection<NarudzbaProizvod> NarudzbaProizvods { get; set; }
         public virtual ICollection<Recenzija> Recenzijas { get; set; }

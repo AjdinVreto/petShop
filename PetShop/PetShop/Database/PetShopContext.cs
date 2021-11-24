@@ -33,7 +33,7 @@ namespace PetShop.Database
         public virtual DbSet<Proizvodjac> Proizvodjacs { get; set; }
         public virtual DbSet<Recenzija> Recenzijas { get; set; }
         public virtual DbSet<Rola> Rolas { get; set; }
-        public virtual DbSet<Slika> Slikas { get; set; }
+        public virtual DbSet<Spol> Spols { get; set; }
         public virtual DbSet<Transkacija> Transkacijas { get; set; }
         public virtual DbSet<Uposlenik> Uposleniks { get; set; }
 
@@ -42,7 +42,7 @@ namespace PetShop.Database
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=localhost, 1433;Initial Catalog=PetShop; user=sa; Password=Asroma11927");
+                optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=PetShop; User=sa; Password=Asroma11927");
             }
         }
 
@@ -119,15 +119,13 @@ namespace PetShop.Database
             {
                 entity.ToTable("Korisnik");
 
+                entity.Property(e => e.BrojTelefona).IsRequired();
+
                 entity.Property(e => e.DatumRodjenja).IsRequired();
 
                 entity.Property(e => e.Email).IsRequired();
 
                 entity.Property(e => e.Ime).IsRequired();
-
-                entity.Property(e => e.Jmbg)
-                    .IsRequired()
-                    .HasColumnName("JMBG");
 
                 entity.Property(e => e.KorisnickoIme).IsRequired();
 
@@ -137,10 +135,6 @@ namespace PetShop.Database
 
                 entity.Property(e => e.Prezime).IsRequired();
 
-                entity.Property(e => e.Spol)
-                    .IsRequired()
-                    .HasMaxLength(1);
-
                 entity.Property(e => e.Token).IsRequired();
 
                 entity.HasOne(d => d.Grad)
@@ -148,6 +142,12 @@ namespace PetShop.Database
                     .HasForeignKey(d => d.GradId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Korisnik_Grad");
+
+                entity.HasOne(d => d.Spol)
+                    .WithMany(p => p.Korisniks)
+                    .HasForeignKey(d => d.SpolId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Korisnik_Spol");
             });
 
             modelBuilder.Entity<KorisnikRola>(entity =>
@@ -216,12 +216,6 @@ namespace PetShop.Database
                     .HasForeignKey(d => d.KorisnikId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Novost_Korisnik");
-
-                entity.HasOne(d => d.Slika)
-                    .WithMany(p => p.Novosts)
-                    .HasForeignKey(d => d.SlikaId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Novost_Slika");
             });
 
             modelBuilder.Entity<PopustKupon>(entity =>
@@ -250,7 +244,7 @@ namespace PetShop.Database
             {
                 entity.ToTable("Proizvod");
 
-                entity.Property(e => e.Cijena).HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.Cijena).HasColumnType("decimal(4, 2)");
 
                 entity.Property(e => e.Naziv).IsRequired();
 
@@ -267,12 +261,6 @@ namespace PetShop.Database
                     .HasForeignKey(d => d.ProizvodjacId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Proizvod_Proizvodjac");
-
-                entity.HasOne(d => d.Slika)
-                    .WithMany(p => p.Proizvods)
-                    .HasForeignKey(d => d.SlikaId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Proizvod_Slika");
             });
 
             modelBuilder.Entity<Proizvodjac>(entity =>
@@ -314,11 +302,13 @@ namespace PetShop.Database
                 entity.Property(e => e.Naziv).IsRequired();
             });
 
-            modelBuilder.Entity<Slika>(entity =>
+            modelBuilder.Entity<Spol>(entity =>
             {
-                entity.ToTable("Slika");
+                entity.ToTable("Spol");
 
-                entity.Property(e => e.Putanja).IsRequired();
+                entity.Property(e => e.Naziv)
+                    .IsRequired()
+                    .HasMaxLength(15);
             });
 
             modelBuilder.Entity<Transkacija>(entity =>
@@ -327,7 +317,7 @@ namespace PetShop.Database
 
                 entity.Property(e => e.Datum).HasColumnType("date");
 
-                entity.Property(e => e.Iznos).HasColumnType("decimal(18, 0)");
+                entity.Property(e => e.Iznos).HasColumnType("decimal(6, 2)");
 
                 entity.Property(e => e.NacinPlacanja).IsRequired();
 
