@@ -4,8 +4,8 @@ using System.Text;
 
 namespace PetShop.Model.Requests
 {
-    public class GradSearchRequest
+    public class ProizvodjacSearchObject
     {
-        public int Id { get; set; }
+        public bool? IncludeDrzava { get; set; }
     }
 }

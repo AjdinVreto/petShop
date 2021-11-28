@@ -42,6 +42,11 @@ namespace PetShop.WinUI.Korisnici
                 cmbSpol.SelectedValue = _korisnik.SpolId;
                 cmbGrad.SelectedValue = _korisnik.GradId;
                 cmbDrzava.SelectedValue = _korisnik.Grad.DrzavaId;
+
+                txtIme.ReadOnly = true;
+                txtPrezime.ReadOnly = true;
+                txtDatumRodjenja.ReadOnly = true;
+                txtKorisnickoIme.ReadOnly = true;
             }
         }
 
@@ -127,6 +132,28 @@ namespace PetShop.WinUI.Korisnici
                 };
 
                 var korisnik = await _serviceKorisnici.Update<Korisnik>(_korisnik.Id, request);
+            }
+        }
+
+        private async void cmbDrzava_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedIndex = cmbDrzava.SelectedValue;
+
+            if (int.TryParse(selectedIndex.ToString(), out int id))
+            {
+                if(id > 0)
+                {
+                    GradSearchObject request = new GradSearchObject()
+                    {
+                        Id = id
+                    };
+
+                    var gradoviFilter = await _serviceGrad.Get<List<Model.Grad>>(request);
+
+                    cmbGrad.DataSource = gradoviFilter;
+                    cmbGrad.DisplayMember = "Naziv";
+                    cmbGrad.ValueMember = "Id";
+                }
             }
         }
     }

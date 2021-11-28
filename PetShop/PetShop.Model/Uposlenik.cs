@@ -14,5 +14,10 @@ namespace PetShop.Model
 
         public virtual Korisnik Korisnik { get; set; }
         public virtual Poslovnica Poslovnica { get; set; }
+        public string KorisnikIme => Korisnik?.Ime;
+        public string KorisnikPrezime => Korisnik?.Prezime;
+        public string KorisnikEmail => Korisnik?.Email;
+        public string KorisnikKorisnickoIme => Korisnik?.KorisnickoIme;
+        public string PoslovnicaAdresa => Poslovnica?.Adresa;
     }
 }

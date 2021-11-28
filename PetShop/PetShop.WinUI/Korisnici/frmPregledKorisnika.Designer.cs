@@ -56,13 +56,6 @@ namespace PetShop.WinUI.Korisnici
             this.lblNaslov = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvKorisnici = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnNoviKorisnik = new System.Windows.Forms.Button();
-            this.btnPrikaz = new System.Windows.Forms.Button();
-            this.lblUnos = new System.Windows.Forms.Label();
-            this.txtPretraga = new System.Windows.Forms.TextBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.Ime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Prezime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Spol = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,6 +64,13 @@ namespace PetShop.WinUI.Korisnici
             this.BrojTelefona = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KorisnickoIme = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnNoviKorisnik = new System.Windows.Forms.Button();
+            this.btnPrikaz = new System.Windows.Forms.Button();
+            this.lblUnos = new System.Windows.Forms.Label();
+            this.txtPretraga = new System.Windows.Forms.TextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -101,9 +101,9 @@ namespace PetShop.WinUI.Korisnici
             this.lblNavigacija.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblNavigacija.Location = new System.Drawing.Point(10, 29);
             this.lblNavigacija.Name = "lblNavigacija";
-            this.lblNavigacija.Size = new System.Drawing.Size(334, 25);
+            this.lblNavigacija.Size = new System.Drawing.Size(332, 25);
             this.lblNavigacija.TabIndex = 19;
-            this.lblNavigacija.Text = "Osobolje >> Upravljanje korisnicima";
+            this.lblNavigacija.Text = "Korisnici >> Upravljanje korisnicima";
             // 
             // btnOdjava
             // 
@@ -264,6 +264,7 @@ namespace PetShop.WinUI.Korisnici
             this.btnNovosti.TabIndex = 13;
             this.btnNovosti.Text = "Novosti";
             this.btnNovosti.UseVisualStyleBackColor = false;
+            this.btnNovosti.Click += new System.EventHandler(this.btnNovosti_Click);
             // 
             // btnKomentari
             // 
@@ -286,6 +287,7 @@ namespace PetShop.WinUI.Korisnici
             this.btnPoslovnice.TabIndex = 11;
             this.btnPoslovnice.Text = "Poslovnice";
             this.btnPoslovnice.UseVisualStyleBackColor = false;
+            this.btnPoslovnice.Click += new System.EventHandler(this.btnPoslovnice_Click);
             // 
             // btnPoruke
             // 
@@ -297,6 +299,7 @@ namespace PetShop.WinUI.Korisnici
             this.btnPoruke.TabIndex = 10;
             this.btnPoruke.Text = "Poruke";
             this.btnPoruke.UseVisualStyleBackColor = false;
+            this.btnPoruke.Click += new System.EventHandler(this.btnPoruke_Click);
             // 
             // btnKategorije
             // 
@@ -308,6 +311,7 @@ namespace PetShop.WinUI.Korisnici
             this.btnKategorije.TabIndex = 8;
             this.btnKategorije.Text = "Kategorije";
             this.btnKategorije.UseVisualStyleBackColor = false;
+            this.btnKategorije.Click += new System.EventHandler(this.btnKategorije_Click);
             // 
             // btnProizvodjaci
             // 
@@ -319,6 +323,7 @@ namespace PetShop.WinUI.Korisnici
             this.btnProizvodjaci.TabIndex = 6;
             this.btnProizvodjaci.Text = "Proizvođači";
             this.btnProizvodjaci.UseVisualStyleBackColor = false;
+            this.btnProizvodjaci.Click += new System.EventHandler(this.btnProizvodjaci_Click);
             // 
             // btnUpravljanjeProizvodima
             // 
@@ -342,6 +347,7 @@ namespace PetShop.WinUI.Korisnici
             this.btnUpravljanjeUposlenicima.TabIndex = 4;
             this.btnUpravljanjeUposlenicima.Text = "Upravljanje uposlenicima";
             this.btnUpravljanjeUposlenicima.UseVisualStyleBackColor = false;
+            this.btnUpravljanjeUposlenicima.Click += new System.EventHandler(this.btnUpravljanjeUposlenicima_Click);
             // 
             // lblNaslov
             // 
@@ -387,6 +393,62 @@ namespace PetShop.WinUI.Korisnici
             this.dgvKorisnici.Size = new System.Drawing.Size(769, 538);
             this.dgvKorisnici.TabIndex = 0;
             this.dgvKorisnici.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKorisnici_CellDoubleClick);
+            // 
+            // Ime
+            // 
+            this.Ime.DataPropertyName = "Ime";
+            this.Ime.HeaderText = "Ime";
+            this.Ime.Name = "Ime";
+            this.Ime.ReadOnly = true;
+            // 
+            // Prezime
+            // 
+            this.Prezime.DataPropertyName = "Prezime";
+            this.Prezime.HeaderText = "Prezime";
+            this.Prezime.Name = "Prezime";
+            this.Prezime.ReadOnly = true;
+            // 
+            // Spol
+            // 
+            this.Spol.DataPropertyName = "SpolNaziv";
+            this.Spol.HeaderText = "Spol";
+            this.Spol.Name = "Spol";
+            this.Spol.ReadOnly = true;
+            // 
+            // DatumRodjenja
+            // 
+            this.DatumRodjenja.DataPropertyName = "DatumRodjenja";
+            this.DatumRodjenja.HeaderText = "Datum rodjenja";
+            this.DatumRodjenja.Name = "DatumRodjenja";
+            this.DatumRodjenja.ReadOnly = true;
+            // 
+            // GradNaziv
+            // 
+            this.GradNaziv.DataPropertyName = "GradNaziv";
+            this.GradNaziv.HeaderText = "Grad";
+            this.GradNaziv.Name = "GradNaziv";
+            this.GradNaziv.ReadOnly = true;
+            // 
+            // BrojTelefona
+            // 
+            this.BrojTelefona.DataPropertyName = "BrojTelefona";
+            this.BrojTelefona.HeaderText = "Broj telefona";
+            this.BrojTelefona.Name = "BrojTelefona";
+            this.BrojTelefona.ReadOnly = true;
+            // 
+            // Email
+            // 
+            this.Email.DataPropertyName = "Email";
+            this.Email.HeaderText = "Email";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            // 
+            // KorisnickoIme
+            // 
+            this.KorisnickoIme.DataPropertyName = "KorisnickoIme";
+            this.KorisnickoIme.HeaderText = "Korisnicko ime";
+            this.KorisnickoIme.Name = "KorisnickoIme";
+            this.KorisnickoIme.ReadOnly = true;
             // 
             // groupBox2
             // 
@@ -459,62 +521,6 @@ namespace PetShop.WinUI.Korisnici
             this.label1.Size = new System.Drawing.Size(120, 27);
             this.label1.TabIndex = 2;
             this.label1.Text = "KORISNICI";
-            // 
-            // Ime
-            // 
-            this.Ime.DataPropertyName = "Ime";
-            this.Ime.HeaderText = "Ime";
-            this.Ime.Name = "Ime";
-            this.Ime.ReadOnly = true;
-            // 
-            // Prezime
-            // 
-            this.Prezime.DataPropertyName = "Prezime";
-            this.Prezime.HeaderText = "Prezime";
-            this.Prezime.Name = "Prezime";
-            this.Prezime.ReadOnly = true;
-            // 
-            // Spol
-            // 
-            this.Spol.DataPropertyName = "SpolNaziv";
-            this.Spol.HeaderText = "Spol";
-            this.Spol.Name = "Spol";
-            this.Spol.ReadOnly = true;
-            // 
-            // DatumRodjenja
-            // 
-            this.DatumRodjenja.DataPropertyName = "DatumRodjenja";
-            this.DatumRodjenja.HeaderText = "Datum rodjenja";
-            this.DatumRodjenja.Name = "DatumRodjenja";
-            this.DatumRodjenja.ReadOnly = true;
-            // 
-            // GradNaziv
-            // 
-            this.GradNaziv.DataPropertyName = "GradNaziv";
-            this.GradNaziv.HeaderText = "Grad";
-            this.GradNaziv.Name = "GradNaziv";
-            this.GradNaziv.ReadOnly = true;
-            // 
-            // BrojTelefona
-            // 
-            this.BrojTelefona.DataPropertyName = "BrojTelefona";
-            this.BrojTelefona.HeaderText = "Broj telefona";
-            this.BrojTelefona.Name = "BrojTelefona";
-            this.BrojTelefona.ReadOnly = true;
-            // 
-            // Email
-            // 
-            this.Email.DataPropertyName = "Email";
-            this.Email.HeaderText = "Email";
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
-            // 
-            // KorisnickoIme
-            // 
-            this.KorisnickoIme.DataPropertyName = "KorisnickoIme";
-            this.KorisnickoIme.HeaderText = "Korisnicko ime";
-            this.KorisnickoIme.Name = "KorisnickoIme";
-            this.KorisnickoIme.ReadOnly = true;
             // 
             // frmPregledKorisnika
             // 

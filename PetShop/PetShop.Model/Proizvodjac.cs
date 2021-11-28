@@ -11,5 +11,6 @@ namespace PetShop.Model
         public int DrzavaId { get; set; }
 
         public virtual Drzava Drzava { get; set; }
+        public string DrzavaNaziv => Drzava?.Naziv;
     }
 }

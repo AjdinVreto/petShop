@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PetShop.Model
+namespace PetShop.Model.Requests
 {
-    public class Poslovnica
+    public class PoslovnicaInsertRequest
     {
-        public int Id { get; set; }
         public string Adresa { get; set; }
         public string BrojTelefona { get; set; }
         public int GradId { get; set; }
-
-        public virtual Grad Grad { get; set; }
-        public string GradNaziv => Grad?.Naziv;
     }
 }

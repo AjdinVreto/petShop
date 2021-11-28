@@ -1,7 +1,7 @@
 ﻿
-namespace PetShop.WinUI.Proizvodi
+namespace PetShop.WinUI.Ostalo
 {
-    partial class frmProizvodi
+    partial class frmPoslovnica
     {
         /// <summary>
         /// Required designer variable.
@@ -29,13 +29,13 @@ namespace PetShop.WinUI.Proizvodi
         /// </summary>
         private void InitializeComponent()
         {
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dgvPoslovnice = new System.Windows.Forms.DataGridView();
+            this.Adresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GradNaziv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BrojTelefona = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lblNavigacija = new System.Windows.Forms.Label();
-            this.btnOdjava = new System.Windows.Forms.Button();
-            this.btnProfil = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -56,38 +56,78 @@ namespace PetShop.WinUI.Proizvodi
             this.btnUpravljanjeProizvodima = new System.Windows.Forms.Button();
             this.btnUpravljanjeUposlenicima = new System.Windows.Forms.Button();
             this.lblNaslov = new System.Windows.Forms.Label();
-            this.txtNaziv = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblNavigacija = new System.Windows.Forms.Label();
+            this.btnOdjava = new System.Windows.Forms.Button();
+            this.btnProfil = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblPrezime = new System.Windows.Forms.Label();
+            this.txtBrojtelefona = new System.Windows.Forms.TextBox();
+            this.lblAdresa = new System.Windows.Forms.Label();
+            this.txtAdresa = new System.Windows.Forms.TextBox();
+            this.cmbGrad = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtOpis = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtCijena = new System.Windows.Forms.TextBox();
-            this.cmbKategorija = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cmbProizvodjac = new System.Windows.Forms.ComboBox();
-            this.pbxSlika = new System.Windows.Forms.PictureBox();
-            this.btnDodajSliku = new System.Windows.Forms.Button();
-            this.gbxProizvodi = new System.Windows.Forms.GroupBox();
-            this.dgvProizvodi = new System.Windows.Forms.DataGridView();
-            this.Naziv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cijena = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Opis = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kategorija = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Proizvodjac = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnSacuvajProizvod = new System.Windows.Forms.Button();
-            this.ofdSlika = new System.Windows.Forms.OpenFileDialog();
+            this.btnSacuvajPoslovnicu = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPoslovnice)).BeginInit();
             this.panel3.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.pnlNavigacija.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxSlika)).BeginInit();
-            this.gbxProizvodi.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProizvodi)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.dgvPoslovnice);
+            this.groupBox1.Location = new System.Drawing.Point(293, 348);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(775, 459);
+            this.groupBox1.TabIndex = 57;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Poslovnice";
+            // 
+            // dgvPoslovnice
+            // 
+            this.dgvPoslovnice.AllowUserToAddRows = false;
+            this.dgvPoslovnice.AllowUserToDeleteRows = false;
+            this.dgvPoslovnice.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvPoslovnice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPoslovnice.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Adresa,
+            this.GradNaziv,
+            this.BrojTelefona});
+            this.dgvPoslovnice.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPoslovnice.Location = new System.Drawing.Point(3, 19);
+            this.dgvPoslovnice.Name = "dgvPoslovnice";
+            this.dgvPoslovnice.ReadOnly = true;
+            this.dgvPoslovnice.RowTemplate.Height = 25;
+            this.dgvPoslovnice.Size = new System.Drawing.Size(769, 437);
+            this.dgvPoslovnice.TabIndex = 0;
+            this.dgvPoslovnice.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPoslovnice_CellDoubleClick);
+            // 
+            // Adresa
+            // 
+            this.Adresa.DataPropertyName = "Adresa";
+            this.Adresa.HeaderText = "Adresa";
+            this.Adresa.Name = "Adresa";
+            this.Adresa.ReadOnly = true;
+            // 
+            // GradNaziv
+            // 
+            this.GradNaziv.DataPropertyName = "GradNaziv";
+            this.GradNaziv.HeaderText = "Grad";
+            this.GradNaziv.Name = "GradNaziv";
+            this.GradNaziv.ReadOnly = true;
+            // 
+            // BrojTelefona
+            // 
+            this.BrojTelefona.DataPropertyName = "BrojTelefona";
+            this.BrojTelefona.HeaderText = "Broj Telefona";
+            this.BrojTelefona.Name = "BrojTelefona";
+            this.BrojTelefona.ReadOnly = true;
             // 
             // panel3
             // 
@@ -96,7 +136,7 @@ namespace PetShop.WinUI.Proizvodi
             this.panel3.Location = new System.Drawing.Point(12, 82);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(200, 42);
-            this.panel3.TabIndex = 35;
+            this.panel3.TabIndex = 56;
             // 
             // label1
             // 
@@ -108,59 +148,6 @@ namespace PetShop.WinUI.Proizvodi
             this.label1.TabIndex = 2;
             this.label1.Text = "KORISNICI";
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Gold;
-            this.panel1.Controls.Add(this.lblNavigacija);
-            this.panel1.Controls.Add(this.btnOdjava);
-            this.panel1.Controls.Add(this.btnProfil);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Location = new System.Drawing.Point(293, 14);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(778, 79);
-            this.panel1.TabIndex = 36;
-            // 
-            // lblNavigacija
-            // 
-            this.lblNavigacija.AutoSize = true;
-            this.lblNavigacija.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblNavigacija.Location = new System.Drawing.Point(10, 29);
-            this.lblNavigacija.Name = "lblNavigacija";
-            this.lblNavigacija.Size = new System.Drawing.Size(351, 25);
-            this.lblNavigacija.TabIndex = 19;
-            this.lblNavigacija.Text = "Proizvodi >> Upravljanje proizvodima";
-            // 
-            // btnOdjava
-            // 
-            this.btnOdjava.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnOdjava.Location = new System.Drawing.Point(682, 18);
-            this.btnOdjava.Name = "btnOdjava";
-            this.btnOdjava.Size = new System.Drawing.Size(90, 41);
-            this.btnOdjava.TabIndex = 19;
-            this.btnOdjava.Text = "Odjavi se";
-            this.btnOdjava.UseVisualStyleBackColor = true;
-            // 
-            // btnProfil
-            // 
-            this.btnProfil.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.btnProfil.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnProfil.Location = new System.Drawing.Point(378, 29);
-            this.btnProfil.Name = "btnProfil";
-            this.btnProfil.Size = new System.Drawing.Size(150, 47);
-            this.btnProfil.TabIndex = 19;
-            this.btnProfil.Text = "Moj profil";
-            this.btnProfil.UseVisualStyleBackColor = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(394, 1);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(121, 25);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "Ime Prezime";
-            // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -168,7 +155,7 @@ namespace PetShop.WinUI.Proizvodi
             this.panel6.Location = new System.Drawing.Point(12, 688);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(200, 42);
-            this.panel6.TabIndex = 32;
+            this.panel6.TabIndex = 53;
             // 
             // label5
             // 
@@ -187,7 +174,7 @@ namespace PetShop.WinUI.Proizvodi
             this.panel5.Location = new System.Drawing.Point(12, 502);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(200, 42);
-            this.panel5.TabIndex = 33;
+            this.panel5.TabIndex = 54;
             // 
             // label4
             // 
@@ -206,7 +193,7 @@ namespace PetShop.WinUI.Proizvodi
             this.panel4.Location = new System.Drawing.Point(12, 222);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(200, 42);
-            this.panel4.TabIndex = 34;
+            this.panel4.TabIndex = 55;
             // 
             // label3
             // 
@@ -236,7 +223,7 @@ namespace PetShop.WinUI.Proizvodi
             this.pnlNavigacija.Location = new System.Drawing.Point(12, 14);
             this.pnlNavigacija.Name = "pnlNavigacija";
             this.pnlNavigacija.Size = new System.Drawing.Size(265, 793);
-            this.pnlNavigacija.TabIndex = 31;
+            this.pnlNavigacija.TabIndex = 52;
             // 
             // panel2
             // 
@@ -378,232 +365,152 @@ namespace PetShop.WinUI.Proizvodi
             this.lblNaslov.TabIndex = 1;
             this.lblNaslov.Text = "PET SHOP";
             // 
-            // txtNaziv
+            // panel1
             // 
-            this.txtNaziv.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtNaziv.Location = new System.Drawing.Point(322, 144);
-            this.txtNaziv.Name = "txtNaziv";
-            this.txtNaziv.Size = new System.Drawing.Size(202, 33);
-            this.txtNaziv.TabIndex = 37;
+            this.panel1.BackColor = System.Drawing.Color.Gold;
+            this.panel1.Controls.Add(this.lblNavigacija);
+            this.panel1.Controls.Add(this.btnOdjava);
+            this.panel1.Controls.Add(this.btnProfil);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Location = new System.Drawing.Point(283, 14);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(788, 79);
+            this.panel1.TabIndex = 51;
+            // 
+            // lblNavigacija
+            // 
+            this.lblNavigacija.AutoSize = true;
+            this.lblNavigacija.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblNavigacija.Location = new System.Drawing.Point(3, 30);
+            this.lblNavigacija.Name = "lblNavigacija";
+            this.lblNavigacija.Size = new System.Drawing.Size(218, 25);
+            this.lblNavigacija.TabIndex = 19;
+            this.lblNavigacija.Text = "Korisnici >> Poslovnica";
+            // 
+            // btnOdjava
+            // 
+            this.btnOdjava.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnOdjava.Location = new System.Drawing.Point(695, 18);
+            this.btnOdjava.Name = "btnOdjava";
+            this.btnOdjava.Size = new System.Drawing.Size(90, 41);
+            this.btnOdjava.TabIndex = 19;
+            this.btnOdjava.Text = "Odjavi se";
+            this.btnOdjava.UseVisualStyleBackColor = true;
+            // 
+            // btnProfil
+            // 
+            this.btnProfil.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnProfil.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnProfil.Location = new System.Drawing.Point(366, 29);
+            this.btnProfil.Name = "btnProfil";
+            this.btnProfil.Size = new System.Drawing.Size(150, 47);
+            this.btnProfil.TabIndex = 19;
+            this.btnProfil.Text = "Moj profil";
+            this.btnProfil.UseVisualStyleBackColor = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(382, 1);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(121, 25);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Ime Prezime";
+            // 
+            // lblPrezime
+            // 
+            this.lblPrezime.AutoSize = true;
+            this.lblPrezime.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblPrezime.Location = new System.Drawing.Point(793, 132);
+            this.lblPrezime.Name = "lblPrezime";
+            this.lblPrezime.Size = new System.Drawing.Size(109, 21);
+            this.lblPrezime.TabIndex = 61;
+            this.lblPrezime.Text = "Broj telefona";
+            // 
+            // txtBrojtelefona
+            // 
+            this.txtBrojtelefona.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtBrojtelefona.Location = new System.Drawing.Point(757, 156);
+            this.txtBrojtelefona.Name = "txtBrojtelefona";
+            this.txtBrojtelefona.Size = new System.Drawing.Size(178, 29);
+            this.txtBrojtelefona.TabIndex = 60;
+            // 
+            // lblAdresa
+            // 
+            this.lblAdresa.AutoSize = true;
+            this.lblAdresa.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblAdresa.Location = new System.Drawing.Point(425, 132);
+            this.lblAdresa.Name = "lblAdresa";
+            this.lblAdresa.Size = new System.Drawing.Size(62, 21);
+            this.lblAdresa.TabIndex = 59;
+            this.lblAdresa.Text = "Adresa";
+            // 
+            // txtAdresa
+            // 
+            this.txtAdresa.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtAdresa.Location = new System.Drawing.Point(368, 156);
+            this.txtAdresa.Name = "txtAdresa";
+            this.txtAdresa.Size = new System.Drawing.Size(178, 29);
+            this.txtAdresa.TabIndex = 58;
+            // 
+            // cmbGrad
+            // 
+            this.cmbGrad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cmbGrad.FormattingEnabled = true;
+            this.cmbGrad.Location = new System.Drawing.Point(368, 235);
+            this.cmbGrad.Name = "cmbGrad";
+            this.cmbGrad.Size = new System.Drawing.Size(178, 29);
+            this.cmbGrad.TabIndex = 62;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(398, 121);
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(425, 208);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 17);
-            this.label7.TabIndex = 38;
-            this.label7.Text = "Naziv";
+            this.label7.Size = new System.Drawing.Size(46, 21);
+            this.label7.TabIndex = 63;
+            this.label7.Text = "Grad";
             // 
-            // label8
+            // btnSacuvajPoslovnicu
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(667, 197);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(36, 17);
-            this.label8.TabIndex = 40;
-            this.label8.Text = "Opis";
+            this.btnSacuvajPoslovnicu.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSacuvajPoslovnicu.Location = new System.Drawing.Point(586, 295);
+            this.btnSacuvajPoslovnicu.Name = "btnSacuvajPoslovnicu";
+            this.btnSacuvajPoslovnicu.Size = new System.Drawing.Size(140, 47);
+            this.btnSacuvajPoslovnicu.TabIndex = 64;
+            this.btnSacuvajPoslovnicu.Text = "Sačuvaj poslovnicu";
+            this.btnSacuvajPoslovnicu.UseVisualStyleBackColor = true;
+            this.btnSacuvajPoslovnicu.Click += new System.EventHandler(this.btnSacuvajPoslovnicu_Click);
             // 
-            // txtOpis
-            // 
-            this.txtOpis.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtOpis.Location = new System.Drawing.Point(591, 220);
-            this.txtOpis.Multiline = true;
-            this.txtOpis.Name = "txtOpis";
-            this.txtOpis.Size = new System.Drawing.Size(202, 118);
-            this.txtOpis.TabIndex = 39;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(667, 121);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(46, 17);
-            this.label9.TabIndex = 42;
-            this.label9.Text = "Cijena";
-            // 
-            // txtCijena
-            // 
-            this.txtCijena.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtCijena.Location = new System.Drawing.Point(591, 144);
-            this.txtCijena.Name = "txtCijena";
-            this.txtCijena.Size = new System.Drawing.Size(202, 33);
-            this.txtCijena.TabIndex = 41;
-            // 
-            // cmbKategorija
-            // 
-            this.cmbKategorija.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cmbKategorija.FormattingEnabled = true;
-            this.cmbKategorija.Location = new System.Drawing.Point(322, 220);
-            this.cmbKategorija.Name = "cmbKategorija";
-            this.cmbKategorija.Size = new System.Drawing.Size(202, 33);
-            this.cmbKategorija.TabIndex = 43;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(382, 200);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(71, 17);
-            this.label10.TabIndex = 44;
-            this.label10.Text = "Kategorija";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(382, 285);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(75, 17);
-            this.label11.TabIndex = 46;
-            this.label11.Text = "Proizvođač";
-            // 
-            // cmbProizvodjac
-            // 
-            this.cmbProizvodjac.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cmbProizvodjac.FormattingEnabled = true;
-            this.cmbProizvodjac.Location = new System.Drawing.Point(322, 305);
-            this.cmbProizvodjac.Name = "cmbProizvodjac";
-            this.cmbProizvodjac.Size = new System.Drawing.Size(202, 33);
-            this.cmbProizvodjac.TabIndex = 45;
-            // 
-            // pbxSlika
-            // 
-            this.pbxSlika.Location = new System.Drawing.Point(845, 144);
-            this.pbxSlika.Name = "pbxSlika";
-            this.pbxSlika.Size = new System.Drawing.Size(209, 138);
-            this.pbxSlika.TabIndex = 47;
-            this.pbxSlika.TabStop = false;
-            // 
-            // btnDodajSliku
-            // 
-            this.btnDodajSliku.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnDodajSliku.Location = new System.Drawing.Point(913, 304);
-            this.btnDodajSliku.Name = "btnDodajSliku";
-            this.btnDodajSliku.Size = new System.Drawing.Size(75, 33);
-            this.btnDodajSliku.TabIndex = 48;
-            this.btnDodajSliku.Text = "...";
-            this.btnDodajSliku.UseVisualStyleBackColor = true;
-            this.btnDodajSliku.Click += new System.EventHandler(this.btnDodajSliku_Click);
-            // 
-            // gbxProizvodi
-            // 
-            this.gbxProizvodi.Controls.Add(this.dgvProizvodi);
-            this.gbxProizvodi.Location = new System.Drawing.Point(293, 433);
-            this.gbxProizvodi.Name = "gbxProizvodi";
-            this.gbxProizvodi.Size = new System.Drawing.Size(778, 374);
-            this.gbxProizvodi.TabIndex = 49;
-            this.gbxProizvodi.TabStop = false;
-            this.gbxProizvodi.Text = "Proizvodi";
-            // 
-            // dgvProizvodi
-            // 
-            this.dgvProizvodi.AllowUserToAddRows = false;
-            this.dgvProizvodi.AllowUserToDeleteRows = false;
-            this.dgvProizvodi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProizvodi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProizvodi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Naziv,
-            this.Cijena,
-            this.Opis,
-            this.Kategorija,
-            this.Proizvodjac});
-            this.dgvProizvodi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvProizvodi.Location = new System.Drawing.Point(3, 19);
-            this.dgvProizvodi.Name = "dgvProizvodi";
-            this.dgvProizvodi.ReadOnly = true;
-            this.dgvProizvodi.RowTemplate.Height = 25;
-            this.dgvProizvodi.Size = new System.Drawing.Size(772, 352);
-            this.dgvProizvodi.TabIndex = 0;
-            this.dgvProizvodi.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProizvodi_CellDoubleClick);
-            // 
-            // Naziv
-            // 
-            this.Naziv.DataPropertyName = "Naziv";
-            this.Naziv.HeaderText = "Naziv";
-            this.Naziv.Name = "Naziv";
-            this.Naziv.ReadOnly = true;
-            // 
-            // Cijena
-            // 
-            this.Cijena.DataPropertyName = "Cijena";
-            this.Cijena.HeaderText = "Cijena";
-            this.Cijena.Name = "Cijena";
-            this.Cijena.ReadOnly = true;
-            // 
-            // Opis
-            // 
-            this.Opis.DataPropertyName = "Opis";
-            this.Opis.HeaderText = "Opis";
-            this.Opis.Name = "Opis";
-            this.Opis.ReadOnly = true;
-            // 
-            // Kategorija
-            // 
-            this.Kategorija.DataPropertyName = "KategorijaNaziv";
-            this.Kategorija.HeaderText = "Kategorija";
-            this.Kategorija.Name = "Kategorija";
-            this.Kategorija.ReadOnly = true;
-            // 
-            // Proizvodjac
-            // 
-            this.Proizvodjac.DataPropertyName = "ProizvodjacNaziv";
-            this.Proizvodjac.HeaderText = "Proizvodjac";
-            this.Proizvodjac.Name = "Proizvodjac";
-            this.Proizvodjac.ReadOnly = true;
-            // 
-            // btnSacuvajProizvod
-            // 
-            this.btnSacuvajProizvod.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSacuvajProizvod.Location = new System.Drawing.Point(603, 356);
-            this.btnSacuvajProizvod.Name = "btnSacuvajProizvod";
-            this.btnSacuvajProizvod.Size = new System.Drawing.Size(174, 52);
-            this.btnSacuvajProizvod.TabIndex = 1;
-            this.btnSacuvajProizvod.Text = "Sačuvaj proizvod";
-            this.btnSacuvajProizvod.UseVisualStyleBackColor = true;
-            this.btnSacuvajProizvod.Click += new System.EventHandler(this.btnSacuvajProizvod_Click);
-            // 
-            // ofdSlika
-            // 
-            this.ofdSlika.FileName = "ofdSlika";
-            // 
-            // frmProizvodi
+            // frmPoslovnica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1083, 821);
-            this.Controls.Add(this.btnSacuvajProizvod);
-            this.Controls.Add(this.gbxProizvodi);
-            this.Controls.Add(this.btnDodajSliku);
-            this.Controls.Add(this.pbxSlika);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.cmbProizvodjac);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.cmbKategorija);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.txtCijena);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.txtOpis);
+            this.Controls.Add(this.btnSacuvajPoslovnicu);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.txtNaziv);
+            this.Controls.Add(this.cmbGrad);
+            this.Controls.Add(this.lblPrezime);
+            this.Controls.Add(this.txtBrojtelefona);
+            this.Controls.Add(this.lblAdresa);
+            this.Controls.Add(this.txtAdresa);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.pnlNavigacija);
-            this.Name = "frmProizvodi";
+            this.Controls.Add(this.panel1);
+            this.Name = "frmPoslovnica";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmProizvodi";
-            this.Load += new System.EventHandler(this.frmProizvodi_Load);
+            this.Text = "frmPoslovnica";
+            this.Load += new System.EventHandler(this.frmPoslovnica_Load);
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPoslovnice)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -614,9 +521,8 @@ namespace PetShop.WinUI.Proizvodi
             this.pnlNavigacija.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxSlika)).EndInit();
-            this.gbxProizvodi.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProizvodi)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -624,13 +530,10 @@ namespace PetShop.WinUI.Proizvodi
 
         #endregion
 
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridView dgvPoslovnice;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lblNavigacija;
-        private System.Windows.Forms.Button btnOdjava;
-        private System.Windows.Forms.Button btnProfil;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel5;
@@ -651,26 +554,20 @@ namespace PetShop.WinUI.Proizvodi
         private System.Windows.Forms.Button btnUpravljanjeProizvodima;
         private System.Windows.Forms.Button btnUpravljanjeUposlenicima;
         private System.Windows.Forms.Label lblNaslov;
-        private System.Windows.Forms.TextBox txtNaziv;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblNavigacija;
+        private System.Windows.Forms.Button btnOdjava;
+        private System.Windows.Forms.Button btnProfil;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblPrezime;
+        private System.Windows.Forms.TextBox txtBrojtelefona;
+        private System.Windows.Forms.Label lblAdresa;
+        private System.Windows.Forms.TextBox txtAdresa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Adresa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GradNaziv;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BrojTelefona;
+        private System.Windows.Forms.ComboBox cmbGrad;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtOpis;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtCijena;
-        private System.Windows.Forms.ComboBox cmbKategorija;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox cmbProizvodjac;
-        private System.Windows.Forms.PictureBox pbxSlika;
-        private System.Windows.Forms.Button btnDodajSliku;
-        private System.Windows.Forms.GroupBox gbxProizvodi;
-        private System.Windows.Forms.DataGridView dgvProizvodi;
-        private System.Windows.Forms.Button btnSacuvajProizvod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Naziv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cijena;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Opis;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Kategorija;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Proizvodjac;
-        private System.Windows.Forms.OpenFileDialog ofdSlika;
+        private System.Windows.Forms.Button btnSacuvajPoslovnicu;
     }
 }

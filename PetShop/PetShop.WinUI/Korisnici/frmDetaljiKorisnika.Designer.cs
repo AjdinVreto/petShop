@@ -108,6 +108,7 @@ namespace PetShop.WinUI.Korisnici
             this.cmbDrzava.Name = "cmbDrzava";
             this.cmbDrzava.Size = new System.Drawing.Size(178, 29);
             this.cmbDrzava.TabIndex = 14;
+            this.cmbDrzava.SelectedIndexChanged += new System.EventHandler(this.cmbDrzava_SelectedIndexChanged);
             // 
             // label10
             // 

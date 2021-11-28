@@ -30,17 +30,13 @@ namespace PetShop.WinUI.Proizvodi
         private async void frmProizvodi_Load(object sender, EventArgs e)
         {
             await LoadData();
-
-            ProizvodSearchObject search = new ProizvodSearchObject();
-            search.IncludeKategorija = true;
-            search.IncludeProizvodjac = true;
-            dgvProizvodi.DataSource = await _serviceProizvodi.Get<List<Model.Proizvod>>(search);
         }
 
         private async Task LoadData()
         {
             await LoadKategorije();
             await LoadProizvodjaci();
+            await LoadProizvodi();
         }
 
         private async Task LoadKategorije()
@@ -61,6 +57,14 @@ namespace PetShop.WinUI.Proizvodi
             cmbProizvodjac.DataSource = proizvodjaci;
             cmbProizvodjac.DisplayMember = "Naziv";
             cmbProizvodjac.ValueMember = "Id";
+        }
+
+        private async Task LoadProizvodi()
+        {
+            ProizvodSearchObject search = new ProizvodSearchObject();
+            search.IncludeKategorija = true;
+            search.IncludeProizvodjac = true;
+            dgvProizvodi.DataSource = await _serviceProizvodi.Get<List<Model.Proizvod>>(search);
         }
 
         private void dgvProizvodi_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -90,9 +94,6 @@ namespace PetShop.WinUI.Proizvodi
 
         private async void btnSacuvajProizvod_Click(object sender, EventArgs e)
         {
-           // CultureInfo culture = new CultureInfo("en-US");
-            //Convert.ToDecimal(txtCijena.Text, culture)
-
             if (_proizvod == null)
             {
                 ProizvodInsertRequest request = new ProizvodInsertRequest()
@@ -105,6 +106,7 @@ namespace PetShop.WinUI.Proizvodi
                 };
 
                 var proizvod = await _serviceProizvodi.Insert<Proizvod>(request);
+                await LoadProizvodi();
             }
             else
             {
@@ -117,7 +119,8 @@ namespace PetShop.WinUI.Proizvodi
                     ProizvodjacId = (int)cmbProizvodjac.SelectedValue
                 };
 
-                var korisnik = await _serviceProizvodi.Update<Proizvod>(_proizvod.Id, request);
+                var proizvod = await _serviceProizvodi.Update<Proizvod>(_proizvod.Id, request);
+                await LoadProizvodi();
             }
         }
     }

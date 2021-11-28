@@ -15,5 +15,6 @@ namespace PetShop.Model
         public int KorisnikId { get; set; }
 
         public virtual Korisnik Korisnik { get; set; }
+        public string KorisnikKorisnickoIme => Korisnik?.KorisnickoIme;
     }
 }

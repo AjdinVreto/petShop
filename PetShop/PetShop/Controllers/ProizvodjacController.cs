@@ -1,4 +1,5 @@
 ﻿using PetShop.Model;
+using PetShop.Model.Requests;
 using PetShop.Services;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace PetShop.Controllers
 {
-    public class ProizvodjacController : BaseReadController<Model.Proizvodjac, object>
+    public class ProizvodjacController : BaseCRUDController<Model.Proizvodjac, ProizvodjacSearchObject, ProizvodjacInsertRequest, object>
     {
-        public ProizvodjacController(IReadService<Proizvodjac, object> service) : base(service)
+        public ProizvodjacController(IProizvodjacService service) : base(service)
         {
         }
     }
