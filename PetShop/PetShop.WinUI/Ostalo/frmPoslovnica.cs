@@ -57,32 +57,59 @@ namespace PetShop.WinUI.Ostalo
             cmbGrad.SelectedValue = _poslovnica.GradId;
         }
 
+        PoslovnicaInsertRequest insert = new PoslovnicaInsertRequest();
+        PoslovnicaUpdateRequest update = new PoslovnicaUpdateRequest();
         private async void btnSacuvajPoslovnicu_Click(object sender, EventArgs e)
         {
-            if(_poslovnica == null)
+            if (ValidirajUnesenePodatke())
             {
-                PoslovnicaInsertRequest request = new PoslovnicaInsertRequest()
+                if (cmbGrad.SelectedValue != null && (int)cmbGrad.SelectedValue > 0)
                 {
-                    Adresa = txtAdresa.Text,
-                    BrojTelefona = txtBrojtelefona.Text,
-                    GradId = (int)cmbGrad.SelectedValue
-                };
+                    var gradObj = cmbGrad.SelectedValue;
 
-                var poslovnica = await _servicePoslovnica.Insert<Model.Poslovnica>(request);
-                await LoadPoslovnica();
+                    if (int.TryParse(gradObj.ToString(), out int gradId))
+                    {
+                        insert.GradId = gradId;
+                        update.GradId = gradId;
+                    }
+
+                    insert.Adresa = update.Adresa = txtAdresa.Text;
+                    insert.BrojTelefona = update.BrojTelefona = txtBrojtelefona.Text;
+
+                    if (_poslovnica == null)
+                    {
+                        var poslovnica = await _servicePoslovnica.Insert<Model.Poslovnica>(insert);
+                        await LoadPoslovnica();
+                        MessageBox.Show("Uspješno izvršeno");
+                    }
+                    else
+                    {
+                        var poslovnica = await _servicePoslovnica.Update<Model.Poslovnica>(_poslovnica.Id, update);
+                        await LoadPoslovnica();
+                        MessageBox.Show("Uspješno izvršeno");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Niste označili grad", "Greška",
+                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                PoslovnicaUpdateRequest request = new PoslovnicaUpdateRequest()
-                {
-                    Adresa = txtAdresa.Text,
-                    BrojTelefona = txtBrojtelefona.Text,
-                    GradId = (int)cmbGrad.SelectedValue
-                };
-
-                var poslovnica = await _servicePoslovnica.Update<Model.Poslovnica>(_poslovnica.Id, request);
-                await LoadPoslovnica();
+                MessageBox.Show("Nisu sva polja popunjena", "Greška",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private bool ValidirajUnesenePodatke()
+        {
+            if(string.IsNullOrEmpty(txtAdresa.Text) || string.IsNullOrEmpty(txtBrojtelefona.Text))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

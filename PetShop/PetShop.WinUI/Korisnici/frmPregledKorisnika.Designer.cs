@@ -276,6 +276,7 @@ namespace PetShop.WinUI.Korisnici
             this.btnKomentari.TabIndex = 12;
             this.btnKomentari.Text = "Komentari";
             this.btnKomentari.UseVisualStyleBackColor = false;
+            this.btnKomentari.Click += new System.EventHandler(this.btnKomentari_Click);
             // 
             // btnPoslovnice
             // 
@@ -390,6 +391,7 @@ namespace PetShop.WinUI.Korisnici
             this.dgvKorisnici.Name = "dgvKorisnici";
             this.dgvKorisnici.ReadOnly = true;
             this.dgvKorisnici.RowTemplate.Height = 25;
+            this.dgvKorisnici.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvKorisnici.Size = new System.Drawing.Size(769, 538);
             this.dgvKorisnici.TabIndex = 0;
             this.dgvKorisnici.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKorisnici_CellDoubleClick);

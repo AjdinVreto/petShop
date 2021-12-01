@@ -95,5 +95,11 @@ namespace PetShop.WinUI.Korisnici
             frmNovosti frm = new frmNovosti();
             frm.ShowDialog();
         }
+
+        private void btnKomentari_Click(object sender, EventArgs e)
+        {
+            frmKomentar frm = new frmKomentar();
+            frm.ShowDialog();
+        }
     }
 }

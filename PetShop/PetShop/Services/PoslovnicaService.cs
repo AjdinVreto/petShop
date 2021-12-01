@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PetShop.Database;
+using PetShop.Filters;
 using PetShop.Model.Requests;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,10 @@ namespace PetShop.Services
 
         public override Model.Poslovnica Insert(PoslovnicaInsertRequest request)
         {
+            if(request.GradId == 0)
+            {
+                throw new UserException("Niste odabrali grad");
+            }
             var entity = _mapper.Map<Database.Poslovnica>(request);
             ctx.Add(entity);
 

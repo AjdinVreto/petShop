@@ -46,11 +46,25 @@ namespace PetShop.Services
         public override Model.Korisnik Insert(KorisnikInsertRequest request)
         {
             var entity = _mapper.Map<Database.Korisnik>(request);
+            var korisnici = ctx.Korisniks.ToList();
             ctx.Add(entity);
+
+            if(request.GradId == 0 || request.SpolId == 0)
+            {
+                throw new UserException("Niste oznacili grad ili spol");
+            }
 
             if(request.Password != request.PotvrdaPassword)
             {
                 throw new UserException("Lozinka nije ispravna");
+            }
+
+            foreach(var item in korisnici)
+            {
+                if(item.KorisnickoIme.Equals(request.KorisnickoIme) || item.Email.Equals(request.Email))
+                {
+                    throw new UserException("Korisnicko ime ili email vec postoji");
+                }
             }
 
             entity.PasswordSalt = GenerateSalt();
@@ -76,6 +90,15 @@ namespace PetShop.Services
         public override Model.Korisnik Update(int id, KorisnikUpdateRequest request)
         {
             var entity = ctx.Korisniks.Find(id);
+            var korisnici = ctx.Korisniks.ToList();
+
+            foreach (var item in korisnici)
+            {
+                if (item.Email.Equals(request.Email) && item.Id != id)
+                {
+                    throw new UserException("Email vec postoji");
+                }
+            }
 
             _mapper.Map(request, entity);
 

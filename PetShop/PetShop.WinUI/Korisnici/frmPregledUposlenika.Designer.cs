@@ -326,9 +326,9 @@ namespace PetShop.WinUI.Korisnici
             this.panel1.Controls.Add(this.btnOdjava);
             this.panel1.Controls.Add(this.btnProfil);
             this.panel1.Controls.Add(this.label6);
-            this.panel1.Location = new System.Drawing.Point(283, 14);
+            this.panel1.Location = new System.Drawing.Point(293, 14);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(788, 79);
+            this.panel1.Size = new System.Drawing.Size(778, 79);
             this.panel1.TabIndex = 34;
             // 
             // lblNavigacija
@@ -344,7 +344,7 @@ namespace PetShop.WinUI.Korisnici
             // btnOdjava
             // 
             this.btnOdjava.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnOdjava.Location = new System.Drawing.Point(695, 18);
+            this.btnOdjava.Location = new System.Drawing.Point(682, 18);
             this.btnOdjava.Name = "btnOdjava";
             this.btnOdjava.Size = new System.Drawing.Size(90, 41);
             this.btnOdjava.TabIndex = 19;
@@ -375,9 +375,9 @@ namespace PetShop.WinUI.Korisnici
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgvUposlenici);
-            this.groupBox1.Location = new System.Drawing.Point(293, 348);
+            this.groupBox1.Location = new System.Drawing.Point(296, 348);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(775, 459);
+            this.groupBox1.Size = new System.Drawing.Size(772, 459);
             this.groupBox1.TabIndex = 40;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Uposlenici";
@@ -400,7 +400,8 @@ namespace PetShop.WinUI.Korisnici
             this.dgvUposlenici.Name = "dgvUposlenici";
             this.dgvUposlenici.ReadOnly = true;
             this.dgvUposlenici.RowTemplate.Height = 25;
-            this.dgvUposlenici.Size = new System.Drawing.Size(769, 437);
+            this.dgvUposlenici.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvUposlenici.Size = new System.Drawing.Size(766, 437);
             this.dgvUposlenici.TabIndex = 0;
             this.dgvUposlenici.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUposlenici_CellDoubleClick);
             // 
@@ -491,7 +492,7 @@ namespace PetShop.WinUI.Korisnici
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(234, 25);
             this.label7.TabIndex = 47;
-            this.label7.Text = "Korisnicko ime uposlenika";
+            this.label7.Text = "Korisničko ime uposlenika";
             // 
             // cmbPoslovnice
             // 

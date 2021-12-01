@@ -30,23 +30,40 @@ namespace PetShop.WinUI.Ostalo
             await LoadNovosti();
         }
 
-        private async Task LoadNovosti()
-        {
-            dgvNovosti.DataSource = await _serviceNovosti.Get<List<Model.Novost>>(null);
-        }
-
         private void btnDodajSliku_Click(object sender, EventArgs e)
         {
             var result = ofdSlika.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                var filename = ofdSlika.FileName;
-                var file = File.ReadAllBytes(filename);
+                var fileName = ofdSlika.FileName;
 
-                pbxSlika.Image = Image.FromFile(filename);
+                var file = File.ReadAllBytes(fileName);
+
+                insert.Slika = file;
+
+                Image image = Image.FromFile(fileName);
+
+                pbxSlika.Image = image;
+                pbxSlika.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
+
+        public static Bitmap ByteToImage(byte[] blob)
+        {
+            System.IO.MemoryStream mStream = new System.IO.MemoryStream();
+            byte[] pData = blob;
+            mStream.Write(pData, 0, Convert.ToInt32(pData.Length));
+            Bitmap bm = new Bitmap(mStream, false);
+            mStream.Dispose();
+            return bm;
+        }
+
+        private async Task LoadNovosti()
+        {
+            dgvNovosti.DataSource = await _serviceNovosti.Get<List<Model.Novost>>(null);
+        }
+
         private void dgvNovosti_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var novost = dgvNovosti.SelectedRows[0].DataBoundItem as Model.Novost;
@@ -54,33 +71,60 @@ namespace PetShop.WinUI.Ostalo
 
             txtNaslov.Text = _novost.Naslov;
             txtTekst.Text = _novost.Tekst;
+            if (novost.Slika.Length != 0)
+            {
+                pbxSlika.Image = ByteToImage(novost.Slika);
+                pbxSlika.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
         }
 
+        NovostInsertRequest insert = new NovostInsertRequest();
+        NovostUpdateRequest update = new NovostUpdateRequest();
         private async void btnDodajNovost_Click(object sender, EventArgs e)
         {
-            if(_novost == null)
+            if (ValidirajUnesenePodatke())
             {
-                NovostInsertRequest request = new NovostInsertRequest()
-                {
-                    Naslov = txtNaslov.Text,
-                    Tekst = txtTekst.Text,
-                    Datum = DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null),
-                    KorisnikId = 1
-                };
+                insert.Naslov = update.Naslov = txtNaslov.Text;
+                insert.Tekst = update.Tekst = txtTekst.Text;
+                insert.Datum = update.Datum = DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null);
+                insert.KorisnikId = 1;
 
-                var novost = await _serviceNovosti.Insert<Model.Novost>(request);
+                if (_novost == null)
+                {
+                    var novost = await _serviceNovosti.Insert<Model.Novost>(insert);
+                }
+                else
+                {
+                    var novost = await _serviceNovosti.Update<Model.Novost>(_novost.Id, update);
+                }
+                await LoadNovosti();
+                MessageBox.Show("Uspješno izvršeno");
             }
             else
             {
-                NovostUpdateRequest request = new NovostUpdateRequest()
-                {
-                    Naslov = txtNaslov.Text,
-                    Tekst = txtTekst.Text,
-                    Datum = DateTime.ParseExact(DateTime.Now.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null)
-                };
-
-                var novost = await _serviceNovosti.Update<Model.Novost>(_novost.Id, request);
+                MessageBox.Show("Nisu sva polja popunjena", "Greška",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void dgvNovosti_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
+        }
+
+        private bool ValidirajUnesenePodatke()
+        {
+            if(string.IsNullOrEmpty(txtNaslov.Text) || string.IsNullOrEmpty(txtTekst.Text))
+            {
+                return false;
+            }
+
+            if (insert.Slika == null && _novost == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

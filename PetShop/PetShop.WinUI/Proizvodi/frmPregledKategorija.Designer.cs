@@ -367,7 +367,7 @@ namespace PetShop.WinUI.Proizvodi
             this.groupBox1.Controls.Add(this.dgvKategorije);
             this.groupBox1.Location = new System.Drawing.Point(469, 285);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(453, 445);
+            this.groupBox1.Size = new System.Drawing.Size(453, 522);
             this.groupBox1.TabIndex = 57;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Kategorije";
@@ -385,7 +385,8 @@ namespace PetShop.WinUI.Proizvodi
             this.dgvKategorije.Name = "dgvKategorije";
             this.dgvKategorije.ReadOnly = true;
             this.dgvKategorije.RowTemplate.Height = 25;
-            this.dgvKategorije.Size = new System.Drawing.Size(447, 423);
+            this.dgvKategorije.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvKategorije.Size = new System.Drawing.Size(447, 500);
             this.dgvKategorije.TabIndex = 0;
             // 
             // Naziv
@@ -398,7 +399,7 @@ namespace PetShop.WinUI.Proizvodi
             // txtNazivKategorije
             // 
             this.txtNazivKategorije.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtNazivKategorije.Location = new System.Drawing.Point(559, 157);
+            this.txtNazivKategorije.Location = new System.Drawing.Point(546, 153);
             this.txtNazivKategorije.Name = "txtNazivKategorije";
             this.txtNazivKategorije.Size = new System.Drawing.Size(262, 33);
             this.txtNazivKategorije.TabIndex = 58;
@@ -406,17 +407,17 @@ namespace PetShop.WinUI.Proizvodi
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(638, 131);
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(608, 130);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(108, 17);
+            this.label7.Size = new System.Drawing.Size(136, 21);
             this.label7.TabIndex = 59;
             this.label7.Text = "Naziv kategorije";
             // 
             // btnDodajKategoriju
             // 
             this.btnDodajKategoriju.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnDodajKategoriju.Location = new System.Drawing.Point(618, 214);
+            this.btnDodajKategoriju.Location = new System.Drawing.Point(608, 214);
             this.btnDodajKategoriju.Name = "btnDodajKategoriju";
             this.btnDodajKategoriju.Size = new System.Drawing.Size(151, 44);
             this.btnDodajKategoriju.TabIndex = 60;

@@ -30,6 +30,10 @@ namespace PetShop.WinUI.Korisnici
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnDodajSliku = new System.Windows.Forms.Button();
+            this.pbxSlika = new System.Windows.Forms.PictureBox();
             this.clbRole = new System.Windows.Forms.CheckedListBox();
             this.txtDatumRodjenja = new System.Windows.Forms.TextBox();
             this.cmbDrzava = new System.Windows.Forms.ComboBox();
@@ -55,12 +59,18 @@ namespace PetShop.WinUI.Korisnici
             this.label9 = new System.Windows.Forms.Label();
             this.txtKorisnickoIme = new System.Windows.Forms.TextBox();
             this.btnSacuvajKorisnika = new System.Windows.Forms.Button();
+            this.ofdSlika = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxSlika)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.btnDodajSliku);
+            this.groupBox1.Controls.Add(this.pbxSlika);
             this.groupBox1.Controls.Add(this.clbRole);
             this.groupBox1.Controls.Add(this.txtDatumRodjenja);
             this.groupBox1.Controls.Add(this.cmbDrzava);
@@ -78,16 +88,55 @@ namespace PetShop.WinUI.Korisnici
             this.groupBox1.Controls.Add(this.txtIme);
             this.groupBox1.Location = new System.Drawing.Point(12, 23);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(568, 402);
+            this.groupBox1.Size = new System.Drawing.Size(568, 489);
             this.groupBox1.TabIndex = 36;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Osnovni podaci";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(421, 205);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 21);
+            this.label2.TabIndex = 20;
+            this.label2.Text = "Uloge";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(100, 267);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 21);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Slika";
+            // 
+            // btnDodajSliku
+            // 
+            this.btnDodajSliku.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDodajSliku.Location = new System.Drawing.Point(72, 434);
+            this.btnDodajSliku.Name = "btnDodajSliku";
+            this.btnDodajSliku.Size = new System.Drawing.Size(99, 36);
+            this.btnDodajSliku.TabIndex = 18;
+            this.btnDodajSliku.Text = "...";
+            this.btnDodajSliku.UseVisualStyleBackColor = true;
+            this.btnDodajSliku.Click += new System.EventHandler(this.btnDodajSliku_Click);
+            // 
+            // pbxSlika
+            // 
+            this.pbxSlika.Location = new System.Drawing.Point(35, 291);
+            this.pbxSlika.Name = "pbxSlika";
+            this.pbxSlika.Size = new System.Drawing.Size(178, 122);
+            this.pbxSlika.TabIndex = 17;
+            this.pbxSlika.TabStop = false;
             // 
             // clbRole
             // 
             this.clbRole.CheckOnClick = true;
             this.clbRole.FormattingEnabled = true;
-            this.clbRole.Location = new System.Drawing.Point(354, 248);
+            this.clbRole.Location = new System.Drawing.Point(354, 229);
             this.clbRole.Name = "clbRole";
             this.clbRole.Size = new System.Drawing.Size(178, 130);
             this.clbRole.TabIndex = 16;
@@ -95,7 +144,7 @@ namespace PetShop.WinUI.Korisnici
             // txtDatumRodjenja
             // 
             this.txtDatumRodjenja.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtDatumRodjenja.Location = new System.Drawing.Point(354, 118);
+            this.txtDatumRodjenja.Location = new System.Drawing.Point(354, 100);
             this.txtDatumRodjenja.Name = "txtDatumRodjenja";
             this.txtDatumRodjenja.Size = new System.Drawing.Size(178, 29);
             this.txtDatumRodjenja.TabIndex = 15;
@@ -104,7 +153,7 @@ namespace PetShop.WinUI.Korisnici
             // 
             this.cmbDrzava.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cmbDrzava.FormattingEnabled = true;
-            this.cmbDrzava.Location = new System.Drawing.Point(35, 199);
+            this.cmbDrzava.Location = new System.Drawing.Point(35, 165);
             this.cmbDrzava.Name = "cmbDrzava";
             this.cmbDrzava.Size = new System.Drawing.Size(178, 29);
             this.cmbDrzava.TabIndex = 14;
@@ -114,7 +163,7 @@ namespace PetShop.WinUI.Korisnici
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(102, 261);
+            this.label10.Location = new System.Drawing.Point(102, 205);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(46, 21);
             this.label10.TabIndex = 13;
@@ -124,7 +173,7 @@ namespace PetShop.WinUI.Korisnici
             // 
             this.cmbGrad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cmbGrad.FormattingEnabled = true;
-            this.cmbGrad.Location = new System.Drawing.Point(35, 285);
+            this.cmbGrad.Location = new System.Drawing.Point(35, 229);
             this.cmbGrad.Name = "cmbGrad";
             this.cmbGrad.Size = new System.Drawing.Size(178, 29);
             this.cmbGrad.TabIndex = 12;
@@ -152,7 +201,7 @@ namespace PetShop.WinUI.Korisnici
             // 
             this.lblGrad.AutoSize = true;
             this.lblGrad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblGrad.Location = new System.Drawing.Point(91, 175);
+            this.lblGrad.Location = new System.Drawing.Point(91, 141);
             this.lblGrad.Name = "lblGrad";
             this.lblGrad.Size = new System.Drawing.Size(63, 21);
             this.lblGrad.TabIndex = 9;
@@ -162,7 +211,7 @@ namespace PetShop.WinUI.Korisnici
             // 
             this.lblDatumRodjenja.AutoSize = true;
             this.lblDatumRodjenja.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblDatumRodjenja.Location = new System.Drawing.Point(380, 94);
+            this.lblDatumRodjenja.Location = new System.Drawing.Point(380, 76);
             this.lblDatumRodjenja.Name = "lblDatumRodjenja";
             this.lblDatumRodjenja.Size = new System.Drawing.Size(125, 21);
             this.lblDatumRodjenja.TabIndex = 7;
@@ -172,17 +221,17 @@ namespace PetShop.WinUI.Korisnici
             // 
             this.lblJmbg.AutoSize = true;
             this.lblJmbg.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblJmbg.Location = new System.Drawing.Point(394, 173);
+            this.lblJmbg.Location = new System.Drawing.Point(394, 141);
             this.lblJmbg.Name = "lblJmbg";
-            this.lblJmbg.Size = new System.Drawing.Size(111, 21);
+            this.lblJmbg.Size = new System.Drawing.Size(109, 21);
             this.lblJmbg.TabIndex = 5;
-            this.lblJmbg.Text = "Broj Telefona";
+            this.lblJmbg.Text = "Broj telefona";
             // 
             // lblPrezime
             // 
             this.lblPrezime.AutoSize = true;
             this.lblPrezime.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblPrezime.Location = new System.Drawing.Point(82, 94);
+            this.lblPrezime.Location = new System.Drawing.Point(82, 77);
             this.lblPrezime.Name = "lblPrezime";
             this.lblPrezime.Size = new System.Drawing.Size(72, 21);
             this.lblPrezime.TabIndex = 3;
@@ -191,7 +240,7 @@ namespace PetShop.WinUI.Korisnici
             // txtPrezime
             // 
             this.txtPrezime.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtPrezime.Location = new System.Drawing.Point(35, 118);
+            this.txtPrezime.Location = new System.Drawing.Point(35, 101);
             this.txtPrezime.Name = "txtPrezime";
             this.txtPrezime.Size = new System.Drawing.Size(178, 29);
             this.txtPrezime.TabIndex = 2;
@@ -199,7 +248,7 @@ namespace PetShop.WinUI.Korisnici
             // txtBrojTelefona
             // 
             this.txtBrojTelefona.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtBrojTelefona.Location = new System.Drawing.Point(354, 197);
+            this.txtBrojTelefona.Location = new System.Drawing.Point(354, 165);
             this.txtBrojTelefona.Name = "txtBrojTelefona";
             this.txtBrojTelefona.Size = new System.Drawing.Size(178, 29);
             this.txtBrojTelefona.TabIndex = 4;
@@ -234,7 +283,7 @@ namespace PetShop.WinUI.Korisnici
             this.groupBox2.Controls.Add(this.txtKorisnickoIme);
             this.groupBox2.Location = new System.Drawing.Point(597, 23);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(568, 402);
+            this.groupBox2.Size = new System.Drawing.Size(568, 489);
             this.groupBox2.TabIndex = 37;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Korisnički podaci";
@@ -314,7 +363,7 @@ namespace PetShop.WinUI.Korisnici
             // btnSacuvajKorisnika
             // 
             this.btnSacuvajKorisnika.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSacuvajKorisnika.Location = new System.Drawing.Point(506, 443);
+            this.btnSacuvajKorisnika.Location = new System.Drawing.Point(508, 528);
             this.btnSacuvajKorisnika.Name = "btnSacuvajKorisnika";
             this.btnSacuvajKorisnika.Size = new System.Drawing.Size(152, 57);
             this.btnSacuvajKorisnika.TabIndex = 38;
@@ -322,11 +371,15 @@ namespace PetShop.WinUI.Korisnici
             this.btnSacuvajKorisnika.UseVisualStyleBackColor = true;
             this.btnSacuvajKorisnika.Click += new System.EventHandler(this.btnSacuvajKorisnika_Click);
             // 
+            // ofdSlika
+            // 
+            this.ofdSlika.FileName = "openFileDialog1";
+            // 
             // frmDetaljiKorisnika
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1217, 524);
+            this.ClientSize = new System.Drawing.Size(1217, 597);
             this.Controls.Add(this.btnSacuvajKorisnika);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -336,6 +389,7 @@ namespace PetShop.WinUI.Korisnici
             this.Load += new System.EventHandler(this.frmDetaljiKorisnika_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxSlika)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -369,5 +423,10 @@ namespace PetShop.WinUI.Korisnici
         private System.Windows.Forms.TextBox txtDatumRodjenja;
         private System.Windows.Forms.CheckedListBox clbRole;
         private System.Windows.Forms.Button btnSacuvajKorisnika;
+        private System.Windows.Forms.Button btnDodajSliku;
+        private System.Windows.Forms.PictureBox pbxSlika;
+        private System.Windows.Forms.OpenFileDialog ofdSlika;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

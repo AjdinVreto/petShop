@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PetShop.Database;
+using PetShop.Filters;
 using PetShop.Model.Requests;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,11 @@ namespace PetShop.Services
         {
             var entity = _mapper.Map<Database.Uposlenik>(request);
             ctx.Add(entity);
+
+            if(request.PoslovnicaId == 0)
+            {
+                throw new UserException("Niste oznacili poslovnicu");
+            }
 
             ctx.SaveChanges();
 

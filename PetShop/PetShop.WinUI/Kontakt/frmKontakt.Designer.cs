@@ -372,7 +372,7 @@ namespace PetShop.WinUI.Kontakt
             this.groupBox1.Controls.Add(this.dgvKontakt);
             this.groupBox1.Location = new System.Drawing.Point(293, 362);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(772, 445);
+            this.groupBox1.Size = new System.Drawing.Size(778, 445);
             this.groupBox1.TabIndex = 37;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Kontakt poruke";
@@ -393,7 +393,8 @@ namespace PetShop.WinUI.Kontakt
             this.dgvKontakt.Name = "dgvKontakt";
             this.dgvKontakt.ReadOnly = true;
             this.dgvKontakt.RowTemplate.Height = 25;
-            this.dgvKontakt.Size = new System.Drawing.Size(766, 423);
+            this.dgvKontakt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvKontakt.Size = new System.Drawing.Size(772, 423);
             this.dgvKontakt.TabIndex = 0;
             this.dgvKontakt.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKontakt_CellDoubleClick);
             // 

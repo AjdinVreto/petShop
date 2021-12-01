@@ -52,16 +52,40 @@ namespace PetShop.WinUI.Proizvodi
             cmbDrzave.ValueMember = "Id";
         }
 
+        ProizvodjacInsertRequest insert = new ProizvodjacInsertRequest();
         private async void btnDodajProizvodjaca_Click(object sender, EventArgs e)
         {
-            ProizvodjacInsertRequest request = new ProizvodjacInsertRequest()
+            if (ValidirajUnesenePodatke())
             {
-                Naziv = txtNazivProizvodjaca.Text,
-                DrzavaId = (int)cmbDrzave.SelectedValue
-            };
+                if(cmbDrzave.SelectedValue != null && (int)cmbDrzave.SelectedValue > 0)
+                {
+                    insert.Naziv = txtNazivProizvodjaca.Text;
+                    insert.DrzavaId = (int)cmbDrzave.SelectedValue;
 
-            var proizvodjac = await _serviceProizvodjaci.Insert<Model.Proizvodjac>(request);
-            await LoadProizvodjaci();
+                    var proizvodjac = await _serviceProizvodjaci.Insert<Model.Proizvodjac>(insert);
+                    await LoadProizvodjaci();
+                }
+                else
+                {
+                    MessageBox.Show("Niste označili grad", "Greška",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nisu sva polja unesena", "Greška",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool ValidirajUnesenePodatke()
+        {
+            if (string.IsNullOrEmpty(txtNazivProizvodjaca.Text))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

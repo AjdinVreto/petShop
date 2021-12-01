@@ -17,6 +17,7 @@ namespace PetShop.Model.Requests
         public string BrojTelefona { get; set; }
         [Required]
         public string Email { get; set; }
+        [Required]
         public byte[] Slika { get; set; }
         [Required]
         public string KorisnickoIme { get; set; }

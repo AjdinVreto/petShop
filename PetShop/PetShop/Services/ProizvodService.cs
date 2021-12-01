@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PetShop.Database;
+using PetShop.Filters;
 using PetShop.Model.Requests;
 using System;
 using System.Collections.Generic;
@@ -52,6 +53,16 @@ namespace PetShop.Services
 
         public override Model.Proizvod Insert(ProizvodInsertRequest request)
         {
+            if (request.ProizvodjacId == 0)
+            {
+                throw new UserException("Niste oznacili proizvodjaca");
+            }
+
+            if (request.KategorijaId == 0)
+            {
+                throw new UserException("Niste oznacili kategoriju");
+            }
+
             var entity = _mapper.Map<Database.Proizvod>(request);
             ctx.Add(entity);
 

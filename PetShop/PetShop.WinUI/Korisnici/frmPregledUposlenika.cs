@@ -17,14 +17,22 @@ namespace PetShop.WinUI.Korisnici
         APIService _serviceUposlenici = new APIService("Uposlenik");
         APIService _servicePoslovnice = new APIService("Poslovnica");
         APIService _serviceKorisnici = new APIService("Korisnik");
+        APIService _serviceKorisnikRola = new APIService("KorisnikRola");
+
         Uposlenik _uposlenik;
         List<Korisnik> _korisnik;
+        List<Korisnik> _korisnici;
+        List<KorisnikRola> _korisnikRola;
+        List<Uposlenik> _uposlenici;
         public frmPregledUposlenika()
         {
             InitializeComponent();
             dgvUposlenici.AutoGenerateColumns = false;
             _uposlenik = null;
             _korisnik = null;
+            _korisnikRola = null;
+            _uposlenici = null;
+            _korisnici = null;
         }
 
         private async void frmPregledUposlenika_Load(object sender, EventArgs e)
@@ -42,6 +50,10 @@ namespace PetShop.WinUI.Korisnici
             };
 
             dgvUposlenici.DataSource = await _serviceUposlenici.Get<List<Model.Uposlenik>>(request);
+
+            _korisnikRola = await _serviceKorisnikRola.Get<List<Model.KorisnikRola>>(null);
+            _uposlenici = await _serviceUposlenici.Get<List<Model.Uposlenik>>(request);
+            _korisnici = await _serviceKorisnici.Get<List<Model.Korisnik>>(null);
         }
 
         private async Task LoadPoslovnice()
@@ -54,39 +66,71 @@ namespace PetShop.WinUI.Korisnici
             cmbPoslovnice.ValueMember = "Id";
         }
 
+        UposlenikInsertRequest insert = new UposlenikInsertRequest();
+        UposlenikUpdateRequest update = new UposlenikUpdateRequest();
         private async void btnSacuvajUposlenika_Click(object sender, EventArgs e)
         {
-            if(_uposlenik == null)
+            KorisnikSearchObject request = new KorisnikSearchObject()
             {
-                KorisnikSearchObject request = new KorisnikSearchObject()
-                {
-                    KorisnickoIme = txtKorisnickoIme.Text
-                };
+                KorisnickoIme = txtKorisnickoIme.Text
+            };
 
+            if (ValidirajUnesenePodatke())
+            {
                 _korisnik = await _serviceKorisnici.Get<List<Model.Korisnik>>(request);
-                int kId = _korisnik[0].Id;
 
-                UposlenikInsertRequest requestInsert = new UposlenikInsertRequest()
+                if (cmbPoslovnice.SelectedValue != null)
                 {
-                    Aktivan = cbAktivan.Checked,
-                    DatumZaposlenja = DateTime.ParseExact(dtpDatumZaposlenja.Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null),
-                    KorisnikId = kId,
-                    PoslovnicaId = (int)cmbPoslovnice.SelectedValue
-                };
+                    var poslovnicaObj = cmbPoslovnice.SelectedValue;
 
-                var uposlenik = await _serviceUposlenici.Insert<Uposlenik>(requestInsert);
+                    if (int.TryParse(poslovnicaObj.ToString(), out int poslovnicaId))
+                    {
+                        insert.PoslovnicaId = poslovnicaId;
+                        update.PoslovnicaId = poslovnicaId;
+                    }
+
+                    insert.Aktivan = update.Aktivan = cbAktivan.Checked;
+                    insert.DatumZaposlenja = update.DatumZaposlenja = DateTime.ParseExact(dtpDatumZaposlenja.Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null);
+
+                    if ((int)poslovnicaObj == 0)
+                    {
+                        MessageBox.Show("Niste oznacili poslovnicu", "Greska",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        if (_uposlenik == null)
+                        {
+                            if (ValidirajUposlenika())
+                            {
+                                insert.KorisnikId = _korisnik[0].Id;
+
+                                var uposlenik = await _serviceUposlenici.Insert<Uposlenik>(insert);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Uneseni korisnik nije uposlenik ili vec postoji", "Greska",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            update.KorisnikId = _uposlenik.KorisnikId;
+
+                            var uposlenik = await _serviceUposlenici.Update<Uposlenik>(_uposlenik.Id, update);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Niste oznacili poslovnicu", "Greska",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                UposlenikUpdateRequest request = new UposlenikUpdateRequest()
-                {
-                    Aktivan = cbAktivan.Checked,
-                    DatumZaposlenja = dtpDatumZaposlenja.Value,
-                    KorisnikId = _uposlenik.KorisnikId,
-                    PoslovnicaId = _uposlenik.PoslovnicaId
-                };
-
-                var uposlenik = await _serviceUposlenici.Update<Uposlenik>(_uposlenik.Id, request);
+                MessageBox.Show("Korisnicko ime uposlenika nije uneseno ili ne postoji", "Greska",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -101,6 +145,66 @@ namespace PetShop.WinUI.Korisnici
             cmbPoslovnice.SelectedValue = _uposlenik.PoslovnicaId;
 
             txtKorisnickoIme.ReadOnly = true;
+        }
+
+        private bool ValidirajUnesenePodatke()
+        {
+            bool postojiKorisnik = false;
+
+            if (string.IsNullOrEmpty(txtKorisnickoIme.Text))
+            {
+                return false;
+            }
+
+            foreach (var item in _korisnici)
+            {
+                if (item.KorisnickoIme.Equals(txtKorisnickoIme.Text))
+                {
+                    postojiKorisnik = true;
+                }
+            }
+
+            if (!postojiKorisnik)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private bool ValidirajUposlenika()
+        {
+            bool provjeraUposlenik = false;
+
+            foreach(var item in _uposlenici)
+            {
+                if (item.Korisnik.KorisnickoIme.Equals(txtKorisnickoIme.Text))
+                {
+                    return false;
+                }
+            }
+
+            foreach(var item in _korisnikRola)
+            {
+                if(item.KorisnikId == _korisnik[0].Id)
+                {
+                    if (item.Rola.Naziv.Equals("Uposlenik"))
+                    {
+                        provjeraUposlenik = true;
+                    }
+                }
+            }
+
+            if(!provjeraUposlenik)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using PetShop.Model;
 using PetShop.Model.Requests;
+using PetShop.WinUI.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
@@ -20,6 +22,7 @@ namespace PetShop.WinUI.Proizvodi
         APIService _serviceProizvodjaci = new APIService("Proizvodjac");
 
         private Proizvod _proizvod;
+        bool updateImage = false;
         public frmProizvodi()
         {
             InitializeComponent();
@@ -30,6 +33,36 @@ namespace PetShop.WinUI.Proizvodi
         private async void frmProizvodi_Load(object sender, EventArgs e)
         {
             await LoadData();
+        }
+
+        private void btnDodajSliku_Click(object sender, EventArgs e)
+        {
+            var result = ofdSlika.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                var fileName = ofdSlika.FileName;
+
+                var file = File.ReadAllBytes(fileName);
+
+                insert.Slika = update.Slika = file;
+                updateImage = true;
+
+                Image image = Image.FromFile(fileName);
+
+                pbxSlika.Image = image;
+                pbxSlika.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+        }
+
+        public static Bitmap ByteToImage(byte[] blob)
+        {
+            System.IO.MemoryStream mStream = new System.IO.MemoryStream();
+            byte[] pData = blob;
+            mStream.Write(pData, 0, Convert.ToInt32(pData.Length));
+            Bitmap bm = new Bitmap(mStream, false);
+            mStream.Dispose();
+            return bm;
         }
 
         private async Task LoadData()
@@ -72,56 +105,99 @@ namespace PetShop.WinUI.Proizvodi
             var proizvod = dgvProizvodi.SelectedRows[0].DataBoundItem as Model.Proizvod;
             _proizvod = proizvod;
 
+            
             txtNaziv.Text = proizvod.Naziv;
             txtCijena.Text = proizvod.Cijena.ToString();
             txtOpis.Text = proizvod.Opis;
             cmbKategorija.SelectedValue = proizvod.KategorijaId;
             cmbProizvodjac.SelectedValue = proizvod.ProizvodjacId;
-        }
-
-        private void btnDodajSliku_Click(object sender, EventArgs e)
-        {
-            var result = ofdSlika.ShowDialog();
-
-            if (result == DialogResult.OK)
+            if(_proizvod.Slika.Length != 0)
             {
-                var filename = ofdSlika.FileName;
-                var file = File.ReadAllBytes(filename);
-
-                pbxSlika.Image = Image.FromFile(filename);
+                pbxSlika.Image = ByteToImage(_proizvod.Slika);
+                pbxSlika.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
 
+        ProizvodInsertRequest insert = new ProizvodInsertRequest();
+        ProizvodUpdateRequest update = new ProizvodUpdateRequest();
         private async void btnSacuvajProizvod_Click(object sender, EventArgs e)
         {
-            if (_proizvod == null)
+            if (updateImage == false && _proizvod != null)
             {
-                ProizvodInsertRequest request = new ProizvodInsertRequest()
-                {
-                    Naziv = txtNaziv.Text,
-                    Cijena = decimal.Parse(txtCijena.Text),
-                    Opis = txtOpis.Text,
-                    KategorijaId = (int)cmbKategorija.SelectedValue,
-                    ProizvodjacId = (int)cmbProizvodjac.SelectedValue
-                };
+                update.Slika = _proizvod.Slika;
+                insert.Slika = _proizvod.Slika;
+            }
 
-                var proizvod = await _serviceProizvodi.Insert<Proizvod>(request);
-                await LoadProizvodi();
+            if (ValidirajUnesenePodatke())
+            {
+                if (cmbKategorija.SelectedValue != null && cmbProizvodjac.SelectedValue != null && (int)cmbKategorija.SelectedValue > 0 && (int)cmbProizvodjac.SelectedValue > 0)
+                {
+                    var kategorijaObj = cmbKategorija.SelectedValue;
+                    var proizvodjacObj = cmbProizvodjac.SelectedValue;
+
+                    if (int.TryParse(kategorijaObj.ToString(), out int kategorijaId))
+                    {
+                        insert.KategorijaId = kategorijaId;
+                        update.KategorijaId = kategorijaId;
+                    }
+
+                    if (int.TryParse(proizvodjacObj.ToString(), out int proizvodjacId))
+                    {
+                        insert.ProizvodjacId = proizvodjacId;
+                        update.ProizvodjacId = proizvodjacId;
+                    }
+
+                    if (decimal.TryParse(txtCijena.Text, out decimal cijena))
+                    {
+                        insert.Cijena = update.Cijena = cijena;
+                    }
+
+                    insert.Naziv = update.Naziv = txtNaziv.Text;
+                    insert.Opis = update.Opis = txtOpis.Text;
+
+                    if (_proizvod == null)
+                    {
+                        var proizvod = await _serviceProizvodi.Insert<Proizvod>(insert);
+                        await LoadProizvodi();
+                        MessageBox.Show("Uspješno izvršeno");
+                    }
+                    else
+                    {
+                        var proizvod = await _serviceProizvodi.Update<Proizvod>(_proizvod.Id, update);
+                        await LoadProizvodi();
+                        MessageBox.Show("Uspješno izvršeno");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Niste oznacili kategoriju ili proizvodjaca", "Greska",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                ProizvodUpdateRequest request = new ProizvodUpdateRequest()
-                {
-                    Naziv = txtNaziv.Text,
-                    Cijena = decimal.Parse(txtCijena.Text),
-                    Opis = txtOpis.Text,
-                    KategorijaId = (int)cmbKategorija.SelectedValue,
-                    ProizvodjacId = (int)cmbProizvodjac.SelectedValue
-                };
-
-                var proizvod = await _serviceProizvodi.Update<Proizvod>(_proizvod.Id, request);
-                await LoadProizvodi();
+                MessageBox.Show("Nisu sva polja unesena", "Greška",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void dgvProizvodi_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
+        }
+
+        private bool ValidirajUnesenePodatke()
+        {
+            if(string.IsNullOrEmpty(txtCijena.Text) || string.IsNullOrEmpty(txtNaziv.Text) || string.IsNullOrEmpty(txtOpis.Text))
+            {
+                return false;
+            }
+
+            if(insert.Slika == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

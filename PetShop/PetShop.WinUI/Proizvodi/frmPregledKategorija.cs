@@ -30,15 +30,31 @@ namespace PetShop.WinUI.Proizvodi
             dgvKategorije.DataSource = await _serviceKategorije.Get<List<Model.Kategorija>>(null);
         }
 
+        KategorijaInsertRequest insert = new KategorijaInsertRequest();
         private async void btnDodajKategoriju_Click(object sender, EventArgs e)
         {
-            KategorijaInsertRequest request = new KategorijaInsertRequest()
+            if (ValidirajUnesenePodatke())
             {
-                Naziv = txtNazivKategorije.Text
-            };
+                insert.Naziv = txtNazivKategorije.Text;
 
-            var _kategorija = await _serviceKategorije.Insert<Kategorija>(request);
-            await LoadKategorija();
+                var _kategorija = await _serviceKategorije.Insert<Kategorija>(insert);
+                await LoadKategorija();
+            }
+            else
+            {
+                MessageBox.Show("Nisu sva polja popunjena", "Greška",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool ValidirajUnesenePodatke()
+        {
+            if (string.IsNullOrEmpty(txtNazivKategorije.Text))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
