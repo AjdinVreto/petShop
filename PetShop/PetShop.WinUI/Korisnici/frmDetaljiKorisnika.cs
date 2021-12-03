@@ -84,7 +84,7 @@ namespace PetShop.WinUI.Korisnici
                 txtBrojTelefona.Text = _korisnik.BrojTelefona;
                 txtKorisnickoIme.Text = _korisnik.KorisnickoIme;
                 txtEmail.Text = _korisnik.Email;
-                txtDatumRodjenja.Text = _korisnik.DatumRodjenja;
+                dtpDatumRodjenja.Value = _korisnik.DatumRodjenja;
                 //test
                 cmbSpol.SelectedValue = _korisnik.SpolId;
                 cmbGrad.SelectedValue = _korisnik.GradId;
@@ -97,7 +97,7 @@ namespace PetShop.WinUI.Korisnici
 
                 txtIme.ReadOnly = true;
                 txtPrezime.ReadOnly = true;
-                txtDatumRodjenja.ReadOnly = true;
+                dtpDatumRodjenja.Enabled = false;
                 txtPassword.ReadOnly = true;
                 txtPasswordPotvrda.ReadOnly = true;
                 clbRole.Enabled = false;
@@ -174,7 +174,7 @@ namespace PetShop.WinUI.Korisnici
                     insert.BrojTelefona = update.BrojTelefona = txtBrojTelefona.Text;
                     insert.KorisnickoIme = update.KorisnickoIme = txtKorisnickoIme.Text;
                     insert.Email = update.Email = txtEmail.Text;
-                    insert.DatumRodjenja = txtDatumRodjenja.Text;
+                    insert.DatumRodjenja = DateTime.ParseExact(dtpDatumRodjenja.Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null);
                     insert.Password = txtPassword.Text;
                     insert.PotvrdaPassword = txtPasswordPotvrda.Text;
 
@@ -184,7 +184,7 @@ namespace PetShop.WinUI.Korisnici
 
                     if (_korisnik == null)
                     {
-                        if (roleIdList.Count == 0)
+                        if (roleIdList.Count > 0)
                         {
                             var korisnik = await _serviceKorisnici.Insert<Korisnik>(insert);
                             MessageBox.Show("Uspješno izvršeno");
@@ -249,7 +249,7 @@ namespace PetShop.WinUI.Korisnici
 
         private bool ValidirajUnesenePodatke()
         {
-            if (string.IsNullOrEmpty(txtIme.Text) || string.IsNullOrEmpty(txtPrezime.Text) || string.IsNullOrEmpty(txtBrojTelefona.Text) || string.IsNullOrEmpty(txtDatumRodjenja.Text) ||
+            if (string.IsNullOrEmpty(txtIme.Text) || string.IsNullOrEmpty(txtPrezime.Text) || string.IsNullOrEmpty(txtBrojTelefona.Text) || dtpDatumRodjenja.Value == null ||
                 string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtKorisnickoIme.Text))
             {
                 return false;

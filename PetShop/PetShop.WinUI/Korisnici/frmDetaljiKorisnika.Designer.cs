@@ -35,7 +35,6 @@ namespace PetShop.WinUI.Korisnici
             this.btnDodajSliku = new System.Windows.Forms.Button();
             this.pbxSlika = new System.Windows.Forms.PictureBox();
             this.clbRole = new System.Windows.Forms.CheckedListBox();
-            this.txtDatumRodjenja = new System.Windows.Forms.TextBox();
             this.cmbDrzava = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cmbGrad = new System.Windows.Forms.ComboBox();
@@ -60,6 +59,7 @@ namespace PetShop.WinUI.Korisnici
             this.txtKorisnickoIme = new System.Windows.Forms.TextBox();
             this.btnSacuvajKorisnika = new System.Windows.Forms.Button();
             this.ofdSlika = new System.Windows.Forms.OpenFileDialog();
+            this.dtpDatumRodjenja = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxSlika)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -67,12 +67,12 @@ namespace PetShop.WinUI.Korisnici
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.dtpDatumRodjenja);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnDodajSliku);
             this.groupBox1.Controls.Add(this.pbxSlika);
             this.groupBox1.Controls.Add(this.clbRole);
-            this.groupBox1.Controls.Add(this.txtDatumRodjenja);
             this.groupBox1.Controls.Add(this.cmbDrzava);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.cmbGrad);
@@ -140,14 +140,6 @@ namespace PetShop.WinUI.Korisnici
             this.clbRole.Name = "clbRole";
             this.clbRole.Size = new System.Drawing.Size(178, 130);
             this.clbRole.TabIndex = 16;
-            // 
-            // txtDatumRodjenja
-            // 
-            this.txtDatumRodjenja.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtDatumRodjenja.Location = new System.Drawing.Point(354, 100);
-            this.txtDatumRodjenja.Name = "txtDatumRodjenja";
-            this.txtDatumRodjenja.Size = new System.Drawing.Size(178, 29);
-            this.txtDatumRodjenja.TabIndex = 15;
             // 
             // cmbDrzava
             // 
@@ -375,6 +367,14 @@ namespace PetShop.WinUI.Korisnici
             // 
             this.ofdSlika.FileName = "openFileDialog1";
             // 
+            // dtpDatumRodjenja
+            // 
+            this.dtpDatumRodjenja.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dtpDatumRodjenja.Location = new System.Drawing.Point(292, 101);
+            this.dtpDatumRodjenja.Name = "dtpDatumRodjenja";
+            this.dtpDatumRodjenja.Size = new System.Drawing.Size(270, 29);
+            this.dtpDatumRodjenja.TabIndex = 46;
+            // 
             // frmDetaljiKorisnika
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -420,7 +420,6 @@ namespace PetShop.WinUI.Korisnici
         private System.Windows.Forms.TextBox txtPasswordPotvrda;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.TextBox txtDatumRodjenja;
         private System.Windows.Forms.CheckedListBox clbRole;
         private System.Windows.Forms.Button btnSacuvajKorisnika;
         private System.Windows.Forms.Button btnDodajSliku;
@@ -428,5 +427,6 @@ namespace PetShop.WinUI.Korisnici
         private System.Windows.Forms.OpenFileDialog ofdSlika;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker dtpDatumRodjenja;
     }
 }

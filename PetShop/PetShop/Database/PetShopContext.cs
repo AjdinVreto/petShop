@@ -121,7 +121,7 @@ namespace PetShop.Database
 
                 entity.Property(e => e.BrojTelefona).IsRequired();
 
-                entity.Property(e => e.DatumRodjenja).IsRequired();
+                entity.Property(e => e.DatumRodjenja).HasColumnType("date");
 
                 entity.Property(e => e.Email).IsRequired();
 

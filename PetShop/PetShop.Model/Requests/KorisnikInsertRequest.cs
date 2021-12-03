@@ -12,7 +12,7 @@ namespace PetShop.Model.Requests
         [Required]
         public string Prezime { get; set; }
         [Required]
-        public string DatumRodjenja { get; set; }
+        public DateTime DatumRodjenja { get; set; }
         [Required]
         public string BrojTelefona { get; set; }
         [Required]
