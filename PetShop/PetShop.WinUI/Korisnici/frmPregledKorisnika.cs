@@ -29,7 +29,7 @@ namespace PetShop.WinUI.Korisnici
                 KorisnickoIme = txtPretraga.Text,
                 Email = txtPretraga.Text,
                 IncludeGrad = true,
-                IncludeSpol = true
+                IncludeSpol = true,
             };
             
             dgvKorisnici.DataSource = await _serviceKorisnici.Get<List<Model.Korisnik>>(request);

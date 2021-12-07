@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,9 +8,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using PetShop.Database;
 using PetShop.Filters;
 using PetShop.Model.Requests;
+using PetShop.Security;
 using PetShop.Services;
 using System;
 using System.Collections.Generic;
@@ -39,7 +42,27 @@ namespace PetShop
             services.AddDbContext<PetShopContext>(
                 options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PetShop", Version = "v1" });
+
+                c.AddSecurityDefinition("basicAuth", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "basic"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "basicAuth" }
+                        },
+                        new string[]{}
+                    }
+                });
+            });
 
             services.AddScoped<IProizvodService, ProizvodService>();
             services.AddScoped<IKorisnikService, KorisnikService>();
@@ -57,6 +80,10 @@ namespace PetShop
             services.AddScoped<IReadService<Model.Drzava, object>, BaseReadService<Model.Drzava, Database.Drzava, object>>();
             services.AddScoped<IReadService<Model.Proizvodjac, object>, BaseReadService<Model.Proizvodjac, Database.Proizvodjac, object>>();
             services.AddScoped<IReadService<Model.Poslovnica, object>, BaseReadService<Model.Poslovnica, Database.Poslovnica, object>>();
+
+            services.AddAuthentication("BasicAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,6 +103,8 @@ namespace PetShop
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

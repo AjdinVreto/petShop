@@ -21,5 +21,7 @@ namespace PetShop.Model
         public virtual Spol Spol { get; set; }
         public string GradNaziv => Grad?.Naziv;
         public string SpolNaziv => Spol?.Naziv;
+
+        public virtual ICollection<KorisnikRola> KorisnikRolas { get; set; }
     }
 }

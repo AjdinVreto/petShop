@@ -8,5 +8,6 @@ namespace PetShop.Services
 {
     public interface IKorisnikService : ICRUDService<Model.Korisnik, KorisnikSearchObject, KorisnikInsertRequest, KorisnikUpdateRequest>
     {
+        Task<Model.Korisnik> Login(string username, string password);
     }
 }

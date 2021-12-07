@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PetShop.Services;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace PetShop.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class BaseReadController<T, TSearch> : ControllerBase where T: class where TSearch: class
     {
         protected readonly IReadService<T, TSearch> _service;

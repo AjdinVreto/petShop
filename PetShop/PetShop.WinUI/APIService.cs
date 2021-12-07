@@ -1,60 +1,94 @@
-﻿using PetShop.Model;
-using Flurl.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using PetShop.Model;
+using PetShop.WinUI.Properties;
+using Flurl.Http;
 
 namespace PetShop.WinUI
 {
     public class APIService
     {
-        private string route = null;
+        private string _resource;
+        public string endpoint = $"{Resources.ApiUrl}";
 
-        public APIService(string _route)
+        public static string Username { get; set; }
+        public static string Password { get; set; }
+
+        public APIService(string resource)
         {
-            route = _route;
+            _resource = resource;
         }
-
-        public async Task<T> Get<T>(object request)
+        public async Task<T> Get<T>(object searchRequest = null)
         {
-            var url = $"{Properties.Settings.Default.ApiURL}/{route}";
-            if(request != null)
+            var query = "";
+            if (searchRequest != null)
             {
-                url += "?";
-                url += await request.ToQueryString();
+                query = await searchRequest?.ToQueryString();
             }
 
-            var result = await url.GetJsonAsync<T>();
+            var list = await $"{endpoint}{_resource}?{query}"
+               .WithBasicAuth(Username, Password).GetJsonAsync<T>();
 
-            return result;
+            return list;
         }
 
         public async Task<T> GetById<T>(object id)
         {
-            var url = $"{Properties.Settings.Default.ApiURL}/{route}/{id}";
+            var url = $"{endpoint}{_resource}/{id}";
 
-            var result = await url.GetJsonAsync<T>();
-
-            return result;
+            return await url.WithBasicAuth(Username, Password).GetJsonAsync<T>();
         }
 
         public async Task<T> Insert<T>(object request)
         {
-            var url = $"{Properties.Settings.Default.ApiURL}/{route}";
+            var url = $"{endpoint}{_resource}";
 
-            var result = await url.PostJsonAsync(request).ReceiveJson<T>();
+            try
+            {
+                return await url.WithBasicAuth(Username, Password).PostJsonAsync(request).ReceiveJson<T>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
 
-            return result;
+                var stringBuilder = new StringBuilder();
+                foreach (var error in errors)
+                {
+                    stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
+                }
+
+                MessageBox.Show(stringBuilder.ToString(), "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return default(T);
+            }
+
         }
 
-        public async Task<T> Update<T>(object id,object request)
+        public async Task<T> Update<T>(int id, object request)
         {
-            var url = $"{Properties.Settings.Default.ApiURL}/{route}/{id}";
+            try
+            {
+                var url = $"{endpoint}{_resource}/{id}";
 
-            var result = await url.PutJsonAsync(request).ReceiveJson<T>();
+                return await url.WithBasicAuth(Username, Password).PutJsonAsync(request).ReceiveJson<T>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
 
-            return result;
+                var stringBuilder = new StringBuilder();
+                foreach (var error in errors)
+                {
+                    stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
+                }
+
+                MessageBox.Show(stringBuilder.ToString(), "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return default(T);
+            }
+
         }
     }
 }

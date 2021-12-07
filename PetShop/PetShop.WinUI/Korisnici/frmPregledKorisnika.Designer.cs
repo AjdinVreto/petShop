@@ -31,9 +31,6 @@ namespace PetShop.WinUI.Korisnici
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblNavigacija = new System.Windows.Forms.Label();
-            this.btnOdjava = new System.Windows.Forms.Button();
-            this.btnProfil = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -87,9 +84,6 @@ namespace PetShop.WinUI.Korisnici
             // 
             this.panel1.BackColor = System.Drawing.Color.Gold;
             this.panel1.Controls.Add(this.lblNavigacija);
-            this.panel1.Controls.Add(this.btnOdjava);
-            this.panel1.Controls.Add(this.btnProfil);
-            this.panel1.Controls.Add(this.label6);
             this.panel1.Location = new System.Drawing.Point(293, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(778, 79);
@@ -98,43 +92,12 @@ namespace PetShop.WinUI.Korisnici
             // lblNavigacija
             // 
             this.lblNavigacija.AutoSize = true;
-            this.lblNavigacija.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblNavigacija.Location = new System.Drawing.Point(10, 29);
+            this.lblNavigacija.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblNavigacija.Location = new System.Drawing.Point(219, 23);
             this.lblNavigacija.Name = "lblNavigacija";
-            this.lblNavigacija.Size = new System.Drawing.Size(332, 25);
+            this.lblNavigacija.Size = new System.Drawing.Size(344, 32);
             this.lblNavigacija.TabIndex = 19;
-            this.lblNavigacija.Text = "Korisnici >> Upravljanje korisnicima";
-            // 
-            // btnOdjava
-            // 
-            this.btnOdjava.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnOdjava.Location = new System.Drawing.Point(682, 18);
-            this.btnOdjava.Name = "btnOdjava";
-            this.btnOdjava.Size = new System.Drawing.Size(90, 41);
-            this.btnOdjava.TabIndex = 19;
-            this.btnOdjava.Text = "Odjavi se";
-            this.btnOdjava.UseVisualStyleBackColor = true;
-            // 
-            // btnProfil
-            // 
-            this.btnProfil.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.btnProfil.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnProfil.Location = new System.Drawing.Point(378, 29);
-            this.btnProfil.Name = "btnProfil";
-            this.btnProfil.Size = new System.Drawing.Size(150, 47);
-            this.btnProfil.TabIndex = 19;
-            this.btnProfil.Text = "Moj profil";
-            this.btnProfil.UseVisualStyleBackColor = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(394, 1);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(121, 25);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "Ime Prezime";
+            this.lblNavigacija.Text = "UPRAVLJANJE KORISNICIMA";
             // 
             // panel6
             // 
@@ -567,9 +530,6 @@ namespace PetShop.WinUI.Korisnici
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblNavigacija;
-        private System.Windows.Forms.Button btnOdjava;
-        private System.Windows.Forms.Button btnProfil;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel5;

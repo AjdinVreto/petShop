@@ -21,6 +21,8 @@ namespace PetShop.Services
 
         public override List<Model.Korisnik> Get(KorisnikSearchObject search = null)
         {
+            bool admin = false;
+
             var entity = ctx.Set<Database.Korisnik>().AsQueryable();
 
             if(!string.IsNullOrWhiteSpace(search?.KorisnickoIme) || !string.IsNullOrWhiteSpace(search?.Email))
@@ -36,6 +38,21 @@ namespace PetShop.Services
             if (search?.IncludeSpol == true)
             {
                 entity = entity.Include(x => x.Spol);
+            }
+
+            List<KorisnikRola> korisniciRole = ctx.KorisnikRolas.Where(x => x.Rola.Naziv.Equals("Administrator")).Include(x => x.Korisnik).ToList();
+
+            foreach(var item in korisniciRole)
+            {
+                if(item.Korisnik.KorisnickoIme == search?.KorisnickoIme)
+                {
+                    admin = true;
+                }
+            }
+
+            if(!admin && search?.AdminChecked == true)
+            {
+                throw new Exception("Onemogucen pristup, niste administrator sistema");
             }
 
             var list = entity.ToList();
@@ -125,6 +142,25 @@ namespace PetShop.Services
             HashAlgorithm algorithm = HashAlgorithm.Create("SHA1");
             byte[] inArray = algorithm.ComputeHash(dst);
             return Convert.ToBase64String(inArray);
+        }
+
+        public async Task<Model.Korisnik> Login(string username, string password)
+        {
+            var entity = await ctx.Korisniks.Include("KorisnikRolas.Rola").FirstOrDefaultAsync(x => x.KorisnickoIme == username);
+
+            if(entity == null)
+            {
+                throw new Exception("Pogresan username ili password");
+            }
+
+            var hash = GenerateHash(entity.PasswordSalt, password);
+
+            if(hash != entity.PasswordHash)
+            {
+                throw new Exception("Pogresan username ili password");
+            }
+
+            return _mapper.Map<Model.Korisnik>(entity);
         }
     }
 }

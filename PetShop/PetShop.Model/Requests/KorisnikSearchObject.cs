@@ -10,5 +10,6 @@ namespace PetShop.Model.Requests
         public string KorisnickoIme { get; set; }
         public bool? IncludeGrad { get; set; }
         public bool? IncludeSpol { get; set; }
+        public bool AdminChecked { get; set; }
     }
 }
