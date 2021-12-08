@@ -16,10 +16,12 @@ namespace PetShop.WinUI.Korisnici
     public partial class frmPregledKorisnika : Form
     {
         APIService _serviceKorisnici = new APIService("Korisnik");
-        public frmPregledKorisnika()
+        string logKorisnickoIme;
+        public frmPregledKorisnika(string _logKorisnickoIme = null)
         {
             InitializeComponent();
             dgvKorisnici.AutoGenerateColumns = false;
+            logKorisnickoIme = _logKorisnickoIme;
         }
 
         private async void btnPrikaz_Click(object sender, EventArgs e)
@@ -62,7 +64,7 @@ namespace PetShop.WinUI.Korisnici
 
         private void btnUpravljanjeUposlenicima_Click(object sender, EventArgs e)
         {
-            frmPregledUposlenika frm = new frmPregledUposlenika();
+            frmPregledUposlenika frm = new frmPregledUposlenika(logKorisnickoIme);
             frm.ShowDialog();
         }
 

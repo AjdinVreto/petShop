@@ -40,19 +40,19 @@ namespace PetShop.Security
 
                 user = await _korisnikService.Login(username, password);
             }
-            catch (Exception ex)
+            catch
             {
-                return AuthenticateResult.Fail("Incorrect username or password");
+                return AuthenticateResult.Fail("Pogresan username ili password");
             }
 
             if(user == null)
             {
-                return AuthenticateResult.Fail("Invalid username or password");
+                return AuthenticateResult.Fail("Pogresan username ili password");
             }
 
             var claims = new List<Claim> {
-                new Claim(ClaimTypes.NameIdentifier, user.KorisnickoIme),
-                new Claim(ClaimTypes.Name, user.Ime),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.KorisnickoIme),
             };
 
             foreach (var role in user.KorisnikRolas)

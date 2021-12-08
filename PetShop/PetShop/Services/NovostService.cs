@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using PetShop.Database;
+using PetShop.Helpers;
 using PetShop.Model.Requests;
 using System;
 using System.Collections.Generic;
@@ -11,9 +13,10 @@ namespace PetShop.Services
 {
     public class NovostService : BaseCRUDService<Model.Novost, Database.Novost, NovostSearchObject, NovostInsertRequest, NovostUpdateRequest>, INovostService
     {
-        public NovostService(PetShopContext context, IMapper mapper) : base(context, mapper)
+        private readonly IHttpContextAccessor _httpContext;
+        public NovostService(PetShopContext context, IMapper mapper, IHttpContextAccessor httpContext) : base(context, mapper)
         {
-
+            _httpContext = httpContext;
         }
 
         public override List<Model.Novost> Get(NovostSearchObject search = null)
@@ -32,8 +35,26 @@ namespace PetShop.Services
 
         public override Model.Novost Insert(NovostInsertRequest request)
         {
+            bool adminUposlenik = false;
+            var userId = int.Parse(_httpContext.GetUserId());
+
             var entity = _mapper.Map<Database.Novost>(request);
             ctx.Add(entity);
+
+            List<KorisnikRola> korisniciRole = ctx.KorisnikRolas.Where(x => x.Rola.Naziv.Equals("Administrator") || x.Rola.Naziv.Equals("Uposlenik")).ToList();
+
+            foreach (var item in korisniciRole)
+            {
+                if (item.KorisnikId == userId)
+                {
+                    adminUposlenik = true;
+                }
+            }
+
+            if (!adminUposlenik)
+            {
+                throw new Exception("Niste administrator ili uposlenik");
+            }
 
             ctx.SaveChanges();
 
@@ -42,9 +63,27 @@ namespace PetShop.Services
 
         public override Model.Novost Update(int id, NovostUpdateRequest request)
         {
+            bool adminUposlenik = false;
+            var userId = int.Parse(_httpContext.GetUserId());
+
             var entity = ctx.Novosts.Find(id);
 
             _mapper.Map(request, entity);
+
+            List<KorisnikRola> korisniciRole = ctx.KorisnikRolas.Where(x => x.Rola.Naziv.Equals("Administrator") || x.Rola.Naziv.Equals("Uposlenik")).ToList();
+
+            foreach (var item in korisniciRole)
+            {
+                if (item.KorisnikId == userId)
+                {
+                    adminUposlenik = true;
+                }
+            }
+
+            if (!adminUposlenik)
+            {
+                throw new Exception("Niste administrator ili uposlenik");
+            }
 
             ctx.SaveChanges();
             return _mapper.Map<Model.Novost>(entity);

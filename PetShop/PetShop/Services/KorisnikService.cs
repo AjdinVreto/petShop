@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using PetShop.Database;
 using PetShop.Filters;
+using PetShop.Helpers;
 using PetShop.Model.Requests;
 using System;
 using System.Collections.Generic;
@@ -14,14 +16,16 @@ namespace PetShop.Services
 {
     public class KorisnikService : BaseCRUDService<Model.Korisnik, Database.Korisnik, KorisnikSearchObject, KorisnikInsertRequest, KorisnikUpdateRequest>, IKorisnikService
     {
-        public KorisnikService(PetShopContext context, IMapper mapper) : base(context, mapper)
+        private readonly IHttpContextAccessor _httpContext;
+        public KorisnikService(PetShopContext context, IMapper mapper, IHttpContextAccessor httpcontext) : base(context, mapper)
         {
-
+            _httpContext = httpcontext;
         }
 
         public override List<Model.Korisnik> Get(KorisnikSearchObject search = null)
         {
-            bool admin = false;
+            bool adminUposlenik = false;
+            var userId = int.Parse(_httpContext.GetUserId());
 
             var entity = ctx.Set<Database.Korisnik>().AsQueryable();
 
@@ -40,17 +44,18 @@ namespace PetShop.Services
                 entity = entity.Include(x => x.Spol);
             }
 
-            List<KorisnikRola> korisniciRole = ctx.KorisnikRolas.Where(x => x.Rola.Naziv.Equals("Administrator")).Include(x => x.Korisnik).ToList();
+
+            List<KorisnikRola> korisniciRole = ctx.KorisnikRolas.Where(x => x.Rola.Naziv.Equals("Administrator") || x.Rola.Naziv.Equals("Uposlenik")).ToList();
 
             foreach(var item in korisniciRole)
             {
-                if(item.Korisnik.KorisnickoIme == search?.KorisnickoIme)
+                if(item.KorisnikId == userId)
                 {
-                    admin = true;
+                    adminUposlenik = true;
                 }
             }
 
-            if(!admin && search?.AdminChecked == true)
+            if(!adminUposlenik)
             {
                 throw new Exception("Onemogucen pristup, niste administrator sistema");
             }
@@ -64,6 +69,20 @@ namespace PetShop.Services
         {
             var entity = _mapper.Map<Database.Korisnik>(request);
             var korisnici = ctx.Korisniks.ToList();
+
+            foreach(var item in korisnici)
+            {
+                if (item.KorisnickoIme.Equals(request.KorisnickoIme))
+                {
+                    throw new UserException("Korisnicko ime vec postoji");
+                }
+
+                if (item.Email.Equals(request.Email))
+                {
+                    throw new UserException("Email vec postoji");
+                }
+            }
+
             ctx.Add(entity);
 
             if(request.GradId == 0 || request.SpolId == 0)

@@ -13,7 +13,7 @@ namespace PetShop.WinUI
 {
     public partial class Login : Form
     {
-        private readonly APIService _api = new APIService("Korisnik");
+        private readonly APIService _api = new APIService("Uposlenik");
         public Login()
         {
             InitializeComponent();
@@ -26,20 +26,14 @@ namespace PetShop.WinUI
 
             try
             {
-                KorisnikSearchObject request = new KorisnikSearchObject()
-                {
-                    KorisnickoIme = txtKorisnickoIme.Text,
-                    AdminChecked = true
-                };
- 
-                var result = await _api.Get<List<Korisnik>>(request);
+                var result = await _api.Get<List<Uposlenik>>();
 
-                frmPregledKorisnika frm = new frmPregledKorisnika();
+                frmPregledKorisnika frm = new frmPregledKorisnika(txtKorisnickoIme.Text);
                 frm.ShowDialog();
             }
             catch
             {
-                MessageBox.Show("Niste administrator ili uneseni podaci nisu tacni !");
+                MessageBox.Show("Niste administrator/uposlenik ili uneseni podaci nisu tacni !");
             }
         }
     }

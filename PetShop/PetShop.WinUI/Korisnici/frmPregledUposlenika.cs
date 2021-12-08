@@ -24,7 +24,10 @@ namespace PetShop.WinUI.Korisnici
         List<Korisnik> _korisnici;
         List<KorisnikRola> _korisnikRola;
         List<Uposlenik> _uposlenici;
-        public frmPregledUposlenika()
+
+        string logKorisnickoIme;
+        int logKorisnikId;
+        public frmPregledUposlenika(string _logKorisnickoIme = null)
         {
             InitializeComponent();
             dgvUposlenici.AutoGenerateColumns = false;
@@ -33,6 +36,8 @@ namespace PetShop.WinUI.Korisnici
             _korisnikRola = null;
             _uposlenici = null;
             _korisnici = null;
+            logKorisnickoIme = _logKorisnickoIme;
+            logKorisnikId = 0;
         }
 
         private async void frmPregledUposlenika_Load(object sender, EventArgs e)
@@ -54,6 +59,14 @@ namespace PetShop.WinUI.Korisnici
             _korisnikRola = await _serviceKorisnikRola.Get<List<Model.KorisnikRola>>(null);
             _uposlenici = await _serviceUposlenici.Get<List<Model.Uposlenik>>(request);
             _korisnici = await _serviceKorisnici.Get<List<Model.Korisnik>>(null);
+
+            foreach(var item in _korisnici)
+            {
+                if (item.KorisnickoIme.Equals(logKorisnickoIme))
+                {
+                    logKorisnikId = item.Id;
+                }
+            }
         }
 
         private async Task LoadPoslovnice()
@@ -99,25 +112,32 @@ namespace PetShop.WinUI.Korisnici
                     }
                     else
                     {
-                        if (_uposlenik == null)
+                        if (provjeraAdmin())
                         {
-                            if (ValidirajUposlenika())
+                            if (_uposlenik == null)
                             {
-                                insert.KorisnikId = _korisnik[0].Id;
+                                if (ValidirajUposlenika())
+                                {
+                                    insert.KorisnikId = _korisnik[0].Id;
 
-                                var uposlenik = await _serviceUposlenici.Insert<Uposlenik>(insert);
+                                    var uposlenik = await _serviceUposlenici.Insert<Uposlenik>(insert);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Uneseni korisnik nije uposlenik ili vec postoji", "Greska",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Uneseni korisnik nije uposlenik ili vec postoji", "Greska",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                update.KorisnikId = _uposlenik.KorisnikId;
+
+                                var uposlenik = await _serviceUposlenici.Update<Uposlenik>(_uposlenik.Id, update);
                             }
                         }
                         else
                         {
-                            update.KorisnikId = _uposlenik.KorisnikId;
-
-                            var uposlenik = await _serviceUposlenici.Update<Uposlenik>(_uposlenik.Id, update);
+                            MessageBox.Show("Niste autorizirani za ovu akciju, samo administratori");
                         }
                     }
                 }
@@ -205,6 +225,23 @@ namespace PetShop.WinUI.Korisnici
             {
                 return true;
             }
+        }
+
+
+        private bool provjeraAdmin()
+        {
+            foreach(var item in _korisnikRola)
+            {
+                if (item.KorisnikId == logKorisnikId)
+                {
+                    if (item.Rola.Naziv.Equals("Administrator"))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }
