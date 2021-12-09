@@ -6,7 +6,6 @@ namespace PetShop.Model.Requests
 {
     public class KorisnikUpdateRequest
     {
-        public string BrojTelefona { get; set; }
         public byte[] Slika { get; set; }
         public string KorisnickoIme { get; set; }
         public string Email { get; set; }

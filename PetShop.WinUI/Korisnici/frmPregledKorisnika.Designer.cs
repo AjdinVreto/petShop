@@ -53,14 +53,6 @@ namespace PetShop.WinUI.Korisnici
             this.lblNaslov = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvKorisnici = new System.Windows.Forms.DataGridView();
-            this.Ime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Prezime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Spol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DatumRodjenja = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GradNaziv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BrojTelefona = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.KorisnickoIme = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnNoviKorisnik = new System.Windows.Forms.Button();
             this.btnPrikaz = new System.Windows.Forms.Button();
@@ -68,6 +60,13 @@ namespace PetShop.WinUI.Korisnici
             this.txtPretraga = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.Ime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prezime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Spol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DatumRodjenja = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GradNaziv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.KorisnickoIme = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -346,7 +345,6 @@ namespace PetShop.WinUI.Korisnici
             this.Spol,
             this.DatumRodjenja,
             this.GradNaziv,
-            this.BrojTelefona,
             this.Email,
             this.KorisnickoIme});
             this.dgvKorisnici.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -358,62 +356,6 @@ namespace PetShop.WinUI.Korisnici
             this.dgvKorisnici.Size = new System.Drawing.Size(769, 538);
             this.dgvKorisnici.TabIndex = 0;
             this.dgvKorisnici.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKorisnici_CellDoubleClick);
-            // 
-            // Ime
-            // 
-            this.Ime.DataPropertyName = "Ime";
-            this.Ime.HeaderText = "Ime";
-            this.Ime.Name = "Ime";
-            this.Ime.ReadOnly = true;
-            // 
-            // Prezime
-            // 
-            this.Prezime.DataPropertyName = "Prezime";
-            this.Prezime.HeaderText = "Prezime";
-            this.Prezime.Name = "Prezime";
-            this.Prezime.ReadOnly = true;
-            // 
-            // Spol
-            // 
-            this.Spol.DataPropertyName = "SpolNaziv";
-            this.Spol.HeaderText = "Spol";
-            this.Spol.Name = "Spol";
-            this.Spol.ReadOnly = true;
-            // 
-            // DatumRodjenja
-            // 
-            this.DatumRodjenja.DataPropertyName = "DatumRodjenja";
-            this.DatumRodjenja.HeaderText = "Datum rodjenja";
-            this.DatumRodjenja.Name = "DatumRodjenja";
-            this.DatumRodjenja.ReadOnly = true;
-            // 
-            // GradNaziv
-            // 
-            this.GradNaziv.DataPropertyName = "GradNaziv";
-            this.GradNaziv.HeaderText = "Grad";
-            this.GradNaziv.Name = "GradNaziv";
-            this.GradNaziv.ReadOnly = true;
-            // 
-            // BrojTelefona
-            // 
-            this.BrojTelefona.DataPropertyName = "BrojTelefona";
-            this.BrojTelefona.HeaderText = "Broj telefona";
-            this.BrojTelefona.Name = "BrojTelefona";
-            this.BrojTelefona.ReadOnly = true;
-            // 
-            // Email
-            // 
-            this.Email.DataPropertyName = "Email";
-            this.Email.HeaderText = "Email";
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
-            // 
-            // KorisnickoIme
-            // 
-            this.KorisnickoIme.DataPropertyName = "KorisnickoIme";
-            this.KorisnickoIme.HeaderText = "Korisnicko ime";
-            this.KorisnickoIme.Name = "KorisnickoIme";
-            this.KorisnickoIme.ReadOnly = true;
             // 
             // groupBox2
             // 
@@ -486,6 +428,55 @@ namespace PetShop.WinUI.Korisnici
             this.label1.Size = new System.Drawing.Size(120, 27);
             this.label1.TabIndex = 2;
             this.label1.Text = "KORISNICI";
+            // 
+            // Ime
+            // 
+            this.Ime.DataPropertyName = "Ime";
+            this.Ime.HeaderText = "Ime";
+            this.Ime.Name = "Ime";
+            this.Ime.ReadOnly = true;
+            // 
+            // Prezime
+            // 
+            this.Prezime.DataPropertyName = "Prezime";
+            this.Prezime.HeaderText = "Prezime";
+            this.Prezime.Name = "Prezime";
+            this.Prezime.ReadOnly = true;
+            // 
+            // Spol
+            // 
+            this.Spol.DataPropertyName = "SpolNaziv";
+            this.Spol.HeaderText = "Spol";
+            this.Spol.Name = "Spol";
+            this.Spol.ReadOnly = true;
+            // 
+            // DatumRodjenja
+            // 
+            this.DatumRodjenja.DataPropertyName = "DatumRodjenja";
+            this.DatumRodjenja.HeaderText = "Datum rodjenja";
+            this.DatumRodjenja.Name = "DatumRodjenja";
+            this.DatumRodjenja.ReadOnly = true;
+            // 
+            // GradNaziv
+            // 
+            this.GradNaziv.DataPropertyName = "GradNaziv";
+            this.GradNaziv.HeaderText = "Grad";
+            this.GradNaziv.Name = "GradNaziv";
+            this.GradNaziv.ReadOnly = true;
+            // 
+            // Email
+            // 
+            this.Email.DataPropertyName = "Email";
+            this.Email.HeaderText = "Email";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            // 
+            // KorisnickoIme
+            // 
+            this.KorisnickoIme.DataPropertyName = "KorisnickoIme";
+            this.KorisnickoIme.HeaderText = "Korisnicko ime";
+            this.KorisnickoIme.Name = "KorisnickoIme";
+            this.KorisnickoIme.ReadOnly = true;
             // 
             // frmPregledKorisnika
             // 
@@ -564,7 +555,6 @@ namespace PetShop.WinUI.Korisnici
         private System.Windows.Forms.DataGridViewTextBoxColumn Spol;
         private System.Windows.Forms.DataGridViewTextBoxColumn DatumRodjenja;
         private System.Windows.Forms.DataGridViewTextBoxColumn GradNaziv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BrojTelefona;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;
         private System.Windows.Forms.DataGridViewTextBoxColumn KorisnickoIme;
     }

@@ -14,8 +14,6 @@ namespace PetShop.Model.Requests
         [Required]
         public DateTime DatumRodjenja { get; set; }
         [Required]
-        public string BrojTelefona { get; set; }
-        [Required]
         public string Email { get; set; }
         [Required]
         public byte[] Slika { get; set; }

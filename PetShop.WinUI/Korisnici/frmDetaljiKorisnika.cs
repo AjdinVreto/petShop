@@ -81,7 +81,6 @@ namespace PetShop.WinUI.Korisnici
             {
                 txtIme.Text = _korisnik.Ime;
                 txtPrezime.Text = _korisnik.Prezime;
-                txtBrojTelefona.Text = _korisnik.BrojTelefona;
                 txtKorisnickoIme.Text = _korisnik.KorisnickoIme;
                 txtEmail.Text = _korisnik.Email;
                 dtpDatumRodjenja.Value = _korisnik.DatumRodjenja;
@@ -171,7 +170,6 @@ namespace PetShop.WinUI.Korisnici
 
                     insert.Ime = txtIme.Text;
                     insert.Prezime = txtPrezime.Text;
-                    insert.BrojTelefona = update.BrojTelefona = txtBrojTelefona.Text;
                     insert.KorisnickoIme = update.KorisnickoIme = txtKorisnickoIme.Text;
                     insert.Email = update.Email = txtEmail.Text;
                     insert.DatumRodjenja = DateTime.ParseExact(dtpDatumRodjenja.Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null);
@@ -249,7 +247,7 @@ namespace PetShop.WinUI.Korisnici
 
         private bool ValidirajUnesenePodatke()
         {
-            if (string.IsNullOrEmpty(txtIme.Text) || string.IsNullOrEmpty(txtPrezime.Text) || string.IsNullOrEmpty(txtBrojTelefona.Text) || dtpDatumRodjenja.Value == null ||
+            if (string.IsNullOrEmpty(txtIme.Text) || string.IsNullOrEmpty(txtPrezime.Text) || dtpDatumRodjenja.Value == null ||
                 string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtKorisnickoIme.Text))
             {
                 return false;

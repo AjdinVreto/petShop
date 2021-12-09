@@ -42,7 +42,7 @@ namespace PetShop.Database
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=PetShop; User=sa; Password=Asroma11927");
+                optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=PetShop; User=SA; Password=Asroma11927");
             }
         }
 
@@ -119,8 +119,6 @@ namespace PetShop.Database
             {
                 entity.ToTable("Korisnik");
 
-                entity.Property(e => e.BrojTelefona).IsRequired();
-
                 entity.Property(e => e.DatumRodjenja).HasColumnType("date");
 
                 entity.Property(e => e.Email).IsRequired();
@@ -134,8 +132,6 @@ namespace PetShop.Database
                 entity.Property(e => e.PasswordSalt).IsRequired();
 
                 entity.Property(e => e.Prezime).IsRequired();
-
-                entity.Property(e => e.Token).IsRequired();
 
                 entity.HasOne(d => d.Grad)
                     .WithMany(p => p.Korisniks)

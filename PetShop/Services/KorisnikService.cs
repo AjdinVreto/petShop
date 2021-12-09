@@ -105,7 +105,6 @@ namespace PetShop.Services
 
             entity.PasswordSalt = GenerateSalt();
             entity.PasswordHash = GenerateHash(entity.PasswordSalt, request.Password);
-            entity.Token = "token";
 
             ctx.SaveChanges();
 
