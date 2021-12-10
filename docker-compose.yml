@@ -1,0 +1,32 @@
+version: "3"
+services:
+    petshop-sql:
+        restart: unless-stopped
+        image: "mcr.microsoft.com/mssql/server:2019-latest"
+        environment:
+            SA_PASSWORD: "Asroma1927"
+            ACCEPT_EULA: "Y"
+            MSSQL_PID: "Developer"
+        ports:
+            - 1403:1433
+        networks:
+            - petshopnet
+
+    petshop-api:
+        restart: unless-stopped
+        build:
+          context: .
+        environment:
+            - ConnectionStrings:DefaultConnection=Server=petshop-sql,1433;Database=petShop_IB160237;User=sa;Password=Asroma1927;
+        ports:
+            - "5013:5013"
+        networks:
+            - petshopnet  
+        depends_on:
+            - petshop-sql
+        links:
+            - petshop-sql  
+
+networks:
+  petshopnet:
+    driver: bridge

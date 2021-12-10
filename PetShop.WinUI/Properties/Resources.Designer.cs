@@ -61,7 +61,7 @@ namespace PetShop.WinUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://localhost:5001/api/.
+        ///   Looks up a localized string similar to http://localhost:5013/api/.
         /// </summary>
         internal static string ApiUrl {
             get {
