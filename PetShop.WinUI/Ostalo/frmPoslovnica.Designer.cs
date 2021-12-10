@@ -175,13 +175,15 @@ namespace PetShop.WinUI.Ostalo
             // 
             // btnSacuvajPoslovnicu
             // 
+            this.btnSacuvajPoslovnicu.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnSacuvajPoslovnicu.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSacuvajPoslovnicu.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSacuvajPoslovnicu.Location = new System.Drawing.Point(346, 281);
             this.btnSacuvajPoslovnicu.Name = "btnSacuvajPoslovnicu";
             this.btnSacuvajPoslovnicu.Size = new System.Drawing.Size(158, 47);
             this.btnSacuvajPoslovnicu.TabIndex = 64;
             this.btnSacuvajPoslovnicu.Text = "Sačuvaj poslovnicu";
-            this.btnSacuvajPoslovnicu.UseVisualStyleBackColor = true;
+            this.btnSacuvajPoslovnicu.UseVisualStyleBackColor = false;
             this.btnSacuvajPoslovnicu.Click += new System.EventHandler(this.btnSacuvajPoslovnicu_Click);
             // 
             // frmPoslovnica

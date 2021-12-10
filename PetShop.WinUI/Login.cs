@@ -28,7 +28,7 @@ namespace PetShop.WinUI
             {
                 var result = await _api.Get<List<Uposlenik>>();
 
-                frmPregledKorisnika frm = new frmPregledKorisnika(txtKorisnickoIme.Text);
+                frmPocetna frm = new frmPocetna(txtKorisnickoIme.Text);
                 frm.ShowDialog();
             }
             catch

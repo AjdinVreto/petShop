@@ -47,13 +47,15 @@ namespace PetShop.WinUI.Proizvodi
             // 
             // btnDodajProizvodjaca
             // 
+            this.btnDodajProizvodjaca.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnDodajProizvodjaca.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDodajProizvodjaca.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnDodajProizvodjaca.Location = new System.Drawing.Point(366, 302);
             this.btnDodajProizvodjaca.Name = "btnDodajProizvodjaca";
             this.btnDodajProizvodjaca.Size = new System.Drawing.Size(178, 44);
             this.btnDodajProizvodjaca.TabIndex = 70;
             this.btnDodajProizvodjaca.Text = "Dodaj proizvođača";
-            this.btnDodajProizvodjaca.UseVisualStyleBackColor = true;
+            this.btnDodajProizvodjaca.UseVisualStyleBackColor = false;
             this.btnDodajProizvodjaca.Click += new System.EventHandler(this.btnDodajProizvodjaca_Click);
             // 
             // label7

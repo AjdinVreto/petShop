@@ -183,7 +183,7 @@ namespace PetShop.WinUI.Proizvodi
             // btnDodajSliku
             // 
             this.btnDodajSliku.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnDodajSliku.Location = new System.Drawing.Point(664, 307);
+            this.btnDodajSliku.Location = new System.Drawing.Point(663, 307);
             this.btnDodajSliku.Name = "btnDodajSliku";
             this.btnDodajSliku.Size = new System.Drawing.Size(75, 33);
             this.btnDodajSliku.TabIndex = 48;
@@ -271,13 +271,15 @@ namespace PetShop.WinUI.Proizvodi
             // 
             // btnSacuvajProizvod
             // 
+            this.btnSacuvajProizvod.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnSacuvajProizvod.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSacuvajProizvod.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSacuvajProizvod.Location = new System.Drawing.Point(353, 358);
             this.btnSacuvajProizvod.Name = "btnSacuvajProizvod";
             this.btnSacuvajProizvod.Size = new System.Drawing.Size(174, 52);
             this.btnSacuvajProizvod.TabIndex = 1;
             this.btnSacuvajProizvod.Text = "Sačuvaj proizvod";
-            this.btnSacuvajProizvod.UseVisualStyleBackColor = true;
+            this.btnSacuvajProizvod.UseVisualStyleBackColor = false;
             this.btnSacuvajProizvod.Click += new System.EventHandler(this.btnSacuvajProizvod_Click);
             // 
             // ofdSlika

@@ -107,7 +107,7 @@ namespace PetShop.WinUI.Proizvodi
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(361, 131);
+            this.label7.Location = new System.Drawing.Point(361, 130);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(136, 21);
             this.label7.TabIndex = 59;
@@ -115,19 +115,22 @@ namespace PetShop.WinUI.Proizvodi
             // 
             // btnDodajKategoriju
             // 
+            this.btnDodajKategoriju.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnDodajKategoriju.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDodajKategoriju.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnDodajKategoriju.Location = new System.Drawing.Point(361, 215);
             this.btnDodajKategoriju.Name = "btnDodajKategoriju";
             this.btnDodajKategoriju.Size = new System.Drawing.Size(151, 44);
             this.btnDodajKategoriju.TabIndex = 60;
             this.btnDodajKategoriju.Text = "Dodaj kategoriju";
-            this.btnDodajKategoriju.UseVisualStyleBackColor = true;
+            this.btnDodajKategoriju.UseVisualStyleBackColor = false;
             this.btnDodajKategoriju.Click += new System.EventHandler(this.btnDodajKategoriju_Click);
             // 
             // frmPregledKategorija
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(874, 821);
             this.Controls.Add(this.btnDodajKategoriju);
             this.Controls.Add(this.label7);

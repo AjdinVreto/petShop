@@ -49,7 +49,7 @@ namespace PetShop.Services
 
             if (!adminUposlenik)
             {
-                throw new Exception("Onemogucen pristup, niste administrator sistema");
+                throw new Exception("Onemogucen pristup, niste administrator ili uposlenik sistema");
             }
 
             var list = entity.ToList();

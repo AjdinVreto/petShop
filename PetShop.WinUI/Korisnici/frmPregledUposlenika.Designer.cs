@@ -214,13 +214,15 @@ namespace PetShop.WinUI.Korisnici
             // 
             // btnSacuvajUposlenika
             // 
+            this.btnSacuvajUposlenika.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnSacuvajUposlenika.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSacuvajUposlenika.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSacuvajUposlenika.Location = new System.Drawing.Point(348, 289);
             this.btnSacuvajUposlenika.Name = "btnSacuvajUposlenika";
             this.btnSacuvajUposlenika.Size = new System.Drawing.Size(152, 53);
             this.btnSacuvajUposlenika.TabIndex = 50;
             this.btnSacuvajUposlenika.Text = "Sačuvaj uposlenika";
-            this.btnSacuvajUposlenika.UseVisualStyleBackColor = true;
+            this.btnSacuvajUposlenika.UseVisualStyleBackColor = false;
             this.btnSacuvajUposlenika.Click += new System.EventHandler(this.btnSacuvajUposlenika_Click);
             // 
             // frmPregledUposlenika

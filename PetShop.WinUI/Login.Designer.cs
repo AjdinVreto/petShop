@@ -41,8 +41,8 @@ namespace PetShop.WinUI
             // 
             this.lblNaslov.AutoSize = true;
             this.lblNaslov.Font = new System.Drawing.Font("Cooper Black", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblNaslov.ForeColor = System.Drawing.Color.Red;
-            this.lblNaslov.Location = new System.Drawing.Point(115, 29);
+            this.lblNaslov.ForeColor = System.Drawing.Color.Gold;
+            this.lblNaslov.Location = new System.Drawing.Point(84, 18);
             this.lblNaslov.Name = "lblNaslov";
             this.lblNaslov.Size = new System.Drawing.Size(275, 55);
             this.lblNaslov.TabIndex = 2;
@@ -52,55 +52,60 @@ namespace PetShop.WinUI
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(26, 120);
+            this.label1.ForeColor = System.Drawing.Color.Gold;
+            this.label1.Location = new System.Drawing.Point(138, 109);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(177, 30);
+            this.label1.Size = new System.Drawing.Size(165, 30);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Korisničko ime : ";
+            this.label1.Text = "Korisničko ime ";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(26, 176);
+            this.label2.ForeColor = System.Drawing.Color.Gold;
+            this.label2.Location = new System.Drawing.Point(170, 191);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 30);
+            this.label2.Size = new System.Drawing.Size(111, 30);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Password :  ";
+            this.label2.Text = "Password ";
             // 
             // txtKorisnickoIme
             // 
             this.txtKorisnickoIme.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtKorisnickoIme.Location = new System.Drawing.Point(196, 120);
+            this.txtKorisnickoIme.Location = new System.Drawing.Point(96, 142);
             this.txtKorisnickoIme.Name = "txtKorisnickoIme";
-            this.txtKorisnickoIme.Size = new System.Drawing.Size(230, 35);
+            this.txtKorisnickoIme.Size = new System.Drawing.Size(252, 35);
             this.txtKorisnickoIme.TabIndex = 5;
             // 
             // txtPassword
             // 
             this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtPassword.Location = new System.Drawing.Point(196, 176);
+            this.txtPassword.Location = new System.Drawing.Point(96, 224);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(230, 35);
+            this.txtPassword.Size = new System.Drawing.Size(252, 35);
             this.txtPassword.TabIndex = 6;
             // 
             // btnLogin
             // 
+            this.btnLogin.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnLogin.Location = new System.Drawing.Point(179, 263);
+            this.btnLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnLogin.Location = new System.Drawing.Point(148, 312);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(133, 56);
             this.btnLogin.TabIndex = 7;
             this.btnLogin.Text = "Prijavi se";
-            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(509, 350);
+            this.BackColor = System.Drawing.Color.Purple;
+            this.ClientSize = new System.Drawing.Size(434, 463);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtKorisnickoIme);

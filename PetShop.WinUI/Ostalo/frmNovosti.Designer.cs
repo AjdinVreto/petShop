@@ -189,13 +189,15 @@ namespace PetShop.WinUI.Ostalo
             // 
             // btnDodajNovost
             // 
+            this.btnDodajNovost.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnDodajNovost.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDodajNovost.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnDodajNovost.Location = new System.Drawing.Point(355, 355);
             this.btnDodajNovost.Name = "btnDodajNovost";
             this.btnDodajNovost.Size = new System.Drawing.Size(138, 46);
             this.btnDodajNovost.TabIndex = 44;
             this.btnDodajNovost.Text = "Sačuvaj novost";
-            this.btnDodajNovost.UseVisualStyleBackColor = true;
+            this.btnDodajNovost.UseVisualStyleBackColor = false;
             this.btnDodajNovost.Click += new System.EventHandler(this.btnDodajNovost_Click);
             // 
             // ofdSlika

@@ -121,6 +121,9 @@ namespace PetShop.WinUI.Korisnici
                                     insert.KorisnikId = _korisnik[0].Id;
 
                                     var uposlenik = await _serviceUposlenici.Insert<Uposlenik>(insert);
+                                    await LoadData();
+
+                                    MessageBox.Show("Uspješno izvršeno");
                                 }
                                 else
                                 {
@@ -133,6 +136,9 @@ namespace PetShop.WinUI.Korisnici
                                 update.KorisnikId = _uposlenik.KorisnikId;
 
                                 var uposlenik = await _serviceUposlenici.Update<Uposlenik>(_uposlenik.Id, update);
+                                await LoadData();
+
+                                MessageBox.Show("Uspješno izvršeno");
                             }
                         }
                         else
