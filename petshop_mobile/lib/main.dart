@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './screens/Login.dart';
+import 'package:petshop_mobile/screens/proizvodi_screen.dart';
+import './screens/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
         fontFamily: "Lato",
       ),
       home: Login(),
+      routes: {
+        Proizvodi.routeName: (ctx) => Proizvodi(),
+      },
     );
   }
 }

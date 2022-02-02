@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:petshop_mobile/models/Narudzba.dart';
+import 'package:petshop_mobile/screens/proizvodi_screen.dart';
+
+import '../services/APIService.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -8,6 +14,38 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+
+  Narudzba? narudzbaRequest;
+
+  var result = null;
+  var narudzbe = null;
+  var narudzbeList = null;
+  var narId = null;
+
+  bool narudzbaPostoji = false;
+
+  Future<void> GetData() async {
+    result = await APIService.Login("Korisnik/login");
+
+    narudzbe = await APIService.Get("Narudzba", null);
+    narudzbeList = narudzbe?.map((i) => Narudzba.fromJson(i)).toList();
+  }
+
+  Future<void> kreirajNarudzbu() async{
+    narudzbeList.forEach((item) {
+      if(item.korisnikId == APIService.korisnikId){
+        narudzbaPostoji = true;
+        APIService.narudzbaId = item.id;
+      };
+    });
+
+    if(!narudzbaPostoji){
+      var id = narudzbeList.length + 1;
+      narudzbaRequest = new Narudzba(id: id, aktivna: true, zavrsena: false, datum: DateTime.now(), korisnikId: APIService.korisnikId);
+      await APIService.Post("Narudzba", json.encode(narudzbaRequest?.toJson()));
+      APIService.narudzbaId = id;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +98,19 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  APIService.username = usernameController.text;
+                  APIService.password = passwordController.text;
+                  await GetData();
+                  if (result != null) {
+                    APIService.SetParameter(result.id);
+                    await kreirajNarudzbu();
+                    Navigator.of(context)
+                        .pushReplacementNamed(Proizvodi.routeName);
+                  } else {
+                    print("Pogresni login podaci");
+                  }
+                },
                 child: Padding(
                   padding: EdgeInsets.all(10),
                   child: Text(

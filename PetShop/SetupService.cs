@@ -96,6 +96,11 @@ namespace PetShop
                 context.Uposleniks.Add(new Uposlenik { KorisnikId = 2, PoslovnicaId = 1, DatumZaposlenja = DateTime.Now, Aktivan = true });
             }
 
+            if (!context.Narudzbas.Any())
+            {
+                context.Narudzbas.Add(new Narudzba { Aktivna = true, Zavrsena = false, Datum = DateTime.Now, KorisnikId = 3 });
+            }
+
             context.SaveChanges();
         }
 
