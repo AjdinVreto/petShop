@@ -129,9 +129,13 @@ namespace PetShop.Services
 
             foreach (var item in korisnici)
             {
-                if (item.Email.Equals(request.Email) && item.Id != id)
+                if (item.Email.Equals(request.Email) && item.Id != id) 
                 {
                     throw new UserException("Email vec postoji");
+                }
+                if(item.KorisnickoIme.Equals(request.KorisnickoIme) && item.Id != id)
+                {
+                    throw new UserException("Korisnicko ime vec postoji");
                 }
             }
 

@@ -9,5 +9,6 @@ namespace PetShop.Model.Requests
         public string Naslov { get; set; }
         public string Tekst { get; set; }
         public DateTime Datum { get; set; }
+        public byte[] Slika { get; set; }
     }
 }

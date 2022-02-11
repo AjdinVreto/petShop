@@ -12,8 +12,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController usernameController = new TextEditingController();
-  TextEditingController passwordController = new TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   Narudzba? narudzbaRequest;
 
@@ -41,7 +41,7 @@ class _LoginState extends State<Login> {
 
     if(!narudzbaPostoji){
       var id = narudzbeList.length + 1;
-      narudzbaRequest = new Narudzba(id: id, aktivna: true, zavrsena: false, datum: DateTime.now(), korisnikId: APIService.korisnikId);
+      narudzbaRequest = Narudzba(id: id, aktivna: true, zavrsena: false, datum: DateTime.now(), korisnikId: APIService.korisnikId);
       await APIService.Post("Narudzba", json.encode(narudzbaRequest?.toJson()));
       APIService.narudzbaId = id;
     }
@@ -51,21 +51,21 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Prijava"),
+        title: const Text("Prijava"),
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(30),
+          padding: const EdgeInsets.all(30),
           child: Column(
             children: [
-              Image(
+              const Image(
                 image: AssetImage("./assets/images/logo.png"),
                 width: 180,
                 height: 220,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextField(
@@ -76,7 +76,7 @@ class _LoginState extends State<Login> {
                     ),
                     hintText: "Korisnicko ime"),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               TextField(
@@ -87,7 +87,7 @@ class _LoginState extends State<Login> {
                     ),
                     hintText: "Password"),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               ElevatedButton(
@@ -111,7 +111,7 @@ class _LoginState extends State<Login> {
                     print("Pogresni login podaci");
                   }
                 },
-                child: Padding(
+                child: const Padding(
                   padding: EdgeInsets.all(10),
                   child: Text(
                     "Prijavi se",

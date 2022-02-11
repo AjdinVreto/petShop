@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:petshop_mobile/screens/korpa_screen.dart';
+import 'package:petshop_mobile/screens/pocetna_screen.dart';
+import 'package:petshop_mobile/screens/profil_screen.dart';
 import 'package:petshop_mobile/screens/proizvodi_screen.dart';
 import './screens/login_screen.dart';
 
@@ -17,11 +20,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
         accentColor: Colors.deepOrange,
-        fontFamily: "Lato",
+        fontFamily: "Raleway",
       ),
       home: Login(),
       routes: {
         Proizvodi.routeName: (ctx) => Proizvodi(),
+        Korpa.routeName: (ctx) => Korpa(),
+        Pocetna.routeName: (ctx) => Pocetna(),
+        Profil.routeName: (ctx) => Profil(),
       },
     );
   }

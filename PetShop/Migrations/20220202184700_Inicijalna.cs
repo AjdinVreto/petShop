@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PetShop.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Inicijalna : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -378,13 +378,15 @@ namespace PetShop.Migrations
                 name: "NarudzbaProizvod",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     NarudzbaId = table.Column<int>(type: "int", nullable: false),
                     ProizvodId = table.Column<int>(type: "int", nullable: false),
                     Kolicina = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NarudzbaProizvod", x => new { x.NarudzbaId, x.ProizvodId });
+                    table.PrimaryKey("PK_NarudzbaProizvod", x => x.Id);
                     table.ForeignKey(
                         name: "PK_NarudzbaProizvod_Narudzba",
                         column: x => x.NarudzbaId,
@@ -467,6 +469,11 @@ namespace PetShop.Migrations
                 name: "IX_Narudzba_KorisnikId",
                 table: "Narudzba",
                 column: "KorisnikId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NarudzbaProizvod_NarudzbaId",
+                table: "NarudzbaProizvod",
+                column: "NarudzbaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_NarudzbaProizvod_ProizvodId",

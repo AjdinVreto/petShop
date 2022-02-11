@@ -65,7 +65,8 @@ namespace PetShop.WinUI.Korisnici
 
                 var file = File.ReadAllBytes(fileName);
 
-                insert.Slika = update.Slika = file;
+                //insert.Slika = update.Slika = file;
+                insert.Slika = file;
                 updateImage = true;
 
                 Image image = Image.FromFile(fileName);
@@ -94,9 +95,6 @@ namespace PetShop.WinUI.Korisnici
                     pbxSlika.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
 
-                txtIme.ReadOnly = true;
-                txtPrezime.ReadOnly = true;
-                dtpDatumRodjenja.Enabled = false;
                 txtPassword.ReadOnly = true;
                 txtPasswordPotvrda.ReadOnly = true;
                 clbRole.Enabled = false;
@@ -160,7 +158,7 @@ namespace PetShop.WinUI.Korisnici
                     if (int.TryParse(gradObj.ToString(), out int gradId))
                     {
                         insert.GradId = gradId;
-                        update.GradId = gradId;
+                        //update.GradId = gradId;
                     }
 
                     if (int.TryParse(spolObj.ToString(), out int spolId))
@@ -168,11 +166,11 @@ namespace PetShop.WinUI.Korisnici
                         insert.SpolId = spolId;
                     }
 
-                    insert.Ime = txtIme.Text;
-                    insert.Prezime = txtPrezime.Text;
+                    insert.Ime = update.Ime = txtIme.Text;
+                    insert.Prezime = update.Prezime = txtPrezime.Text;
                     insert.KorisnickoIme = update.KorisnickoIme = txtKorisnickoIme.Text;
                     insert.Email = update.Email = txtEmail.Text;
-                    insert.DatumRodjenja = DateTime.ParseExact(dtpDatumRodjenja.Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null);
+                    insert.DatumRodjenja = update.DatumRodjenja = DateTime.ParseExact(dtpDatumRodjenja.Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null);
                     insert.Password = txtPassword.Text;
                     insert.PotvrdaPassword = txtPasswordPotvrda.Text;
 
@@ -199,7 +197,7 @@ namespace PetShop.WinUI.Korisnici
                         {
                             if (updateImage == false)
                             {
-                                update.Slika = _korisnik.Slika;
+                                //update.Slika = _korisnik.Slika;
                             }
                             var korisnik = await _serviceKorisnici.Update<Korisnik>(_korisnik.Id, update);
                             MessageBox.Show("Uspješno izvršeno");

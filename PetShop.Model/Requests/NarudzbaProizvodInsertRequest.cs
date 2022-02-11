@@ -8,6 +8,8 @@ namespace PetShop.Model.Requests
     public class NarudzbaProizvodInsertRequest
     {
         [Required]
+        public int Id { get; set; }
+        [Required]
         public int NarudzbaId { get; set; }
         [Required]
         public int ProizvodId { get; set; }

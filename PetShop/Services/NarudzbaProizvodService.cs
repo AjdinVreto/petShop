@@ -24,6 +24,8 @@ namespace PetShop.Services
         {
             var entity = ctx.Set<Database.NarudzbaProizvod>().AsQueryable();
 
+            entity = entity.Include(x => x.Narudzba).Include(x => x.Proizvod);
+
             var list = entity.ToList();
 
             return _mapper.Map<List<Model.NarudzbaProizvod>>(list);
@@ -41,7 +43,7 @@ namespace PetShop.Services
 
         public override Model.NarudzbaProizvod Update(int id, NarudzbaProizvodUpdateRequest request)
         {
-            var entity = ctx.NarudzbaProizvods.Where(x => x.NarudzbaId == id).FirstOrDefault();
+            var entity = ctx.NarudzbaProizvods.Where(x => x.Id == id).FirstOrDefault();
 
             _mapper.Map(request, entity);
 

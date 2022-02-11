@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:petshop_mobile/models/NarudzbaProizvod.dart';
 
 import 'package:petshop_mobile/models/Proizvod.dart';
 import 'package:petshop_mobile/models/Kategorija.dart';
@@ -16,12 +19,13 @@ class Proizvodi extends StatefulWidget {
 class _ProizvodiState extends State<Proizvodi> {
   Kategorija? _selectedKategorija = null;
   List<DropdownMenuItem> items = [];
+  NarudzbaProizvod? narudzbaProizvodRequest;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Proizvodi"),
+        title: const Text("Proizvodi"),
       ),
       drawer: AppDrawer(),
       body: bodyWidget(),
@@ -33,7 +37,7 @@ class _ProizvodiState extends State<Proizvodi> {
       future: GetProizvodi(_selectedKategorija),
       builder: (BuildContext context, AsyncSnapshot<List<Proizvod>?> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: Text("Loading..."),
           );
         } else {
@@ -47,12 +51,12 @@ class _ProizvodiState extends State<Proizvodi> {
                 Row(
                   children: [
                     Expanded(child: dropdownWidget()),
-                    Text("Search"),
+                    const Text("Search"),
                   ],
                 ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: GridView.builder(
                       itemCount: snapshot.data?.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -75,7 +79,7 @@ class _ProizvodiState extends State<Proizvodi> {
 
   Future<List<Proizvod>?> GetProizvodi(Kategorija? selectedItem) async {
     Map<String, String>? queryParams = null;
-    if(selectedItem != null && selectedItem.id != 0){
+    if (selectedItem != null && selectedItem.id != 0) {
       queryParams = {"kategorijaid": selectedItem.id.toString()};
     }
 
@@ -85,7 +89,8 @@ class _ProizvodiState extends State<Proizvodi> {
 
   Future<List<Kategorija>?> GetKategorije(Kategorija? _selectedItem) async {
     var Kategorije = await APIService.Get('Kategorija', null);
-    var kategorijeList = Kategorije?.map((i) => Kategorija.fromJson(i)).toList();
+    var kategorijeList =
+        Kategorije?.map((i) => Kategorija.fromJson(i)).toList();
 
     items = kategorijeList!.map((item) {
       return DropdownMenuItem<Kategorija>(
@@ -94,34 +99,46 @@ class _ProizvodiState extends State<Proizvodi> {
       );
     }).toList();
 
-    if (_selectedItem != null && _selectedItem.id != 0)
-    {
-      _selectedKategorija = kategorijeList.where((element) => element.id == _selectedItem.id).first;
+    items.add(DropdownMenuItem<Kategorija>(child: Text("Sve kategorije")));
+
+    if (_selectedItem != null && _selectedItem.id != 0) {
+      _selectedKategorija = kategorijeList
+          .where((element) => element.id == _selectedItem.id)
+          .first;
     }
     return kategorijeList;
   }
 
-  Widget dropdownWidget(){
+  Future<void> DodajKorpa(proizvod) async {
+    narudzbaProizvodRequest = NarudzbaProizvod(
+        id: null,
+        narudzbaId: APIService.narudzbaId,
+        proizvodId: proizvod.id,
+        kolicina: 1,
+        proizvod: proizvod);
+    await APIService.Post(
+        "NarudzbaProizvod", json.encode(narudzbaProizvodRequest?.toJson()));
+  }
+
+  Widget dropdownWidget() {
     return FutureBuilder<List<Kategorija>?>(
         future: GetKategorije(_selectedKategorija),
-        builder: (BuildContext context,
-            AsyncSnapshot<List<Kategorija>?> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Kategorija>?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: Text('Loading...'),
             );
-          }
-          else {
+          } else {
             if (snapshot.hasError) {
               return Center(
                 child: Text('${snapshot.error}'),
               );
-            }
-            else {
+            } else {
               return Padding(
-                padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
                 child: DropdownButton<dynamic>(
-                  hint: Text('Odaberite vrstu proizvoda'),
+                  hint: const Text('Odaberite vrstu proizvoda'),
                   isExpanded: true,
                   items: items,
                   onChanged: (newVal) {
@@ -163,7 +180,7 @@ class _ProizvodiState extends State<Proizvodi> {
                   child: Text(
                     proizvod.naziv,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 19,
                       fontWeight: FontWeight.bold,
                     ),
@@ -191,14 +208,14 @@ class _ProizvodiState extends State<Proizvodi> {
               child: Container(
                 color: Colors.orangeAccent,
                 child: Container(
-                  margin: EdgeInsets.only(left: 6, right: 5),
+                  margin: const EdgeInsets.only(left: 6, right: 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Chip(
                         label: Text(
                           proizvod.cijena.toString() + " KM",
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
@@ -211,8 +228,11 @@ class _ProizvodiState extends State<Proizvodi> {
                         child: IconButton(
                           iconSize: 30,
                           color: Colors.white,
-                          icon: Icon(Icons.shopping_cart),
-                          onPressed: () {},
+                          icon: const Icon(Icons.shopping_cart),
+                          onPressed: () async {
+                            await DodajKorpa(proizvod);
+                            showAlertDialog(context);
+                          },
                         ),
                       )
                     ],
@@ -223,6 +243,33 @@ class _ProizvodiState extends State<Proizvodi> {
           ],
         ),
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: const Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("My title"),
+      content: const Text("This is my message."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

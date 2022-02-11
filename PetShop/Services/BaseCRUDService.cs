@@ -40,5 +40,15 @@ namespace PetShop.Services
 
             return _mapper.Map<T>(entity);
         }
+
+        public virtual T Delete(int id)
+        {
+            var entity = ctx.Set<Tdb>().Find(id);
+            ctx.Set<Tdb>().Remove(entity);
+
+            ctx.SaveChanges();
+
+            return _mapper.Map<T>(entity);
+        }
     }
 }

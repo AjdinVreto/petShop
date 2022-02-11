@@ -7,6 +7,7 @@ namespace PetShop.Database
 {
     public partial class NarudzbaProizvod
     {
+        public int Id { get; set; }
         public int NarudzbaId { get; set; }
         public int ProizvodId { get; set; }
         public int Kolicina { get; set; }

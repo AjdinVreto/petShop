@@ -8,17 +8,23 @@ import 'package:petshop_mobile/models/Proizvodjac.dart';
 import 'package:petshop_mobile/services/APIService.dart';
 
 class ProizvodDetalji extends StatelessWidget {
-  var proizvod;
-  var proizvodjac = null;
+  final proizvod;
+  var proizvodjac;
 
   NarudzbaProizvod? narudzbaProizvodRequest;
 
   ProizvodDetalji(this.proizvod);
 
-  Future<void> DodajKorpa() async{
-    narudzbaProizvodRequest = new NarudzbaProizvod(narudzbaId: APIService.narudzbaId, proizvodId: proizvod.id, kolicina: 1);
-    await APIService.Post("NarudzbaProizvod", json.encode(narudzbaProizvodRequest?.toJson()));
-    print("AS");
+  Future<void> DodajKorpa() async {
+    narudzbaProizvodRequest = NarudzbaProizvod(
+        id: null,
+        narudzbaId: APIService.narudzbaId,
+        proizvodId: proizvod.id,
+        kolicina: 1,
+        proizvod: proizvod);
+
+    await APIService.Post(
+        "NarudzbaProizvod", json.encode(narudzbaProizvodRequest?.toJson()));
   }
 
   @override
@@ -31,12 +37,13 @@ class ProizvodDetalji extends StatelessWidget {
     );
   }
 
-  Widget bodyWidget(){
+  Widget bodyWidget() {
     return FutureBuilder<List<Proizvodjac>?>(
       future: GetProizvodjac(),
-      builder: (BuildContext context, AsyncSnapshot<List<Proizvodjac>?> snapshot) {
+      builder:
+          (BuildContext context, AsyncSnapshot<List<Proizvodjac>?> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: Text("Loading..."),
           );
         } else {
@@ -48,83 +55,86 @@ class ProizvodDetalji extends StatelessWidget {
             return SingleChildScrollView(
               child: Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Column(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  children: [
+                    Chip(
+                      backgroundColor: Colors.orange,
+                      label: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Text(
+                          proizvod.naziv.toString(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Image(
+                      image: MemoryImage(proizvod.slika),
+                      height: 250,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Chip(
-                          backgroundColor: Colors.orange,
-                          label: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Text(
-                              proizvod.naziv.toString(),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22,
-                                  color: Colors.white),
-                            ),
+                          padding: const EdgeInsets.all(14),
+                          backgroundColor: Colors.purple,
+                          label: Text(
+                            proizvod.cijena.toString() + " KM",
+                            style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Image(
-                          image: MemoryImage(proizvod.slika),
-                          height: 250,
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Chip(
-                              padding: EdgeInsets.all(14),
-                              backgroundColor: Colors.purple,
-                              label: Text(
-                                proizvod.cijena.toString() + " KM",
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                            ),
-                            dodaj_korpa_widget(DodajKorpa),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Divider(
-                          thickness: 1,
-                        ),
-                        ocjeni_proizvod_widget(),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Divider(
-                          thickness: 1,
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.all(12),
-                            primary: Colors.blue,
-                          ),
-                          onPressed: () {},
-                          child: Text(
-                            "Komentari",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        Divider(
-                          thickness: 1,
-                        ),
-                        proizvod_opis_widget(proizvod: proizvod, proizvodjac: proizvodjac,)
+                        dodaj_korpa_widget(DodajKorpa),
                       ],
                     ),
-                  )),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Divider(
+                      thickness: 1,
+                    ),
+                    ocjeni_proizvod_widget(),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Divider(
+                      thickness: 1,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(12),
+                        primary: Colors.blue,
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        "Komentari",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 2,
+                    ),
+                    const Divider(
+                      thickness: 1,
+                    ),
+                    proizvod_opis_widget(
+                      proizvod: proizvod,
+                      proizvodjac: proizvodjac,
+                    )
+                  ],
+                ),
+              )),
             );
           }
         }
@@ -134,9 +144,12 @@ class ProizvodDetalji extends StatelessWidget {
 
   Future<List<Proizvodjac>?> GetProizvodjac() async {
     var proizvodjaci = await APIService.Get("Proizvodjac", null);
-    var proizvodjaciList = proizvodjaci?.map((i) => Proizvodjac.fromJson(i)).toList();
+    var proizvodjaciList =
+        proizvodjaci?.map((i) => Proizvodjac.fromJson(i)).toList();
 
-    proizvodjac = proizvodjaciList?.where((element) => element.id == proizvod.proizvodjacId).first;
+    proizvodjac = proizvodjaciList
+        ?.where((element) => element.id == proizvod.proizvodjacId)
+        .first;
   }
 }
 
@@ -149,13 +162,14 @@ class dodaj_korpa_widget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         primary: Colors.orange,
       ),
       onPressed: () async {
         await DodajKorpa();
+        showAlertDialog(context);
       },
-      child: Text.rich(
+      child: const Text.rich(
         TextSpan(children: [
           TextSpan(
             text: "Dodaj u korpu  ",
@@ -171,6 +185,33 @@ class dodaj_korpa_widget extends StatelessWidget {
       ),
     );
   }
+
+  showAlertDialog(BuildContext context) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: const Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("My title"),
+      content: const Text("This is my message."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 }
 
 class ocjeni_proizvod_widget extends StatelessWidget {
@@ -180,10 +221,9 @@ class ocjeni_proizvod_widget extends StatelessWidget {
       initialRating: 3,
       minRating: 1,
       direction: Axis.horizontal,
-      allowHalfRating: true,
       itemCount: 5,
-      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-      itemBuilder: (context, _) => Icon(
+      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+      itemBuilder: (context, _) => const Icon(
         Icons.star,
         color: Colors.amber,
       ),
@@ -216,9 +256,13 @@ class proizvod_opis_widget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(top: 5),
           child: Text(
-            "O proizvodu \n\nOpis : " + proizvod.opis + "\n" + "Proizvodjac : " + proizvodjac.naziv,
+            "O proizvodu \n\nOpis : " +
+                proizvod.opis +
+                "\n" +
+                "Proizvodjac : " +
+                proizvodjac.naziv,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20,
               color: Colors.white,
             ),
@@ -312,4 +356,3 @@ class proizvod_opis_widget extends StatelessWidget {
 //         )),
 //   );
 // }
-

@@ -41,8 +41,8 @@ class APIService {
     return null;
   }
 
-  static Future<dynamic> GetById(String route, dynamic id) async{
-    String baseUrl= _baseRoute + route + "/" + id;
+  static Future<dynamic> GetById(String route, int id) async{
+    String baseUrl= _baseRoute + route + "/" + id.toString();
     final String basicAuth='Basic '+base64Encode(utf8.encode('$username:$password'));
     final response= await http.get(
       Uri.parse(baseUrl),
@@ -71,7 +71,48 @@ class APIService {
     );
 
     if (response.statusCode == 201){
-      print("AS");
+      json.decode(response.body);
+    }
+
+    return null;
+  }
+
+  static Future<dynamic> Update(String route, int id, String body) async {
+    String baseUrl= _baseRoute + route + "/" + id.toString();
+
+    final String basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+
+    final response = await http.put(
+      Uri.parse(baseUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        HttpHeaders.authorizationHeader: basicAuth
+      },
+      body: body
+    );
+
+    if (response.statusCode == 200){
+      json.decode(response.body);
+    }
+
+    return null;
+  }
+
+  static Future<dynamic> Delete(String route, int id) async {
+
+    String baseUrl = _baseRoute + route + "/" + id.toString();
+
+    final String basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+
+    print(baseUrl);
+    final response = await http.delete(
+      Uri.parse(baseUrl),
+      headers: {HttpHeaders.authorizationHeader: basicAuth},
+    );
+
+    if(response.statusCode == 201){
       json.decode(response.body);
     }
 

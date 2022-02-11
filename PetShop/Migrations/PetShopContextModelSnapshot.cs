@@ -229,16 +229,23 @@ namespace PetShop.Migrations
 
             modelBuilder.Entity("PetShop.Database.NarudzbaProizvod", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Kolicina")
+                        .HasColumnType("int");
+
                     b.Property<int>("NarudzbaId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProizvodId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Kolicina")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("NarudzbaId", "ProizvodId");
+                    b.HasIndex("NarudzbaId");
 
                     b.HasIndex("ProizvodId");
 

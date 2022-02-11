@@ -8,46 +8,46 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: [
           AppBar(
-            title: Text("Meni"),
+            title: const Text("Meni"),
             automaticallyImplyLeading: false,
             centerTitle: true,
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text("Pocetna"),
+            leading: const Icon(Icons.home),
+            title: const Text("Pocetna"),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed('/pocetna');
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.shop),
+            title: const Text("Shop"),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/proizvodi');
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.shop),
-            title: Text("Shop"),
+            leading: const Icon(Icons.add_shopping_cart),
+            title: const Text("Korpa"),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed('/proizvodi');
+              Navigator.of(context).pushReplacementNamed('/korpa');
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.add_shopping_cart),
-            title: Text("Korpa"),
+            leading: const Icon(Icons.person),
+            title: const Text("Profil"),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed('/orders');
+              Navigator.of(context).pushReplacementNamed('/profil');
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text("Profil"),
-            onTap: () {
-              Navigator.of(context).pushReplacementNamed('/orders');
-            },
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.logout),
-            title: Text("Odjava"),
+            leading: const Icon(Icons.logout),
+            title: const Text("Odjava"),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
             },

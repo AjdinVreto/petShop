@@ -23,7 +23,7 @@ class Proizvod {
     return Proizvod(
         id: int.parse(json["id"].toString()),
         naziv: json["naziv"],
-        cijena: json["cijena"],
+        cijena: double.parse(json["cijena"].toString()),
         opis: json["opis"],
         kategorijaId: int.parse(json["kategorijaId"].toString()),
         proizvodjacId: int.parse(json["proizvodjacId"].toString()),

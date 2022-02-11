@@ -40,7 +40,7 @@ namespace PetShop.WinUI.Ostalo
 
                 var file = File.ReadAllBytes(fileName);
 
-                insert.Slika = file;
+                insert.Slika = update.Slika = file;
 
                 Image image = Image.FromFile(fileName);
 
