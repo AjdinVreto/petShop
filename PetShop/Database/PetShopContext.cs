@@ -37,6 +37,14 @@ namespace PetShop.Database
         public virtual DbSet<Transkacija> Transkacijas { get; set; }
         public virtual DbSet<Uposlenik> Uposleniks { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Data Source=localhost, 1433;Initial Catalog=PetShop; Trusted_Connection=true;");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -96,7 +104,7 @@ namespace PetShop.Database
 
                 entity.Property(e => e.Email).IsRequired();
 
-                entity.Property(e => e.ImePrezime).IsRequired();
+                entity.Property(e => e.Ime).IsRequired();
 
                 entity.Property(e => e.Tekst).IsRequired();
 
@@ -110,6 +118,8 @@ namespace PetShop.Database
             modelBuilder.Entity<Korisnik>(entity =>
             {
                 entity.ToTable("Korisnik");
+
+                entity.Property(e => e.Adresa).IsRequired();
 
                 entity.Property(e => e.DatumRodjenja).HasColumnType("date");
 

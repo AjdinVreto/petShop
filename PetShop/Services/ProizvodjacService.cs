@@ -24,10 +24,7 @@ namespace PetShop.Services
         {
             var entity = ctx.Set<Database.Proizvodjac>().AsQueryable();
 
-            if(search?.IncludeDrzava == true)
-            {
-                entity = entity.Include(x => x.Drzava);
-            }
+            entity = entity.Include(x => x.Drzava);
 
             var list = entity.ToList();
 

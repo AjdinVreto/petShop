@@ -18,29 +18,11 @@ class _KorpaState extends State<Korpa> {
   late double ukCijena;
   late NarudzbaProizvodUpdate? narudzbaProizvodRequest;
 
-  @override
-  Widget build(BuildContext context) {
-    cijena = 0.0;
-    ukCijena = 0.0;
-    narudzbaProizvodRequest = null;
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Korpa"),
-      ),
-      drawer: AppDrawer(),
-      body: bodyWidget(),
-    );
-  }
-
   Future<List<NarudzbaProizvod>?> getData() async {
     var korpaProizvodi = await APIService.Get("NarudzbaProizvod", null);
 
     var korpaProizvodiList =
-        korpaProizvodi?.map((i) => NarudzbaProizvod.fromJson(i)).toList();
-
-    // return korpaProizvodiList
-    //     ?.where((element) => element.narudzbaId == APIService.narudzbaId)
-    //     .toList();
+    korpaProizvodi?.map((i) => NarudzbaProizvod.fromJson(i)).toList();
 
     return korpaProizvodiList?.where((element) {
       cijena = element.proizvod?.cijena as double;
@@ -57,6 +39,20 @@ class _KorpaState extends State<Korpa> {
   Future<void> izmjeniKolicinu(id) async {
     await APIService.Update(
         "NarudzbaProizvod", id, json.encode(narudzbaProizvodRequest?.toJson()));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    cijena = 0.0;
+    ukCijena = 0.0;
+    narudzbaProizvodRequest = null;
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Korpa"),
+      ),
+      drawer: AppDrawer(),
+      body: bodyWidget(),
+    );
   }
 
   Widget bodyWidget() {
@@ -80,11 +76,11 @@ class _KorpaState extends State<Korpa> {
                   ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
-                    physics: ScrollPhysics(),
+                    physics: const ScrollPhysics(),
                     itemBuilder: (ctx, i) => KorpaItem(snapshot.data![i]),
                     itemCount: snapshot.data?.length,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   narudzbaInfo(),
@@ -161,8 +157,8 @@ class _KorpaState extends State<Korpa> {
                         ],
                       ),
                       IconButton(
-                        onPressed: () {
-                          obrisiProizvod(korpaItem.id).then((value) {
+                        onPressed: () async {
+                          await obrisiProizvod(korpaItem.id).then((value) {
                             setState(() {
 
                             });
@@ -187,27 +183,27 @@ class _KorpaState extends State<Korpa> {
 
   Widget narudzbaInfo() {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Chip(
             label: Text(
               "Ukupno za platiti : " + ukCijena.toString() + " KM",
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 19,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             backgroundColor: Colors.purple,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           ElevatedButton(
             onPressed: () {},
-            child: Text(
+            child: const Text(
               "Izvrsi narudzbu",
               style: TextStyle(
                 fontSize: 24,
@@ -216,7 +212,7 @@ class _KorpaState extends State<Korpa> {
             ),
             style: ElevatedButton.styleFrom(
               primary: Colors.orangeAccent,
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
             ),
           )
         ],
@@ -236,10 +232,10 @@ class _KorpaState extends State<Korpa> {
             color: Colors.black87,
           ),
           backgroundColor: Colors.white,
-          onPressed: () {
+          onPressed: () async {
             narudzbaProizvodRequest =
                 NarudzbaProizvodUpdate(kolicina: kolicina + 1);
-            izmjeniKolicinu(id).then((value) {
+            await izmjeniKolicinu(id).then((value) {
               setState(() {});
             });
           },
@@ -260,10 +256,10 @@ class _KorpaState extends State<Korpa> {
             color: Colors.black87,
           ),
           backgroundColor: Colors.white,
-          onPressed: () {
+          onPressed: () async{
             narudzbaProizvodRequest =
                 NarudzbaProizvodUpdate(kolicina: kolicina - 1);
-            izmjeniKolicinu(id).then((value) {
+            await izmjeniKolicinu(id).then((value) {
               setState(() {});
             });
           },

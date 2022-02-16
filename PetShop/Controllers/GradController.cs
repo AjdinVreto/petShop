@@ -1,4 +1,5 @@
-﻿using PetShop.Model;
+﻿using Microsoft.AspNetCore.Mvc;
+using PetShop.Model;
 using PetShop.Model.Requests;
 using PetShop.Services;
 using System;
@@ -10,9 +11,16 @@ namespace PetShop.Controllers
 {
     public class GradController : BaseReadController<Model.Grad, GradSearchObject>
     {
+        protected readonly IGradService Service;
         public GradController(IGradService service) : base(service)
         {
+            Service = service;
+        }
 
+        [HttpGet("getgradovi")]
+        public virtual Task<List<Model.Grad>> getGradovi()
+        {
+            return Service.getGradovi();
         }
     }
 }

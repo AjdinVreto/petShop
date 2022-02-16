@@ -24,7 +24,7 @@ namespace PetShop.Services
         {
             var entity = ctx.Set<Database.NarudzbaProizvod>().AsQueryable();
 
-            entity = entity.Include(x => x.Narudzba).Include(x => x.Proizvod);
+            entity = entity.Include(x => x.Proizvod).Include(x => x.Proizvod.Proizvodjac).Include(x => x.Proizvod.Proizvodjac.Drzava);
 
             var list = entity.ToList();
 

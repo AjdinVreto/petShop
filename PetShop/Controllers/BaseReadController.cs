@@ -10,7 +10,6 @@ namespace PetShop.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class BaseReadController<T, TSearch> : ControllerBase where T: class where TSearch: class
     {
         protected readonly IReadService<T, TSearch> _service;
@@ -20,12 +19,14 @@ namespace PetShop.Controllers
             _service = service;
         }
 
+        [Authorize]
         [HttpGet]
         public virtual IList<T> Get([FromQuery]TSearch search)
         {
             return _service.Get(search);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public virtual T GetById(int id)
         {

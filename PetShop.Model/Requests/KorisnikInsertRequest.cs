@@ -14,8 +14,9 @@ namespace PetShop.Model.Requests
         [Required]
         public DateTime DatumRodjenja { get; set; }
         [Required]
-        public string Email { get; set; }
+        public string Adresa { get; set; }
         [Required]
+        public string Email { get; set; }
         public byte[] Slika { get; set; }
         [Required]
         public string KorisnickoIme { get; set; }
@@ -27,7 +28,6 @@ namespace PetShop.Model.Requests
         public int GradId { get; set; }
         [Required]
         public int SpolId { get; set; }
-        [Required]
         public List<int> Role { get; set; } = new List<int>();
 
     }

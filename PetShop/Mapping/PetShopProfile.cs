@@ -48,6 +48,9 @@ namespace PetShop.Mapping
             CreateMap<NarudzbaUpdateRequest, Database.Narudzba>();
             CreateMap<NarudzbaProizvodInsertRequest, Database.NarudzbaProizvod>();
             CreateMap<NarudzbaProizvodUpdateRequest, Database.NarudzbaProizvod>();
+            CreateMap<KontaktInsertRequest, Database.Kontakt>();
+            CreateMap<RecenzijaInsertRequest, Database.Recenzija>();
+            CreateMap<RecenzijaUpdateRequest, Database.Recenzija>();
         }
     }
 }

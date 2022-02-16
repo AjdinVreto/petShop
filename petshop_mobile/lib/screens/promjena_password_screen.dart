@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:petshop_mobile/models/Korisnik.dart';
+import 'package:petshop_mobile/models/Requests/KorisnikProfilUpdate.dart';
 import 'package:petshop_mobile/services/APIService.dart';
 
 class PromjenaPassword extends StatefulWidget {
@@ -20,7 +23,26 @@ class _PromjenaPasswordState extends State<PromjenaPassword> {
   TextEditingController potvrdaNovogPasswordaController =
       TextEditingController();
 
+  late KorisnikProfilUpdate passwordUpdateRequest;
+
   final _validationKey = GlobalKey<FormState>();
+
+  Future<void> updatePassword() async {
+    await APIService.Update("Korisnik", APIService.korisnikId,
+        json.encode(passwordUpdateRequest.toJson()));
+  }
+
+  int validatePassword(String password) {
+    String patttern = r'(^[a-zA-Z0-9 ,.-]*$)';
+    RegExp regExp = RegExp(patttern);
+    if (password.isEmpty || password.length == 0) {
+      return 1;
+    } else if (password.length < 3) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +52,6 @@ class _PromjenaPasswordState extends State<PromjenaPassword> {
       ),
       body: bodyWidget(),
     );
-  }
-
-  int validatePassword(String password) {
-    String patttern = r'(^[a-zA-Z0-9 ,.-]*$)';
-    RegExp regExp = RegExp(patttern);
-    if (password.isEmpty || password.length == 0) {
-      return 1;
-    } else if (password.length < 5) {
-      return 1;
-    } else {
-      return 0;
-    }
   }
 
   Widget bodyWidget() {
@@ -68,7 +78,38 @@ class _PromjenaPasswordState extends State<PromjenaPassword> {
                   height: 25,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async{
+                    if (stariPasswordController.text != APIService.password) {
+                      showAlertDialog(
+                          context, "NEUSPJESNO !", "Stari password nije tacan");
+                    } else if (noviPasswordController.text !=
+                        potvrdaNovogPasswordaController.text) {
+                      showAlertDialog(
+                          context, "NEUSPJESNO !", "Passwordi se ne poklapaju");
+                    } else {
+                      if(_validationKey.currentState!.validate()){
+                        passwordUpdateRequest = KorisnikProfilUpdate(
+                            ime: widget.korisnik?.ime,
+                            prezime: widget.korisnik?.prezime,
+                            email: widget.korisnik?.email,
+                            adresa: widget.korisnik?.adresa,
+                            korisnickoIme: widget.korisnik?.korisnickoIme,
+                            datumRodjenja: widget.korisnik?.datumRodjenja,
+                            spolId: widget.korisnik?.spolId,
+                            gradId: widget.korisnik?.gradId,
+                            password: noviPasswordController.text);
+                        await updatePassword().then((value) {
+                          setState(() {
+                            APIService.password = noviPasswordController.text;
+                            showAlertDialog(context, "USPJESNO !",
+                                "Vas password je uspjesno izmjenjen");
+                          });
+                        });
+                      } else{
+                        showAlertDialog(context, "Greska", "Postoje neke greske");
+                      }
+                    }
+                  },
                   child: const Text(
                     "Sacuvaj password",
                     style: TextStyle(
@@ -162,6 +203,33 @@ class _PromjenaPasswordState extends State<PromjenaPassword> {
           ),
         ),
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context, title, info) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: const Text("U redu"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(title),
+      content: Text(info),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

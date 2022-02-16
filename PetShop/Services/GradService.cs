@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PetShop.Database;
 using PetShop.Model.Requests;
 using System;
@@ -23,6 +24,13 @@ namespace PetShop.Services
             {
                 entity = ctx.Grads.Where(x => x.DrzavaId == search.Id);
             }
+
+            return _mapper.Map<List<Model.Grad>>(entity);
+        }
+
+        public async Task<List<Model.Grad>> getGradovi()
+        {
+            var entity = await ctx.Grads.ToListAsync();
 
             return _mapper.Map<List<Model.Grad>>(entity);
         }

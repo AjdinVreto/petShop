@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PetShop.Migrations
 {
-    public partial class Inicijalna : Migration
+    public partial class inicijalna : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -122,9 +122,11 @@ namespace PetShop.Migrations
                     Ime = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Prezime = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DatumRodjenja = table.Column<DateTime>(type: "date", nullable: false),
+                    Adresa = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Slika = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     KorisnickoIme = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PasswordSalt = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GradId = table.Column<int>(type: "int", nullable: false),
@@ -204,7 +206,7 @@ namespace PetShop.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ImePrezime = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ime = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Tekst = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Odgovoreno = table.Column<bool>(type: "bit", nullable: false),

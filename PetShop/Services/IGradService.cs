@@ -8,6 +8,6 @@ namespace PetShop.Services
 {
     public interface IGradService : IReadService<Model.Grad, GradSearchObject>
     {
-
+        Task<List<Model.Grad>> getGradovi();
     }
 }

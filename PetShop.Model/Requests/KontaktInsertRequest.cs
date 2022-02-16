@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PetShop.Model
+namespace PetShop.Model.Requests
 {
-    public class Kontakt
+    public class KontaktInsertRequest
     {
-        public int Id { get; set; }
         public string Ime { get; set; }
         public string Email { get; set; }
         public string Tekst { get; set; }
         public bool Odgovoreno { get; set; }
         public int KorisnikId { get; set; }
-
-        public virtual Korisnik Korisnik { get; set; }
     }
 }

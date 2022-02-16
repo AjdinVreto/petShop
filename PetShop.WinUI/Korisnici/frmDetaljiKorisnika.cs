@@ -150,10 +150,11 @@ namespace PetShop.WinUI.Korisnici
         {
             if (ValidirajUnesenePodatke() && ValidirajEmailIKorisnickoIme())
             {
-                if (cmbGrad.SelectedValue != null && cmbSpol.SelectedValue != null && (int)cmbGrad.SelectedValue > 0 && (int)cmbSpol.SelectedValue > 0)
+                if (cmbGrad.SelectedValue != null && cmbSpol.SelectedValue != null && (int)cmbGrad.SelectedValue > 0 && (int)cmbSpol.SelectedValue > 0 && cmbDrzava.SelectedValue != null && (int)cmbDrzava.SelectedValue > 0)
                 {
                     var gradObj = cmbGrad.SelectedValue;
                     var spolObj = cmbSpol.SelectedValue;
+                    var drzavaObj = cmbDrzava.SelectedValue;
 
                     if (int.TryParse(gradObj.ToString(), out int gradId))
                     {

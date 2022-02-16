@@ -23,12 +23,12 @@ class APIService {
   static Future<List<dynamic>?> Get(String route, dynamic object) async {
     String queryString = Uri(queryParameters: object).query;
     String baseUrl = _baseRoute + route;
-
     if(object!=null){
       baseUrl = baseUrl + '?' + queryString;
     }
 
     final String basicAuth = 'Basic '+base64Encode(utf8.encode('$username:$password'));
+
     final response = await http.get(
       Uri.parse(baseUrl),
       headers: {HttpHeaders.authorizationHeader:basicAuth}
@@ -69,7 +69,7 @@ class APIService {
       },
       body: body,
     );
-
+print(body);
     if (response.statusCode == 201){
       json.decode(response.body);
     }
@@ -132,6 +132,24 @@ class APIService {
 
     if (response.statusCode == 200) {
       return Korisnik.fromJson(json.decode(response.body));
+    }
+
+    return null;
+  }
+
+  static Future<List<dynamic>?> GetGradSpol(String route, dynamic object) async {
+    String queryString = Uri(queryParameters: object).query;
+    String baseUrl = _baseRoute + route;
+    if(object!=null){
+      baseUrl = baseUrl + '?' + queryString;
+    }
+
+    final response = await http.get(
+        Uri.parse(baseUrl),
+    );
+
+    if(response.statusCode == 200) {
+      return json.decode(response.body) as List;
     }
 
     return null;

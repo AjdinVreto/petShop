@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PetShop.Database;
 using PetShop.Filters;
@@ -34,16 +35,7 @@ namespace PetShop.Services
                 entity = entity.Where(x => x.KorisnickoIme.Contains(search.KorisnickoIme) || x.Email.Contains(search.Email));
             }
 
-            if(search?.IncludeGrad == true)
-            {
-                entity = entity.Include(x => x.Grad);
-            }
-
-            if (search?.IncludeSpol == true)
-            {
-                entity = entity.Include(x => x.Spol);
-            }
-
+            entity = entity.Include(x => x.Spol).Include(x => x.Grad);
 
             List<KorisnikRola> korisniciRole = ctx.KorisnikRolas.Where(x => x.Rola.Naziv.Equals("Administrator") || x.Rola.Naziv.Equals("Uposlenik")).ToList();
 
@@ -139,7 +131,15 @@ namespace PetShop.Services
                 }
             }
 
+            if(request.Password != null)
+            {
+                string passwordSalt = GenerateSalt();
+                entity.PasswordSalt = passwordSalt;
+                entity.PasswordHash = GenerateHash(passwordSalt, request.Password);
+            }
+
             _mapper.Map(request, entity);
+            entity.Password = null;
 
             ctx.SaveChanges();
             return _mapper.Map<Model.Korisnik>(entity);
@@ -168,7 +168,7 @@ namespace PetShop.Services
 
         public async Task<Model.Korisnik> Login(string username, string password)
         {
-            var entity = await ctx.Korisniks.Include("KorisnikRolas.Rola").FirstOrDefaultAsync(x => x.KorisnickoIme == username);
+            var entity = await ctx.Korisniks.Include("KorisnikRolas.Rola").Include(x => x.Spol).Include(x => x.Grad).FirstOrDefaultAsync(x => x.KorisnickoIme == username);
 
             if(entity == null)
             {
@@ -181,6 +181,45 @@ namespace PetShop.Services
             {
                 throw new Exception("Pogresan username ili password");
             }
+
+            return _mapper.Map<Model.Korisnik>(entity);
+        }
+
+        public async Task<Model.Korisnik> Registracija([FromBody]KorisnikInsertRequest request)
+        {
+            var entity = _mapper.Map<Database.Korisnik>(request);
+            var korisnici = await ctx.Korisniks.ToListAsync();
+
+            foreach (var item in korisnici)
+            {
+                if (item.KorisnickoIme.Equals(request.KorisnickoIme))
+                {
+                    throw new UserException("Korisnicko ime vec postoji");
+                }
+
+                if (item.Email.Equals(request.Email))
+                {
+                    throw new UserException("Email vec postoji");
+                }
+            }
+
+            ctx.Add(entity);
+
+            entity.PasswordSalt = GenerateSalt();
+            entity.PasswordHash = GenerateHash(entity.PasswordSalt, request.Password);
+            entity.Password = null;
+            entity.Slika = null;
+
+            ctx.SaveChanges();
+
+            var rola = await ctx.KorisnikRolas.Where(x => x.Rola.Naziv.Equals("Korisnik")).FirstOrDefaultAsync();
+
+            Database.KorisnikRola korisnikRola = new KorisnikRola();
+            korisnikRola.KorisnikId = entity.Id;
+            korisnikRola.RolaId = rola.RolaId;
+
+            ctx.KorisnikRolas.Add(korisnikRola);
+            ctx.SaveChanges();
 
             return _mapper.Map<Model.Korisnik>(entity);
         }

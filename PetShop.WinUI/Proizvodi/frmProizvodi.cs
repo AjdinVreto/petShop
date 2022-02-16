@@ -94,8 +94,6 @@ namespace PetShop.WinUI.Proizvodi
         private async Task LoadProizvodi()
         {
             ProizvodSearchObject search = new ProizvodSearchObject();
-            search.IncludeKategorija = true;
-            search.IncludeProizvodjac = true;
             dgvProizvodi.DataSource = await _serviceProizvodi.Get<List<Model.Proizvod>>(search);
         }
 

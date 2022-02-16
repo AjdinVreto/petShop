@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PetShop.Controllers
 {
-    public class KontaktController : BaseCRUDController<Model.Kontakt, object, object, KontaktUpdateRequest>
+    public class KontaktController : BaseCRUDController<Model.Kontakt, object, KontaktInsertRequest, KontaktUpdateRequest>
     {
         public KontaktController(IKontaktService service) : base(service)
         {

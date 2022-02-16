@@ -22,9 +22,11 @@ namespace PetShop.Database
         public string Ime { get; set; }
         public string Prezime { get; set; }
         public DateTime DatumRodjenja { get; set; }
+        public string Adresa { get; set; }
         public string Email { get; set; }
         public byte[] Slika { get; set; }
         public string KorisnickoIme { get; set; }
+        public string Password { get; set; }
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
         public int GradId { get; set; }

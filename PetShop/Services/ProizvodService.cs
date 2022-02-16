@@ -39,15 +39,7 @@ namespace PetShop.Services
                 entity = entity.Where(x => x.ProizvodjacId == search.ProizvodjacId);
             }
 
-            if(search?.IncludeKategorija == true)
-            {
-                entity = entity.Include(x => x.Kategorija);
-            }
-
-            if (search?.IncludeProizvodjac == true)
-            {
-                entity = entity.Include(x => x.Proizvodjac);
-            }
+            entity = entity.Include(x => x.Kategorija).Include(x => x.Proizvodjac).Include(x => x.Proizvodjac.Drzava);
 
             var list = entity.ToList();
 

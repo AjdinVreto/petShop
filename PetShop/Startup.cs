@@ -76,9 +76,10 @@ namespace PetShop
             services.AddScoped<IKomentarService, KomentarService>();
             services.AddScoped<IKorisnikRolaService, KorisnikRolaService>();
             services.AddScoped<INarudzbaService, NarudzbaService>();
+            services.AddScoped<ISpolService, SpolService>();
             services.AddScoped<INarudzbaProizvodService, NarudzbaProizvodService>();
+            services.AddScoped<IRecenzijaService, RecenzijaService>();
             services.AddScoped<IReadService<Model.Rola, object>, BaseReadService<Model.Rola, Database.Rola, object>>();
-            services.AddScoped<IReadService<Model.Spol, object>, BaseReadService<Model.Spol, Database.Spol, object>>();
             services.AddScoped<IReadService<Model.Drzava, object>, BaseReadService<Model.Drzava, Database.Drzava, object>>();
             services.AddScoped<IReadService<Model.Proizvodjac, object>, BaseReadService<Model.Proizvodjac, Database.Proizvodjac, object>>();
             services.AddScoped<IReadService<Model.Poslovnica, object>, BaseReadService<Model.Poslovnica, Database.Poslovnica, object>>();

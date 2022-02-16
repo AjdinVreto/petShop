@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:petshop_mobile/screens/kontakt_screen.dart';
 
 import 'package:petshop_mobile/screens/korpa_screen.dart';
 import 'package:petshop_mobile/screens/pocetna_screen.dart';
 import 'package:petshop_mobile/screens/profil_screen.dart';
 import 'package:petshop_mobile/screens/proizvodi_screen.dart';
+import 'package:petshop_mobile/screens/registracija_screen.dart';
 import './screens/login_screen.dart';
 
 void main() {
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
         Korpa.routeName: (ctx) => Korpa(),
         Pocetna.routeName: (ctx) => Pocetna(),
         Profil.routeName: (ctx) => Profil(),
+        KontaktScreen.routeName: (ctx) => KontaktScreen(),
+        Registracija.routeName: (ctx) => Registracija(),
       },
     );
   }

@@ -12,6 +12,13 @@ class Pocetna extends StatefulWidget {
 }
 
 class _PocetnaState extends State<Pocetna> {
+
+  Future<List<Novost>?> getData() async {
+    var novosti = await APIService.Get("Novost", null);
+
+    return novosti?.map((i) => Novost.fromJson(i)).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,12 +28,6 @@ class _PocetnaState extends State<Pocetna> {
       body: bodyWidget(),
       drawer: AppDrawer(),
     );
-  }
-
-  Future<List<Novost>?> getData() async {
-    var novosti = await APIService.Get("Novost", null);
-
-    return novosti?.map((i) => Novost.fromJson(i)).toList();
   }
 
   Widget bodyWidget() {

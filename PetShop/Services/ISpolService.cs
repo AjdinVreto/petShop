@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace PetShop.Services
 {
-    public interface IKontaktService : ICRUDService<Model.Kontakt, object, KontaktInsertRequest, KontaktUpdateRequest>
+    public interface ISpolService : IReadService<Model.Spol, object>
     {
+        Task<List<Model.Spol>> getSpolovi();
     }
 }

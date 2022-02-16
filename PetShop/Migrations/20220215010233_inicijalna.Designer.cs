@@ -10,8 +10,8 @@ using PetShop.Database;
 namespace PetShop.Migrations
 {
     [DbContext(typeof(PetShopContext))]
-    [Migration("20220202184700_Inicijalna")]
-    partial class Inicijalna
+    [Migration("20220215010233_inicijalna")]
+    partial class inicijalna
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -115,7 +115,7 @@ namespace PetShop.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImePrezime")
+                    b.Property<string>("Ime")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -143,6 +143,10 @@ namespace PetShop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Adresa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DatumRodjenja")
                         .HasColumnType("date");
 
@@ -159,6 +163,9 @@ namespace PetShop.Migrations
 
                     b.Property<string>("KorisnickoIme")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")

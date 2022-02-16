@@ -113,7 +113,7 @@ namespace PetShop.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImePrezime")
+                    b.Property<string>("Ime")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -141,6 +141,10 @@ namespace PetShop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Adresa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DatumRodjenja")
                         .HasColumnType("date");
 
@@ -157,6 +161,9 @@ namespace PetShop.Migrations
 
                     b.Property<string>("KorisnickoIme")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")

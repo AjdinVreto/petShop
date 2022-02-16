@@ -43,9 +43,9 @@ namespace PetShop
             if (!context.Korisniks.Any())
             {
                 string passwordSalt = GenerateSalt();
-                context.Korisniks.Add(new Korisnik { Ime = "Ajdin", Prezime = "Vreto", DatumRodjenja = DateTime.Now, Email = "ajdintotti5@gmail.com", GradId = 1, KorisnickoIme = "admin", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test")});
-                context.Korisniks.Add(new Korisnik { Ime = "John", Prezime = "Doe", DatumRodjenja = DateTime.Now, Email = "john@gmail.com", GradId = 1, KorisnickoIme = "uposlenik", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
-                context.Korisniks.Add(new Korisnik { Ime = "Tammy", Prezime = "Abraham", DatumRodjenja = DateTime.Now, Email = "tammy@gmail.com", GradId = 1, KorisnickoIme = "korisnik", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "roma") });
+                context.Korisniks.Add(new Korisnik { Ime = "Ajdin", Prezime = "Vreto", DatumRodjenja = DateTime.Now, Adresa = "Rukodol 7", Email = "ajdintotti5@gmail.com", GradId = 1, KorisnickoIme = "admin", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test")});
+                context.Korisniks.Add(new Korisnik { Ime = "John", Prezime = "Doe", DatumRodjenja = DateTime.Now, Adresa = "NY 1", Email = "john@gmail.com", GradId = 1, KorisnickoIme = "uposlenik", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
+                context.Korisniks.Add(new Korisnik { Ime = "Tammy", Prezime = "Abraham", DatumRodjenja = DateTime.Now, Adresa = "Roma 22", Email = "tammy@gmail.com", GradId = 1, KorisnickoIme = "korisnik", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "roma") });
             }
 
             if (!context.KorisnikRolas.Any())

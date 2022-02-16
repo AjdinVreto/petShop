@@ -4,30 +4,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:petshop_mobile/models/Grad.dart';
-import 'package:petshop_mobile/models/Korisnik.dart';
+import 'package:petshop_mobile/models/Requests/KorisnikRegistracija.dart';
 import 'package:petshop_mobile/models/Spol.dart';
-import 'package:petshop_mobile/screens/promjena_password_screen.dart';
 import 'package:petshop_mobile/services/APIService.dart';
-import 'package:petshop_mobile/widgets/app_drawer.dart';
-import '../models/Requests/KorisnikProfilUpdate.dart';
 
-class Profil extends StatefulWidget {
-  static const routeName = "/profil";
+class Registracija extends StatefulWidget {
+  static const routeName = "/registracija";
 
   @override
-  _ProfilState createState() => _ProfilState();
+  _RegistracijaState createState() => _RegistracijaState();
 }
 
-class _ProfilState extends State<Profil> {
+class _RegistracijaState extends State<Registracija> {
   final _validationKey = GlobalKey<FormState>();
-  late KorisnikProfilUpdate? korisnikProfilUpdateRequest;
+
+  late KorisnikRegistracija korisnik;
 
   TextEditingController imeController = TextEditingController();
   TextEditingController prezimeController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController korisnickoImeController = TextEditingController();
   TextEditingController adresaController = TextEditingController();
-  DateTime? datumRodjenja = null;
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController potvrdaPasswordaController = TextEditingController();
+  DateTime? datumRodjenja = DateTime.now();
 
   List<DropdownMenuItem> items = [];
   List<DropdownMenuItem> itemsGradovi = [];
@@ -35,18 +35,6 @@ class _ProfilState extends State<Profil> {
   Grad? selectedGrad = null;
 
   int brojac = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    korisnikProfilUpdateRequest = null;
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Profil"),
-      ),
-      body: bodyWidget(),
-      drawer: AppDrawer(),
-    );
-  }
 
   int validateImePrezime(String ime) {
     String patttern = r'(^[a-zA-Z0-9 ,.-]*$)';
@@ -72,19 +60,20 @@ class _ProfilState extends State<Profil> {
       return 0;
   }
 
-  Future<dynamic> getData() async {
-    var korisnik = await APIService.GetById("Korisnik", APIService.korisnikId);
-
-    return Korisnik.fromJson(korisnik);
-  }
-
-  Future<void> sacuvajProfil() async {
-    await APIService.Update("Korisnik", APIService.korisnikId,
-        json.encode(korisnikProfilUpdateRequest?.toJson()));
+  int validatePassword(String password) {
+    String patttern = r'(^[a-zA-Z0-9 ,.-]*$)';
+    RegExp regExp = RegExp(patttern);
+    if (password.isEmpty || password.length == 0) {
+      return 1;
+    } else if (password.length < 3) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   Future<List<Spol>?> getSpolovi(Spol? _selectedItem) async {
-    var spolovi = await APIService.Get("Spol", null);
+    var spolovi = await APIService.GetGradSpol("Spol/getspolovi", null);
 
     var listaSpolovi = spolovi?.map((i) => Spol.fromJson(i)).toList();
 
@@ -96,15 +85,14 @@ class _ProfilState extends State<Profil> {
     }).toList();
 
     if (_selectedItem != null && _selectedItem.id != 0) {
-      selectedSpol = listaSpolovi
-          .where((element) => element.id == _selectedItem.id)
-          .first;
+      selectedSpol =
+          listaSpolovi.where((element) => element.id == _selectedItem.id).first;
     }
     return listaSpolovi;
   }
 
   Future<List<Grad>?> getGradovi(Grad? _selectedItem) async {
-    var gradovi = await APIService.Get("Grad", null);
+    var gradovi = await APIService.GetGradSpol("Grad/getgradovi", null);
 
     var listaGradovi = gradovi?.map((i) => Grad.fromJson(i)).toList();
 
@@ -116,77 +104,46 @@ class _ProfilState extends State<Profil> {
     }).toList();
 
     if (_selectedItem != null && _selectedItem.id != 0) {
-      selectedGrad = listaGradovi
-          .where((element) => element.id == _selectedItem.id)
-          .first;
+      selectedGrad =
+          listaGradovi.where((element) => element.id == _selectedItem.id).first;
     }
     return listaGradovi;
   }
 
-  Widget bodyWidget() {
-    return FutureBuilder(
-      future: getData(),
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: Text("Loading..."),
-          );
-        } else {
-          if (snapshot.hasError) {
-            return Center(
-              child: Text("${snapshot.error}"),
-            );
-          } else {
-            if(selectedSpol == null){
-              selectedSpol = snapshot.data.spol;
-            }
-            if(selectedGrad == null){
-              selectedGrad = snapshot.data.grad;
-            }
-            datumRodjenja = snapshot.data.datumRodjenja;
-            return ProfilWidget(snapshot.data);
-          }
-        }
-      },
+  Future<void> registrujKorisnika() async {
+    await APIService.Post(
+        "Korisnik/registracija", json.encode(korisnik.toJson()));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Registracija"),
+        centerTitle: true,
+      ),
+      body: bodyWidget(),
     );
   }
 
-  Widget ProfilWidget(korisnik) {
+  Widget bodyWidget() {
     return SingleChildScrollView(
       child: Center(
         child: Column(
           children: [
             const SizedBox(
-              height: 20,
-            ),
-            Container(
-              width: 150,
-              height: 150,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: korisnik.slika.isEmpty
-                      ? const AssetImage("./assets/images/userprofile.jpg")
-                          as ImageProvider
-                      : MemoryImage(korisnik.slika),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 30,
+              height: 25,
             ),
             Form(
               key: _validationKey,
               child: Column(
                 children: [
-                  textFormField(
-                      "Ime", brojac > 0 ? imeController.text : korisnik.ime, imeController, validateImePrezime),
+                  textFormField("Ime", imeController, validateImePrezime),
                   const SizedBox(
-                    height: 15,
+                    height: 25,
                   ),
-                  textFormField("Prezime", brojac > 0 ? prezimeController.text : korisnik.prezime, prezimeController,
-                      validateImePrezime),
+                  textFormField(
+                      "Prezime", prezimeController, validateImePrezime),
                   const SizedBox(
                     height: 25,
                   ),
@@ -198,80 +155,69 @@ class _ProfilState extends State<Profil> {
                   const SizedBox(
                     height: 25,
                   ),
-                  textFormField("Adresa", brojac > 0 ? adresaController.text : korisnik.adresa, adresaController,
+                  Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.only(right: 50, left: 50),
+                      child: izmjeniDatumRodjenja()),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  textFormField("Adresa", adresaController, validateImePrezime),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  textFormField("Email", emailController, validateEmail),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  textFormField("Korisnicko ime", korisnickoImeController,
                       validateImePrezime),
                   const SizedBox(
                     height: 25,
                   ),
-                  Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.only(right: 50, left: 50),
-                      child: izmjeniDatumRodjenja(korisnik)),
+                  textFormField(
+                      "Password", passwordController, validatePassword),
                   const SizedBox(
                     height: 25,
                   ),
-                  textFormField(
-                      "E-mail", brojac > 0 ? emailController.text : korisnik.email, emailController, validateEmail),
+                  textFormField("Potvrdi password", potvrdaPasswordaController,
+                      validatePassword),
                   const SizedBox(
-                    height: 15,
-                  ),
-                  textFormField("Korisnicko ime", brojac > 0 ? korisnickoImeController.text : korisnik.korisnickoIme,
-                      korisnickoImeController, validateImePrezime),
-                  const SizedBox(
-                    height: 35,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    margin: const EdgeInsets.only(right: 50, left: 50),
-                    child: ElevatedButton.icon(
-                      icon: const Icon(Icons.password),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PromjenaPassword(korisnik),
-                          ),
-                        );
-                      },
-                      label: const Text(
-                        "Promjeni password",
-                        style: TextStyle(
-                          fontSize: 22,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(10),
-                        primary: Colors.blue,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
+                    height: 25,
                   ),
                   ElevatedButton(
-                    onPressed: () async{
-                      if (_validationKey.currentState!.validate()) {
-                        korisnikProfilUpdateRequest = KorisnikProfilUpdate(
-                          ime: imeController.text,
-                          prezime: prezimeController.text,
-                          adresa: adresaController.text,
-                          email: emailController.text,
-                          korisnickoIme: korisnickoImeController.text,
-                          password: null,
-                          datumRodjenja: datumRodjenja,
-                          spolId: selectedSpol?.id,
-                          gradId: selectedGrad?.id,
-                        );
-                        await sacuvajProfil().then((value) {
-                          APIService.username = korisnickoImeController.text;
-                          setState(() {
-                            showAlertDialog(context, "Uspjesno !",
-                                "Podaci na vasem profilu su uspjesno sacuvani");
-                          });
-                        });
-                      } else {
-                        showAlertDialog(context, "Neuspjesno !",
-                            "Podaci nisu izmjenjeni, postoje neke greske");
+                    onPressed: () async {
+                      if(selectedSpol != null || selectedGrad != null){
+                        if(passwordController.text == potvrdaPasswordaController.text){
+                          if (_validationKey.currentState!.validate()) {
+                            korisnik = KorisnikRegistracija(
+                              ime: imeController.text,
+                              prezime: prezimeController.text,
+                              adresa: adresaController.text,
+                              email: emailController.text,
+                              korisnickoIme: korisnickoImeController.text,
+                              password: passwordController.text,
+                              potvrdaPassword: potvrdaPasswordaController.text,
+                              datumRodjenja: datumRodjenja,
+                              spolId: selectedSpol?.id,
+                              gradId: selectedGrad?.id,
+                              slika: null,
+                            );
+                            await registrujKorisnika().then((value) {
+                              setState(() {
+                                showAlertDialog(context, "Uspjesno !",
+                                    "Uspjesno ste registrovani, sada se mozete logirati");
+                              });
+                            });
+                          } else {
+                            showAlertDialog(
+                                context, "Neuspjesno !", "Postoje neke greske");
+                          }
+                        }else{
+                          showAlertDialog(context, "Greska", "Passwordi se ne poklapaju");
+                        }
+                      }else {
+                        showAlertDialog(context, "Greska", "Niste oznacili grad ili spol");
                       }
                     },
                     child: const Text(
@@ -287,7 +233,7 @@ class _ProfilState extends State<Profil> {
                     ),
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 35,
                   ),
                 ],
               ),
@@ -298,13 +244,13 @@ class _ProfilState extends State<Profil> {
     );
   }
 
-  Widget textFormField(naziv, korisnik, controller, validirajPolje) {
+  Widget textFormField(naziv, controller, validirajPolje) {
     return Container(
       margin: const EdgeInsets.only(right: 50, left: 50),
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         /* autovalidate is disabled */
-        controller: controller..text = korisnik,
+        controller: controller,
         inputFormatters: [
           FilteringTextInputFormatter.deny(RegExp(r"\s\s")),
           FilteringTextInputFormatter.deny(RegExp(
@@ -377,8 +323,7 @@ class _ProfilState extends State<Profil> {
   Widget spoloviDropdown() {
     return FutureBuilder<List<Spol>?>(
         future: getSpolovi(selectedSpol),
-        builder:
-            (BuildContext context, AsyncSnapshot<List<Spol>?> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<Spol>?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: Text('Loading...'),
@@ -395,6 +340,7 @@ class _ProfilState extends State<Profil> {
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                   ),
+                  hint: const Text("Izaberite spol"),
                   isExpanded: true,
                   items: items,
                   onChanged: (newVal) {
@@ -414,8 +360,7 @@ class _ProfilState extends State<Profil> {
   Widget gradoviDropdown() {
     return FutureBuilder<List<Grad>?>(
         future: getGradovi(selectedGrad),
-        builder:
-            (BuildContext context, AsyncSnapshot<List<Grad>?> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<Grad>?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: Text('Loading...'),
@@ -432,6 +377,7 @@ class _ProfilState extends State<Profil> {
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                   ),
+                  hint: const Text("Izaberite grad"),
                   isExpanded: true,
                   items: itemsGradovi,
                   onChanged: (newVal) {
@@ -448,7 +394,7 @@ class _ProfilState extends State<Profil> {
         });
   }
 
-  Widget izmjeniDatumRodjenja(korisnik) {
+  Widget izmjeniDatumRodjenja() {
     return ElevatedButton.icon(
       icon: const Icon(Icons.date_range),
       onPressed: () {
@@ -458,7 +404,7 @@ class _ProfilState extends State<Profil> {
             maxTime: DateTime.now(),
             onChanged: (date) {}, onConfirm: (date) {
           datumRodjenja = date;
-        }, currentTime: korisnik.datumRodjenja, locale: LocaleType.en);
+        }, currentTime: DateTime.now(), locale: LocaleType.en);
       },
       label: const Text(
         "Datum rodjenja",

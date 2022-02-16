@@ -12,7 +12,7 @@ namespace PetShop.Controllers
 {
     public class KorisnikController : BaseCRUDController<Model.Korisnik, KorisnikSearchObject, KorisnikInsertRequest, KorisnikUpdateRequest>
     {
-        protected new readonly IKorisnikService Service;
+        protected readonly IKorisnikService Service;
         public KorisnikController(IKorisnikService service) : base(service)
         {
             Service = service;
@@ -32,6 +32,12 @@ namespace PetShop.Controllers
             int seperatorIndex = usernamePassword.IndexOf(':');
 
             return Service.Login(usernamePassword.Substring(0, seperatorIndex), usernamePassword[(seperatorIndex + 1)..]);
+        }
+        
+        [HttpPost("registracija")]
+        public virtual Task<Model.Korisnik> Registracija(KorisnikInsertRequest request)
+        {
+            return Service.Registracija(request);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PetShop.Services;
 using System;
 using System.Collections.Generic;
@@ -15,18 +16,21 @@ namespace PetShop.Controllers
             _crudService = service;
         }
 
+        [Authorize]
         [HttpPost]
         public T Insert([FromBody] TInsert request)
         {
             return _crudService.Insert(request);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public T Update(int id, [FromBody] TUpdate request)
         {
             return _crudService.Update(id, request);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public T Delete(int id)
         {

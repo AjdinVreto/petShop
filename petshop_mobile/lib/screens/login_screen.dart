@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:petshop_mobile/models/Narudzba.dart';
 import 'package:petshop_mobile/screens/proizvodi_screen.dart';
+import 'package:petshop_mobile/screens/registracija_screen.dart';
 
 import '../services/APIService.dart';
 
@@ -31,17 +32,23 @@ class _LoginState extends State<Login> {
     narudzbeList = narudzbe?.map((i) => Narudzba.fromJson(i)).toList();
   }
 
-  Future<void> kreirajNarudzbu() async{
+  Future<void> kreirajNarudzbu() async {
     narudzbeList.forEach((item) {
-      if(item.korisnikId == APIService.korisnikId){
+      if (item.korisnikId == APIService.korisnikId) {
         narudzbaPostoji = true;
         APIService.narudzbaId = item.id;
-      };
+      }
+      ;
     });
 
-    if(!narudzbaPostoji){
+    if (!narudzbaPostoji) {
       var id = narudzbeList.length + 1;
-      narudzbaRequest = Narudzba(id: id, aktivna: true, zavrsena: false, datum: DateTime.now(), korisnikId: APIService.korisnikId);
+      narudzbaRequest = Narudzba(
+          id: id,
+          aktivna: true,
+          zavrsena: false,
+          datum: DateTime.now(),
+          korisnikId: APIService.korisnikId);
       await APIService.Post("Narudzba", json.encode(narudzbaRequest?.toJson()));
       APIService.narudzbaId = id;
     }
@@ -108,7 +115,7 @@ class _LoginState extends State<Login> {
                     Navigator.of(context)
                         .pushReplacementNamed(Proizvodi.routeName);
                   } else {
-                    print("Pogresni login podaci");
+                    showAlertDialog(context, "Greska", "Login podaci nisu tacni");
                   }
                 },
                 child: const Padding(
@@ -121,11 +128,64 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
-              )
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Registracija(),
+                    ),
+                  );
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    "Registruj se",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
   }
+  showAlertDialog(BuildContext context, title, info) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: const Text("U redu"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(title),
+      content: Text(info),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
 }
