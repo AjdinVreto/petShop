@@ -38,7 +38,7 @@ class _KomentariState extends State<Komentari> {
     }).toList();
   }
 
-  Future<void> obrisiKomentar(komentarId) async{
+  Future<void> obrisiKomentar(komentarId) async {
     await APIService.Delete("Komentar", komentarId);
   }
 
@@ -129,6 +129,9 @@ class _KomentariState extends State<Komentari> {
                   Text(
                     "Komentari ostalih korisnika",
                     style: TextStyle(fontSize: 16),
+                  ),
+                  Center(
+                    child: Icon(Icons.arrow_downward),
                   ),
                   SizedBox(
                     height: 25,
@@ -302,9 +305,7 @@ class _KomentariState extends State<Komentari> {
                         ? IconButton(
                             onPressed: () async {
                               await obrisiKomentar(komentar.id).then((value) {
-                                setState(() {
-
-                                });
+                                setState(() {});
                               });
                             },
                             icon: Icon(Icons.delete),
@@ -320,7 +321,14 @@ class _KomentariState extends State<Komentari> {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: 5,
+          ),
+          Divider(
+            thickness: 1,
+            color: Colors.red,
+          ),
+          SizedBox(
+            height: 5,
           ),
         ],
       ),

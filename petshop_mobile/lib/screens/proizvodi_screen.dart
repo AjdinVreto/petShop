@@ -32,10 +32,8 @@ class _ProizvodiState extends State<Proizvodi> {
 
   bool proizvodUKorpi = false;
 
-
-  Future<List<Proizvod>?> GetProizvodi(
-      Kategorija? selectedItemKategorija, Proizvodjac? selectedItemProizvodjac) async {
-
+  Future<List<Proizvod>?> GetProizvodi(Kategorija? selectedItemKategorija,
+      Proizvodjac? selectedItemProizvodjac) async {
     Map<String, String>? queryParams = null;
 
     if (selectedItemKategorija != null &&
@@ -53,7 +51,8 @@ class _ProizvodiState extends State<Proizvodi> {
         "naziv": pretragaController.text,
         "proizvodjacid": selectedItemProizvodjac.id.toString()
       };
-    } else if (selectedItemKategorija != null && selectedItemKategorija.id != 0) {
+    } else if (selectedItemKategorija != null &&
+        selectedItemKategorija.id != 0) {
       queryParams = {
         "naziv": pretragaController.text,
         "kategorijaid": selectedItemKategorija.id.toString()
@@ -72,7 +71,7 @@ class _ProizvodiState extends State<Proizvodi> {
   Future<List<Kategorija>?> GetKategorije(Kategorija? _selectedItem) async {
     var Kategorije = await APIService.Get('Kategorija', null);
     var kategorijeList =
-    Kategorije?.map((i) => Kategorija.fromJson(i)).toList();
+        Kategorije?.map((i) => Kategorija.fromJson(i)).toList();
 
     items = kategorijeList!.map((item) {
       return DropdownMenuItem<Kategorija>(
@@ -95,7 +94,7 @@ class _ProizvodiState extends State<Proizvodi> {
   Future<List<Proizvodjac>?> GetProizvodjaci(Proizvodjac? _selectedItem) async {
     var Proizvodjaci = await APIService.Get('Proizvodjac', null);
     var proizvodjaciList =
-    Proizvodjaci?.map((i) => Proizvodjac.fromJson(i)).toList();
+        Proizvodjaci?.map((i) => Proizvodjac.fromJson(i)).toList();
 
     itemsProizvodjaci = proizvodjaciList!.map((item) {
       return DropdownMenuItem<Proizvodjac>(
@@ -133,7 +132,8 @@ class _ProizvodiState extends State<Proizvodi> {
     var korpaLista = korpa?.map((i) => NarudzbaProizvod.fromJson(i)).toList();
 
     korpaLista?.forEach((element) {
-      if(APIService.narudzbaId == element.narudzbaId && element.proizvodId == proizvodId){
+      if (APIService.narudzbaId == element.narudzbaId &&
+          element.proizvodId == proizvodId) {
         proizvodUKorpi = true;
       }
     });
@@ -144,9 +144,7 @@ class _ProizvodiState extends State<Proizvodi> {
     return Scaffold(
       appBar: AppBar(
         title: customSearchBar,
-        actions: [
-          SearchBar()
-        ],
+        actions: [SearchBar()],
       ),
       drawer: AppDrawer(),
       body: bodyWidget(),
@@ -283,7 +281,10 @@ class _ProizvodiState extends State<Proizvodi> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Container(
-        color: Colors.indigoAccent,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.red),
+          color: Colors.white70,
+        ),
         child: Column(
           children: [
             GestureDetector(
@@ -331,12 +332,12 @@ class _ProizvodiState extends State<Proizvodi> {
             Expanded(
               child: Container(
                 color: Colors.orangeAccent,
-                child: Container(
-                  margin: const EdgeInsets.only(left: 6, right: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Chip(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 4),
+                      child: Chip(
                         label: Text(
                           proizvod.cijena.toStringAsFixed(2) + " KM",
                           style: const TextStyle(
@@ -346,7 +347,10 @@ class _ProizvodiState extends State<Proizvodi> {
                         ),
                         backgroundColor: Colors.purple,
                       ),
-                      CircleAvatar(
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(right: 4),
+                      child: CircleAvatar(
                         backgroundColor: Colors.purple,
                         radius: 25,
                         child: IconButton(
@@ -354,23 +358,26 @@ class _ProizvodiState extends State<Proizvodi> {
                           color: Colors.white,
                           icon: const Icon(Icons.shopping_cart),
                           onPressed: () async {
-                            await ProizvodProvjera(proizvod.id).then((value) async {
-                              if(proizvodUKorpi) {
-                                showAlertDialog(context, "NEUSPJESNO !", "Proizvod se vec nalazi u vasoj korpi");
-                              }else {
+                            await ProizvodProvjera(proizvod.id)
+                                .then((value) async {
+                              if (proizvodUKorpi) {
+                                showAlertDialog(context, "NEUSPJESNO !",
+                                    "Proizvod se vec nalazi u vasoj korpi");
+                              } else {
                                 await DodajKorpa(proizvod).then((value) {
-                                  showAlertDialog(context, "USPJESNO !", "Odabrani proizvod je uspjesno dodan u korpu");
+                                  showAlertDialog(context, "USPJESNO !",
+                                      "Odabrani proizvod je uspjesno dodan u korpu");
                                 });
                               }
                             });
                           },
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -415,8 +422,7 @@ class _ProizvodiState extends State<Proizvodi> {
               padding: const EdgeInsets.only(bottom: 5),
               child: TextField(
                 onChanged: (value) async {
-                  await GetProizvodi(
-                      _selectedKategorija, _selectedProizvodjac)
+                  await GetProizvodi(_selectedKategorija, _selectedProizvodjac)
                       .then((value) {
                     setState(() {});
                   });

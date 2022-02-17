@@ -106,7 +106,6 @@ print(body);
     final String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
 
-    print(baseUrl);
     final response = await http.delete(
       Uri.parse(baseUrl),
       headers: {HttpHeaders.authorizationHeader: basicAuth},
