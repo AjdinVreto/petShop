@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petshop_mobile/screens/komentar_screen.dart';
 import 'package:petshop_mobile/screens/kontakt_screen.dart';
 
 import 'package:petshop_mobile/screens/korpa_screen.dart';

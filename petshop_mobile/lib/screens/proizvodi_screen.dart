@@ -338,7 +338,7 @@ class _ProizvodiState extends State<Proizvodi> {
                     children: [
                       Chip(
                         label: Text(
-                          proizvod.cijena.toString() + " KM",
+                          proizvod.cijena.toStringAsFixed(2) + " KM",
                           style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,

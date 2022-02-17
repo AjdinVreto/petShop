@@ -1,0 +1,38 @@
+import 'Korisnik.dart';
+
+class Komentar {
+  final int? id;
+  final String? tekst;
+  final DateTime? datum;
+  final int? korisnikId;
+  final int? proizvodId;
+  final Korisnik? korisnik;
+
+  Komentar({
+    required this.id,
+    required this.tekst,
+    required this.datum,
+    required this.korisnikId,
+    required this.proizvodId,
+    required this.korisnik,
+  });
+
+  factory Komentar.fromJson(Map<String, dynamic> json) {
+    return Komentar(
+      id: int.parse(json["id"].toString()),
+      tekst: json["tekst"],
+      datum: DateTime.tryParse(json['datum']),
+      korisnikId: json["korisnikId"],
+      proizvodId: json["proizvodId"],
+      korisnik: Korisnik.fromJson(json["korisnik"]),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "tekst": tekst,
+        "datum": datum == null ? null : datum!.toIso8601String(),
+        "proizvodId": proizvodId,
+        "korisnikId": korisnikId,
+      };
+}

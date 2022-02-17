@@ -28,8 +28,7 @@ namespace PetShop.WinUI.Ostalo
         {
             KomentarSearchObject request = new KomentarSearchObject()
             {
-                IncludeKorisnik = true,
-                IncludeProizvod = true
+
             };
 
             dgvKomentari.DataSource = await _serviceKomentari.Get<List<Model.Komentar>>(request);

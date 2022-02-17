@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PetShop.Services
 {
-    public interface IKomentarService : IReadService<Model.Komentar, KomentarSearchObject>
+    public interface IKomentarService : ICRUDService<Model.Komentar, KomentarSearchObject, KomentarInsertRequest, KomentarUpdateRequest>
     {
     }
 }

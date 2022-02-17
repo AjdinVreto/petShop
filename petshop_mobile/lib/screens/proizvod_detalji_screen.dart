@@ -8,6 +8,8 @@ import 'package:petshop_mobile/models/Recenzija.dart';
 import 'package:petshop_mobile/models/Requests/RecenzijaUpdate.dart';
 import 'package:petshop_mobile/services/APIService.dart';
 
+import 'komentar_screen.dart';
+
 class ProizvodDetalji extends StatefulWidget {
   final proizvod;
 
@@ -28,6 +30,8 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
   int brojac = 0;
 
   late int recenzijaId;
+
+  bool proizvodUKorpi = false;
 
   Future<List<Recenzija>?> getRecenzije() async {
     var recenzije = await APIService.Get("Recenzija", null);
@@ -68,6 +72,19 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
   Future<void> updateRecenzija() async {
     await APIService.Update("Recenzija", recenzijaId,
         json.encode(recenzijaUpdateRequest?.toJson()));
+  }
+
+  Future<void> ProizvodProvjera(proizvodId) async {
+    proizvodUKorpi = false;
+    var korpa = await APIService.Get("NarudzbaProizvod", null);
+
+    var korpaLista = korpa?.map((i) => NarudzbaProizvod.fromJson(i)).toList();
+
+    korpaLista?.forEach((element) {
+      if(APIService.narudzbaId == element.narudzbaId && element.proizvodId == proizvodId){
+        proizvodUKorpi = true;
+      }
+    });
   }
 
   @override
@@ -133,7 +150,7 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
                             padding: const EdgeInsets.all(14),
                             backgroundColor: Colors.purple,
                             label: Text(
-                              widget.proizvod.cijena.toString() + " KM",
+                              widget.proizvod.cijena.toStringAsFixed(2) + " KM",
                               style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
@@ -173,7 +190,14 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
                           padding: const EdgeInsets.all(12),
                           primary: Colors.blue,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Komentari(widget.proizvod),
+                            ),
+                          );
+                        },
                         child: const Text(
                           "Komentari",
                           style: TextStyle(fontSize: 20),
@@ -213,9 +237,15 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
             proizvodId: widget.proizvod.id,
             kolicina: 1,
             proizvod: widget.proizvod);
-        await DodajKorpa().then((value) {
-          showAlertDialog(
-              context, "Uspjesno", "Proizvod uspjesno dodan u korpu");
+
+        await ProizvodProvjera(widget.proizvod.id).then((value) async {
+          if(proizvodUKorpi) {
+            showAlertDialog(context, "NEUSPJESNO !", "Proizvod se vec nalazi u vasoj korpi");
+          }else {
+            await DodajKorpa().then((value) {
+              showAlertDialog(context, "USPJESNO !", "Odabrani proizvod je uspjesno dodan u korpu");
+            });
+          }
         });
       },
       child: const Text.rich(
@@ -313,8 +343,8 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: const Text("My title"),
-      content: const Text("This is my message."),
+      title: Text(title),
+      content: Text(info),
       actions: [
         okButton,
       ],

@@ -126,7 +126,7 @@ class _KorpaState extends State<Korpa> {
                       Chip(
                         backgroundColor: Colors.purple,
                         label: Text(
-                          korpaItem.proizvod.cijena.toString() + " KM",
+                          korpaItem.proizvod.cijena.toStringAsFixed(2) + " KM",
                           style: const TextStyle(
                               color: Colors.white, fontSize: 17),
                           maxLines: 2,
@@ -189,7 +189,7 @@ class _KorpaState extends State<Korpa> {
         children: [
           Chip(
             label: Text(
-              "Ukupno za platiti : " + ukCijena.toString() + " KM",
+              "Ukupno za platiti : " + ukCijena.toStringAsFixed(2) + " KM",
               style: const TextStyle(
                   fontSize: 19,
                   fontWeight: FontWeight.bold,

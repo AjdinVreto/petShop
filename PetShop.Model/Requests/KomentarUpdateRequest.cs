@@ -4,7 +4,8 @@ using System.Text;
 
 namespace PetShop.Model.Requests
 {
-    public class KomentarSearchObject
+    public class KomentarUpdateRequest
     {
+        public string Tekst { get; set; }
     }
 }

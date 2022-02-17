@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PetShop.Services
 {
-    public class KomentarService : BaseReadService<Model.Komentar, Database.Komentar, KomentarSearchObject>, IKomentarService
+    public class KomentarService : BaseCRUDService<Model.Komentar, Database.Komentar, KomentarSearchObject, KomentarInsertRequest, KomentarUpdateRequest>, IKomentarService
     {
         public KomentarService(PetShopContext context, IMapper mapper) : base(context, mapper)
         {
@@ -20,17 +20,22 @@ namespace PetShop.Services
         {
             var entity = ctx.Set<Database.Komentar>().AsQueryable();
 
-            if(search?.IncludeKorisnik == true)
-            {
-                entity = entity.Include(x => x.Korisnik);
-            }
+            entity = entity.Include(x => x.Korisnik).Include(x => x.Proizvod);
 
-            if (search?.IncludeProizvod == true)
-            {
-                entity = entity.Include(x => x.Proizvod);
-            }
+            var list = entity.ToList();
 
-            return _mapper.Map<List<Model.Komentar>>(entity);
+            return _mapper.Map<List<Model.Komentar>>(list);
+        }
+
+        public override Model.Komentar Insert(KomentarInsertRequest request)
+        {
+            var entity = _mapper.Map<Database.Komentar>(request);
+
+            ctx.Add(entity);
+
+            ctx.SaveChanges();
+
+            return _mapper.Map<Model.Komentar>(entity);
         }
     }
 }
