@@ -59,7 +59,7 @@ class _KomentariState extends State<Komentari> {
     komentarController.clear();
     return Scaffold(
       appBar: AppBar(
-        title: Text("Komentari"),
+        title: const Text("Komentari"),
       ),
       body: bodyWidget(),
     );
@@ -70,7 +70,7 @@ class _KomentariState extends State<Komentari> {
       child: Center(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Form(
@@ -79,7 +79,7 @@ class _KomentariState extends State<Komentari> {
                 children: [
                   textFormField("Upisite komentar (max 150 karaktera)",
                       komentarController, validateKomentar, 3),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   ElevatedButton(
@@ -115,25 +115,25 @@ class _KomentariState extends State<Komentari> {
                       padding: const EdgeInsets.all(12),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Divider(
+                  const Divider(
                     height: 3,
                     thickness: 0.5,
                     color: Colors.red,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     "Komentari ostalih korisnika",
                     style: TextStyle(fontSize: 16),
                   ),
-                  Center(
+                  const Center(
                     child: Icon(Icons.arrow_downward),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   ucitajKomentare(),
@@ -241,7 +241,7 @@ class _KomentariState extends State<Komentari> {
             return ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              physics: ScrollPhysics(),
+              physics: const ScrollPhysics(),
               itemBuilder: (ctx, i) => KomentarWidget(snapshot.data![i]),
               itemCount: snapshot.data?.length,
             );
@@ -258,8 +258,8 @@ class _KomentariState extends State<Komentari> {
           Container(
             height: 150,
             width: double.infinity,
-            margin: EdgeInsets.only(right: 15, left: 15),
-            padding: EdgeInsets.all(5),
+            margin: const EdgeInsets.only(right: 15, left: 15),
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Colors.purple,
@@ -269,13 +269,13 @@ class _KomentariState extends State<Komentari> {
               children: [
                 Text(
                   komentar.tekst,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.white,
                   ),
                   maxLines: 4,
                 ),
-                Divider(
+                const Divider(
                   thickness: 0.7,
                   color: Colors.white,
                 ),
@@ -283,22 +283,20 @@ class _KomentariState extends State<Komentari> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 5, bottom: 5),
+                      margin: const EdgeInsets.only(left: 5, bottom: 5),
                       child: Text(
                         komentar.korisnik.ime + " " + komentar.korisnik.prezime,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           color: Colors.white,
                         ),
                       ),
                     ),
-                    Container(
-                      child: Text(
-                        DateFormat("dd/MM/yyyy").format(komentar.datum),
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
+                    Text(
+                      DateFormat("dd/MM/yyyy").format(komentar.datum),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
                       ),
                     ),
                     komentar.korisnikId == APIService.korisnikId
@@ -320,14 +318,14 @@ class _KomentariState extends State<Komentari> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
-          Divider(
+          const Divider(
             thickness: 1,
             color: Colors.red,
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
         ],
