@@ -79,9 +79,9 @@ namespace PetShop
             services.AddScoped<ISpolService, SpolService>();
             services.AddScoped<INarudzbaProizvodService, NarudzbaProizvodService>();
             services.AddScoped<IRecenzijaService, RecenzijaService>();
+            services.AddScoped<IPopustKuponService, PopustKuponService>();
             services.AddScoped<IReadService<Model.Rola, object>, BaseReadService<Model.Rola, Database.Rola, object>>();
             services.AddScoped<IReadService<Model.Drzava, object>, BaseReadService<Model.Drzava, Database.Drzava, object>>();
-            services.AddScoped<IReadService<Model.PopustKupon, object>, BaseReadService<Model.PopustKupon, Database.PopustKupon, object>>();
 
             services.AddAuthentication("BasicAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);

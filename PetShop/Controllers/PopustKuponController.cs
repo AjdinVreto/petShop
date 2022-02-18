@@ -1,4 +1,4 @@
-﻿using PetShop.Model;
+﻿using PetShop.Model.Requests;
 using PetShop.Services;
 using System;
 using System.Collections.Generic;
@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace PetShop.Controllers
 {
-    public class PopustKuponController : BaseReadController<Model.PopustKupon, object>
+    public class PopustKuponController : BaseCRUDController<Model.PopustKupon, PopustKuponSearchRequest, PopustKuponInsertRequest, PopustKuponUpdateRequest>
     {
-        public PopustKuponController(IReadService<PopustKupon, object> service) : base(service)
+        public PopustKuponController(IPopustKuponService service) : base(service)
         {
+
         }
     }
 }

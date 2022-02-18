@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:petshop_mobile/models/NarudzbaProizvod.dart';
 import 'package:petshop_mobile/models/Requests/NarudzbaProizvodUpdate.dart';
+import 'package:petshop_mobile/screens/placanje_screen.dart';
 import 'package:petshop_mobile/services/APIService.dart';
 import 'package:petshop_mobile/widgets/app_drawer.dart';
 
@@ -17,12 +18,13 @@ class _KorpaState extends State<Korpa> {
   late double cijena;
   late double ukCijena;
   late NarudzbaProizvodUpdate? narudzbaProizvodRequest;
+  bool korpaPrazna = false;
 
   Future<List<NarudzbaProizvod>?> getData() async {
     var korpaProizvodi = await APIService.Get("NarudzbaProizvod", null);
 
     var korpaProizvodiList =
-    korpaProizvodi?.map((i) => NarudzbaProizvod.fromJson(i)).toList();
+        korpaProizvodi?.map((i) => NarudzbaProizvod.fromJson(i)).toList();
 
     return korpaProizvodiList?.where((element) {
       cijena = element.proizvod?.cijena as double;
@@ -46,6 +48,7 @@ class _KorpaState extends State<Korpa> {
     cijena = 0.0;
     ukCijena = 0.0;
     narudzbaProizvodRequest = null;
+    korpaPrazna = false;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Korpa"),
@@ -70,6 +73,9 @@ class _KorpaState extends State<Korpa> {
               child: Text("${snapshot.error}"),
             );
           } else {
+            if(snapshot.data?.length == 0){
+              korpaPrazna = true;
+            }
             return SingleChildScrollView(
               child: Column(
                 children: [
@@ -81,7 +87,11 @@ class _KorpaState extends State<Korpa> {
                     itemCount: snapshot.data?.length,
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 40,
+                  ),
+                  Divider(
+                    thickness: 1,
+                    color: Colors.red,
                   ),
                   narudzbaInfo(),
                 ],
@@ -159,9 +169,7 @@ class _KorpaState extends State<Korpa> {
                       IconButton(
                         onPressed: () async {
                           await obrisiProizvod(korpaItem.id).then((value) {
-                            setState(() {
-
-                            });
+                            setState(() {});
                           });
                         },
                         icon: const Icon(
@@ -191,7 +199,7 @@ class _KorpaState extends State<Korpa> {
             label: Text(
               "Ukupno za platiti : " + ukCijena.toStringAsFixed(2) + " KM",
               style: const TextStyle(
-                  fontSize: 19,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
@@ -202,9 +210,20 @@ class _KorpaState extends State<Korpa> {
             height: 10,
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              if(!korpaPrazna){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Placanje(ukCijena),
+                  ),
+                );
+              }else{
+                showAlertDialog(context, "NEUSPJESNO !", "Nemate nista u korpi");
+              }
+            },
             child: const Text(
-              "Izvrsi narudzbu",
+              "Procesiraj narudzbu",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -256,7 +275,7 @@ class _KorpaState extends State<Korpa> {
             color: Colors.black87,
           ),
           backgroundColor: Colors.white,
-          onPressed: () async{
+          onPressed: () async {
             narudzbaProizvodRequest =
                 NarudzbaProizvodUpdate(kolicina: kolicina - 1);
             await izmjeniKolicinu(id).then((value) {
@@ -265,6 +284,33 @@ class _KorpaState extends State<Korpa> {
           },
         ),
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context, title, info) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: const Text("U redu"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(title),
+      content: Text(info),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

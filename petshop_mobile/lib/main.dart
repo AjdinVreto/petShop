@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:petshop_mobile/screens/kontakt_screen.dart';
 
 import 'package:petshop_mobile/screens/korpa_screen.dart';
@@ -9,6 +10,7 @@ import 'package:petshop_mobile/screens/registracija_screen.dart';
 import './screens/login_screen.dart';
 
 void main() {
+  Stripe.publishableKey = "pk_test_51KUEEACcGdmoO9FeLpguyRvLnTXctNspmr1r05WDPgeVBxaoIFUPKswwcNf9SzCnV9WVBK7OZ5uAWnWGulUu1ksV00UspYV3LN";
   runApp(const MyApp());
 }
 
