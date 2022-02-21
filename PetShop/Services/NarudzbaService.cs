@@ -24,9 +24,11 @@ namespace PetShop.Services
         {
             var entity = ctx.Set<Database.Narudzba>().AsQueryable();
 
-            if (search?.IncludeKorisnik == true)
+            entity = entity.Include(x => x.Korisnik);
+
+            if (search.KorisnikId.HasValue)
             {
-                entity = entity.Include(x => x.Korisnik);
+                entity = entity.Where(x => x.KorisnikId == search.KorisnikId);
             }
 
             var list = entity.ToList();

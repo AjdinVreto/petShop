@@ -452,7 +452,7 @@ namespace PetShop.Migrations
                     b.ToTable("Spol");
                 });
 
-            modelBuilder.Entity("PetShop.Database.Transkacija", b =>
+            modelBuilder.Entity("PetShop.Database.Transakcija", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -472,8 +472,12 @@ namespace PetShop.Migrations
                     b.Property<int>("NarudzbaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PopustKuponId")
+                    b.Property<int?>("PopustKuponId")
                         .HasColumnType("int");
+
+                    b.Property<string>("StripePaymentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -481,7 +485,7 @@ namespace PetShop.Migrations
 
                     b.HasIndex("PopustKuponId");
 
-                    b.ToTable("Transkacija");
+                    b.ToTable("Transakcija");
                 });
 
             modelBuilder.Entity("PetShop.Database.Uposlenik", b =>
@@ -692,19 +696,18 @@ namespace PetShop.Migrations
                     b.Navigation("Proizvod");
                 });
 
-            modelBuilder.Entity("PetShop.Database.Transkacija", b =>
+            modelBuilder.Entity("PetShop.Database.Transakcija", b =>
                 {
                     b.HasOne("PetShop.Database.Narudzba", "Narudzba")
-                        .WithMany("Transkacijas")
+                        .WithMany("Transakcijas")
                         .HasForeignKey("NarudzbaId")
                         .HasConstraintName("FK_Transakcija_Narudzba")
                         .IsRequired();
 
                     b.HasOne("PetShop.Database.PopustKupon", "PopustKupon")
-                        .WithMany("Transkacijas")
+                        .WithMany("Transakcijas")
                         .HasForeignKey("PopustKuponId")
-                        .HasConstraintName("FK_Transkacija_PopustKupon")
-                        .IsRequired();
+                        .HasConstraintName("FK_Transakcija_PopustKupon");
 
                     b.Navigation("Narudzba");
 
@@ -770,12 +773,12 @@ namespace PetShop.Migrations
                 {
                     b.Navigation("NarudzbaProizvods");
 
-                    b.Navigation("Transkacijas");
+                    b.Navigation("Transakcijas");
                 });
 
             modelBuilder.Entity("PetShop.Database.PopustKupon", b =>
                 {
-                    b.Navigation("Transkacijas");
+                    b.Navigation("Transakcijas");
                 });
 
             modelBuilder.Entity("PetShop.Database.Poslovnica", b =>

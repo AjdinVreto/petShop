@@ -1,13 +1,12 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:petshop_mobile/models/NarudzbaProizvod.dart';
-
 import 'package:petshop_mobile/models/Proizvod.dart';
 import 'package:petshop_mobile/models/Kategorija.dart';
 import 'package:petshop_mobile/models/Proizvodjac.dart';
 import 'package:petshop_mobile/screens/proizvod_detalji_screen.dart';
 import 'package:petshop_mobile/services/APIService.dart';
+import 'package:petshop_mobile/widgets/alert_dialog.dart';
 import 'package:petshop_mobile/widgets/app_drawer.dart';
 
 class Proizvodi extends StatefulWidget {
@@ -127,13 +126,16 @@ class _ProizvodiState extends State<Proizvodi> {
 
   Future<void> ProizvodProvjera(proizvodId) async {
     proizvodUKorpi = false;
-    var korpa = await APIService.Get("NarudzbaProizvod", null);
+
+    Map<String, String>? queryParams = null;
+    queryParams = {"narudzbaId": APIService.narudzbaId.toString()};
+
+    var korpa = await APIService.Get("NarudzbaProizvod", queryParams);
 
     var korpaLista = korpa?.map((i) => NarudzbaProizvod.fromJson(i)).toList();
 
     korpaLista?.forEach((element) {
-      if (APIService.narudzbaId == element.narudzbaId &&
-          element.proizvodId == proizvodId) {
+      if (element.proizvodId == proizvodId) {
         proizvodUKorpi = true;
       }
     });
@@ -157,12 +159,12 @@ class _ProizvodiState extends State<Proizvodi> {
       builder: (BuildContext context, AsyncSnapshot<List<Proizvod>?> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: Text("Loading..."),
+            child: CircularProgressIndicator(color: Colors.orange,),
           );
         } else {
           if (snapshot.hasError) {
             return Center(
-              child: Text("${snapshot.error}"),
+              child: Text("Greska na serveru, pokusajte ponovo"),
             );
           } else {
             return Column(
@@ -204,12 +206,12 @@ class _ProizvodiState extends State<Proizvodi> {
             (BuildContext context, AsyncSnapshot<List<Kategorija>?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: Text('Loading...'),
+              child: CircularProgressIndicator(color: Colors.orange,),
             );
           } else {
             if (snapshot.hasError) {
               return Center(
-                child: Text('${snapshot.error}'),
+                child: Text("Greska na serveru, pokusajte ponovo"),
               );
             } else {
               return Padding(
@@ -244,12 +246,12 @@ class _ProizvodiState extends State<Proizvodi> {
             (BuildContext context, AsyncSnapshot<List<Proizvodjac>?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: Text('Loading...'),
+              child: CircularProgressIndicator(color: Colors.orange,),
             );
           } else {
             if (snapshot.hasError) {
               return Center(
-                child: Text('${snapshot.error}'),
+                child: Text("Greska na serveru, pokusajte ponovo"),
               );
             } else {
               return Padding(
@@ -336,7 +338,7 @@ class _ProizvodiState extends State<Proizvodi> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 4),
+                      margin: const EdgeInsets.only(left: 4),
                       child: Chip(
                         label: Text(
                           proizvod.cijena.toStringAsFixed(2) + " KM",
@@ -349,7 +351,7 @@ class _ProizvodiState extends State<Proizvodi> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(right: 4),
+                      margin: const EdgeInsets.only(right: 4),
                       child: CircleAvatar(
                         backgroundColor: Colors.purple,
                         radius: 25,
@@ -361,12 +363,12 @@ class _ProizvodiState extends State<Proizvodi> {
                             await ProizvodProvjera(proizvod.id)
                                 .then((value) async {
                               if (proizvodUKorpi) {
-                                showAlertDialog(context, "NEUSPJESNO !",
-                                    "Proizvod se vec nalazi u vasoj korpi");
+                                ShowAlertDialog.showAlertDialog(context, "NEUSPJESNO !",
+                                    "Proizvod se vec nalazi u vasoj korpi", false);
                               } else {
                                 await DodajKorpa(proizvod).then((value) {
-                                  showAlertDialog(context, "USPJESNO !",
-                                      "Odabrani proizvod je uspjesno dodan u korpu");
+                                  ShowAlertDialog.showAlertDialog(context, "USPJESNO !",
+                                      "Odabrani proizvod je uspjesno dodan u korpu", false);
                                 });
                               }
                             });
@@ -381,33 +383,6 @@ class _ProizvodiState extends State<Proizvodi> {
           ],
         ),
       ),
-    );
-  }
-
-  showAlertDialog(BuildContext context, title, info) {
-    // set up the button
-    Widget okButton = TextButton(
-      child: const Text("OK"),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(title),
-      content: Text(info),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
     );
   }
 

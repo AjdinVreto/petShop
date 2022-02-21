@@ -23,10 +23,9 @@ namespace PetShop.Services
         {
             var entity = ctx.Set<Database.Novost>().AsQueryable();
 
-            if (search?.IncludeKorisnik == true)
-            {
-                entity = entity.Include(x => x.Korisnik);
-            }
+            entity = entity.Include(x => x.Korisnik);
+
+            entity = entity.OrderByDescending(x => x.Id).Take(10);
 
             var list = entity.ToList();
 

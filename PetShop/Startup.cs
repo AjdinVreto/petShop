@@ -80,6 +80,7 @@ namespace PetShop
             services.AddScoped<INarudzbaProizvodService, NarudzbaProizvodService>();
             services.AddScoped<IRecenzijaService, RecenzijaService>();
             services.AddScoped<IPopustKuponService, PopustKuponService>();
+            services.AddScoped<ITransakcijaService, TransakcijaService>();
             services.AddScoped<IReadService<Model.Rola, object>, BaseReadService<Model.Rola, Database.Rola, object>>();
             services.AddScoped<IReadService<Model.Drzava, object>, BaseReadService<Model.Drzava, Database.Drzava, object>>();
 

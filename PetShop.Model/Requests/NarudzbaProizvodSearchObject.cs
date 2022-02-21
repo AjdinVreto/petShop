@@ -6,7 +6,7 @@ namespace PetShop.Model.Requests
 {
     public class NarudzbaProizvodSearchObject
     {
-        public int NarudzbaId { get; set; }
+        public int? NarudzbaId { get; set; }
         public int ProizvodId { get; set; }
         public int Kolicina { get; set; }
     }

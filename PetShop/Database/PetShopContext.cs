@@ -34,17 +34,8 @@ namespace PetShop.Database
         public virtual DbSet<Recenzija> Recenzijas { get; set; }
         public virtual DbSet<Rola> Rolas { get; set; }
         public virtual DbSet<Spol> Spols { get; set; }
-        public virtual DbSet<Transkacija> Transkacijas { get; set; }
+        public virtual DbSet<Transakcija> Transakcijas { get; set; }
         public virtual DbSet<Uposlenik> Uposleniks { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=localhost, 1433;Initial Catalog=PetShop; Trusted_Connection=true;");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -307,9 +298,9 @@ namespace PetShop.Database
                     .HasMaxLength(15);
             });
 
-            modelBuilder.Entity<Transkacija>(entity =>
+            modelBuilder.Entity<Transakcija>(entity =>
             {
-                entity.ToTable("Transkacija");
+                entity.ToTable("Transakcija");
 
                 entity.Property(e => e.Datum).HasColumnType("date");
 
@@ -317,17 +308,18 @@ namespace PetShop.Database
 
                 entity.Property(e => e.NacinPlacanja).IsRequired();
 
+                entity.Property(e => e.StripePaymentId).IsRequired();
+
                 entity.HasOne(d => d.Narudzba)
-                    .WithMany(p => p.Transkacijas)
+                    .WithMany(p => p.Transakcijas)
                     .HasForeignKey(d => d.NarudzbaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Transakcija_Narudzba");
 
                 entity.HasOne(d => d.PopustKupon)
-                    .WithMany(p => p.Transkacijas)
+                    .WithMany(p => p.Transakcijas)
                     .HasForeignKey(d => d.PopustKuponId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Transkacija_PopustKupon");
+                    .HasConstraintName("FK_Transakcija_PopustKupon");
             });
 
             modelBuilder.Entity<Uposlenik>(entity =>

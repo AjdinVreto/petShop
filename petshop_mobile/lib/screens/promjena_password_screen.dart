@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:petshop_mobile/models/Korisnik.dart';
 import 'package:petshop_mobile/models/Requests/KorisnikProfilUpdate.dart';
 import 'package:petshop_mobile/services/APIService.dart';
+import 'package:petshop_mobile/widgets/alert_dialog.dart';
 
 class PromjenaPassword extends StatefulWidget {
   Korisnik? korisnik;
@@ -78,16 +79,16 @@ class _PromjenaPasswordState extends State<PromjenaPassword> {
                   height: 25,
                 ),
                 ElevatedButton(
-                  onPressed: () async{
+                  onPressed: () async {
                     if (stariPasswordController.text != APIService.password) {
-                      showAlertDialog(
-                          context, "NEUSPJESNO !", "Stari password nije tacan");
+                      ShowAlertDialog.showAlertDialog(context, "NEUSPJESNO !",
+                          "Stari password nije tacan", false);
                     } else if (noviPasswordController.text !=
                         potvrdaNovogPasswordaController.text) {
-                      showAlertDialog(
-                          context, "NEUSPJESNO !", "Passwordi se ne poklapaju");
+                      ShowAlertDialog.showAlertDialog(context, "NEUSPJESNO !",
+                          "Passwordi se ne poklapaju", false);
                     } else {
-                      if(_validationKey.currentState!.validate()){
+                      if (_validationKey.currentState!.validate()) {
                         passwordUpdateRequest = KorisnikProfilUpdate(
                             ime: widget.korisnik?.ime,
                             prezime: widget.korisnik?.prezime,
@@ -101,12 +102,16 @@ class _PromjenaPasswordState extends State<PromjenaPassword> {
                         await updatePassword().then((value) {
                           setState(() {
                             APIService.password = noviPasswordController.text;
-                            showAlertDialog(context, "USPJESNO !",
-                                "Vas password je uspjesno izmjenjen");
+                            ShowAlertDialog.showAlertDialog(
+                                context,
+                                "USPJESNO !",
+                                "Vas password je uspjesno izmjenjen",
+                                false);
                           });
                         });
-                      } else{
-                        showAlertDialog(context, "Greska", "Postoje neke greske");
+                      } else {
+                        ShowAlertDialog.showAlertDialog(
+                            context, "Greska", "Postoje neke greske", false);
                       }
                     }
                   },
@@ -203,33 +208,6 @@ class _PromjenaPasswordState extends State<PromjenaPassword> {
           ),
         ),
       ),
-    );
-  }
-
-  showAlertDialog(BuildContext context, title, info) {
-    // set up the button
-    Widget okButton = TextButton(
-      child: const Text("U redu"),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(title),
-      content: Text(info),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
     );
   }
 }

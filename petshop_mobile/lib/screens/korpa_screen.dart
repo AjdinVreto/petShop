@@ -1,10 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:petshop_mobile/models/NarudzbaProizvod.dart';
 import 'package:petshop_mobile/models/Requests/NarudzbaProizvodUpdate.dart';
 import 'package:petshop_mobile/screens/placanje_screen.dart';
 import 'package:petshop_mobile/services/APIService.dart';
+import 'package:petshop_mobile/widgets/alert_dialog.dart';
 import 'package:petshop_mobile/widgets/app_drawer.dart';
 
 class Korpa extends StatefulWidget {
@@ -21,17 +21,20 @@ class _KorpaState extends State<Korpa> {
   bool korpaPrazna = false;
 
   Future<List<NarudzbaProizvod>?> getData() async {
-    var korpaProizvodi = await APIService.Get("NarudzbaProizvod", null);
+    Map<String, String>? queryParams = null;
+    queryParams = {"narudzbaId": APIService.narudzbaId.toString()};
+
+    var korpaProizvodi = await APIService.Get("NarudzbaProizvod", queryParams);
 
     var korpaProizvodiList =
         korpaProizvodi?.map((i) => NarudzbaProizvod.fromJson(i)).toList();
 
-    return korpaProizvodiList?.where((element) {
+    korpaProizvodiList?.forEach((element) {
       cijena = element.proizvod?.cijena as double;
       ukCijena += cijena * element.kolicina;
+    });
 
-      return element.narudzbaId == APIService.narudzbaId;
-    }).toList();
+    return korpaProizvodiList;
   }
 
   Future<void> obrisiProizvod(id) async {
@@ -65,15 +68,15 @@ class _KorpaState extends State<Korpa> {
           AsyncSnapshot<List<NarudzbaProizvod>?> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: Text("Loading..."),
+            child: CircularProgressIndicator(color: Colors.orange,),
           );
         } else {
           if (snapshot.hasError) {
             return Center(
-              child: Text("${snapshot.error}"),
+              child: Text("Greska na serveru, pokusajte ponovo"),
             );
           } else {
-            if(snapshot.data?.length == 0){
+            if (snapshot.data?.length == 0) {
               korpaPrazna = true;
             }
             return SingleChildScrollView(
@@ -89,7 +92,7 @@ class _KorpaState extends State<Korpa> {
                   const SizedBox(
                     height: 40,
                   ),
-                  Divider(
+                  const Divider(
                     thickness: 1,
                     color: Colors.red,
                   ),
@@ -211,15 +214,16 @@ class _KorpaState extends State<Korpa> {
           ),
           ElevatedButton(
             onPressed: () {
-              if(!korpaPrazna){
+              if (!korpaPrazna) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => Placanje(ukCijena),
                   ),
                 );
-              }else{
-                showAlertDialog(context, "NEUSPJESNO !", "Nemate nista u korpi");
+              } else {
+                ShowAlertDialog.showAlertDialog(
+                    context, "NEUSPJESNO !", "Nemate nista u korpi", false);
               }
             },
             child: const Text(
@@ -284,33 +288,6 @@ class _KorpaState extends State<Korpa> {
           },
         ),
       ),
-    );
-  }
-
-  showAlertDialog(BuildContext context, title, info) {
-    // set up the button
-    Widget okButton = TextButton(
-      child: const Text("U redu"),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(title),
-      content: Text(info),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
     );
   }
 }

@@ -27,7 +27,7 @@ namespace PetShop.Mapping
             CreateMap<Database.Proizvodjac, Model.Proizvodjac>();
             CreateMap<Database.Recenzija, Model.Recenzija>();
             CreateMap<Database.Rola, Model.Rola>();
-            CreateMap<Database.Transkacija, Model.Transakcija>();
+            CreateMap<Database.Transakcija, Model.Transakcija>();
             CreateMap<Database.Uposlenik, Model.Uposlenik>();
             CreateMap<Database.Spol, Model.Spol>().ReverseMap();
 
@@ -55,6 +55,7 @@ namespace PetShop.Mapping
             CreateMap<KomentarUpdateRequest, Database.Komentar>();
             CreateMap<PopustKuponInsertRequest, Database.PopustKupon>();
             CreateMap<PopustKuponUpdateRequest, Database.PopustKupon>();
+            CreateMap<TransakcijaInsertRequest, Database.Transakcija>();
         }
     }
 }

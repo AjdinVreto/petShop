@@ -26,12 +26,7 @@ namespace PetShop.WinUI.Ostalo
 
         private async Task LoadKomentari()
         {
-            KomentarSearchObject request = new KomentarSearchObject()
-            {
-
-            };
-
-            dgvKomentari.DataSource = await _serviceKomentari.Get<List<Model.Komentar>>(request);
+            dgvKomentari.DataSource = await _serviceKomentari.Get<List<Model.Komentar>>();
         }
     }
 }

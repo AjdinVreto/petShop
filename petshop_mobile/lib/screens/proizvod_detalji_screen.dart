@@ -1,12 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:petshop_mobile/models/NarudzbaProizvod.dart';
 import 'package:petshop_mobile/models/Recenzija.dart';
 import 'package:petshop_mobile/models/Requests/RecenzijaUpdate.dart';
 import 'package:petshop_mobile/services/APIService.dart';
+import 'package:petshop_mobile/widgets/alert_dialog.dart';
 
 import 'komentar_screen.dart';
 
@@ -21,7 +20,6 @@ class ProizvodDetalji extends StatefulWidget {
 
 class _ProizvodDetaljiState extends State<ProizvodDetalji> {
   NarudzbaProizvod? narudzbaProizvodRequest;
-
   Recenzija? recenzijaInsertRequest;
   RecenzijaUpdate? recenzijaUpdateRequest;
 
@@ -30,12 +28,13 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
   int brojac = 0;
 
   late int recenzijaId;
-
   bool proizvodUKorpi = false;
 
   Future<List<Recenzija>?> getRecenzije() async {
-    var recenzije = await APIService.Get("Recenzija", null);
+    Map<String, String>? queryParams = null;
+    queryParams = {"proizvodId": widget.proizvod.id.toString()};
 
+    var recenzije = await APIService.Get("Recenzija", queryParams);
     var recenzijeList = recenzije?.map((i) => Recenzija.fromJson(i)).toList();
 
     int suma = 0;
@@ -81,7 +80,8 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
     var korpaLista = korpa?.map((i) => NarudzbaProizvod.fromJson(i)).toList();
 
     korpaLista?.forEach((element) {
-      if(APIService.narudzbaId == element.narudzbaId && element.proizvodId == proizvodId){
+      if (APIService.narudzbaId == element.narudzbaId &&
+          element.proizvodId == proizvodId) {
         proizvodUKorpi = true;
       }
     });
@@ -106,12 +106,12 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
           (BuildContext context, AsyncSnapshot<List<Recenzija>?> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: Text("Loading..."),
+            child: CircularProgressIndicator(color: Colors.orange,),
           );
         } else {
           if (snapshot.hasError) {
             return Center(
-              child: Text("${snapshot.error}"),
+              child: Text("Greska na serveru, pokusajte ponovo"),
             );
           } else {
             return SingleChildScrollView(
@@ -167,14 +167,14 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
                         thickness: 1,
                       ),
                       ocjeniProizvod(),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
                       Text(
                         prosjecnaOcjena.toString() +
                             "/5.0" +
                             "   ( ${brojac} ocjena )",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -209,7 +209,7 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
                       const Divider(
                         thickness: 1,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       proizvodOpis(),
@@ -239,11 +239,13 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
             proizvod: widget.proizvod);
 
         await ProizvodProvjera(widget.proizvod.id).then((value) async {
-          if(proizvodUKorpi) {
-            showAlertDialog(context, "NEUSPJESNO !", "Proizvod se vec nalazi u vasoj korpi");
-          }else {
+          if (proizvodUKorpi) {
+            ShowAlertDialog.showAlertDialog(context, "NEUSPJESNO !",
+                "Proizvod se vec nalazi u vasoj korpi", false);
+          } else {
             await DodajKorpa().then((value) {
-              showAlertDialog(context, "USPJESNO !", "Odabrani proizvod je uspjesno dodan u korpu");
+              ShowAlertDialog.showAlertDialog(context, "USPJESNO !",
+                  "Odabrani proizvod je uspjesno dodan u korpu", false);
             });
           }
         });
@@ -329,33 +331,6 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
           ),
         ),
       ),
-    );
-  }
-
-  showAlertDialog(BuildContext context, title, info) {
-    // set up the button
-    Widget okButton = TextButton(
-      child: const Text("OK"),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(title),
-      content: Text(info),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
     );
   }
 }

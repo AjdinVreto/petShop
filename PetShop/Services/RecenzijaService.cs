@@ -11,12 +11,26 @@ using System.Threading.Tasks;
 
 namespace PetShop.Services
 {
-    public class RecenzijaService : BaseCRUDService<Model.Recenzija, Database.Recenzija, object, RecenzijaInsertRequest, RecenzijaUpdateRequest>, IRecenzijaService
+    public class RecenzijaService : BaseCRUDService<Model.Recenzija, Database.Recenzija, RecenzijaSearchObject, RecenzijaInsertRequest, RecenzijaUpdateRequest>, IRecenzijaService
     {
         private readonly IHttpContextAccessor _httpContext;
         public RecenzijaService(PetShopContext context, IMapper mapper, IHttpContextAccessor httpContext) : base(context, mapper)
         {
             _httpContext = httpContext;
+        }
+
+        public override List<Model.Recenzija> Get(RecenzijaSearchObject search = null)
+        {
+            var entity = ctx.Set<Database.Recenzija>().AsQueryable();
+
+            if (search.ProizvodId.HasValue)
+            {
+                entity = entity.Where(x => x.ProizvodId == search.ProizvodId);
+            }
+
+            var list = entity.ToList();
+
+            return _mapper.Map<List<Model.Recenzija>>(list);
         }
 
         public override Model.Recenzija Insert(RecenzijaInsertRequest request)

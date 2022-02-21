@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PetShop.Model.Requests
 {
-    public class KomentarSearchObject
+    public class RecenzijaSearchObject
     {
         public int? ProizvodId { get; set; }
     }

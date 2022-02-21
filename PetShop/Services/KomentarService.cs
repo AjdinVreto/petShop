@@ -22,6 +22,11 @@ namespace PetShop.Services
 
             entity = entity.Include(x => x.Korisnik).Include(x => x.Proizvod);
 
+            if (search.ProizvodId.HasValue)
+            {
+                entity = entity.Where(x => x.ProizvodId == search.ProizvodId);
+            }
+
             var list = entity.ToList();
 
             return _mapper.Map<List<Model.Komentar>>(list);

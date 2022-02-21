@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PetShop.Migrations
 {
-    public partial class inicijalna : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -404,7 +404,7 @@ namespace PetShop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Transkacija",
+                name: "Transakcija",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -412,12 +412,13 @@ namespace PetShop.Migrations
                     Iznos = table.Column<decimal>(type: "decimal(6,2)", nullable: false),
                     NacinPlacanja = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Datum = table.Column<DateTime>(type: "date", nullable: false),
-                    PopustKuponId = table.Column<int>(type: "int", nullable: false),
+                    StripePaymentId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PopustKuponId = table.Column<int>(type: "int", nullable: true),
                     NarudzbaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Transkacija", x => x.Id);
+                    table.PrimaryKey("PK_Transakcija", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Transakcija_Narudzba",
                         column: x => x.NarudzbaId,
@@ -425,7 +426,7 @@ namespace PetShop.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Transkacija_PopustKupon",
+                        name: "FK_Transakcija_PopustKupon",
                         column: x => x.PopustKuponId,
                         principalTable: "PopustKupon",
                         principalColumn: "Id",
@@ -518,13 +519,13 @@ namespace PetShop.Migrations
                 column: "ProizvodId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transkacija_NarudzbaId",
-                table: "Transkacija",
+                name: "IX_Transakcija_NarudzbaId",
+                table: "Transakcija",
                 column: "NarudzbaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transkacija_PopustKuponId",
-                table: "Transkacija",
+                name: "IX_Transakcija_PopustKuponId",
+                table: "Transakcija",
                 column: "PopustKuponId");
 
             migrationBuilder.CreateIndex(
@@ -559,7 +560,7 @@ namespace PetShop.Migrations
                 name: "Recenzija");
 
             migrationBuilder.DropTable(
-                name: "Transkacija");
+                name: "Transakcija");
 
             migrationBuilder.DropTable(
                 name: "Uposlenik");

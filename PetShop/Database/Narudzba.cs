@@ -10,7 +10,7 @@ namespace PetShop.Database
         public Narudzba()
         {
             NarudzbaProizvods = new HashSet<NarudzbaProizvod>();
-            Transkacijas = new HashSet<Transkacija>();
+            Transakcijas = new HashSet<Transakcija>();
         }
 
         public int Id { get; set; }
@@ -21,6 +21,6 @@ namespace PetShop.Database
 
         public virtual Korisnik Korisnik { get; set; }
         public virtual ICollection<NarudzbaProizvod> NarudzbaProizvods { get; set; }
-        public virtual ICollection<Transkacija> Transkacijas { get; set; }
+        public virtual ICollection<Transakcija> Transakcijas { get; set; }
     }
 }

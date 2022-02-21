@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -8,6 +7,7 @@ import 'package:petshop_mobile/models/Korisnik.dart';
 import 'package:petshop_mobile/models/Spol.dart';
 import 'package:petshop_mobile/screens/promjena_password_screen.dart';
 import 'package:petshop_mobile/services/APIService.dart';
+import 'package:petshop_mobile/widgets/alert_dialog.dart';
 import 'package:petshop_mobile/widgets/app_drawer.dart';
 import '../models/Requests/KorisnikProfilUpdate.dart';
 
@@ -129,12 +129,12 @@ class _ProfilState extends State<Profil> {
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: Text("Loading..."),
+            child: CircularProgressIndicator(color: Colors.orange,),
           );
         } else {
           if (snapshot.hasError) {
             return Center(
-              child: Text("${snapshot.error}"),
+              child: Text("Greska na serveru, pokusajte ponovo"),
             );
           } else {
             if(selectedSpol == null){
@@ -265,13 +265,13 @@ class _ProfilState extends State<Profil> {
                         await sacuvajProfil().then((value) {
                           APIService.username = korisnickoImeController.text;
                           setState(() {
-                            showAlertDialog(context, "Uspjesno !",
-                                "Podaci na vasem profilu su uspjesno sacuvani");
+                            ShowAlertDialog.showAlertDialog(context, "Uspjesno !",
+                                "Podaci na vasem profilu su uspjesno sacuvani", false);
                           });
                         });
                       } else {
-                        showAlertDialog(context, "Neuspjesno !",
-                            "Podaci nisu izmjenjeni, postoje neke greske");
+                        ShowAlertDialog.showAlertDialog(context, "Neuspjesno !",
+                            "Podaci nisu izmjenjeni, postoje neke greske", false);
                       }
                     },
                     child: const Text(
@@ -381,12 +381,12 @@ class _ProfilState extends State<Profil> {
             (BuildContext context, AsyncSnapshot<List<Spol>?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: Text('Loading...'),
+              child: CircularProgressIndicator(color: Colors.orange,),
             );
           } else {
             if (snapshot.hasError) {
               return Center(
-                child: Text('${snapshot.error}'),
+                child: Text("Greska na serveru, pokusajte ponovo"),
               );
             } else {
               return Container(
@@ -418,12 +418,12 @@ class _ProfilState extends State<Profil> {
             (BuildContext context, AsyncSnapshot<List<Grad>?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: Text('Loading...'),
+              child: CircularProgressIndicator(color: Colors.orange,),
             );
           } else {
             if (snapshot.hasError) {
               return Center(
-                child: Text('${snapshot.error}'),
+                child: Text("Greska na serveru, pokusajte ponovo"),
               );
             } else {
               return Container(
@@ -467,33 +467,6 @@ class _ProfilState extends State<Profil> {
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(10),
       ),
-    );
-  }
-
-  showAlertDialog(BuildContext context, title, info) {
-    // set up the button
-    Widget okButton = TextButton(
-      child: const Text("U redu"),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(title),
-      content: Text(info),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
     );
   }
 }

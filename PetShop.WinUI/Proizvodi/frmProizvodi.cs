@@ -93,8 +93,7 @@ namespace PetShop.WinUI.Proizvodi
 
         private async Task LoadProizvodi()
         {
-            ProizvodSearchObject search = new ProizvodSearchObject();
-            dgvProizvodi.DataSource = await _serviceProizvodi.Get<List<Model.Proizvod>>(search);
+            dgvProizvodi.DataSource = await _serviceProizvodi.Get<List<Model.Proizvod>>();
         }
 
         private void dgvProizvodi_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

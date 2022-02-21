@@ -1,10 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:petshop_mobile/models/Kontakt.dart';
 import 'package:petshop_mobile/models/Poslovnica.dart';
 import 'package:petshop_mobile/services/APIService.dart';
+import 'package:petshop_mobile/widgets/alert_dialog.dart';
 import 'package:petshop_mobile/widgets/app_drawer.dart';
 
 class KontaktScreen extends StatefulWidget {
@@ -110,13 +110,13 @@ class _KontaktScreenState extends State<KontaktScreen> {
                             korisnikId: APIService.korisnikId);
                         await postKontakt().then((i) {
                           setState(() {
-                            showAlertDialog(context, "Uspjesno",
-                                "Vasa poruka je uspjesno poslana");
+                            ShowAlertDialog.showAlertDialog(context, "Uspjesno",
+                                "Vasa poruka je uspjesno poslana", false);
                           });
                         });
                       } else {
-                        showAlertDialog(
-                            context, "Greska", "Postoje neke greske");
+                        ShowAlertDialog.showAlertDialog(
+                            context, "Greska", "Postoje neke greske", false);
                       }
                     },
                     child: const Text(
@@ -161,12 +161,12 @@ class _KontaktScreenState extends State<KontaktScreen> {
             (BuildContext context, AsyncSnapshot<List<Poslovnica>?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: Text('Loading...'),
+              child: CircularProgressIndicator(color: Colors.orange,),
             );
           } else {
             if (snapshot.hasError) {
               return Center(
-                child: Text('${snapshot.error}'),
+                child: Text("Greska na serveru, pokusajte ponovo"),
               );
             } else {
               return ListView.builder(
@@ -283,33 +283,6 @@ class _KontaktScreenState extends State<KontaktScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  showAlertDialog(BuildContext context, title, info) {
-    // set up the button
-    Widget okButton = TextButton(
-      child: const Text("U redu"),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(title),
-      content: Text(info),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
     );
   }
 }

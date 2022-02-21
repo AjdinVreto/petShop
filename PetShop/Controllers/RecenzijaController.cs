@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PetShop.Controllers
 {
-    public class RecenzijaController : BaseCRUDController<Model.Recenzija, object, RecenzijaInsertRequest, RecenzijaUpdateRequest>
+    public class RecenzijaController : BaseCRUDController<Model.Recenzija, RecenzijaSearchObject, RecenzijaInsertRequest, RecenzijaUpdateRequest>
     {
         public RecenzijaController(IRecenzijaService service) : base(service)
         {

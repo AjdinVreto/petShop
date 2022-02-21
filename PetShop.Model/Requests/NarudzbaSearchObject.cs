@@ -7,6 +7,6 @@ namespace PetShop.Model.Requests
 {
     public class NarudzbaSearchObject
     {
-        public bool? IncludeKorisnik { get; set; }
+        public int? KorisnikId { get; set; }
     }
 }

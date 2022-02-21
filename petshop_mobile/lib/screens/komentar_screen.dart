@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:intl/intl.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:petshop_mobile/models/Komentar.dart';
 import 'package:petshop_mobile/models/Proizvod.dart';
 import 'package:petshop_mobile/models/Requests/KomentarInsert.dart';
 import 'package:petshop_mobile/services/APIService.dart';
+import 'package:petshop_mobile/widgets/alert_dialog.dart';
 
 class Komentari extends StatefulWidget {
   final Proizvod proizvod;
@@ -30,12 +30,14 @@ class _KomentariState extends State<Komentari> {
   }
 
   Future<List<Komentar>?> getKomentari() async {
-    var komentari = await APIService.Get("Komentar", null);
+    Map<String, String>? queryParams = null;
+    queryParams = {"proizvodId": widget.proizvod.id.toString()};
+
+    var komentari = await APIService.Get("Komentar", queryParams);
+
     var komentariList = komentari?.map((i) => Komentar.fromJson(i)).toList();
 
-    return komentariList?.where((element) {
-      return element.proizvodId == widget.proizvod.id;
-    }).toList();
+    return komentariList;
   }
 
   Future<void> obrisiKomentar(komentarId) async {
@@ -94,13 +96,13 @@ class _KomentariState extends State<Komentari> {
                         );
                         await postKomentar().then((value) {
                           setState(() {
-                            showAlertDialog(context, "Uspjesno !",
-                                "Vas komentar je uspjesno objavljen");
+                            ShowAlertDialog.showAlertDialog(context, "Uspjesno !",
+                                "Vas komentar je uspjesno objavljen", false);
                           });
                         });
                       } else {
-                        showAlertDialog(
-                            context, "GRESKA !", "Postoje neke greske");
+                        ShowAlertDialog.showAlertDialog(
+                            context, "GRESKA !", "Postoje neke greske", false);
                       }
                     },
                     child: const Text(
@@ -230,12 +232,12 @@ class _KomentariState extends State<Komentari> {
       builder: (BuildContext context, AsyncSnapshot<List<Komentar>?> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: Text("Loading..."),
+            child: CircularProgressIndicator(color: Colors.orange,),
           );
         } else {
           if (snapshot.hasError) {
             return Center(
-              child: Text("${snapshot.error}"),
+              child: Text("Greska na serveru, pokusajte ponovo"),
             );
           } else {
             return ListView.builder(
@@ -306,10 +308,10 @@ class _KomentariState extends State<Komentari> {
                                 setState(() {});
                               });
                             },
-                            icon: Icon(Icons.delete),
+                            icon: const Icon(Icons.delete),
                             color: Colors.red,
                           )
-                        : Icon(
+                        : const Icon(
                             Icons.delete,
                             color: Colors.black,
                           ),
@@ -330,33 +332,6 @@ class _KomentariState extends State<Komentari> {
           ),
         ],
       ),
-    );
-  }
-
-  showAlertDialog(BuildContext context, title, info) {
-    // set up the button
-    Widget okButton = TextButton(
-      child: const Text("U redu"),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(title),
-      content: Text(info),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
     );
   }
 }

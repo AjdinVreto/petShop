@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PetShop.Services
 {
-    public interface IRecenzijaService : ICRUDService<Model.Recenzija, RecenzijaSearchObject, RecenzijaInsertRequest, RecenzijaUpdateRequest>
+    public interface ITransakcijaService : ICRUDService<Model.Transakcija, TransakcijaSearchObject, TransakcijaInsertRequest, object>
     {
     }
 }

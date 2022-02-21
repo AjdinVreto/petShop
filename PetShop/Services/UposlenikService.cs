@@ -27,7 +27,7 @@ namespace PetShop.Services
 
             var entity = ctx.Set<Database.Uposlenik>().AsQueryable();
 
-            if(search?.IncludeKorisnik == true)
+            if (search?.IncludeKorisnik == true)
             {
                 entity = entity.Include(x => x.Korisnik);
             }
@@ -65,7 +65,7 @@ namespace PetShop.Services
             var entity = _mapper.Map<Database.Uposlenik>(request);
             ctx.Add(entity);
 
-            if(request.PoslovnicaId == 0)
+            if (request.PoslovnicaId == 0)
             {
                 throw new UserException("Niste oznacili poslovnicu");
             }

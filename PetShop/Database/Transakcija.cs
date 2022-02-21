@@ -5,13 +5,14 @@ using System.Collections.Generic;
 
 namespace PetShop.Database
 {
-    public partial class Transkacija
+    public partial class Transakcija
     {
         public int Id { get; set; }
         public decimal Iznos { get; set; }
         public string NacinPlacanja { get; set; }
         public DateTime Datum { get; set; }
-        public int PopustKuponId { get; set; }
+        public string StripePaymentId { get; set; }
+        public int? PopustKuponId { get; set; }
         public int NarudzbaId { get; set; }
 
         public virtual Narudzba Narudzba { get; set; }

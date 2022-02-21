@@ -9,13 +9,13 @@ namespace PetShop.Database
     {
         public PopustKupon()
         {
-            Transkacijas = new HashSet<Transkacija>();
+            Transakcijas = new HashSet<Transakcija>();
         }
 
         public int Id { get; set; }
         public int Iznos { get; set; }
         public string Kod { get; set; }
 
-        public virtual ICollection<Transkacija> Transkacijas { get; set; }
+        public virtual ICollection<Transakcija> Transakcijas { get; set; }
     }
 }

@@ -1,9 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:petshop_mobile/models/Narudzba.dart';
+import 'package:petshop_mobile/models/Requests/NarudzbaInsert.dart';
 import 'package:petshop_mobile/screens/proizvodi_screen.dart';
 import 'package:petshop_mobile/screens/registracija_screen.dart';
+import 'package:petshop_mobile/widgets/alert_dialog.dart';
 
 import '../services/APIService.dart';
 
@@ -16,41 +17,50 @@ class _LoginState extends State<Login> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Narudzba? narudzbaRequest;
+  NarudzbaInsert? narudzbaRequest;
 
   var result = null;
   var narudzbe = null;
   var narudzbeList = null;
-  var narId = null;
 
   bool narudzbaPostoji = false;
 
   Future<void> GetData() async {
     result = await APIService.Login("Korisnik/login");
+  }
 
-    narudzbe = await APIService.Get("Narudzba", null);
+  Future<void> GetNarudzbe() async{
+    Map<String, String>? queryParams = null;
+    queryParams = {"korisnikId": APIService.korisnikId.toString()};
+
+    narudzbe = await APIService.Get("Narudzba", queryParams);
     narudzbeList = narudzbe?.map((i) => Narudzba.fromJson(i)).toList();
   }
 
   Future<void> kreirajNarudzbu() async {
     narudzbeList.forEach((item) {
-      if (item.korisnikId == APIService.korisnikId) {
+      if (item.korisnikId == APIService.korisnikId && item.aktivna == true) {
         narudzbaPostoji = true;
         APIService.narudzbaId = item.id;
       }
-      ;
     });
 
     if (!narudzbaPostoji) {
-      var id = narudzbeList.length + 1;
-      narudzbaRequest = Narudzba(
-          id: id,
-          aktivna: true,
-          zavrsena: false,
-          datum: DateTime.now(),
-          korisnikId: APIService.korisnikId);
-      await APIService.Post("Narudzba", json.encode(narudzbaRequest?.toJson()));
-      APIService.narudzbaId = id;
+      narudzbaRequest = NarudzbaInsert(
+        aktivna: true,
+        zavrsena: false,
+        datum: DateTime.now(),
+        korisnikId: APIService.korisnikId,
+      );
+      await APIService.Post("Narudzba", json.encode(narudzbaRequest?.toJson())).then((value) async {
+        await GetNarudzbe().then((value) {
+          narudzbeList.forEach((item){
+            if(item.korisnikId == APIService.korisnikId && item.aktivna == true){
+              APIService.narudzbaId = item.id;
+            }
+          });
+        });
+      });
     }
   }
 
@@ -111,11 +121,15 @@ class _LoginState extends State<Login> {
                   await GetData();
                   if (result != null) {
                     APIService.SetParameter(result.id);
-                    await kreirajNarudzbu();
-                    Navigator.of(context)
-                        .pushReplacementNamed(Proizvodi.routeName);
+                    await GetNarudzbe().then((value) async{
+                      await kreirajNarudzbu().then((value) {
+                        Navigator.of(context)
+                            .pushReplacementNamed(Proizvodi.routeName);
+                      });
+                    });
                   } else {
-                    showAlertDialog(context, "Greska", "Login podaci nisu tacni");
+                    ShowAlertDialog.showAlertDialog(
+                        context, "Greska", "Login podaci nisu tacni", false);
                   }
                 },
                 child: const Padding(
@@ -161,31 +175,4 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-  showAlertDialog(BuildContext context, title, info) {
-    // set up the button
-    Widget okButton = TextButton(
-      child: const Text("U redu"),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(title),
-      content: Text(info),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
-
 }

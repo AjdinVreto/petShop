@@ -7,6 +7,7 @@ import 'package:petshop_mobile/models/Grad.dart';
 import 'package:petshop_mobile/models/Requests/KorisnikRegistracija.dart';
 import 'package:petshop_mobile/models/Spol.dart';
 import 'package:petshop_mobile/services/APIService.dart';
+import 'package:petshop_mobile/widgets/alert_dialog.dart';
 
 class Registracija extends StatefulWidget {
   static const routeName = "/registracija";
@@ -19,6 +20,7 @@ class _RegistracijaState extends State<Registracija> {
   final _validationKey = GlobalKey<FormState>();
 
   late KorisnikRegistracija korisnik;
+  bool korisnickoImeMailPostoji = false;
 
   TextEditingController imeController = TextEditingController();
   TextEditingController prezimeController = TextEditingController();
@@ -111,8 +113,13 @@ class _RegistracijaState extends State<Registracija> {
   }
 
   Future<void> registrujKorisnika() async {
-    await APIService.Post(
+    korisnickoImeMailPostoji = false;
+    var k = await APIService.Post(
         "Korisnik/registracija", json.encode(korisnik.toJson()));
+
+    if (k == null) {
+      korisnickoImeMailPostoji = true;
+    }
   }
 
   @override
@@ -185,53 +192,7 @@ class _RegistracijaState extends State<Registracija> {
                   const SizedBox(
                     height: 25,
                   ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      if(selectedSpol != null || selectedGrad != null){
-                        if(passwordController.text == potvrdaPasswordaController.text){
-                          if (_validationKey.currentState!.validate()) {
-                            korisnik = KorisnikRegistracija(
-                              ime: imeController.text,
-                              prezime: prezimeController.text,
-                              adresa: adresaController.text,
-                              email: emailController.text,
-                              korisnickoIme: korisnickoImeController.text,
-                              password: passwordController.text,
-                              potvrdaPassword: potvrdaPasswordaController.text,
-                              datumRodjenja: datumRodjenja,
-                              spolId: selectedSpol?.id,
-                              gradId: selectedGrad?.id,
-                              slika: null,
-                            );
-                            await registrujKorisnika().then((value) {
-                              setState(() {
-                                showAlertDialog(context, "Uspjesno !",
-                                    "Uspjesno ste registrovani, sada se mozete logirati");
-                              });
-                            });
-                          } else {
-                            showAlertDialog(
-                                context, "Neuspjesno !", "Postoje neke greske");
-                          }
-                        }else{
-                          showAlertDialog(context, "Greska", "Passwordi se ne poklapaju");
-                        }
-                      }else {
-                        showAlertDialog(context, "Greska", "Niste oznacili grad ili spol");
-                      }
-                    },
-                    child: const Text(
-                      "Sacuvaj profil",
-                      style: TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.orangeAccent,
-                      padding: const EdgeInsets.all(12),
-                    ),
-                  ),
+                  registrujSe(),
                   const SizedBox(
                     height: 35,
                   ),
@@ -320,18 +281,78 @@ class _RegistracijaState extends State<Registracija> {
     );
   }
 
+  Widget registrujSe() {
+    return ElevatedButton(
+      onPressed: () async {
+        if (selectedSpol != null || selectedGrad != null) {
+          if (passwordController.text == potvrdaPasswordaController.text) {
+            if (_validationKey.currentState!.validate()) {
+              korisnik = KorisnikRegistracija(
+                ime: imeController.text,
+                prezime: prezimeController.text,
+                adresa: adresaController.text,
+                email: emailController.text,
+                korisnickoIme: korisnickoImeController.text,
+                password: passwordController.text,
+                potvrdaPassword: potvrdaPasswordaController.text,
+                datumRodjenja: datumRodjenja,
+                spolId: selectedSpol?.id,
+                gradId: selectedGrad?.id,
+                slika: null,
+              );
+              await registrujKorisnika().then((value) {
+                if (korisnickoImeMailPostoji == false) {
+                  ShowAlertDialog.showAlertDialog(
+                      context,
+                      "Uspjesno !",
+                      "Uspjesno ste registrovani, sada se mozete logirati",
+                      true);
+                } else {
+                  setState(() {
+                    ShowAlertDialog.showAlertDialog(context, "NEUSPJESNO !",
+                        "Korisnicko ime ili email vec postoji", false);
+                  });
+                }
+              });
+            } else {
+              ShowAlertDialog.showAlertDialog(
+                  context, "Neuspjesno !", "Postoje neke greske", false);
+            }
+          } else {
+            ShowAlertDialog.showAlertDialog(
+                context, "Greska", "Passwordi se ne poklapaju", false);
+          }
+        } else {
+          ShowAlertDialog.showAlertDialog(
+              context, "Greska", "Niste oznacili grad ili spol", false);
+        }
+      },
+      child: const Text(
+        "Registruj se",
+        style: TextStyle(
+          fontSize: 26,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.orangeAccent,
+        padding: const EdgeInsets.all(12),
+      ),
+    );
+  }
+
   Widget spoloviDropdown() {
     return FutureBuilder<List<Spol>?>(
         future: getSpolovi(selectedSpol),
         builder: (BuildContext context, AsyncSnapshot<List<Spol>?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: Text('Loading...'),
+              child: CircularProgressIndicator(color: Colors.orange,),
             );
           } else {
             if (snapshot.hasError) {
               return Center(
-                child: Text('${snapshot.error}'),
+                child: Text("Greska na serveru, pokusajte ponovo"),
               );
             } else {
               return Container(
@@ -363,12 +384,12 @@ class _RegistracijaState extends State<Registracija> {
         builder: (BuildContext context, AsyncSnapshot<List<Grad>?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: Text('Loading...'),
+              child: CircularProgressIndicator(color: Colors.orange,),
             );
           } else {
             if (snapshot.hasError) {
               return Center(
-                child: Text('${snapshot.error}'),
+                child: Text("Greska na serveru, pokusajte ponovo"),
               );
             } else {
               return Container(
@@ -413,33 +434,6 @@ class _RegistracijaState extends State<Registracija> {
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(10),
       ),
-    );
-  }
-
-  showAlertDialog(BuildContext context, title, info) {
-    // set up the button
-    Widget okButton = TextButton(
-      child: const Text("U redu"),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text(title),
-      content: Text(info),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
     );
   }
 }

@@ -36,12 +36,12 @@ class _PocetnaState extends State<Pocetna> {
       builder: (BuildContext context, AsyncSnapshot<List<Novost>?> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: Text("Loading..."),
+            child: CircularProgressIndicator(color: Colors.orange,),
           );
         } else {
           if (snapshot.hasError) {
             return Center(
-              child: Text("${snapshot.error}"),
+              child: Text("Greska na serveru, pokusajte ponovo"),
             );
           } else {
             return ListView.builder(

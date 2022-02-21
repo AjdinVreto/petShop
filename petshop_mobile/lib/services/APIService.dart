@@ -69,9 +69,9 @@ class APIService {
       },
       body: body,
     );
-print(body);
-    if (response.statusCode == 201){
-      json.decode(response.body);
+
+    if (response.statusCode == 200){
+      return json.decode(response.body);
     }
 
     return null;
