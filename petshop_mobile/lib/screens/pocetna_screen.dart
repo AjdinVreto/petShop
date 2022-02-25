@@ -40,7 +40,7 @@ class _PocetnaState extends State<Pocetna> {
           );
         } else {
           if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: Text("Greska na serveru, pokusajte ponovo"),
             );
           } else {

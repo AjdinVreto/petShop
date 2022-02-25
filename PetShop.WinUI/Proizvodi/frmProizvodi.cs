@@ -153,16 +153,15 @@ namespace PetShop.WinUI.Proizvodi
 
                     if (_proizvod == null)
                     {
-                        var proizvod = await _serviceProizvodi.Insert<Proizvod>(insert);
-                        await LoadProizvodi();
-                        MessageBox.Show("Uspješno izvršeno");
+                        await _serviceProizvodi.Insert<Proizvod>(insert);
                     }
                     else
                     {
-                        var proizvod = await _serviceProizvodi.Update<Proizvod>(_proizvod.Id, update);
-                        await LoadProizvodi();
-                        MessageBox.Show("Uspješno izvršeno");
+                        await _serviceProizvodi.Update<Proizvod>(_proizvod.Id, update);
                     }
+                    await LoadProizvodi();
+                    MessageBox.Show("Uspješno izvršeno");
+                    OcistiPolja();
                 }
                 else
                 {
@@ -194,6 +193,31 @@ namespace PetShop.WinUI.Proizvodi
             }
 
             return true;
+        }
+
+        private void OcistiPolja()
+        {
+            _proizvod = null;
+            txtCijena.Clear();
+            txtNaziv.Clear();
+            txtOpis.Clear();
+            cmbKategorija.SelectedIndex = 0;
+            cmbProizvodjac.SelectedIndex = 0;
+        }
+
+        private async void dgvProizvodi_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 6)
+            {
+                var proizvod = dgvProizvodi.SelectedRows[0].DataBoundItem as Model.Proizvod;
+
+                if (MessageBox.Show("Da li zelite obrisati proizvod ?", "Poruka", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    await _serviceProizvodi.Delete<Proizvod>(proizvod.Id);
+                }
+
+                await LoadProizvodi();
+            }
         }
     }
 }

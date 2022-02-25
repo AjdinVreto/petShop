@@ -85,7 +85,7 @@ namespace PetShop.Database
                 entity.HasOne(d => d.Proizvod)
                     .WithMany(p => p.Komentars)
                     .HasForeignKey(d => d.ProizvodId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Komentar_Proizvod");
             });
 
@@ -184,7 +184,7 @@ namespace PetShop.Database
                 entity.HasOne(d => d.Proizvod)
                     .WithMany(p => p.NarudzbaProizvods)
                     .HasForeignKey(d => d.ProizvodId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("PK_NarudzbaProizvod_Proizvod");
             });
 
@@ -240,13 +240,13 @@ namespace PetShop.Database
                 entity.HasOne(d => d.Kategorija)
                     .WithMany(p => p.Proizvods)
                     .HasForeignKey(d => d.KategorijaId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Proizvod_Kategorija");
 
                 entity.HasOne(d => d.Proizvodjac)
                     .WithMany(p => p.Proizvods)
                     .HasForeignKey(d => d.ProizvodjacId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Proizvod_Proizvodjac");
             });
 
@@ -278,7 +278,7 @@ namespace PetShop.Database
                 entity.HasOne(d => d.Proizvod)
                     .WithMany(p => p.Recenzijas)
                     .HasForeignKey(d => d.ProizvodId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Recenzija_Proizvod");
             });
 
@@ -337,7 +337,7 @@ namespace PetShop.Database
                 entity.HasOne(d => d.Poslovnica)
                     .WithMany(p => p.Uposleniks)
                     .HasForeignKey(d => d.PoslovnicaId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Uposlenik_Poslovnica");
             });
 

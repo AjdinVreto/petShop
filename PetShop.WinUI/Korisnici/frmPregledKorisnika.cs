@@ -35,11 +35,6 @@ namespace PetShop.WinUI.Korisnici
             dgvKorisnici.DataSource = await _serviceKorisnici.Get<List<Model.Korisnik>>(request);
         }
 
-        private async void frmPregledKorisnika_Load(object sender, EventArgs e)
-        {
-            //dgvKorisnici.DataSource = await _serviceKorisnici.Get<List<Model.Korisnik>>(null);
-        }
-
         private void dgvKorisnici_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var item = dgvKorisnici.SelectedRows[0].DataBoundItem;
@@ -52,6 +47,11 @@ namespace PetShop.WinUI.Korisnici
         {
             frmDetaljiKorisnika frm = new frmDetaljiKorisnika(null);
             frm.ShowDialog();
+        }
+
+        private void dgvKorisnici_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
         }
     }
 }

@@ -56,16 +56,16 @@ namespace PetShop.WinUI.Ostalo
             // 
             this.panel1.BackColor = System.Drawing.Color.Gold;
             this.panel1.Controls.Add(this.lblNavigacija);
-            this.panel1.Location = new System.Drawing.Point(38, 13);
+            this.panel1.Location = new System.Drawing.Point(12, 11);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(778, 79);
+            this.panel1.Size = new System.Drawing.Size(778, 50);
             this.panel1.TabIndex = 36;
             // 
             // lblNavigacija
             // 
             this.lblNavigacija.AutoSize = true;
             this.lblNavigacija.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblNavigacija.Location = new System.Drawing.Point(335, 23);
+            this.lblNavigacija.Location = new System.Drawing.Point(335, 9);
             this.lblNavigacija.Name = "lblNavigacija";
             this.lblNavigacija.Size = new System.Drawing.Size(120, 32);
             this.lblNavigacija.TabIndex = 19;
@@ -74,7 +74,7 @@ namespace PetShop.WinUI.Ostalo
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgvNovosti);
-            this.groupBox1.Location = new System.Drawing.Point(38, 407);
+            this.groupBox1.Location = new System.Drawing.Point(12, 360);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(778, 399);
             this.groupBox1.TabIndex = 37;
@@ -135,7 +135,7 @@ namespace PetShop.WinUI.Ostalo
             // 
             this.lblIme.AutoSize = true;
             this.lblIme.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblIme.Location = new System.Drawing.Point(250, 116);
+            this.lblIme.Location = new System.Drawing.Point(222, 69);
             this.lblIme.Name = "lblIme";
             this.lblIme.Size = new System.Drawing.Size(63, 21);
             this.lblIme.TabIndex = 39;
@@ -144,7 +144,7 @@ namespace PetShop.WinUI.Ostalo
             // txtNaslov
             // 
             this.txtNaslov.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtNaslov.Location = new System.Drawing.Point(93, 140);
+            this.txtNaslov.Location = new System.Drawing.Point(65, 93);
             this.txtNaslov.Name = "txtNaslov";
             this.txtNaslov.Size = new System.Drawing.Size(386, 33);
             this.txtNaslov.TabIndex = 38;
@@ -152,7 +152,7 @@ namespace PetShop.WinUI.Ostalo
             // txtTekst
             // 
             this.txtTekst.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtTekst.Location = new System.Drawing.Point(93, 209);
+            this.txtTekst.Location = new System.Drawing.Point(65, 162);
             this.txtTekst.Multiline = true;
             this.txtTekst.Name = "txtTekst";
             this.txtTekst.Size = new System.Drawing.Size(386, 113);
@@ -162,7 +162,7 @@ namespace PetShop.WinUI.Ostalo
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(255, 185);
+            this.label7.Location = new System.Drawing.Point(227, 138);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(49, 21);
             this.label7.TabIndex = 41;
@@ -170,7 +170,7 @@ namespace PetShop.WinUI.Ostalo
             // 
             // pbxSlika
             // 
-            this.pbxSlika.Location = new System.Drawing.Point(513, 139);
+            this.pbxSlika.Location = new System.Drawing.Point(485, 92);
             this.pbxSlika.Name = "pbxSlika";
             this.pbxSlika.Size = new System.Drawing.Size(297, 166);
             this.pbxSlika.TabIndex = 42;
@@ -179,7 +179,7 @@ namespace PetShop.WinUI.Ostalo
             // btnDodajSliku
             // 
             this.btnDodajSliku.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnDodajSliku.Location = new System.Drawing.Point(602, 319);
+            this.btnDodajSliku.Location = new System.Drawing.Point(574, 272);
             this.btnDodajSliku.Name = "btnDodajSliku";
             this.btnDodajSliku.Size = new System.Drawing.Size(116, 46);
             this.btnDodajSliku.TabIndex = 43;
@@ -192,7 +192,7 @@ namespace PetShop.WinUI.Ostalo
             this.btnDodajNovost.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnDodajNovost.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnDodajNovost.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDodajNovost.Location = new System.Drawing.Point(355, 355);
+            this.btnDodajNovost.Location = new System.Drawing.Point(327, 308);
             this.btnDodajNovost.Name = "btnDodajNovost";
             this.btnDodajNovost.Size = new System.Drawing.Size(138, 46);
             this.btnDodajNovost.TabIndex = 44;
@@ -208,7 +208,7 @@ namespace PetShop.WinUI.Ostalo
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(644, 112);
+            this.label8.Location = new System.Drawing.Point(616, 65);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(47, 21);
             this.label8.TabIndex = 45;
@@ -218,7 +218,7 @@ namespace PetShop.WinUI.Ostalo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(874, 821);
+            this.ClientSize = new System.Drawing.Size(801, 769);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btnDodajNovost);
             this.Controls.Add(this.btnDodajSliku);

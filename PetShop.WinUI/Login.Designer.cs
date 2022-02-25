@@ -92,7 +92,7 @@ namespace PetShop.WinUI
             this.btnLogin.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnLogin.Location = new System.Drawing.Point(148, 312);
+            this.btnLogin.Location = new System.Drawing.Point(157, 297);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(133, 56);
             this.btnLogin.TabIndex = 7;

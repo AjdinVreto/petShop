@@ -38,8 +38,7 @@ namespace PetShop.WinUI
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.pnlNavigacija = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.btnPopustKupon = new System.Windows.Forms.Button();
             this.btnUpravljanjeKorisnicima = new System.Windows.Forms.Button();
             this.btnIzvjestaji = new System.Windows.Forms.Button();
             this.btnNovosti = new System.Windows.Forms.Button();
@@ -50,7 +49,9 @@ namespace PetShop.WinUI
             this.btnProizvodjaci = new System.Windows.Forms.Button();
             this.btnUpravljanjeProizvodima = new System.Windows.Forms.Button();
             this.btnUpravljanjeUposlenicima = new System.Windows.Forms.Button();
-            this.lblNaslov = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -61,9 +62,9 @@ namespace PetShop.WinUI
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel3.BackColor = System.Drawing.Color.SandyBrown;
             this.panel3.Controls.Add(this.label1);
-            this.panel3.Location = new System.Drawing.Point(12, 82);
+            this.panel3.Location = new System.Drawing.Point(12, 28);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(200, 42);
             this.panel3.TabIndex = 35;
@@ -80,9 +81,9 @@ namespace PetShop.WinUI
             // 
             // panel6
             // 
-            this.panel6.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel6.BackColor = System.Drawing.Color.SandyBrown;
             this.panel6.Controls.Add(this.label5);
-            this.panel6.Location = new System.Drawing.Point(12, 688);
+            this.panel6.Location = new System.Drawing.Point(0, 668);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(200, 42);
             this.panel6.TabIndex = 32;
@@ -99,9 +100,9 @@ namespace PetShop.WinUI
             // 
             // panel5
             // 
-            this.panel5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel5.BackColor = System.Drawing.Color.SandyBrown;
             this.panel5.Controls.Add(this.label4);
-            this.panel5.Location = new System.Drawing.Point(12, 502);
+            this.panel5.Location = new System.Drawing.Point(12, 448);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(200, 42);
             this.panel5.TabIndex = 33;
@@ -118,9 +119,9 @@ namespace PetShop.WinUI
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel4.BackColor = System.Drawing.Color.SandyBrown;
             this.panel4.Controls.Add(this.label3);
-            this.panel4.Location = new System.Drawing.Point(12, 222);
+            this.panel4.Location = new System.Drawing.Point(12, 168);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(200, 42);
             this.panel4.TabIndex = 34;
@@ -138,9 +139,10 @@ namespace PetShop.WinUI
             // pnlNavigacija
             // 
             this.pnlNavigacija.BackColor = System.Drawing.Color.DarkMagenta;
-            this.pnlNavigacija.Controls.Add(this.panel2);
+            this.pnlNavigacija.Controls.Add(this.btnPopustKupon);
             this.pnlNavigacija.Controls.Add(this.btnUpravljanjeKorisnicima);
             this.pnlNavigacija.Controls.Add(this.btnIzvjestaji);
+            this.pnlNavigacija.Controls.Add(this.panel6);
             this.pnlNavigacija.Controls.Add(this.btnNovosti);
             this.pnlNavigacija.Controls.Add(this.btnKomentari);
             this.pnlNavigacija.Controls.Add(this.btnPoslovnice);
@@ -149,17 +151,147 @@ namespace PetShop.WinUI
             this.pnlNavigacija.Controls.Add(this.btnProizvodjaci);
             this.pnlNavigacija.Controls.Add(this.btnUpravljanjeProizvodima);
             this.pnlNavigacija.Controls.Add(this.btnUpravljanjeUposlenicima);
-            this.pnlNavigacija.Controls.Add(this.lblNaslov);
             this.pnlNavigacija.Location = new System.Drawing.Point(12, 14);
             this.pnlNavigacija.Name = "pnlNavigacija";
-            this.pnlNavigacija.Size = new System.Drawing.Size(265, 793);
+            this.pnlNavigacija.Size = new System.Drawing.Size(265, 772);
             this.pnlNavigacija.TabIndex = 31;
+            // 
+            // btnPopustKupon
+            // 
+            this.btnPopustKupon.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPopustKupon.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnPopustKupon.Location = new System.Drawing.Point(47, 622);
+            this.btnPopustKupon.Name = "btnPopustKupon";
+            this.btnPopustKupon.Size = new System.Drawing.Size(218, 40);
+            this.btnPopustKupon.TabIndex = 37;
+            this.btnPopustKupon.Text = "Popust kuponi";
+            this.btnPopustKupon.UseVisualStyleBackColor = false;
+            this.btnPopustKupon.Click += new System.EventHandler(this.btnPopustKupon_Click);
+            // 
+            // btnUpravljanjeKorisnicima
+            // 
+            this.btnUpravljanjeKorisnicima.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnUpravljanjeKorisnicima.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnUpravljanjeKorisnicima.Location = new System.Drawing.Point(47, 62);
+            this.btnUpravljanjeKorisnicima.Name = "btnUpravljanjeKorisnicima";
+            this.btnUpravljanjeKorisnicima.Size = new System.Drawing.Size(218, 40);
+            this.btnUpravljanjeKorisnicima.TabIndex = 16;
+            this.btnUpravljanjeKorisnicima.Text = "Upravljanje korisnicima";
+            this.btnUpravljanjeKorisnicima.UseVisualStyleBackColor = false;
+            this.btnUpravljanjeKorisnicima.Click += new System.EventHandler(this.btnUpravljanjeKorisnicima_Click);
+            // 
+            // btnIzvjestaji
+            // 
+            this.btnIzvjestaji.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnIzvjestaji.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnIzvjestaji.Location = new System.Drawing.Point(47, 716);
+            this.btnIzvjestaji.Name = "btnIzvjestaji";
+            this.btnIzvjestaji.Size = new System.Drawing.Size(218, 40);
+            this.btnIzvjestaji.TabIndex = 15;
+            this.btnIzvjestaji.Text = "Pregled izvještaja";
+            this.btnIzvjestaji.UseVisualStyleBackColor = false;
+            // 
+            // btnNovosti
+            // 
+            this.btnNovosti.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnNovosti.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnNovosti.Location = new System.Drawing.Point(47, 530);
+            this.btnNovosti.Name = "btnNovosti";
+            this.btnNovosti.Size = new System.Drawing.Size(218, 40);
+            this.btnNovosti.TabIndex = 13;
+            this.btnNovosti.Text = "Novosti";
+            this.btnNovosti.UseVisualStyleBackColor = false;
+            this.btnNovosti.Click += new System.EventHandler(this.btnNovosti_Click);
+            // 
+            // btnKomentari
+            // 
+            this.btnKomentari.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnKomentari.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnKomentari.Location = new System.Drawing.Point(47, 576);
+            this.btnKomentari.Name = "btnKomentari";
+            this.btnKomentari.Size = new System.Drawing.Size(218, 40);
+            this.btnKomentari.TabIndex = 12;
+            this.btnKomentari.Text = "Komentari";
+            this.btnKomentari.UseVisualStyleBackColor = false;
+            this.btnKomentari.Click += new System.EventHandler(this.btnKomentari_Click);
+            // 
+            // btnPoslovnice
+            // 
+            this.btnPoslovnice.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPoslovnice.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnPoslovnice.Location = new System.Drawing.Point(47, 484);
+            this.btnPoslovnice.Name = "btnPoslovnice";
+            this.btnPoslovnice.Size = new System.Drawing.Size(218, 40);
+            this.btnPoslovnice.TabIndex = 11;
+            this.btnPoslovnice.Text = "Poslovnice";
+            this.btnPoslovnice.UseVisualStyleBackColor = false;
+            this.btnPoslovnice.Click += new System.EventHandler(this.btnPoslovnice_Click);
+            // 
+            // btnPoruke
+            // 
+            this.btnPoruke.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnPoruke.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnPoruke.Location = new System.Drawing.Point(47, 388);
+            this.btnPoruke.Name = "btnPoruke";
+            this.btnPoruke.Size = new System.Drawing.Size(218, 40);
+            this.btnPoruke.TabIndex = 10;
+            this.btnPoruke.Text = "Poruke";
+            this.btnPoruke.UseVisualStyleBackColor = false;
+            this.btnPoruke.Click += new System.EventHandler(this.btnPoruke_Click);
+            // 
+            // btnKategorije
+            // 
+            this.btnKategorije.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnKategorije.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnKategorije.Location = new System.Drawing.Point(47, 248);
+            this.btnKategorije.Name = "btnKategorije";
+            this.btnKategorije.Size = new System.Drawing.Size(218, 40);
+            this.btnKategorije.TabIndex = 8;
+            this.btnKategorije.Text = "Kategorije";
+            this.btnKategorije.UseVisualStyleBackColor = false;
+            this.btnKategorije.Click += new System.EventHandler(this.btnKategorije_Click);
+            // 
+            // btnProizvodjaci
+            // 
+            this.btnProizvodjaci.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnProizvodjaci.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnProizvodjaci.Location = new System.Drawing.Point(47, 294);
+            this.btnProizvodjaci.Name = "btnProizvodjaci";
+            this.btnProizvodjaci.Size = new System.Drawing.Size(218, 40);
+            this.btnProizvodjaci.TabIndex = 6;
+            this.btnProizvodjaci.Text = "Proizvođači";
+            this.btnProizvodjaci.UseVisualStyleBackColor = false;
+            this.btnProizvodjaci.Click += new System.EventHandler(this.btnProizvodjaci_Click);
+            // 
+            // btnUpravljanjeProizvodima
+            // 
+            this.btnUpravljanjeProizvodima.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnUpravljanjeProizvodima.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnUpravljanjeProizvodima.Location = new System.Drawing.Point(47, 202);
+            this.btnUpravljanjeProizvodima.Name = "btnUpravljanjeProizvodima";
+            this.btnUpravljanjeProizvodima.Size = new System.Drawing.Size(218, 40);
+            this.btnUpravljanjeProizvodima.TabIndex = 5;
+            this.btnUpravljanjeProizvodima.Text = "Upravljanje proizvodima";
+            this.btnUpravljanjeProizvodima.UseVisualStyleBackColor = false;
+            this.btnUpravljanjeProizvodima.Click += new System.EventHandler(this.btnUpravljanjeProizvodima_Click);
+            // 
+            // btnUpravljanjeUposlenicima
+            // 
+            this.btnUpravljanjeUposlenicima.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnUpravljanjeUposlenicima.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnUpravljanjeUposlenicima.Location = new System.Drawing.Point(47, 108);
+            this.btnUpravljanjeUposlenicima.Name = "btnUpravljanjeUposlenicima";
+            this.btnUpravljanjeUposlenicima.Size = new System.Drawing.Size(218, 40);
+            this.btnUpravljanjeUposlenicima.TabIndex = 4;
+            this.btnUpravljanjeUposlenicima.Text = "Upravljanje uposlenicima";
+            this.btnUpravljanjeUposlenicima.UseVisualStyleBackColor = false;
+            this.btnUpravljanjeUposlenicima.Click += new System.EventHandler(this.btnUpravljanjeUposlenicima_Click);
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel2.BackColor = System.Drawing.Color.SandyBrown;
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(0, 394);
+            this.panel2.Location = new System.Drawing.Point(12, 354);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 42);
             this.panel2.TabIndex = 17;
@@ -174,149 +306,33 @@ namespace PetShop.WinUI
             this.label2.TabIndex = 2;
             this.label2.Text = "KONTAKT";
             // 
-            // btnUpravljanjeKorisnicima
+            // label6
             // 
-            this.btnUpravljanjeKorisnicima.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnUpravljanjeKorisnicima.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnUpravljanjeKorisnicima.Location = new System.Drawing.Point(47, 116);
-            this.btnUpravljanjeKorisnicima.Name = "btnUpravljanjeKorisnicima";
-            this.btnUpravljanjeKorisnicima.Size = new System.Drawing.Size(218, 40);
-            this.btnUpravljanjeKorisnicima.TabIndex = 16;
-            this.btnUpravljanjeKorisnicima.Text = "Upravljanje korisnicima";
-            this.btnUpravljanjeKorisnicima.UseVisualStyleBackColor = false;
-            this.btnUpravljanjeKorisnicima.Click += new System.EventHandler(this.btnUpravljanjeKorisnicima_Click);
-            // 
-            // btnIzvjestaji
-            // 
-            this.btnIzvjestaji.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnIzvjestaji.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnIzvjestaji.Location = new System.Drawing.Point(47, 722);
-            this.btnIzvjestaji.Name = "btnIzvjestaji";
-            this.btnIzvjestaji.Size = new System.Drawing.Size(218, 40);
-            this.btnIzvjestaji.TabIndex = 15;
-            this.btnIzvjestaji.Text = "Pregled izvještaja";
-            this.btnIzvjestaji.UseVisualStyleBackColor = false;
-            // 
-            // btnNovosti
-            // 
-            this.btnNovosti.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnNovosti.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnNovosti.Location = new System.Drawing.Point(47, 582);
-            this.btnNovosti.Name = "btnNovosti";
-            this.btnNovosti.Size = new System.Drawing.Size(218, 40);
-            this.btnNovosti.TabIndex = 13;
-            this.btnNovosti.Text = "Novosti";
-            this.btnNovosti.UseVisualStyleBackColor = false;
-            this.btnNovosti.Click += new System.EventHandler(this.btnNovosti_Click);
-            // 
-            // btnKomentari
-            // 
-            this.btnKomentari.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnKomentari.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnKomentari.Location = new System.Drawing.Point(47, 628);
-            this.btnKomentari.Name = "btnKomentari";
-            this.btnKomentari.Size = new System.Drawing.Size(218, 40);
-            this.btnKomentari.TabIndex = 12;
-            this.btnKomentari.Text = "Komentari";
-            this.btnKomentari.UseVisualStyleBackColor = false;
-            this.btnKomentari.Click += new System.EventHandler(this.btnKomentari_Click);
-            // 
-            // btnPoslovnice
-            // 
-            this.btnPoslovnice.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPoslovnice.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnPoslovnice.Location = new System.Drawing.Point(47, 536);
-            this.btnPoslovnice.Name = "btnPoslovnice";
-            this.btnPoslovnice.Size = new System.Drawing.Size(218, 40);
-            this.btnPoslovnice.TabIndex = 11;
-            this.btnPoslovnice.Text = "Poslovnice";
-            this.btnPoslovnice.UseVisualStyleBackColor = false;
-            this.btnPoslovnice.Click += new System.EventHandler(this.btnPoslovnice_Click);
-            // 
-            // btnPoruke
-            // 
-            this.btnPoruke.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPoruke.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnPoruke.Location = new System.Drawing.Point(47, 442);
-            this.btnPoruke.Name = "btnPoruke";
-            this.btnPoruke.Size = new System.Drawing.Size(218, 40);
-            this.btnPoruke.TabIndex = 10;
-            this.btnPoruke.Text = "Poruke";
-            this.btnPoruke.UseVisualStyleBackColor = false;
-            this.btnPoruke.Click += new System.EventHandler(this.btnPoruke_Click);
-            // 
-            // btnKategorije
-            // 
-            this.btnKategorije.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnKategorije.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnKategorije.Location = new System.Drawing.Point(47, 302);
-            this.btnKategorije.Name = "btnKategorije";
-            this.btnKategorije.Size = new System.Drawing.Size(218, 40);
-            this.btnKategorije.TabIndex = 8;
-            this.btnKategorije.Text = "Kategorije";
-            this.btnKategorije.UseVisualStyleBackColor = false;
-            this.btnKategorije.Click += new System.EventHandler(this.btnKategorije_Click);
-            // 
-            // btnProizvodjaci
-            // 
-            this.btnProizvodjaci.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnProizvodjaci.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnProizvodjaci.Location = new System.Drawing.Point(47, 348);
-            this.btnProizvodjaci.Name = "btnProizvodjaci";
-            this.btnProizvodjaci.Size = new System.Drawing.Size(218, 40);
-            this.btnProizvodjaci.TabIndex = 6;
-            this.btnProizvodjaci.Text = "Proizvođači";
-            this.btnProizvodjaci.UseVisualStyleBackColor = false;
-            this.btnProizvodjaci.Click += new System.EventHandler(this.btnProizvodjaci_Click);
-            // 
-            // btnUpravljanjeProizvodima
-            // 
-            this.btnUpravljanjeProizvodima.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnUpravljanjeProizvodima.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnUpravljanjeProizvodima.Location = new System.Drawing.Point(47, 256);
-            this.btnUpravljanjeProizvodima.Name = "btnUpravljanjeProizvodima";
-            this.btnUpravljanjeProizvodima.Size = new System.Drawing.Size(218, 40);
-            this.btnUpravljanjeProizvodima.TabIndex = 5;
-            this.btnUpravljanjeProizvodima.Text = "Upravljanje proizvodima";
-            this.btnUpravljanjeProizvodima.UseVisualStyleBackColor = false;
-            this.btnUpravljanjeProizvodima.Click += new System.EventHandler(this.btnUpravljanjeProizvodima_Click);
-            // 
-            // btnUpravljanjeUposlenicima
-            // 
-            this.btnUpravljanjeUposlenicima.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnUpravljanjeUposlenicima.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnUpravljanjeUposlenicima.Location = new System.Drawing.Point(47, 162);
-            this.btnUpravljanjeUposlenicima.Name = "btnUpravljanjeUposlenicima";
-            this.btnUpravljanjeUposlenicima.Size = new System.Drawing.Size(218, 40);
-            this.btnUpravljanjeUposlenicima.TabIndex = 4;
-            this.btnUpravljanjeUposlenicima.Text = "Upravljanje uposlenicima";
-            this.btnUpravljanjeUposlenicima.UseVisualStyleBackColor = false;
-            this.btnUpravljanjeUposlenicima.Click += new System.EventHandler(this.btnUpravljanjeUposlenicima_Click);
-            // 
-            // lblNaslov
-            // 
-            this.lblNaslov.AutoSize = true;
-            this.lblNaslov.Font = new System.Drawing.Font("Cooper Black", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblNaslov.ForeColor = System.Drawing.Color.Gold;
-            this.lblNaslov.Location = new System.Drawing.Point(0, 0);
-            this.lblNaslov.Name = "lblNaslov";
-            this.lblNaslov.Size = new System.Drawing.Size(275, 55);
-            this.lblNaslov.TabIndex = 1;
-            this.lblNaslov.Text = "PET SHOP";
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Purple;
+            this.label6.Font = new System.Drawing.Font("Showcard Gothic", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.ForeColor = System.Drawing.Color.Orange;
+            this.label6.Location = new System.Drawing.Point(384, 14);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(335, 79);
+            this.label6.TabIndex = 36;
+            this.label6.Text = "PET SHOP";
             // 
             // frmPocetna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1083, 821);
+            this.ClientSize = new System.Drawing.Size(807, 797);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.pnlNavigacija);
             this.Name = "frmPocetna";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmPocetna";
+            this.Load += new System.EventHandler(this.frmPocetna_Load);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel6.ResumeLayout(false);
@@ -326,10 +342,10 @@ namespace PetShop.WinUI
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.pnlNavigacija.ResumeLayout(false);
-            this.pnlNavigacija.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -356,6 +372,7 @@ namespace PetShop.WinUI
         private System.Windows.Forms.Button btnProizvodjaci;
         private System.Windows.Forms.Button btnUpravljanjeProizvodima;
         private System.Windows.Forms.Button btnUpravljanjeUposlenicima;
-        private System.Windows.Forms.Label lblNaslov;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnPopustKupon;
     }
 }

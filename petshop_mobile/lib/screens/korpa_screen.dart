@@ -72,7 +72,7 @@ class _KorpaState extends State<Korpa> {
           );
         } else {
           if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: Text("Greska na serveru, pokusajte ponovo"),
             );
           } else {

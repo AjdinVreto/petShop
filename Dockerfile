@@ -14,6 +14,7 @@ FROM build AS publish
 RUN dotnet publish "PetShop/PetShop.csproj" -c Release -o /app
 FROM base AS final
 WORKDIR /app
+ADD ./PetShop/Images ./Images
 COPY --from=publish /app .
 
 ENTRYPOINT ["dotnet", "PetShop.dll"]

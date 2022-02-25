@@ -44,6 +44,7 @@ namespace PetShop.Services
         public virtual T Delete(int id)
         {
             var entity = ctx.Set<Tdb>().Find(id);
+
             ctx.Set<Tdb>().Remove(entity);
 
             ctx.SaveChanges();

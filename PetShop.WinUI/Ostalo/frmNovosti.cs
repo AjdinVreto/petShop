@@ -15,7 +15,6 @@ namespace PetShop.WinUI.Ostalo
     public partial class frmNovosti : Form
     {
         APIService _serviceNovosti = new APIService("Novost");
-        APIService _serviceKorisnik = new APIService("Korisnik");
 
         private Novost _novost;
         public frmNovosti()
@@ -29,6 +28,11 @@ namespace PetShop.WinUI.Ostalo
         {
             await LoadNovosti();
         }
+        private async Task LoadNovosti()
+        {
+            dgvNovosti.DataSource = await _serviceNovosti.Get<List<Model.Novost>>(null);
+        }
+
 
         private void btnDodajSliku_Click(object sender, EventArgs e)
         {
@@ -59,11 +63,6 @@ namespace PetShop.WinUI.Ostalo
             return bm;
         }
 
-        private async Task LoadNovosti()
-        {
-            dgvNovosti.DataSource = await _serviceNovosti.Get<List<Model.Novost>>(null);
-        }
-
         private void dgvNovosti_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var novost = dgvNovosti.SelectedRows[0].DataBoundItem as Model.Novost;
@@ -91,14 +90,15 @@ namespace PetShop.WinUI.Ostalo
 
                 if (_novost == null)
                 {
-                    var novost = await _serviceNovosti.Insert<Model.Novost>(insert);
+                    await _serviceNovosti.Insert<Model.Novost>(insert);
                 }
                 else
                 {
-                    var novost = await _serviceNovosti.Update<Model.Novost>(_novost.Id, update);
+                    await _serviceNovosti.Update<Model.Novost>(_novost.Id, update);
                 }
                 await LoadNovosti();
                 MessageBox.Show("Uspješno izvršeno");
+                OcistiPolja();
             }
             else
             {
@@ -125,6 +125,13 @@ namespace PetShop.WinUI.Ostalo
             }
 
             return true;
+        }
+
+        private void OcistiPolja()
+        {
+            _novost = null;
+            txtNaslov.Clear();
+            txtTekst.Clear();
         }
     }
 }

@@ -23,16 +23,21 @@ class NovostDetalji extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Chip(
-            backgroundColor: Colors.orangeAccent,
-            padding: const EdgeInsets.all(6),
-            label: Text(
-              novost.naslov,
-              style: const TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-              maxLines: 2,
+          Container(
+            margin: EdgeInsets.only(right: 5, left: 5),
+            child: Chip(
+              backgroundColor: Colors.orangeAccent,
+              padding: const EdgeInsets.all(10),
+              label: Text(
+                novost.naslov,
+                style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+                maxLines: 2,
+                softWrap: true,
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
           const SizedBox(

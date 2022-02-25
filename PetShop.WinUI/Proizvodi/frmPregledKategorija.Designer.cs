@@ -33,10 +33,11 @@ namespace PetShop.WinUI.Proizvodi
             this.lblNavigacija = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvKategorije = new System.Windows.Forms.DataGridView();
-            this.Naziv = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtNazivKategorije = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnDodajKategoriju = new System.Windows.Forms.Button();
+            this.Naziv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Obrisi = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKategorije)).BeginInit();
@@ -46,16 +47,16 @@ namespace PetShop.WinUI.Proizvodi
             // 
             this.panel1.BackColor = System.Drawing.Color.Gold;
             this.panel1.Controls.Add(this.lblNavigacija);
-            this.panel1.Location = new System.Drawing.Point(46, 15);
+            this.panel1.Location = new System.Drawing.Point(9, 7);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(778, 79);
+            this.panel1.Size = new System.Drawing.Size(778, 51);
             this.panel1.TabIndex = 56;
             // 
             // lblNavigacija
             // 
             this.lblNavigacija.AutoSize = true;
             this.lblNavigacija.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblNavigacija.Location = new System.Drawing.Point(315, 23);
+            this.lblNavigacija.Location = new System.Drawing.Point(315, 9);
             this.lblNavigacija.Name = "lblNavigacija";
             this.lblNavigacija.Size = new System.Drawing.Size(155, 32);
             this.lblNavigacija.TabIndex = 19;
@@ -64,9 +65,9 @@ namespace PetShop.WinUI.Proizvodi
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgvKategorije);
-            this.groupBox1.Location = new System.Drawing.Point(222, 286);
+            this.groupBox1.Location = new System.Drawing.Point(106, 206);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(453, 522);
+            this.groupBox1.Size = new System.Drawing.Size(610, 522);
             this.groupBox1.TabIndex = 57;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Kategorije";
@@ -78,27 +79,23 @@ namespace PetShop.WinUI.Proizvodi
             this.dgvKategorije.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvKategorije.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvKategorije.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Naziv});
+            this.Naziv,
+            this.Obrisi});
             this.dgvKategorije.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvKategorije.Location = new System.Drawing.Point(3, 19);
             this.dgvKategorije.Name = "dgvKategorije";
             this.dgvKategorije.ReadOnly = true;
             this.dgvKategorije.RowTemplate.Height = 25;
             this.dgvKategorije.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvKategorije.Size = new System.Drawing.Size(447, 500);
+            this.dgvKategorije.Size = new System.Drawing.Size(604, 500);
             this.dgvKategorije.TabIndex = 0;
-            // 
-            // Naziv
-            // 
-            this.Naziv.DataPropertyName = "Naziv";
-            this.Naziv.HeaderText = "Naziv kategorije";
-            this.Naziv.Name = "Naziv";
-            this.Naziv.ReadOnly = true;
+            this.dgvKategorije.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKategorije_CellContentClick);
+            this.dgvKategorije.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvKategorije_DataError);
             // 
             // txtNazivKategorije
             // 
             this.txtNazivKategorije.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtNazivKategorije.Location = new System.Drawing.Point(299, 154);
+            this.txtNazivKategorije.Location = new System.Drawing.Point(262, 95);
             this.txtNazivKategorije.Name = "txtNazivKategorije";
             this.txtNazivKategorije.Size = new System.Drawing.Size(262, 33);
             this.txtNazivKategorije.TabIndex = 58;
@@ -107,7 +104,7 @@ namespace PetShop.WinUI.Proizvodi
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(361, 130);
+            this.label7.Location = new System.Drawing.Point(324, 71);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(136, 21);
             this.label7.TabIndex = 59;
@@ -118,7 +115,7 @@ namespace PetShop.WinUI.Proizvodi
             this.btnDodajKategoriju.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnDodajKategoriju.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnDodajKategoriju.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDodajKategoriju.Location = new System.Drawing.Point(361, 215);
+            this.btnDodajKategoriju.Location = new System.Drawing.Point(324, 156);
             this.btnDodajKategoriju.Name = "btnDodajKategoriju";
             this.btnDodajKategoriju.Size = new System.Drawing.Size(151, 44);
             this.btnDodajKategoriju.TabIndex = 60;
@@ -126,12 +123,28 @@ namespace PetShop.WinUI.Proizvodi
             this.btnDodajKategoriju.UseVisualStyleBackColor = false;
             this.btnDodajKategoriju.Click += new System.EventHandler(this.btnDodajKategoriju_Click);
             // 
+            // Naziv
+            // 
+            this.Naziv.DataPropertyName = "Naziv";
+            this.Naziv.HeaderText = "Naziv kategorije";
+            this.Naziv.Name = "Naziv";
+            this.Naziv.ReadOnly = true;
+            // 
+            // Obrisi
+            // 
+            this.Obrisi.DataPropertyName = "Obrisi";
+            this.Obrisi.HeaderText = "Obrisi";
+            this.Obrisi.Name = "Obrisi";
+            this.Obrisi.ReadOnly = true;
+            this.Obrisi.Text = "Obrisi";
+            this.Obrisi.UseColumnTextForButtonValue = true;
+            // 
             // frmPregledKategorija
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(874, 821);
+            this.ClientSize = new System.Drawing.Size(799, 739);
             this.Controls.Add(this.btnDodajKategoriju);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtNazivKategorije);
@@ -155,9 +168,10 @@ namespace PetShop.WinUI.Proizvodi
         private System.Windows.Forms.Label lblNavigacija;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dgvKategorije;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Naziv;
         private System.Windows.Forms.TextBox txtNazivKategorije;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnDodajKategoriju;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Naziv;
+        private System.Windows.Forms.DataGridViewButtonColumn Obrisi;
     }
 }

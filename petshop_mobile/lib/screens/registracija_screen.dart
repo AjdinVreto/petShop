@@ -114,7 +114,7 @@ class _RegistracijaState extends State<Registracija> {
 
   Future<void> registrujKorisnika() async {
     korisnickoImeMailPostoji = false;
-    var k = await APIService.Post(
+    var k = await APIService.Registracija(
         "Korisnik/registracija", json.encode(korisnik.toJson()));
 
     if (k == null) {
@@ -351,7 +351,7 @@ class _RegistracijaState extends State<Registracija> {
             );
           } else {
             if (snapshot.hasError) {
-              return Center(
+              return const Center(
                 child: Text("Greska na serveru, pokusajte ponovo"),
               );
             } else {
@@ -388,7 +388,7 @@ class _RegistracijaState extends State<Registracija> {
             );
           } else {
             if (snapshot.hasError) {
-              return Center(
+              return const Center(
                 child: Text("Greska na serveru, pokusajte ponovo"),
               );
             } else {

@@ -10,8 +10,8 @@ using PetShop.Database;
 namespace PetShop.Migrations
 {
     [DbContext(typeof(PetShopContext))]
-    [Migration("20220218230452_init")]
-    partial class init
+    [Migration("20220223041313_Inicijalna")]
+    partial class Inicijalna
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -541,6 +541,7 @@ namespace PetShop.Migrations
                         .WithMany("Komentars")
                         .HasForeignKey("ProizvodId")
                         .HasConstraintName("FK_Komentar_Proizvod")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Korisnik");
@@ -620,6 +621,7 @@ namespace PetShop.Migrations
                         .WithMany("NarudzbaProizvods")
                         .HasForeignKey("ProizvodId")
                         .HasConstraintName("PK_NarudzbaProizvod_Proizvod")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Narudzba");
@@ -655,12 +657,14 @@ namespace PetShop.Migrations
                         .WithMany("Proizvods")
                         .HasForeignKey("KategorijaId")
                         .HasConstraintName("FK_Proizvod_Kategorija")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("PetShop.Database.Proizvodjac", "Proizvodjac")
                         .WithMany("Proizvods")
                         .HasForeignKey("ProizvodjacId")
                         .HasConstraintName("FK_Proizvod_Proizvodjac")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Kategorija");
@@ -691,6 +695,7 @@ namespace PetShop.Migrations
                         .WithMany("Recenzijas")
                         .HasForeignKey("ProizvodId")
                         .HasConstraintName("FK_Recenzija_Proizvod")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Korisnik");
@@ -728,6 +733,7 @@ namespace PetShop.Migrations
                         .WithMany("Uposleniks")
                         .HasForeignKey("PoslovnicaId")
                         .HasConstraintName("FK_Uposlenik_Poslovnica")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Korisnik");

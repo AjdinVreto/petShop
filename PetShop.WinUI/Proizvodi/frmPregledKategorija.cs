@@ -37,13 +37,31 @@ namespace PetShop.WinUI.Proizvodi
             {
                 insert.Naziv = txtNazivKategorije.Text;
 
-                var _kategorija = await _serviceKategorije.Insert<Kategorija>(insert);
+                await _serviceKategorije.Insert<Kategorija>(insert);
                 await LoadKategorija();
+                MessageBox.Show("Uspješno izvršeno");
+                OcistiPolja();
             }
             else
             {
                 MessageBox.Show("Nisu sva polja popunjena", "Greška",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private async void dgvKategorije_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 1)
+            {
+                var kategorija = dgvKategorije.SelectedRows[0].DataBoundItem as Model.Kategorija;
+
+                if (MessageBox.Show("Brisanje kategorije brise i proizvode sa ovom kategorijom. Da li zelite obrisati","Poruka", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    await _serviceKategorije.Delete<Kategorija>(kategorija.Id);
+                }
+
+                await LoadKategorija();
             }
         }
 
@@ -55,6 +73,16 @@ namespace PetShop.WinUI.Proizvodi
             }
 
             return true;
+        }
+
+        private void OcistiPolja()
+        {
+            txtNazivKategorije.Clear();
+        }
+
+        private void dgvKategorije_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
         }
     }
 }

@@ -48,8 +48,28 @@ namespace PetShop.WinUI.Kontakt
                 Odgovoreno = true
             };
 
-            var kontaktRequest = await _serviceKontakti.Update<Model.Kontakt>(_kontakt.Id, request);
+            await _serviceKontakti.Update<Model.Kontakt>(_kontakt.Id, request);
             await LoadKontakt();
+        }
+
+        private async void dgvKontakt_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 4)
+            {
+                var kontakt = dgvKontakt.SelectedRows[0].DataBoundItem as Model.Kontakt;
+
+                if (MessageBox.Show("Da li zelite obrisati poruku ?", "Poruka", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    await _serviceKontakti.Delete<Model.Kontakt>(kontakt.Id);
+                }
+
+                await LoadKontakt();
+            }
+        }
+
+        private void dgvKontakt_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
         }
     }
 }

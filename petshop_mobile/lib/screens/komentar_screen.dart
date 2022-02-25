@@ -36,7 +36,6 @@ class _KomentariState extends State<Komentari> {
     var komentari = await APIService.Get("Komentar", queryParams);
 
     var komentariList = komentari?.map((i) => Komentar.fromJson(i)).toList();
-
     return komentariList;
   }
 
@@ -236,7 +235,7 @@ class _KomentariState extends State<Komentari> {
           );
         } else {
           if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: Text("Greska na serveru, pokusajte ponovo"),
             );
           } else {

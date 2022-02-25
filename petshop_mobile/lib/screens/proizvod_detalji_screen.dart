@@ -110,7 +110,7 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
           );
         } else {
           if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: Text("Greska na serveru, pokusajte ponovo"),
             );
           } else {
@@ -130,6 +130,9 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 22,
                                 color: Colors.white),
+                            maxLines: 2,
+                            softWrap: true,
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),
@@ -301,32 +304,36 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
   }
 
   Widget proizvodOpis() {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.orange,
-        ),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      width: double.infinity,
-      height: 350,
+    return SingleChildScrollView(
       child: Container(
-        color: Colors.purple,
-        child: Padding(
-          padding: const EdgeInsets.all(6),
-          child: Text(
-            "O proizvodu \n\nOpis : " +
-                widget.proizvod.opis +
-                "\n\n" +
-                "Proizvodjac : " +
-                widget.proizvod.proizvodjac.naziv +
-                "\n\n" +
-                "Zemlja porijekla : " +
-                widget.proizvod.proizvodjac.drzava.naziv,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 20,
-              color: Colors.white,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.orange,
+          ),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        width: double.infinity,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Container(
+            color: Colors.purple,
+            child: Padding(
+              padding: const EdgeInsets.all(6),
+              child: Text(
+                "O proizvodu \n\nOpis : " +
+                    widget.proizvod.opis +
+                    "\n\n" +
+                    "Proizvodjac : " +
+                    widget.proizvod.proizvodjac.naziv +
+                    "\n\n" +
+                    "Zemlja porijekla : " +
+                    widget.proizvod.proizvodjac.drzava.naziv,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
         ),

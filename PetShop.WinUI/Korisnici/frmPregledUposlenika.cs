@@ -25,9 +25,9 @@ namespace PetShop.WinUI.Korisnici
         List<KorisnikRola> _korisnikRola;
         List<Uposlenik> _uposlenici;
 
-        string logKorisnickoIme;
-        int logKorisnikId;
-        public frmPregledUposlenika(string _logKorisnickoIme = null)
+        bool provjeraAdmin;
+
+        public frmPregledUposlenika(bool _provjeraAdmin)
         {
             InitializeComponent();
             dgvUposlenici.AutoGenerateColumns = false;
@@ -36,8 +36,7 @@ namespace PetShop.WinUI.Korisnici
             _korisnikRola = null;
             _uposlenici = null;
             _korisnici = null;
-            logKorisnickoIme = _logKorisnickoIme;
-            logKorisnikId = 0;
+            provjeraAdmin = _provjeraAdmin;
         }
 
         private async void frmPregledUposlenika_Load(object sender, EventArgs e)
@@ -54,19 +53,11 @@ namespace PetShop.WinUI.Korisnici
                 IncludePoslovnica = true
             };
 
-            dgvUposlenici.DataSource = await _serviceUposlenici.Get<List<Model.Uposlenik>>(request);
-
             _korisnikRola = await _serviceKorisnikRola.Get<List<Model.KorisnikRola>>(null);
             _uposlenici = await _serviceUposlenici.Get<List<Model.Uposlenik>>(request);
             _korisnici = await _serviceKorisnici.Get<List<Model.Korisnik>>(null);
 
-            foreach(var item in _korisnici)
-            {
-                if (item.KorisnickoIme.Equals(logKorisnickoIme))
-                {
-                    logKorisnikId = item.Id;
-                }
-            }
+            dgvUposlenici.DataSource = _uposlenici;
         }
 
         private async Task LoadPoslovnice()
@@ -112,7 +103,7 @@ namespace PetShop.WinUI.Korisnici
                     }
                     else
                     {
-                        if (provjeraAdmin())
+                        if (provjeraAdmin)
                         {
                             if (_uposlenik == null)
                             {
@@ -233,21 +224,9 @@ namespace PetShop.WinUI.Korisnici
             }
         }
 
-
-        private bool provjeraAdmin()
+        private void dgvUposlenici_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            foreach(var item in _korisnikRola)
-            {
-                if (item.KorisnikId == logKorisnikId)
-                {
-                    if (item.Rola.Naziv.Equals("Administrator"))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
+            e.Cancel = true;
         }
     }
 }

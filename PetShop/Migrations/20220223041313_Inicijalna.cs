@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PetShop.Migrations
 {
-    public partial class init : Migration
+    public partial class Inicijalna : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -191,13 +191,13 @@ namespace PetShop.Migrations
                         column: x => x.KategorijaId,
                         principalTable: "Kategorija",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Proizvod_Proizvodjac",
                         column: x => x.ProizvodjacId,
                         principalTable: "Proizvodjac",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -317,7 +317,7 @@ namespace PetShop.Migrations
                         column: x => x.PoslovnicaId,
                         principalTable: "Poslovnica",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -345,7 +345,7 @@ namespace PetShop.Migrations
                         column: x => x.ProizvodId,
                         principalTable: "Proizvod",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -373,7 +373,7 @@ namespace PetShop.Migrations
                         column: x => x.ProizvodId,
                         principalTable: "Proizvod",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -400,7 +400,7 @@ namespace PetShop.Migrations
                         column: x => x.ProizvodId,
                         principalTable: "Proizvod",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

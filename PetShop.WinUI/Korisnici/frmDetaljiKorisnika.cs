@@ -19,7 +19,6 @@ namespace PetShop.WinUI.Korisnici
         APIService _serviceRole = new APIService("Rola");
         APIService _serviceGrad = new APIService("Grad");
         APIService _serviceSpol = new APIService("Spol");
-        APIService _serviceDrzava = new APIService("Drzava");
 
         private Korisnik _korisnik;
         private List<Korisnik> _korisnici;
@@ -38,7 +37,6 @@ namespace PetShop.WinUI.Korisnici
         private async Task LoadData()
         {
             await LoadRole();
-            await LoadDrzava();
             await LoadGrad();
             await LoadSpol();
             await LoadKorisnici();
@@ -85,10 +83,8 @@ namespace PetShop.WinUI.Korisnici
                 txtKorisnickoIme.Text = _korisnik.KorisnickoIme;
                 txtEmail.Text = _korisnik.Email;
                 dtpDatumRodjenja.Value = _korisnik.DatumRodjenja;
-                //test
                 cmbSpol.SelectedValue = _korisnik.SpolId;
                 cmbGrad.SelectedValue = _korisnik.GradId;
-                cmbDrzava.SelectedValue = _korisnik.Grad.DrzavaId;
                 if (_korisnik.Slika.Length != 0)
                 {
                     pbxSlika.Image = ByteToImage(_korisnik.Slika);
@@ -118,15 +114,6 @@ namespace PetShop.WinUI.Korisnici
             cmbSpol.DisplayMember = "Naziv";
             cmbSpol.ValueMember = "Id";
         }
-        private async Task LoadDrzava()
-        {
-            var drzave = await _serviceDrzava.Get<List<Model.Drzava>>(null);
-
-            drzave.Insert(0, new Drzava());
-            cmbDrzava.DataSource = drzave;
-            cmbDrzava.DisplayMember = "Naziv";
-            cmbDrzava.ValueMember = "Id";
-        }
 
         private async Task LoadGrad()
         {
@@ -150,21 +137,21 @@ namespace PetShop.WinUI.Korisnici
         {
             if (ValidirajUnesenePodatke() && ValidirajEmailIKorisnickoIme())
             {
-                if (cmbGrad.SelectedValue != null && cmbSpol.SelectedValue != null && (int)cmbGrad.SelectedValue > 0 && (int)cmbSpol.SelectedValue > 0 && cmbDrzava.SelectedValue != null && (int)cmbDrzava.SelectedValue > 0)
+                if (cmbGrad.SelectedValue != null && cmbSpol.SelectedValue != null && (int)cmbGrad.SelectedValue > 0 && (int)cmbSpol.SelectedValue > 0)
                 {
                     var gradObj = cmbGrad.SelectedValue;
                     var spolObj = cmbSpol.SelectedValue;
-                    var drzavaObj = cmbDrzava.SelectedValue;
 
                     if (int.TryParse(gradObj.ToString(), out int gradId))
                     {
                         insert.GradId = gradId;
-                        //update.GradId = gradId;
+                        update.GradId = gradId;
                     }
 
                     if (int.TryParse(spolObj.ToString(), out int spolId))
                     {
                         insert.SpolId = spolId;
+                        update.SpolId = spolId;
                     }
 
                     insert.Ime = update.Ime = txtIme.Text;
@@ -266,28 +253,6 @@ namespace PetShop.WinUI.Korisnici
             }
 
             return true;
-        }
-
-        private async void cmbDrzava_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var selectedIndex = cmbDrzava.SelectedValue;
-
-            if (int.TryParse(selectedIndex.ToString(), out int id))
-            {
-                if (id > 0)
-                {
-                    GradSearchObject request = new GradSearchObject()
-                    {
-                        Id = id
-                    };
-
-                    var gradoviFilter = await _serviceGrad.Get<List<Model.Grad>>(request);
-
-                    cmbGrad.DataSource = gradoviFilter;
-                    cmbGrad.DisplayMember = "Naziv";
-                    cmbGrad.ValueMember = "Id";
-                }
-            }
         }
     }
 }

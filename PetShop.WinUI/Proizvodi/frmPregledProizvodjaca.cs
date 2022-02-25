@@ -62,8 +62,10 @@ namespace PetShop.WinUI.Proizvodi
                     insert.Naziv = txtNazivProizvodjaca.Text;
                     insert.DrzavaId = (int)cmbDrzave.SelectedValue;
 
-                    var proizvodjac = await _serviceProizvodjaci.Insert<Model.Proizvodjac>(insert);
+                    await _serviceProizvodjaci.Insert<Model.Proizvodjac>(insert);
                     await LoadProizvodjaci();
+                    MessageBox.Show("Uspješno izvršeno");
+                    OcistiPolja();
                 }
                 else
                 {
@@ -86,6 +88,16 @@ namespace PetShop.WinUI.Proizvodi
             }
 
             return true;
+        }
+
+        private void OcistiPolja()
+        {
+            txtNazivProizvodjaca.Clear();
+        }
+
+        private void dgvProizvodjaci_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
         }
     }
 }

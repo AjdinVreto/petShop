@@ -37,6 +37,7 @@ namespace PetShop.WinUI.Ostalo
             this.Datum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProizvodNaziv = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KorisnikKorisnickoIme = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Obrisi = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKomentari)).BeginInit();
@@ -46,16 +47,16 @@ namespace PetShop.WinUI.Ostalo
             // 
             this.panel1.BackColor = System.Drawing.Color.Gold;
             this.panel1.Controls.Add(this.lblNavigacija);
-            this.panel1.Location = new System.Drawing.Point(38, 12);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(778, 79);
+            this.panel1.Size = new System.Drawing.Size(941, 51);
             this.panel1.TabIndex = 65;
             // 
             // lblNavigacija
             // 
             this.lblNavigacija.AutoSize = true;
             this.lblNavigacija.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblNavigacija.Location = new System.Drawing.Point(320, 24);
+            this.lblNavigacija.Location = new System.Drawing.Point(419, 12);
             this.lblNavigacija.Name = "lblNavigacija";
             this.lblNavigacija.Size = new System.Drawing.Size(155, 32);
             this.lblNavigacija.TabIndex = 19;
@@ -64,9 +65,9 @@ namespace PetShop.WinUI.Ostalo
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgvKomentari);
-            this.groupBox1.Location = new System.Drawing.Point(38, 272);
+            this.groupBox1.Location = new System.Drawing.Point(12, 78);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(778, 537);
+            this.groupBox1.Size = new System.Drawing.Size(944, 537);
             this.groupBox1.TabIndex = 71;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Komentari";
@@ -81,15 +82,18 @@ namespace PetShop.WinUI.Ostalo
             this.Tekst,
             this.Datum,
             this.ProizvodNaziv,
-            this.KorisnikKorisnickoIme});
+            this.KorisnikKorisnickoIme,
+            this.Obrisi});
             this.dgvKomentari.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvKomentari.Location = new System.Drawing.Point(3, 19);
             this.dgvKomentari.Name = "dgvKomentari";
             this.dgvKomentari.ReadOnly = true;
             this.dgvKomentari.RowTemplate.Height = 25;
             this.dgvKomentari.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvKomentari.Size = new System.Drawing.Size(772, 515);
+            this.dgvKomentari.Size = new System.Drawing.Size(938, 515);
             this.dgvKomentari.TabIndex = 0;
+            this.dgvKomentari.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKomentari_CellContentClick);
+            this.dgvKomentari.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvKomentari_DataError);
             // 
             // Tekst
             // 
@@ -119,11 +123,20 @@ namespace PetShop.WinUI.Ostalo
             this.KorisnikKorisnickoIme.Name = "KorisnikKorisnickoIme";
             this.KorisnikKorisnickoIme.ReadOnly = true;
             // 
+            // Obrisi
+            // 
+            this.Obrisi.DataPropertyName = "Obrisi";
+            this.Obrisi.HeaderText = "Obrisi";
+            this.Obrisi.Name = "Obrisi";
+            this.Obrisi.ReadOnly = true;
+            this.Obrisi.Text = "Obrisi";
+            this.Obrisi.UseColumnTextForButtonValue = true;
+            // 
             // frmKomentar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(874, 821);
+            this.ClientSize = new System.Drawing.Size(968, 628);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.Name = "frmKomentar";
@@ -147,5 +160,6 @@ namespace PetShop.WinUI.Ostalo
         private System.Windows.Forms.DataGridViewTextBoxColumn Datum;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProizvodNaziv;
         private System.Windows.Forms.DataGridViewTextBoxColumn KorisnikKorisnickoIme;
+        private System.Windows.Forms.DataGridViewButtonColumn Obrisi;
     }
 }

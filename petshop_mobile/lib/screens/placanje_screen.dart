@@ -112,18 +112,19 @@ class _PlacanjeState extends State<Placanje> {
 
   void izracunajPopust() {
     widget.ukCijena = widget.ukCijena - (widget.ukCijena * iznos / 100);
+    convertIznos();
   }
 
   void convertIznos() {
-    String? prvidio;
-    prvidio = widget.ukCijena
+    String? toInt;
+    toInt = widget.ukCijena
             .toString()
             .substring(0, widget.ukCijena.toString().indexOf(".")) +
         widget.ukCijena.toStringAsFixed(2).substring(
             widget.ukCijena.toStringAsFixed(2).indexOf(".") + 1,
             widget.ukCijena.toStringAsFixed(2).length);
 
-    iznosInt = int.parse(prvidio);
+    iznosInt = int.parse(toInt);
   }
 
   Future<void> makePayment() async {

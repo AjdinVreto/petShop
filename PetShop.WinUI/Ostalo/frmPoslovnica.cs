@@ -54,7 +54,7 @@ namespace PetShop.WinUI.Ostalo
 
             txtAdresa.Text = _poslovnica.Adresa;
             txtBrojtelefona.Text = _poslovnica.BrojTelefona;
-            cmbGrad.SelectedValue = _poslovnica.GradId;
+            cmbGrad.Enabled = false;
         }
 
         PoslovnicaInsertRequest insert = new PoslovnicaInsertRequest();
@@ -63,31 +63,30 @@ namespace PetShop.WinUI.Ostalo
         {
             if (ValidirajUnesenePodatke())
             {
-                if (cmbGrad.SelectedValue != null && (int)cmbGrad.SelectedValue > 0)
+                if ((cmbGrad.SelectedValue != null && (int)cmbGrad.SelectedValue > 0) || _poslovnica != null)
                 {
                     var gradObj = cmbGrad.SelectedValue;
 
                     if (int.TryParse(gradObj.ToString(), out int gradId))
                     {
                         insert.GradId = gradId;
-                        update.GradId = gradId;
                     }
 
                     insert.Adresa = update.Adresa = txtAdresa.Text;
                     insert.BrojTelefona = update.BrojTelefona = txtBrojtelefona.Text;
+                    update.GradId = _poslovnica.GradId;
 
                     if (_poslovnica == null)
                     {
-                        var poslovnica = await _servicePoslovnica.Insert<Model.Poslovnica>(insert);
-                        await LoadPoslovnica();
-                        MessageBox.Show("Uspješno izvršeno");
+                        await _servicePoslovnica.Insert<Model.Poslovnica>(insert);
                     }
                     else
                     {
-                        var poslovnica = await _servicePoslovnica.Update<Model.Poslovnica>(_poslovnica.Id, update);
-                        await LoadPoslovnica();
-                        MessageBox.Show("Uspješno izvršeno");
+                        await _servicePoslovnica.Update<Model.Poslovnica>(_poslovnica.Id, update);
                     }
+                    await LoadPoslovnica();
+                    MessageBox.Show("Uspješno izvršeno");
+                    OcistiPolja();
                 }
                 else
                 {
@@ -110,6 +109,19 @@ namespace PetShop.WinUI.Ostalo
             }
 
             return true;
+        }
+
+        private void OcistiPolja()
+        {
+            _poslovnica = null;
+            txtAdresa.Clear();
+            txtBrojtelefona.Clear();
+            cmbGrad.Enabled = true;
+        }
+
+        private void dgvPoslovnice_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
         }
     }
 }

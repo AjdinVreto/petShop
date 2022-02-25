@@ -50,7 +50,7 @@ namespace PetShop.WinUI.Proizvodi
             this.btnDodajProizvodjaca.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnDodajProizvodjaca.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnDodajProizvodjaca.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDodajProizvodjaca.Location = new System.Drawing.Point(366, 302);
+            this.btnDodajProizvodjaca.Location = new System.Drawing.Point(324, 205);
             this.btnDodajProizvodjaca.Name = "btnDodajProizvodjaca";
             this.btnDodajProizvodjaca.Size = new System.Drawing.Size(178, 44);
             this.btnDodajProizvodjaca.TabIndex = 70;
@@ -62,7 +62,7 @@ namespace PetShop.WinUI.Proizvodi
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(376, 136);
+            this.label7.Location = new System.Drawing.Point(334, 66);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(152, 21);
             this.label7.TabIndex = 69;
@@ -71,7 +71,7 @@ namespace PetShop.WinUI.Proizvodi
             // txtNazivProizvodjaca
             // 
             this.txtNazivProizvodjaca.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtNazivProizvodjaca.Location = new System.Drawing.Point(314, 160);
+            this.txtNazivProizvodjaca.Location = new System.Drawing.Point(272, 90);
             this.txtNazivProizvodjaca.Name = "txtNazivProizvodjaca";
             this.txtNazivProizvodjaca.Size = new System.Drawing.Size(262, 33);
             this.txtNazivProizvodjaca.TabIndex = 68;
@@ -79,9 +79,9 @@ namespace PetShop.WinUI.Proizvodi
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgvProizvodjaci);
-            this.groupBox1.Location = new System.Drawing.Point(228, 365);
+            this.groupBox1.Location = new System.Drawing.Point(74, 255);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(453, 445);
+            this.groupBox1.Size = new System.Drawing.Size(680, 445);
             this.groupBox1.TabIndex = 67;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Proizvodjaci";
@@ -101,8 +101,9 @@ namespace PetShop.WinUI.Proizvodi
             this.dgvProizvodjaci.ReadOnly = true;
             this.dgvProizvodjaci.RowTemplate.Height = 25;
             this.dgvProizvodjaci.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProizvodjaci.Size = new System.Drawing.Size(447, 423);
+            this.dgvProizvodjaci.Size = new System.Drawing.Size(674, 423);
             this.dgvProizvodjaci.TabIndex = 0;
+            this.dgvProizvodjaci.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvProizvodjaci_DataError);
             // 
             // Naziv
             // 
@@ -122,16 +123,16 @@ namespace PetShop.WinUI.Proizvodi
             // 
             this.panel1.BackColor = System.Drawing.Color.Gold;
             this.panel1.Controls.Add(this.lblNavigacija);
-            this.panel1.Location = new System.Drawing.Point(48, 17);
+            this.panel1.Location = new System.Drawing.Point(6, 8);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(778, 79);
+            this.panel1.Size = new System.Drawing.Size(778, 51);
             this.panel1.TabIndex = 66;
             // 
             // lblNavigacija
             // 
             this.lblNavigacija.AutoSize = true;
             this.lblNavigacija.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblNavigacija.Location = new System.Drawing.Point(318, 23);
+            this.lblNavigacija.Location = new System.Drawing.Point(318, 9);
             this.lblNavigacija.Name = "lblNavigacija";
             this.lblNavigacija.Size = new System.Drawing.Size(178, 32);
             this.lblNavigacija.TabIndex = 19;
@@ -141,7 +142,7 @@ namespace PetShop.WinUI.Proizvodi
             // 
             this.cmbDrzave.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cmbDrzave.FormattingEnabled = true;
-            this.cmbDrzave.Location = new System.Drawing.Point(314, 225);
+            this.cmbDrzave.Location = new System.Drawing.Point(272, 155);
             this.cmbDrzave.Name = "cmbDrzave";
             this.cmbDrzave.Size = new System.Drawing.Size(262, 33);
             this.cmbDrzave.TabIndex = 71;
@@ -150,7 +151,7 @@ namespace PetShop.WinUI.Proizvodi
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(417, 201);
+            this.label8.Location = new System.Drawing.Point(375, 131);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(63, 21);
             this.label8.TabIndex = 72;
@@ -160,7 +161,7 @@ namespace PetShop.WinUI.Proizvodi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(874, 821);
+            this.ClientSize = new System.Drawing.Size(796, 706);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.cmbDrzave);
             this.Controls.Add(this.btnDodajProizvodjaca);

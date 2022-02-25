@@ -20,7 +20,7 @@ namespace PetShop.Services
         {
             var entity = ctx.Set<Database.Komentar>().AsQueryable();
 
-            entity = entity.Include(x => x.Korisnik).Include(x => x.Proizvod);
+            entity = entity.Include(x => x.Korisnik).Include(x => x.Korisnik.Grad).Include(x => x.Korisnik.Spol).Include(x => x.Proizvod);
 
             if (search.ProizvodId.HasValue)
             {
