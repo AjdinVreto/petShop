@@ -73,6 +73,12 @@ namespace PetShop
                 context.SaveChanges();
                 context.Korisniks.Add(new Korisnik { Ime = "Tammy", Prezime = "Abraham", DatumRodjenja = DateTime.Now, Adresa = "Roma 22", Email = "tammy@gmail.com", GradId = 1, KorisnickoIme = "korisnik", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "roma") });
                 context.SaveChanges();
+                context.Korisniks.Add(new Korisnik { Ime = "Admir", Prezime = "Vreto", DatumRodjenja = DateTime.Now, Adresa = "Rukdol 77", Email = "admir@gmail.com", GradId = 1, KorisnickoIme = "admirvreto", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
+                context.SaveChanges();
+                context.Korisniks.Add(new Korisnik { Ime = "Samir", Prezime = "Sinanovic", DatumRodjenja = DateTime.Now, Adresa = "Zelenih beretki 213", Email = "samke@gmail.com", GradId = 2, KorisnickoIme = "samke", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
+                context.SaveChanges();
+                context.Korisniks.Add(new Korisnik { Ime = "Tarik", Prezime = "Vreto", DatumRodjenja = DateTime.Now, Adresa = "Bistricki put 12", Email = "Tare@gmail.com", GradId = 3, KorisnickoIme = "tarikv", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
+                context.SaveChanges();
                 context.Korisniks.Add(new Korisnik { Ime = "Edin", Prezime = "Dzeko", DatumRodjenja = DateTime.Now, Adresa = "Sarajevska 123", Email = "dzeko@hotmail.com", GradId = 1, KorisnickoIme = "edzeko", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
                 context.SaveChanges();
                 context.Korisniks.Add(new Korisnik { Ime = "Lara", Prezime = "Croft", DatumRodjenja = DateTime.Now, Adresa = "142, Abbingdon Road", Email = "lara@gmail.com", GradId = 2, KorisnickoIme = "mobile", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
@@ -86,6 +92,16 @@ namespace PetShop
                 context.KorisnikRolas.Add(new KorisnikRola { KorisnikId = 2, RolaId = 2 });
                 context.SaveChanges();
                 context.KorisnikRolas.Add(new KorisnikRola { KorisnikId = 3, RolaId = 3 });
+                context.SaveChanges();
+                context.KorisnikRolas.Add(new KorisnikRola { KorisnikId = 4, RolaId = 3 });
+                context.SaveChanges();
+                context.KorisnikRolas.Add(new KorisnikRola { KorisnikId = 5, RolaId = 3 });
+                context.SaveChanges();
+                context.KorisnikRolas.Add(new KorisnikRola { KorisnikId = 6, RolaId = 3 });
+                context.SaveChanges();
+                context.KorisnikRolas.Add(new KorisnikRola { KorisnikId = 7, RolaId = 3 });
+                context.SaveChanges();
+                context.KorisnikRolas.Add(new KorisnikRola { KorisnikId = 8, RolaId = 3 });
                 context.SaveChanges();
             }
 
@@ -192,33 +208,33 @@ namespace PetShop
 
             if (!context.Komentars.Any())
             {
-                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 2, ProizvodId = 7, Tekst = "Odlican proizvod !" });
+                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 5, ProizvodId = 7, Tekst = "Odlican proizvod !" });
                 context.SaveChanges();
-                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 5, ProizvodId = 4, Tekst = "Svidja mi se ovaj proizvod !" });
+                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 6, ProizvodId = 4, Tekst = "Svidja mi se ovaj proizvod !" });
                 context.SaveChanges();
-                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 4, ProizvodId = 5, Tekst = "Svidja mi se !" });
+                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 5, ProizvodId = 5, Tekst = "Svidja mi se !" });
                 context.SaveChanges();
-                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 5, ProizvodId = 2, Tekst = "Vrhunski proizvod. Ponovo cu ga kupiti !" });
+                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 6, ProizvodId = 2, Tekst = "Vrhunski proizvod. Ponovo cu ga kupiti !" });
                 context.SaveChanges();
-                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 3, ProizvodId = 1, Tekst = "Pohvale za proizvod !" });
+                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 4, ProizvodId = 1, Tekst = "Pohvale za proizvod !" });
                 context.SaveChanges();
-                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 5, ProizvodId = 10, Tekst = "Nije nesto !" });
+                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 6, ProizvodId = 10, Tekst = "Nije nesto !" });
                 context.SaveChanges();
-                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 5, ProizvodId = 1, Tekst = "Kupujem ponovo. Odlicno !" });
+                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 6, ProizvodId = 1, Tekst = "Kupujem ponovo. Odlicno !" });
                 context.SaveChanges();
-                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 4, ProizvodId = 2, Tekst = "Odlicno, sigurno cu ponovo kupiti !" });
+                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 5, ProizvodId = 2, Tekst = "Odlicno, sigurno cu ponovo kupiti !" });
                 context.SaveChanges();
-                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 5, ProizvodId = 3, Tekst = "Odlicno, sigurno cu ponovo kupiti. Sve pohvale !" });
+                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 6, ProizvodId = 3, Tekst = "Odlicno, sigurno cu ponovo kupiti. Sve pohvale !" });
                 context.SaveChanges();
-                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 4, ProizvodId = 6, Tekst = "Vrhunski proizvod !" });
+                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 5, ProizvodId = 6, Tekst = "Vrhunski proizvod !" });
                 context.SaveChanges();
-                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 3, ProizvodId = 11, Tekst = "Ma odlicno !" });
+                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 4, ProizvodId = 11, Tekst = "Ma odlicno !" });
                 context.SaveChanges();
-                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 3, ProizvodId = 8, Tekst = "Sjajan proizvod !" });
+                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 4, ProizvodId = 8, Tekst = "Sjajan proizvod !" });
                 context.SaveChanges();
-                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 3, ProizvodId = 12, Tekst = "nije lose " });
+                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 4, ProizvodId = 12, Tekst = "nije lose " });
                 context.SaveChanges();
-                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 4, ProizvodId = 11, Tekst = "Preporuke za proizvod" });
+                context.Komentars.Add(new Komentar { Datum = DateTime.Now, KorisnikId = 5, ProizvodId = 11, Tekst = "Preporuke za proizvod" });
                 context.SaveChanges();
             }
 
@@ -226,37 +242,82 @@ namespace PetShop
 
             if (!context.Recenzijas.Any())
             {
-                context.Recenzijas.Add(new Recenzija { ProizvodId = 1, KorisnikId = 5, Ocjena = 5, Datum = DateTime.Now });
+                context.Recenzijas.Add(new Recenzija { ProizvodId = 1, KorisnikId = 6, Ocjena = 5, Datum = DateTime.Now });
                 context.SaveChanges();
-                context.Recenzijas.Add(new Recenzija { ProizvodId = 1, KorisnikId = 4, Ocjena = 3, Datum = DateTime.Now });
+                context.Recenzijas.Add(new Recenzija { ProizvodId = 1, KorisnikId = 5, Ocjena = 3, Datum = DateTime.Now });
+                context.SaveChanges();
+                context.Recenzijas.Add(new Recenzija { ProizvodId = 2, KorisnikId = 6, Ocjena = 5, Datum = DateTime.Now });
+                context.SaveChanges();
+                context.Recenzijas.Add(new Recenzija { ProizvodId = 3, KorisnikId = 6, Ocjena = 4, Datum = DateTime.Now });
+                context.SaveChanges();
+                context.Recenzijas.Add(new Recenzija { ProizvodId = 4, KorisnikId = 6, Ocjena = 4, Datum = DateTime.Now });
+                context.SaveChanges();
+                context.Recenzijas.Add(new Recenzija { ProizvodId = 5, KorisnikId = 6, Ocjena = 2, Datum = DateTime.Now });
+                context.SaveChanges();
+                context.Recenzijas.Add(new Recenzija { ProizvodId = 6, KorisnikId = 6, Ocjena = 4, Datum = DateTime.Now });
+                context.SaveChanges();
+                context.Recenzijas.Add(new Recenzija { ProizvodId = 7, KorisnikId = 6, Ocjena = 5, Datum = DateTime.Now });
+                context.SaveChanges();
+                context.Recenzijas.Add(new Recenzija { ProizvodId = 8, KorisnikId = 6, Ocjena = 4, Datum = DateTime.Now });
+                context.SaveChanges();
+                context.Recenzijas.Add(new Recenzija { ProizvodId = 9, KorisnikId = 6, Ocjena = 5, Datum = DateTime.Now });
                 context.SaveChanges();
                 context.Recenzijas.Add(new Recenzija { ProizvodId = 2, KorisnikId = 5, Ocjena = 5, Datum = DateTime.Now });
                 context.SaveChanges();
-                context.Recenzijas.Add(new Recenzija { ProizvodId = 3, KorisnikId = 5, Ocjena = 4, Datum = DateTime.Now });
+                context.Recenzijas.Add(new Recenzija { ProizvodId = 3, KorisnikId = 4, Ocjena = 3, Datum = DateTime.Now });
                 context.SaveChanges();
-                context.Recenzijas.Add(new Recenzija { ProizvodId = 4, KorisnikId = 5, Ocjena = 4, Datum = DateTime.Now });
+                context.Recenzijas.Add(new Recenzija { ProizvodId = 4, KorisnikId = 4, Ocjena = 2, Datum = DateTime.Now });
                 context.SaveChanges();
-                context.Recenzijas.Add(new Recenzija { ProizvodId = 5, KorisnikId = 5, Ocjena = 2, Datum = DateTime.Now });
+                context.Recenzijas.Add(new Recenzija { ProizvodId = 10, KorisnikId = 5, Ocjena = 5, Datum = DateTime.Now });
                 context.SaveChanges();
-                context.Recenzijas.Add(new Recenzija { ProizvodId = 6, KorisnikId = 5, Ocjena = 4, Datum = DateTime.Now });
+                context.Recenzijas.Add(new Recenzija { ProizvodId = 11, KorisnikId = 4, Ocjena = 4, Datum = DateTime.Now });
                 context.SaveChanges();
-                context.Recenzijas.Add(new Recenzija { ProizvodId = 7, KorisnikId = 5, Ocjena = 5, Datum = DateTime.Now });
+                context.Recenzijas.Add(new Recenzija { ProizvodId = 8, KorisnikId = 4, Ocjena = 5, Datum = DateTime.Now });
                 context.SaveChanges();
-                context.Recenzijas.Add(new Recenzija { ProizvodId = 8, KorisnikId = 5, Ocjena = 4, Datum = DateTime.Now });
+            }
+
+            if (!context.Narudzbas.Any())
+            {
+                context.Narudzbas.Add(new Narudzba { KorisnikId = 4, Zavrsena = true, Aktivna = false, Datum = DateTime.Now });
                 context.SaveChanges();
-                context.Recenzijas.Add(new Recenzija { ProizvodId = 9, KorisnikId = 5, Ocjena = 5, Datum = DateTime.Now });
+                context.Narudzbas.Add(new Narudzba { KorisnikId = 4, Zavrsena = true, Aktivna = false, Datum = DateTime.Now });
                 context.SaveChanges();
-                context.Recenzijas.Add(new Recenzija { ProizvodId = 2, KorisnikId = 4, Ocjena = 5, Datum = DateTime.Now });
+                context.Narudzbas.Add(new Narudzba { KorisnikId = 4, Zavrsena = true, Aktivna = false, Datum = DateTime.Now });
                 context.SaveChanges();
-                context.Recenzijas.Add(new Recenzija { ProizvodId = 3, KorisnikId = 3, Ocjena = 3, Datum = DateTime.Now });
+                context.Narudzbas.Add(new Narudzba { KorisnikId = 5, Zavrsena = true, Aktivna = false, Datum = DateTime.Now });
                 context.SaveChanges();
-                context.Recenzijas.Add(new Recenzija { ProizvodId = 4, KorisnikId = 3, Ocjena = 2, Datum = DateTime.Now });
+                context.Narudzbas.Add(new Narudzba { KorisnikId = 5, Zavrsena = true, Aktivna = false, Datum = DateTime.Now });
                 context.SaveChanges();
-                context.Recenzijas.Add(new Recenzija { ProizvodId = 10, KorisnikId = 4, Ocjena = 5, Datum = DateTime.Now });
+                context.Narudzbas.Add(new Narudzba { KorisnikId = 6, Zavrsena = true, Aktivna = false, Datum = DateTime.Now });
                 context.SaveChanges();
-                context.Recenzijas.Add(new Recenzija { ProizvodId = 11, KorisnikId = 3, Ocjena = 4, Datum = DateTime.Now });
+            }
+
+            if (!context.NarudzbaProizvods.Any())
+            {
+                context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 1, ProizvodId = 1, Kolicina = 2 });
+                context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 1, ProizvodId = 2, Kolicina = 2 });
+                context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 1, ProizvodId = 3, Kolicina = 2 });
+                context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 2, ProizvodId = 5, Kolicina = 6 });
+                context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 3, ProizvodId = 1, Kolicina = 3 });
+                context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 4, ProizvodId = 7, Kolicina = 4 });
+                context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 5, ProizvodId = 11, Kolicina = 1 });
+                context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 5, ProizvodId = 1, Kolicina = 2 });
+                context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 6, ProizvodId = 6, Kolicina = 1 });
+            }
+
+            if (!context.Transakcijas.Any())
+            {
+                context.Transakcijas.Add(new Transakcija { NarudzbaId = 1, NacinPlacanja = "Kartica", Datum = DateTime.Now, PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)29.60 });
                 context.SaveChanges();
-                context.Recenzijas.Add(new Recenzija { ProizvodId = 8, KorisnikId = 3, Ocjena = 5, Datum = DateTime.Now });
+                context.Transakcijas.Add(new Transakcija { NarudzbaId = 2, NacinPlacanja = "Kartica", Datum = DateTime.Now, PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)9.00 });
+                context.SaveChanges();
+                context.Transakcijas.Add(new Transakcija { NarudzbaId = 3, NacinPlacanja = "Kartica", Datum = DateTime.Now, PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)14.70 });
+                context.SaveChanges();
+                context.Transakcijas.Add(new Transakcija { NarudzbaId = 4, NacinPlacanja = "Kartica", Datum = DateTime.Now, PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)28.00 });
+                context.SaveChanges();
+                context.Transakcijas.Add(new Transakcija { NarudzbaId = 5, NacinPlacanja = "Kartica", Datum = DateTime.Now, PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)14.80 });
+                context.SaveChanges();
+                context.Transakcijas.Add(new Transakcija { NarudzbaId = 6, NacinPlacanja = "Kartica", Datum = DateTime.Now, PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)3.50 });
                 context.SaveChanges();
             }
         }
