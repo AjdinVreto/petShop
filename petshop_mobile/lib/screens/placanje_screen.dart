@@ -178,11 +178,9 @@ class _PlacanjeState extends State<Placanje> {
         paymentIntentData = null;
 
         await postTransakcija();
-        await ocistiKorpa().then((value) async {
-          await updateNarudzba().then((value) async {
-            await kreirajNarudzba();
-            Navigator.of(context).pushReplacementNamed("/proizvodi");
-          });
+        await updateNarudzba().then((value) async {
+          await kreirajNarudzba();
+          Navigator.of(context).pushReplacementNamed("/proizvodi");
         });
       }).onError((error, stackTrace) {
         print('Exception/DISPLAYPAYMENTSHEET==> $error $stackTrace');
@@ -191,7 +189,7 @@ class _PlacanjeState extends State<Placanje> {
       showDialog(
           context: context,
           builder: (_) => const AlertDialog(
-                content: Text("Ponisteno "),
+                content: Text("Ponistena transakcija"),
               ));
     } catch (e) {
       print('$e');

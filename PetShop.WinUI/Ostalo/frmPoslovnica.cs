@@ -54,6 +54,7 @@ namespace PetShop.WinUI.Ostalo
 
             txtAdresa.Text = _poslovnica.Adresa;
             txtBrojtelefona.Text = _poslovnica.BrojTelefona;
+            update.GradId = _poslovnica.GradId;
             cmbGrad.Enabled = false;
         }
 
@@ -74,7 +75,6 @@ namespace PetShop.WinUI.Ostalo
 
                     insert.Adresa = update.Adresa = txtAdresa.Text;
                     insert.BrojTelefona = update.BrojTelefona = txtBrojtelefona.Text;
-                    update.GradId = _poslovnica.GradId;
 
                     if (_poslovnica == null)
                     {
@@ -116,6 +116,7 @@ namespace PetShop.WinUI.Ostalo
             _poslovnica = null;
             txtAdresa.Clear();
             txtBrojtelefona.Clear();
+            cmbGrad.SelectedIndex = 0;
             cmbGrad.Enabled = true;
         }
 

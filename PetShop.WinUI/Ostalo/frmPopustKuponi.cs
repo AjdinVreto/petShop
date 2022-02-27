@@ -90,6 +90,8 @@ namespace PetShop.WinUI.Ostalo
                 return false;
             }
 
+            
+
             return true;
         }
 
@@ -104,6 +106,14 @@ namespace PetShop.WinUI.Ostalo
         private void dgvPopustKuponi_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
+        }
+
+        private void txtIznos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

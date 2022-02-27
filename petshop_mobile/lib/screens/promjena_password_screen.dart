@@ -61,6 +61,7 @@ class _PromjenaPasswordState extends State<PromjenaPassword> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Form(
+            key: _validationKey,
             child: Column(
               children: [
                 textFormField("Stari password", stariPasswordController,
@@ -98,7 +99,9 @@ class _PromjenaPasswordState extends State<PromjenaPassword> {
                             datumRodjenja: widget.korisnik?.datumRodjenja,
                             spolId: widget.korisnik?.spolId,
                             gradId: widget.korisnik?.gradId,
-                            password: noviPasswordController.text);
+                            password: noviPasswordController.text,
+                            slika: widget.korisnik?.slika
+                        );
                         await updatePassword().then((value) {
                           setState(() {
                             APIService.password = noviPasswordController.text;

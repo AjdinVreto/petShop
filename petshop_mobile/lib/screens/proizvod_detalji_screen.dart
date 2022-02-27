@@ -174,7 +174,7 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
                         height: 6,
                       ),
                       Text(
-                        prosjecnaOcjena.toString() +
+                        prosjecnaOcjena.toStringAsFixed(1) +
                             "/5.0" +
                             "   ( ${brojac} ocjena )",
                         style: const TextStyle(

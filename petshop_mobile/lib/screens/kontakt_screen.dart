@@ -51,7 +51,7 @@ class _KontaktScreenState extends State<KontaktScreen> {
     var poslovnice = await APIService.Get("Poslovnica", null);
 
     var poslovniceList =
-    poslovnice?.map((i) => Poslovnica.fromJson(i)).toList();
+        poslovnice?.map((i) => Poslovnica.fromJson(i)).toList();
 
     return poslovniceList;
   }
@@ -161,7 +161,9 @@ class _KontaktScreenState extends State<KontaktScreen> {
             (BuildContext context, AsyncSnapshot<List<Poslovnica>?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: CircularProgressIndicator(color: Colors.orange,),
+              child: CircularProgressIndicator(
+                color: Colors.orange,
+              ),
             );
           } else {
             if (snapshot.hasError) {
@@ -205,6 +207,9 @@ class _KontaktScreenState extends State<KontaktScreen> {
               style: const TextStyle(color: Colors.white, fontSize: 18),
             ),
           ),
+        ),
+        SizedBox(
+          height: 10,
         ),
       ],
     );

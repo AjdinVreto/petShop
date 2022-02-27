@@ -79,6 +79,7 @@ class _ProfilState extends State<Profil> {
   }
 
   Future<void> sacuvajProfil() async {
+    print(selectedGrad);
     await APIService.Update("Korisnik", APIService.korisnikId,
         json.encode(korisnikProfilUpdateRequest?.toJson()));
   }
@@ -261,6 +262,7 @@ class _ProfilState extends State<Profil> {
                           datumRodjenja: datumRodjenja,
                           spolId: selectedSpol?.id,
                           gradId: selectedGrad?.id,
+                          slika: korisnik.slika.length == 0 ? null : korisnik.slika,
                         );
                         await sacuvajProfil().then((value) {
                           APIService.username = korisnickoImeController.text;

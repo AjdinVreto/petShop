@@ -42,7 +42,7 @@ class Proizvod {
         "naziv": naziv,
         "cijena": cijena,
         "opis": opis,
-        "slika": slika,
+        "slika": slika != null ? base64.encode(slika!) : slika,
         "kategorijaId": kategorijaId,
         "proizvodjacId": proizvodjacId,
       };

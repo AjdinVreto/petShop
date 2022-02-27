@@ -64,16 +64,16 @@ namespace PetShop.WinUI
             // 
             this.panel3.BackColor = System.Drawing.Color.SandyBrown;
             this.panel3.Controls.Add(this.label1);
-            this.panel3.Location = new System.Drawing.Point(12, 28);
+            this.panel3.Location = new System.Drawing.Point(10, 24);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(200, 42);
+            this.panel3.Size = new System.Drawing.Size(192, 36);
             this.panel3.TabIndex = 35;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Britannic Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(47, 9);
+            this.label1.Font = new System.Drawing.Font("Britannic Bold", 18F);
+            this.label1.Location = new System.Drawing.Point(40, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(120, 27);
             this.label1.TabIndex = 2;
@@ -83,16 +83,16 @@ namespace PetShop.WinUI
             // 
             this.panel6.BackColor = System.Drawing.Color.SandyBrown;
             this.panel6.Controls.Add(this.label5);
-            this.panel6.Location = new System.Drawing.Point(0, 668);
+            this.panel6.Location = new System.Drawing.Point(0, 579);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(200, 42);
+            this.panel6.Size = new System.Drawing.Size(192, 36);
             this.panel6.TabIndex = 32;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Britannic Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(47, 9);
+            this.label5.Font = new System.Drawing.Font("Britannic Bold", 18F);
+            this.label5.Location = new System.Drawing.Point(40, 8);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(123, 27);
             this.label5.TabIndex = 2;
@@ -102,16 +102,16 @@ namespace PetShop.WinUI
             // 
             this.panel5.BackColor = System.Drawing.Color.SandyBrown;
             this.panel5.Controls.Add(this.label4);
-            this.panel5.Location = new System.Drawing.Point(12, 448);
+            this.panel5.Location = new System.Drawing.Point(10, 388);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(200, 42);
+            this.panel5.Size = new System.Drawing.Size(192, 36);
             this.panel5.TabIndex = 33;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Britannic Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(47, 9);
+            this.label4.Font = new System.Drawing.Font("Britannic Bold", 18F);
+            this.label4.Location = new System.Drawing.Point(55, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(94, 27);
             this.label4.TabIndex = 2;
@@ -121,16 +121,16 @@ namespace PetShop.WinUI
             // 
             this.panel4.BackColor = System.Drawing.Color.SandyBrown;
             this.panel4.Controls.Add(this.label3);
-            this.panel4.Location = new System.Drawing.Point(12, 168);
+            this.panel4.Location = new System.Drawing.Point(10, 146);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(200, 42);
+            this.panel4.Size = new System.Drawing.Size(192, 36);
             this.panel4.TabIndex = 34;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Britannic Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(47, 9);
+            this.label3.Font = new System.Drawing.Font("Britannic Bold", 18F);
+            this.label3.Location = new System.Drawing.Point(40, 8);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(129, 27);
             this.label3.TabIndex = 2;
@@ -151,18 +151,18 @@ namespace PetShop.WinUI
             this.pnlNavigacija.Controls.Add(this.btnProizvodjaci);
             this.pnlNavigacija.Controls.Add(this.btnUpravljanjeProizvodima);
             this.pnlNavigacija.Controls.Add(this.btnUpravljanjeUposlenicima);
-            this.pnlNavigacija.Location = new System.Drawing.Point(12, 14);
+            this.pnlNavigacija.Location = new System.Drawing.Point(10, 12);
             this.pnlNavigacija.Name = "pnlNavigacija";
-            this.pnlNavigacija.Size = new System.Drawing.Size(265, 772);
+            this.pnlNavigacija.Size = new System.Drawing.Size(290, 669);
             this.pnlNavigacija.TabIndex = 31;
             // 
             // btnPopustKupon
             // 
             this.btnPopustKupon.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPopustKupon.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnPopustKupon.Location = new System.Drawing.Point(47, 622);
+            this.btnPopustKupon.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnPopustKupon.Location = new System.Drawing.Point(40, 539);
             this.btnPopustKupon.Name = "btnPopustKupon";
-            this.btnPopustKupon.Size = new System.Drawing.Size(218, 40);
+            this.btnPopustKupon.Size = new System.Drawing.Size(247, 35);
             this.btnPopustKupon.TabIndex = 37;
             this.btnPopustKupon.Text = "Popust kuponi";
             this.btnPopustKupon.UseVisualStyleBackColor = false;
@@ -171,10 +171,10 @@ namespace PetShop.WinUI
             // btnUpravljanjeKorisnicima
             // 
             this.btnUpravljanjeKorisnicima.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnUpravljanjeKorisnicima.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnUpravljanjeKorisnicima.Location = new System.Drawing.Point(47, 62);
+            this.btnUpravljanjeKorisnicima.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnUpravljanjeKorisnicima.Location = new System.Drawing.Point(40, 54);
             this.btnUpravljanjeKorisnicima.Name = "btnUpravljanjeKorisnicima";
-            this.btnUpravljanjeKorisnicima.Size = new System.Drawing.Size(218, 40);
+            this.btnUpravljanjeKorisnicima.Size = new System.Drawing.Size(247, 35);
             this.btnUpravljanjeKorisnicima.TabIndex = 16;
             this.btnUpravljanjeKorisnicima.Text = "Upravljanje korisnicima";
             this.btnUpravljanjeKorisnicima.UseVisualStyleBackColor = false;
@@ -183,10 +183,10 @@ namespace PetShop.WinUI
             // btnIzvjestaji
             // 
             this.btnIzvjestaji.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnIzvjestaji.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnIzvjestaji.Location = new System.Drawing.Point(47, 716);
+            this.btnIzvjestaji.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnIzvjestaji.Location = new System.Drawing.Point(40, 621);
             this.btnIzvjestaji.Name = "btnIzvjestaji";
-            this.btnIzvjestaji.Size = new System.Drawing.Size(218, 40);
+            this.btnIzvjestaji.Size = new System.Drawing.Size(247, 35);
             this.btnIzvjestaji.TabIndex = 15;
             this.btnIzvjestaji.Text = "Pregled izvještaja";
             this.btnIzvjestaji.UseVisualStyleBackColor = false;
@@ -194,10 +194,10 @@ namespace PetShop.WinUI
             // btnNovosti
             // 
             this.btnNovosti.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnNovosti.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnNovosti.Location = new System.Drawing.Point(47, 530);
+            this.btnNovosti.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnNovosti.Location = new System.Drawing.Point(40, 459);
             this.btnNovosti.Name = "btnNovosti";
-            this.btnNovosti.Size = new System.Drawing.Size(218, 40);
+            this.btnNovosti.Size = new System.Drawing.Size(247, 35);
             this.btnNovosti.TabIndex = 13;
             this.btnNovosti.Text = "Novosti";
             this.btnNovosti.UseVisualStyleBackColor = false;
@@ -206,10 +206,10 @@ namespace PetShop.WinUI
             // btnKomentari
             // 
             this.btnKomentari.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnKomentari.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnKomentari.Location = new System.Drawing.Point(47, 576);
+            this.btnKomentari.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnKomentari.Location = new System.Drawing.Point(40, 499);
             this.btnKomentari.Name = "btnKomentari";
-            this.btnKomentari.Size = new System.Drawing.Size(218, 40);
+            this.btnKomentari.Size = new System.Drawing.Size(247, 35);
             this.btnKomentari.TabIndex = 12;
             this.btnKomentari.Text = "Komentari";
             this.btnKomentari.UseVisualStyleBackColor = false;
@@ -218,10 +218,10 @@ namespace PetShop.WinUI
             // btnPoslovnice
             // 
             this.btnPoslovnice.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPoslovnice.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnPoslovnice.Location = new System.Drawing.Point(47, 484);
+            this.btnPoslovnice.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnPoslovnice.Location = new System.Drawing.Point(40, 419);
             this.btnPoslovnice.Name = "btnPoslovnice";
-            this.btnPoslovnice.Size = new System.Drawing.Size(218, 40);
+            this.btnPoslovnice.Size = new System.Drawing.Size(247, 35);
             this.btnPoslovnice.TabIndex = 11;
             this.btnPoslovnice.Text = "Poslovnice";
             this.btnPoslovnice.UseVisualStyleBackColor = false;
@@ -230,10 +230,10 @@ namespace PetShop.WinUI
             // btnPoruke
             // 
             this.btnPoruke.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnPoruke.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnPoruke.Location = new System.Drawing.Point(47, 388);
+            this.btnPoruke.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnPoruke.Location = new System.Drawing.Point(40, 336);
             this.btnPoruke.Name = "btnPoruke";
-            this.btnPoruke.Size = new System.Drawing.Size(218, 40);
+            this.btnPoruke.Size = new System.Drawing.Size(247, 35);
             this.btnPoruke.TabIndex = 10;
             this.btnPoruke.Text = "Poruke";
             this.btnPoruke.UseVisualStyleBackColor = false;
@@ -242,10 +242,10 @@ namespace PetShop.WinUI
             // btnKategorije
             // 
             this.btnKategorije.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnKategorije.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnKategorije.Location = new System.Drawing.Point(47, 248);
+            this.btnKategorije.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnKategorije.Location = new System.Drawing.Point(40, 215);
             this.btnKategorije.Name = "btnKategorije";
-            this.btnKategorije.Size = new System.Drawing.Size(218, 40);
+            this.btnKategorije.Size = new System.Drawing.Size(247, 35);
             this.btnKategorije.TabIndex = 8;
             this.btnKategorije.Text = "Kategorije";
             this.btnKategorije.UseVisualStyleBackColor = false;
@@ -254,10 +254,10 @@ namespace PetShop.WinUI
             // btnProizvodjaci
             // 
             this.btnProizvodjaci.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnProizvodjaci.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnProizvodjaci.Location = new System.Drawing.Point(47, 294);
+            this.btnProizvodjaci.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnProizvodjaci.Location = new System.Drawing.Point(40, 255);
             this.btnProizvodjaci.Name = "btnProizvodjaci";
-            this.btnProizvodjaci.Size = new System.Drawing.Size(218, 40);
+            this.btnProizvodjaci.Size = new System.Drawing.Size(247, 35);
             this.btnProizvodjaci.TabIndex = 6;
             this.btnProizvodjaci.Text = "Proizvođači";
             this.btnProizvodjaci.UseVisualStyleBackColor = false;
@@ -266,10 +266,10 @@ namespace PetShop.WinUI
             // btnUpravljanjeProizvodima
             // 
             this.btnUpravljanjeProizvodima.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnUpravljanjeProizvodima.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnUpravljanjeProizvodima.Location = new System.Drawing.Point(47, 202);
+            this.btnUpravljanjeProizvodima.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnUpravljanjeProizvodima.Location = new System.Drawing.Point(40, 175);
             this.btnUpravljanjeProizvodima.Name = "btnUpravljanjeProizvodima";
-            this.btnUpravljanjeProizvodima.Size = new System.Drawing.Size(218, 40);
+            this.btnUpravljanjeProizvodima.Size = new System.Drawing.Size(247, 35);
             this.btnUpravljanjeProizvodima.TabIndex = 5;
             this.btnUpravljanjeProizvodima.Text = "Upravljanje proizvodima";
             this.btnUpravljanjeProizvodima.UseVisualStyleBackColor = false;
@@ -278,10 +278,10 @@ namespace PetShop.WinUI
             // btnUpravljanjeUposlenicima
             // 
             this.btnUpravljanjeUposlenicima.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnUpravljanjeUposlenicima.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnUpravljanjeUposlenicima.Location = new System.Drawing.Point(47, 108);
+            this.btnUpravljanjeUposlenicima.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnUpravljanjeUposlenicima.Location = new System.Drawing.Point(40, 94);
             this.btnUpravljanjeUposlenicima.Name = "btnUpravljanjeUposlenicima";
-            this.btnUpravljanjeUposlenicima.Size = new System.Drawing.Size(218, 40);
+            this.btnUpravljanjeUposlenicima.Size = new System.Drawing.Size(247, 35);
             this.btnUpravljanjeUposlenicima.TabIndex = 4;
             this.btnUpravljanjeUposlenicima.Text = "Upravljanje uposlenicima";
             this.btnUpravljanjeUposlenicima.UseVisualStyleBackColor = false;
@@ -291,16 +291,16 @@ namespace PetShop.WinUI
             // 
             this.panel2.BackColor = System.Drawing.Color.SandyBrown;
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(12, 354);
+            this.panel2.Location = new System.Drawing.Point(10, 307);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 42);
+            this.panel2.Size = new System.Drawing.Size(192, 36);
             this.panel2.TabIndex = 17;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Britannic Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(47, 9);
+            this.label2.Font = new System.Drawing.Font("Britannic Bold", 18F);
+            this.label2.Location = new System.Drawing.Point(40, 8);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 27);
             this.label2.TabIndex = 2;
@@ -310,9 +310,9 @@ namespace PetShop.WinUI
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Purple;
-            this.label6.Font = new System.Drawing.Font("Showcard Gothic", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Font = new System.Drawing.Font("Showcard Gothic", 48F);
             this.label6.ForeColor = System.Drawing.Color.Orange;
-            this.label6.Location = new System.Drawing.Point(384, 14);
+            this.label6.Location = new System.Drawing.Point(329, 12);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(335, 79);
             this.label6.TabIndex = 36;
@@ -320,9 +320,9 @@ namespace PetShop.WinUI
             // 
             // frmPocetna
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(807, 797);
+            this.ClientSize = new System.Drawing.Size(690, 691);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);

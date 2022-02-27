@@ -138,6 +138,7 @@ namespace PetShop
             if (!context.Novosts.Any())
             {
                 context.Novosts.Add(new Novost { Naslov = "Nova snizenja u online trgovini", Datum = DateTime.Now, KorisnikId = 1, Tekst = "Postovani kupci, obavijestavamo vas da su u toku velika snizenja u nasoj online trgovini. Jedinstvena prilika da obradujete vase kucne ljubimce !", Slika = File.ReadAllBytes("Images/discountsnovost.jpg") });
+                context.SaveChanges();
                 context.Novosts.Add(new Novost { Naslov = "Otvaranje nove poslovnice u Zenici", Datum = DateTime.Now, KorisnikId = 1, Tekst = "Postovani kupci, obavijestavamo vas da se narednog mjeseca otvara nasa nova trgovina u Zenici. Posjetite nas !", Slika = File.ReadAllBytes("Images/poslovnicanovost.jpg") });
                 context.SaveChanges();
             }
@@ -189,6 +190,7 @@ namespace PetShop
             if (!context.PopustKupons.Any())
             {
                 context.PopustKupons.Add(new PopustKupon { Iznos = 10, Kod = "Discount" });
+                context.SaveChanges();
                 context.PopustKupons.Add(new PopustKupon { Iznos = 20, Kod = "Dvadeset" });
                 context.SaveChanges();
             }
@@ -196,6 +198,7 @@ namespace PetShop
             if (!context.Poslovnicas.Any())
             {
                 context.Poslovnicas.Add(new Poslovnica { Adresa = "Edina Dzeke 9", GradId = 1, BrojTelefona = "044214123" });
+                context.SaveChanges();
                 context.Poslovnicas.Add(new Poslovnica { Adresa = "Mostarska 123", GradId = 2, BrojTelefona = "066412367" });
                 context.SaveChanges();
             }
@@ -295,14 +298,23 @@ namespace PetShop
             if (!context.NarudzbaProizvods.Any())
             {
                 context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 1, ProizvodId = 1, Kolicina = 2 });
+                context.SaveChanges();
                 context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 1, ProizvodId = 2, Kolicina = 2 });
+                context.SaveChanges();
                 context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 1, ProizvodId = 3, Kolicina = 2 });
+                context.SaveChanges();
                 context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 2, ProizvodId = 5, Kolicina = 6 });
+                context.SaveChanges();
                 context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 3, ProizvodId = 1, Kolicina = 3 });
+                context.SaveChanges();
                 context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 4, ProizvodId = 7, Kolicina = 4 });
+                context.SaveChanges();
                 context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 5, ProizvodId = 11, Kolicina = 1 });
+                context.SaveChanges();
                 context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 5, ProizvodId = 1, Kolicina = 2 });
+                context.SaveChanges();
                 context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 6, ProizvodId = 6, Kolicina = 1 });
+                context.SaveChanges();
             }
 
             if (!context.Transakcijas.Any())

@@ -63,8 +63,8 @@ namespace PetShop.WinUI.Korisnici
 
                 var file = File.ReadAllBytes(fileName);
 
-                //insert.Slika = update.Slika = file;
-                insert.Slika = file;
+                insert.Slika = update.Slika = file;
+                //insert.Slika = file;
                 updateImage = true;
 
                 Image image = Image.FromFile(fileName);
@@ -82,6 +82,7 @@ namespace PetShop.WinUI.Korisnici
                 txtPrezime.Text = _korisnik.Prezime;
                 txtKorisnickoIme.Text = _korisnik.KorisnickoIme;
                 txtEmail.Text = _korisnik.Email;
+                txtAdresa.Text = _korisnik.Adresa;
                 dtpDatumRodjenja.Value = _korisnik.DatumRodjenja;
                 cmbSpol.SelectedValue = _korisnik.SpolId;
                 cmbGrad.SelectedValue = _korisnik.GradId;
@@ -135,7 +136,7 @@ namespace PetShop.WinUI.Korisnici
 
         private async void btnSacuvajKorisnika_Click(object sender, EventArgs e)
         {
-            if (ValidirajUnesenePodatke() && ValidirajEmailIKorisnickoIme())
+            if (ValidirajUnesenePodatke() && ValidirajEmailIKorisnickoIme() && ValidirajPassword())
             {
                 if (cmbGrad.SelectedValue != null && cmbSpol.SelectedValue != null && (int)cmbGrad.SelectedValue > 0 && (int)cmbSpol.SelectedValue > 0)
                 {
@@ -158,6 +159,7 @@ namespace PetShop.WinUI.Korisnici
                     insert.Prezime = update.Prezime = txtPrezime.Text;
                     insert.KorisnickoIme = update.KorisnickoIme = txtKorisnickoIme.Text;
                     insert.Email = update.Email = txtEmail.Text;
+                    insert.Adresa = update.Adresa = txtAdresa.Text;
                     insert.DatumRodjenja = update.DatumRodjenja = DateTime.ParseExact(dtpDatumRodjenja.Value.ToString("dd/MM/yyyy"), "dd/MM/yyyy", null);
                     insert.Password = txtPassword.Text;
                     insert.PotvrdaPassword = txtPasswordPotvrda.Text;
@@ -168,15 +170,24 @@ namespace PetShop.WinUI.Korisnici
 
                     if (_korisnik == null)
                     {
-                        if (roleIdList.Count > 0)
+                        if (ValidirajPotvrdaPassword())
                         {
-                            var korisnik = await _serviceKorisnici.Insert<Korisnik>(insert);
-                            MessageBox.Show("Uspješno izvršeno");
+                            if (roleIdList.Count > 0)
+                            {
+                                var korisnik = await _serviceKorisnici.Insert<Korisnik>(insert);
+                                MessageBox.Show("Uspješno izvršeno");
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("Niste odabrali rolu", "Greška",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Niste odabrali rolu", "Greška",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("Passwordi se ne poklapaju", "Greška",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
@@ -185,7 +196,7 @@ namespace PetShop.WinUI.Korisnici
                         {
                             if (updateImage == false)
                             {
-                                //update.Slika = _korisnik.Slika;
+                                update.Slika = _korisnik.Slika;
                             }
                             var korisnik = await _serviceKorisnici.Update<Korisnik>(_korisnik.Id, update);
                             MessageBox.Show("Uspješno izvršeno");
@@ -250,6 +261,26 @@ namespace PetShop.WinUI.Korisnici
                 {
                     return false;
                 }
+            }
+
+            return true;
+        }
+
+        private bool ValidirajPassword()
+        {
+            if((!string.IsNullOrEmpty(txtPassword.Text) && !string.IsNullOrEmpty(txtPasswordPotvrda.Text)) || txtPassword.ReadOnly && txtPasswordPotvrda.ReadOnly)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool ValidirajPotvrdaPassword()
+        {
+            if(txtPassword.Text != txtPasswordPotvrda.Text)
+            {
+                return false;
             }
 
             return true;

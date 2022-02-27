@@ -35,7 +35,7 @@ namespace PetShop.Services
                 entity = entity.Where(x => x.KorisnickoIme.Contains(search.KorisnickoIme) || x.Email.Contains(search.Email));
             }
 
-            entity = entity.Include(x => x.Spol).Include(x => x.Grad);
+            entity = entity.Include(x => x.Spol).Include(x => x.Grad).Include(x => x.Grad.Drzava);
 
             List<KorisnikRola> korisniciRole = ctx.KorisnikRolas.Where(x => x.Rola.Naziv.Equals("Administrator") || x.Rola.Naziv.Equals("Uposlenik")).ToList();
 

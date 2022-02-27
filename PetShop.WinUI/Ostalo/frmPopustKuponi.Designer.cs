@@ -48,11 +48,11 @@ namespace PetShop.WinUI.Ostalo
             // btnDodajPopustKupon
             // 
             this.btnDodajPopustKupon.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnDodajPopustKupon.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDodajPopustKupon.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnDodajPopustKupon.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDodajPopustKupon.Location = new System.Drawing.Point(293, 217);
+            this.btnDodajPopustKupon.Location = new System.Drawing.Point(235, 204);
             this.btnDodajPopustKupon.Name = "btnDodajPopustKupon";
-            this.btnDodajPopustKupon.Size = new System.Drawing.Size(202, 46);
+            this.btnDodajPopustKupon.Size = new System.Drawing.Size(208, 49);
             this.btnDodajPopustKupon.TabIndex = 53;
             this.btnDodajPopustKupon.Text = "Sacuvaj popust kupon";
             this.btnDodajPopustKupon.UseVisualStyleBackColor = false;
@@ -61,8 +61,8 @@ namespace PetShop.WinUI.Ostalo
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(378, 132);
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.label7.Location = new System.Drawing.Point(315, 121);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(40, 21);
             this.label7.TabIndex = 50;
@@ -71,8 +71,8 @@ namespace PetShop.WinUI.Ostalo
             // lblIme
             // 
             this.lblIme.AutoSize = true;
-            this.lblIme.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblIme.Location = new System.Drawing.Point(368, 70);
+            this.lblIme.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.lblIme.Location = new System.Drawing.Point(315, 61);
             this.lblIme.Name = "lblIme";
             this.lblIme.Size = new System.Drawing.Size(50, 21);
             this.lblIme.TabIndex = 48;
@@ -80,45 +80,46 @@ namespace PetShop.WinUI.Ostalo
             // 
             // txtIznos
             // 
-            this.txtIznos.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtIznos.Location = new System.Drawing.Point(293, 94);
+            this.txtIznos.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.txtIznos.Location = new System.Drawing.Point(251, 85);
             this.txtIznos.Name = "txtIznos";
-            this.txtIznos.Size = new System.Drawing.Size(202, 33);
+            this.txtIznos.Size = new System.Drawing.Size(174, 33);
             this.txtIznos.TabIndex = 47;
+            this.txtIznos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIznos_KeyPress);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Gold;
             this.panel1.Controls.Add(this.lblNavigacija);
-            this.panel1.Location = new System.Drawing.Point(10, 12);
+            this.panel1.Location = new System.Drawing.Point(9, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(778, 51);
+            this.panel1.Size = new System.Drawing.Size(667, 44);
             this.panel1.TabIndex = 46;
             // 
             // lblNavigacija
             // 
             this.lblNavigacija.AutoSize = true;
-            this.lblNavigacija.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblNavigacija.Location = new System.Drawing.Point(283, 9);
+            this.lblNavigacija.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
+            this.lblNavigacija.Location = new System.Drawing.Point(243, 8);
             this.lblNavigacija.Name = "lblNavigacija";
-            this.lblNavigacija.Size = new System.Drawing.Size(206, 32);
+            this.lblNavigacija.Size = new System.Drawing.Size(207, 32);
             this.lblNavigacija.TabIndex = 19;
             this.lblNavigacija.Text = "POPUST KUPONI";
             // 
             // txtKod
             // 
-            this.txtKod.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtKod.Location = new System.Drawing.Point(293, 156);
+            this.txtKod.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.txtKod.Location = new System.Drawing.Point(251, 149);
             this.txtKod.Name = "txtKod";
-            this.txtKod.Size = new System.Drawing.Size(202, 33);
+            this.txtKod.Size = new System.Drawing.Size(174, 33);
             this.txtKod.TabIndex = 54;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgvPopustKuponi);
-            this.groupBox1.Location = new System.Drawing.Point(193, 280);
+            this.groupBox1.Location = new System.Drawing.Point(171, 259);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(405, 298);
+            this.groupBox1.Size = new System.Drawing.Size(347, 258);
             this.groupBox1.TabIndex = 55;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Popust kuponi";
@@ -133,12 +134,12 @@ namespace PetShop.WinUI.Ostalo
             this.Iznos,
             this.Kod});
             this.dgvPopustKuponi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPopustKuponi.Location = new System.Drawing.Point(3, 19);
+            this.dgvPopustKuponi.Location = new System.Drawing.Point(3, 16);
             this.dgvPopustKuponi.Name = "dgvPopustKuponi";
             this.dgvPopustKuponi.ReadOnly = true;
             this.dgvPopustKuponi.RowTemplate.Height = 25;
             this.dgvPopustKuponi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPopustKuponi.Size = new System.Drawing.Size(399, 276);
+            this.dgvPopustKuponi.Size = new System.Drawing.Size(341, 239);
             this.dgvPopustKuponi.TabIndex = 0;
             this.dgvPopustKuponi.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPopustKuponi_CellDoubleClick);
             this.dgvPopustKuponi.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvPopustKuponi_DataError);
@@ -159,9 +160,9 @@ namespace PetShop.WinUI.Ostalo
             // 
             // frmPopustKuponi
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 590);
+            this.ClientSize = new System.Drawing.Size(686, 529);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtKod);
             this.Controls.Add(this.btnDodajPopustKupon);

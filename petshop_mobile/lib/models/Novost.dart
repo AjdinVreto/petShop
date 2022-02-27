@@ -37,6 +37,6 @@ class Novost {
     "korisnikId": korisnikId,
     "datum":
     datum == null ? null : datum!.toIso8601String(),
-    "slika": slika,
+    "slika": slika != null ? base64.encode(slika!) : slika,
   };
 }

@@ -49,6 +49,7 @@ namespace PetShop.WinUI.Kontakt
             };
 
             await _serviceKontakti.Update<Model.Kontakt>(_kontakt.Id, request);
+            MessageBox.Show("Uspjesno odgovoreno");
             await LoadKontakt();
         }
 
