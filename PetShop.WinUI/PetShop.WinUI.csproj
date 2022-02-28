@@ -81,6 +81,34 @@
     <Compile Include="frmPocetna.Designer.cs">
       <DependentUpon>frmPocetna.cs</DependentUpon>
     </Compile>
+    <Compile Include="Izvjestaji\dsProdajaPoDatumu.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsProdajaPoDatumu.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Izvjestaji\dsTopKorisnici.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsTopKorisnici.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Izvjestaji\frmOdabirIzvjestaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Izvjestaji\frmOdabirIzvjestaja.Designer.cs">
+      <DependentUpon>frmOdabirIzvjestaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Izvjestaji\frmProdajaPoDatumu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Izvjestaji\frmProdajaPoDatumu.Designer.cs">
+      <DependentUpon>frmProdajaPoDatumu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Izvjestaji\frmTopKorisnici.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Izvjestaji\frmTopKorisnici.Designer.cs">
+      <DependentUpon>frmTopKorisnici.cs</DependentUpon>
+    </Compile>
     <Compile Include="Kontakt\frmKontakt.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +187,17 @@
     <EmbeddedResource Include="frmPocetna.resx">
       <DependentUpon>frmPocetna.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Izvjestaji\frmOdabirIzvjestaja.resx">
+      <DependentUpon>frmOdabirIzvjestaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Izvjestaji\frmProdajaPoDatumu.resx">
+      <DependentUpon>frmProdajaPoDatumu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Izvjestaji\frmTopKorisnici.resx">
+      <DependentUpon>frmTopKorisnici.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Izvjestaji\rptProdajaPoDatumu.rdlc" />
+    <EmbeddedResource Include="Izvjestaji\rptTopKorisnici.rdlc" />
     <EmbeddedResource Include="Kontakt\frmKontakt.resx">
       <DependentUpon>frmKontakt.cs</DependentUpon>
     </EmbeddedResource>
@@ -204,6 +243,28 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Izvjestaji\dsProdajaPoDatumu.xsc">
+      <DependentUpon>dsProdajaPoDatumu.xsd</DependentUpon>
+    </None>
+    <None Include="Izvjestaji\dsProdajaPoDatumu.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsProdajaPoDatumu.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Izvjestaji\dsProdajaPoDatumu.xss">
+      <DependentUpon>dsProdajaPoDatumu.xsd</DependentUpon>
+    </None>
+    <None Include="Izvjestaji\dsTopKorisnici.xsc">
+      <DependentUpon>dsTopKorisnici.xsd</DependentUpon>
+    </None>
+    <None Include="Izvjestaji\dsTopKorisnici.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsTopKorisnici.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Izvjestaji\dsTopKorisnici.xss">
+      <DependentUpon>dsTopKorisnici.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

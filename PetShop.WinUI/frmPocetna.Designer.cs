@@ -190,6 +190,7 @@ namespace PetShop.WinUI
             this.btnIzvjestaji.TabIndex = 15;
             this.btnIzvjestaji.Text = "Pregled izvještaja";
             this.btnIzvjestaji.UseVisualStyleBackColor = false;
+            this.btnIzvjestaji.Click += new System.EventHandler(this.btnIzvjestaji_Click);
             // 
             // btnNovosti
             // 

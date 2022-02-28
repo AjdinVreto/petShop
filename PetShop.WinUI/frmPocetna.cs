@@ -1,4 +1,5 @@
 ﻿using PetShop.Model;
+using PetShop.WinUI.Izvjestaji;
 using PetShop.WinUI.Kontakt;
 using PetShop.WinUI.Korisnici;
 using PetShop.WinUI.Ostalo;
@@ -113,6 +114,12 @@ namespace PetShop.WinUI
                 MessageBox.Show("Niste autorizirani za ovu akciju, samo administratori", "Greska",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnIzvjestaji_Click(object sender, EventArgs e)
+        {
+            frmOdabirIzvjestaja frm = new frmOdabirIzvjestaja();
+            frm.ShowDialog();
         }
 
         private async void frmPocetna_Load(object sender, EventArgs e)

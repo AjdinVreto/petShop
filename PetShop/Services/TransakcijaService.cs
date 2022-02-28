@@ -26,6 +26,7 @@ namespace PetShop.Services
             var userId = int.Parse(_httpContext.GetUserId());
 
             var entity = ctx.Set<Database.Transakcija>().AsQueryable();
+            entity = entity.Include(x => x.Narudzba).Include(x => x.Narudzba.Korisnik);
 
             List<KorisnikRola> korisniciRole = ctx.KorisnikRolas.Where(x => x.Rola.Naziv.Equals("Administrator") || x.Rola.Naziv.Equals("Uposlenik")).ToList();
 

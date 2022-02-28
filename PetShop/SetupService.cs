@@ -319,17 +319,17 @@ namespace PetShop
 
             if (!context.Transakcijas.Any())
             {
-                context.Transakcijas.Add(new Transakcija { NarudzbaId = 1, NacinPlacanja = "Kartica", Datum = DateTime.Now, PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)29.60 });
+                context.Transakcijas.Add(new Transakcija { NarudzbaId = 1, NacinPlacanja = "Kartica", Datum = new DateTime(2022, 1, 1), PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)29.60 });
                 context.SaveChanges();
-                context.Transakcijas.Add(new Transakcija { NarudzbaId = 2, NacinPlacanja = "Kartica", Datum = DateTime.Now, PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)9.00 });
+                context.Transakcijas.Add(new Transakcija { NarudzbaId = 2, NacinPlacanja = "Kartica", Datum = new DateTime(2022, 1, 10), PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)9.00 });
                 context.SaveChanges();
-                context.Transakcijas.Add(new Transakcija { NarudzbaId = 3, NacinPlacanja = "Kartica", Datum = DateTime.Now, PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)14.70 });
+                context.Transakcijas.Add(new Transakcija { NarudzbaId = 3, NacinPlacanja = "Kartica", Datum = new DateTime(2022, 1, 20), PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)14.70 });
                 context.SaveChanges();
-                context.Transakcijas.Add(new Transakcija { NarudzbaId = 4, NacinPlacanja = "Kartica", Datum = DateTime.Now, PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)28.00 });
+                context.Transakcijas.Add(new Transakcija { NarudzbaId = 4, NacinPlacanja = "Kartica", Datum = new DateTime(2022, 1, 30), PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)28.00 });
                 context.SaveChanges();
-                context.Transakcijas.Add(new Transakcija { NarudzbaId = 5, NacinPlacanja = "Kartica", Datum = DateTime.Now, PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)14.80 });
+                context.Transakcijas.Add(new Transakcija { NarudzbaId = 5, NacinPlacanja = "Kartica", Datum = new DateTime(2022, 2, 1), PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)14.80 });
                 context.SaveChanges();
-                context.Transakcijas.Add(new Transakcija { NarudzbaId = 6, NacinPlacanja = "Kartica", Datum = DateTime.Now, PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)3.50 });
+                context.Transakcijas.Add(new Transakcija { NarudzbaId = 6, NacinPlacanja = "Kartica", Datum = new DateTime(2022, 1, 10), PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)3.50 });
                 context.SaveChanges();
             }
         }
