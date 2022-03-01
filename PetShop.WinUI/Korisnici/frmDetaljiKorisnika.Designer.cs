@@ -279,6 +279,7 @@ namespace PetShop.WinUI.Korisnici
             this.txtPasswordPotvrda.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.txtPasswordPotvrda.Location = new System.Drawing.Point(27, 261);
             this.txtPasswordPotvrda.Name = "txtPasswordPotvrda";
+            this.txtPasswordPotvrda.PasswordChar = '*';
             this.txtPasswordPotvrda.Size = new System.Drawing.Size(153, 29);
             this.txtPasswordPotvrda.TabIndex = 16;
             // 
@@ -297,6 +298,7 @@ namespace PetShop.WinUI.Korisnici
             this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.txtPassword.Location = new System.Drawing.Point(27, 190);
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(153, 29);
             this.txtPassword.TabIndex = 14;
             // 

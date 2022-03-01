@@ -28,5 +28,11 @@ namespace PetShop.WinUI.Izvjestaji
             frmTopKorisnici forma = new frmTopKorisnici();
             forma.ShowDialog();
         }
+
+        private void btnPorastPadKupovine_Click(object sender, EventArgs e)
+        {
+            frmPorastPadProdaje forma = new frmPorastPadProdaje();
+            forma.ShowDialog();
+        }
     }
 }

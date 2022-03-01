@@ -52,6 +52,7 @@ namespace PetShop.WinUI
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -164,7 +165,7 @@ namespace PetShop.WinUI
             this.btnPopustKupon.Name = "btnPopustKupon";
             this.btnPopustKupon.Size = new System.Drawing.Size(247, 35);
             this.btnPopustKupon.TabIndex = 37;
-            this.btnPopustKupon.Text = "Popust kuponi";
+            this.btnPopustKupon.Text = "Popust kuponi *";
             this.btnPopustKupon.UseVisualStyleBackColor = false;
             this.btnPopustKupon.Click += new System.EventHandler(this.btnPopustKupon_Click);
             // 
@@ -176,7 +177,7 @@ namespace PetShop.WinUI
             this.btnUpravljanjeKorisnicima.Name = "btnUpravljanjeKorisnicima";
             this.btnUpravljanjeKorisnicima.Size = new System.Drawing.Size(247, 35);
             this.btnUpravljanjeKorisnicima.TabIndex = 16;
-            this.btnUpravljanjeKorisnicima.Text = "Upravljanje korisnicima";
+            this.btnUpravljanjeKorisnicima.Text = "Upravljanje korisnicima *";
             this.btnUpravljanjeKorisnicima.UseVisualStyleBackColor = false;
             this.btnUpravljanjeKorisnicima.Click += new System.EventHandler(this.btnUpravljanjeKorisnicima_Click);
             // 
@@ -188,7 +189,7 @@ namespace PetShop.WinUI
             this.btnIzvjestaji.Name = "btnIzvjestaji";
             this.btnIzvjestaji.Size = new System.Drawing.Size(247, 35);
             this.btnIzvjestaji.TabIndex = 15;
-            this.btnIzvjestaji.Text = "Pregled izvještaja";
+            this.btnIzvjestaji.Text = "Pregled izvještaja *";
             this.btnIzvjestaji.UseVisualStyleBackColor = false;
             this.btnIzvjestaji.Click += new System.EventHandler(this.btnIzvjestaji_Click);
             // 
@@ -284,7 +285,7 @@ namespace PetShop.WinUI
             this.btnUpravljanjeUposlenicima.Name = "btnUpravljanjeUposlenicima";
             this.btnUpravljanjeUposlenicima.Size = new System.Drawing.Size(247, 35);
             this.btnUpravljanjeUposlenicima.TabIndex = 4;
-            this.btnUpravljanjeUposlenicima.Text = "Upravljanje uposlenicima";
+            this.btnUpravljanjeUposlenicima.Text = "Upravljanje uposlenicima *";
             this.btnUpravljanjeUposlenicima.UseVisualStyleBackColor = false;
             this.btnUpravljanjeUposlenicima.Click += new System.EventHandler(this.btnUpravljanjeUposlenicima_Click);
             // 
@@ -319,11 +320,23 @@ namespace PetShop.WinUI
             this.label6.TabIndex = 36;
             this.label6.Text = "PET SHOP";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(504, 106);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(160, 18);
+            this.label7.TabIndex = 37;
+            this.label7.Text = "* - Samo administratori";
+            // 
             // frmPocetna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(690, 691);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
@@ -375,5 +388,6 @@ namespace PetShop.WinUI
         private System.Windows.Forms.Button btnUpravljanjeUposlenicima;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnPopustKupon;
+        private System.Windows.Forms.Label label7;
     }
 }

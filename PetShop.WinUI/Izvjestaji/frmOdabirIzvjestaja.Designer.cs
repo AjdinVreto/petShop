@@ -104,6 +104,7 @@ namespace PetShop.WinUI.Izvjestaji
             this.btnPorastPadKupovine.TabIndex = 63;
             this.btnPorastPadKupovine.Text = "Izvjestaj o porastu/padu kupovine";
             this.btnPorastPadKupovine.UseVisualStyleBackColor = false;
+            this.btnPorastPadKupovine.Click += new System.EventHandler(this.btnPorastPadKupovine_Click);
             // 
             // frmOdabirIzvjestaja
             // 

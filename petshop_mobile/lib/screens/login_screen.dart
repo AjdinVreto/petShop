@@ -97,6 +97,7 @@ class _LoginState extends State<Login> {
                 height: 15,
               ),
               TextField(
+                obscureText: true,
                 controller: passwordController,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(

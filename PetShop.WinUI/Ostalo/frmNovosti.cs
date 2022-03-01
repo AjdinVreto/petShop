@@ -72,9 +72,10 @@ namespace PetShop.WinUI.Ostalo
             txtTekst.Text = _novost.Tekst;
             if (novost.Slika.Length != 0)
             {
-                pbxSlika.Image = ByteToImage(novost.Slika);
+                pbxSlika.Image = ByteToImage(_novost.Slika);
                 pbxSlika.SizeMode = PictureBoxSizeMode.StretchImage;
             }
+            update.Slika = _novost.Slika;
         }
 
         NovostInsertRequest insert = new NovostInsertRequest();
@@ -114,12 +115,17 @@ namespace PetShop.WinUI.Ostalo
 
         private bool ValidirajUnesenePodatke()
         {
-            if(string.IsNullOrEmpty(txtNaslov.Text) || string.IsNullOrEmpty(txtTekst.Text))
+            if (string.IsNullOrEmpty(txtNaslov.Text) || string.IsNullOrEmpty(txtTekst.Text))
             {
                 return false;
             }
 
             if (insert.Slika == null && _novost == null)
+            {
+                return false;
+            }
+
+            if (update.Slika == null && _novost != null)
             {
                 return false;
             }
@@ -132,6 +138,8 @@ namespace PetShop.WinUI.Ostalo
             _novost = null;
             txtNaslov.Clear();
             txtTekst.Clear();
+            pbxSlika.Image = null;
+            insert.Slika = update.Slika = null;
         }
     }
 }

@@ -136,6 +136,7 @@ namespace PetShop.WinUI.Ostalo
             this.txtBrojtelefona.Name = "txtBrojtelefona";
             this.txtBrojtelefona.Size = new System.Drawing.Size(205, 33);
             this.txtBrojtelefona.TabIndex = 60;
+            this.txtBrojtelefona.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBrojtelefona_KeyPress);
             // 
             // lblAdresa
             // 

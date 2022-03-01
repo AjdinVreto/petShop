@@ -175,8 +175,10 @@ namespace PetShop.WinUI.Korisnici
                             if (roleIdList.Count > 0)
                             {
                                 var korisnik = await _serviceKorisnici.Insert<Korisnik>(insert);
-                                MessageBox.Show("Uspješno izvršeno");
-
+                                if(korisnik != null)
+                                {
+                                    MessageBox.Show("Uspješno izvršeno");
+                                }
                             }
                             else
                             {
@@ -199,7 +201,10 @@ namespace PetShop.WinUI.Korisnici
                                 update.Slika = _korisnik.Slika;
                             }
                             var korisnik = await _serviceKorisnici.Update<Korisnik>(_korisnik.Id, update);
-                            MessageBox.Show("Uspješno izvršeno");
+                            if(korisnik != null)
+                            {
+                                MessageBox.Show("Uspješno izvršeno");
+                            }
                         }
                         else
                         {
@@ -245,7 +250,7 @@ namespace PetShop.WinUI.Korisnici
         private bool ValidirajUnesenePodatke()
         {
             if (string.IsNullOrEmpty(txtIme.Text) || string.IsNullOrEmpty(txtPrezime.Text) || dtpDatumRodjenja.Value == null ||
-                string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtKorisnickoIme.Text))
+                string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtKorisnickoIme.Text) || string.IsNullOrEmpty(txtAdresa.Text))
             {
                 return false;
             }

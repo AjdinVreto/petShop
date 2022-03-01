@@ -118,8 +118,16 @@ namespace PetShop.WinUI
 
         private void btnIzvjestaji_Click(object sender, EventArgs e)
         {
-            frmOdabirIzvjestaja frm = new frmOdabirIzvjestaja();
-            frm.ShowDialog();
+            if (provjeraAdmin)
+            {
+                frmOdabirIzvjestaja frm = new frmOdabirIzvjestaja();
+                frm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Niste autorizirani za ovu akciju, samo administratori", "Greska",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async void frmPocetna_Load(object sender, EventArgs e)
