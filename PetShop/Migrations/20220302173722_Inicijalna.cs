@@ -74,6 +74,19 @@ namespace PetShop.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Zivotinja",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Zivotinja", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Grad",
                 columns: table => new
                 {
@@ -181,7 +194,8 @@ namespace PetShop.Migrations
                     Opis = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Slika = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     KategorijaId = table.Column<int>(type: "int", nullable: false),
-                    ProizvodjacId = table.Column<int>(type: "int", nullable: false)
+                    ProizvodjacId = table.Column<int>(type: "int", nullable: false),
+                    ZivotinjaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -198,6 +212,12 @@ namespace PetShop.Migrations
                         principalTable: "Proizvodjac",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Proizvod_Zivotinja",
+                        column: x => x.ZivotinjaId,
+                        principalTable: "Zivotinja",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -504,6 +524,11 @@ namespace PetShop.Migrations
                 column: "ProizvodjacId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Proizvod_ZivotinjaId",
+                table: "Proizvod",
+                column: "ZivotinjaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Proizvodjac_DrzavaId",
                 table: "Proizvodjac",
                 column: "DrzavaId");
@@ -585,6 +610,9 @@ namespace PetShop.Migrations
 
             migrationBuilder.DropTable(
                 name: "Proizvodjac");
+
+            migrationBuilder.DropTable(
+                name: "Zivotinja");
 
             migrationBuilder.DropTable(
                 name: "Korisnik");

@@ -39,7 +39,12 @@ namespace PetShop.Services
                 entity = entity.Where(x => x.ProizvodjacId == search.ProizvodjacId);
             }
 
-            entity = entity.Include(x => x.Kategorija).Include(x => x.Proizvodjac).Include(x => x.Proizvodjac.Drzava);
+            if (search.ZivotinjaId.HasValue)
+            {
+                entity = entity.Where(x => x.ZivotinjaId == search.ZivotinjaId);
+            }
+
+            entity = entity.Include(x => x.Kategorija).Include(x => x.Proizvodjac).Include(x => x.Proizvodjac.Drzava).Include(x => x.Zivotinja);
 
             var list = entity.ToList();
 
@@ -60,6 +65,12 @@ namespace PetShop.Services
             {
                 throw new UserException("Niste oznacili kategoriju");
             }
+
+            if (request.ZivotinjaId == 0)
+            {
+                throw new UserException("Niste oznacili zivotinju");
+            }
+
 
             var entity = _mapper.Map<Database.Proizvod>(request);
             ctx.Add(entity);
@@ -90,6 +101,21 @@ namespace PetShop.Services
             var userId = int.Parse(_httpContext.GetUserId());
 
             var entity = ctx.Proizvods.Find(id);
+
+            if (request.ProizvodjacId == 0)
+            {
+                throw new UserException("Niste oznacili proizvodjaca");
+            }
+
+            if (request.KategorijaId == 0)
+            {
+                throw new UserException("Niste oznacili kategoriju");
+            }
+
+            if (request.ZivotinjaId == 0)
+            {
+                throw new UserException("Niste oznacili zivotinju");
+            }
 
             _mapper.Map(request, entity);
 

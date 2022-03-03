@@ -4,6 +4,7 @@ import 'package:petshop_mobile/models/NarudzbaProizvod.dart';
 import 'package:petshop_mobile/models/Proizvod.dart';
 import 'package:petshop_mobile/models/Kategorija.dart';
 import 'package:petshop_mobile/models/Proizvodjac.dart';
+import 'package:petshop_mobile/models/Zivotinja.dart';
 import 'package:petshop_mobile/screens/proizvod_detalji_screen.dart';
 import 'package:petshop_mobile/services/APIService.dart';
 import 'package:petshop_mobile/widgets/alert_dialog.dart';
@@ -19,9 +20,11 @@ class Proizvodi extends StatefulWidget {
 class _ProizvodiState extends State<Proizvodi> {
   Kategorija? _selectedKategorija = null;
   Proizvodjac? _selectedProizvodjac = null;
+  Zivotinja? _selectedZivotinja = null;
 
   List<DropdownMenuItem> items = [];
   List<DropdownMenuItem> itemsProizvodjaci = [];
+  List<DropdownMenuItem> itemsZivotinje = [];
   NarudzbaProizvod? narudzbaProizvodRequest;
 
   TextEditingController pretragaController = TextEditingController();
@@ -32,13 +35,13 @@ class _ProizvodiState extends State<Proizvodi> {
   bool proizvodUKorpi = false;
 
   Future<List<Proizvod>?> GetProizvodi(Kategorija? selectedItemKategorija,
-      Proizvodjac? selectedItemProizvodjac) async {
+      Proizvodjac? selectedItemProizvodjac, Zivotinja? selectedItemZivotinja) async {
     Map<String, String>? queryParams = null;
 
     if (selectedItemKategorija != null &&
         selectedItemKategorija.id != 0 &&
         selectedItemProizvodjac != null &&
-        _selectedProizvodjac != 0) {
+        selectedItemProizvodjac.id != 0) {
       queryParams = {
         "naziv": pretragaController.text,
         "proizvodjacid": selectedItemProizvodjac.id.toString(),
@@ -56,7 +59,43 @@ class _ProizvodiState extends State<Proizvodi> {
         "naziv": pretragaController.text,
         "kategorijaid": selectedItemKategorija.id.toString()
       };
-    } else if (pretragaController.text.isNotEmpty) {
+    }else if(selectedItemKategorija != null &&
+        selectedItemKategorija.id != 0 &&
+        selectedItemProizvodjac != null &&
+        selectedItemProizvodjac.id != 0 &&
+        selectedItemZivotinja != null &&
+        selectedItemZivotinja.id != 0){
+      queryParams = {
+        "naziv": pretragaController.text,
+        "proizvodjacid": selectedItemProizvodjac.id.toString(),
+        "kategorijaid": selectedItemKategorija.id.toString(),
+        "zivotinjaid": selectedItemZivotinja.id.toString()
+      };
+    }  else if(selectedItemKategorija != null &&
+        selectedItemKategorija.id != 0 &&
+        selectedItemZivotinja != null &&
+        selectedItemZivotinja.id != 0) {
+      queryParams = {
+        "naziv": pretragaController.text,
+        "kategorijaid": selectedItemKategorija.id.toString(),
+        "zivotinjaid": selectedItemZivotinja.id.toString()
+      };
+    } else if(selectedItemProizvodjac != null &&
+        selectedItemProizvodjac.id != 0 &&
+        selectedItemZivotinja != null &&
+        selectedItemZivotinja.id != 0){
+      queryParams = {
+        "naziv": pretragaController.text,
+        "proizvodjacid": selectedItemProizvodjac.id.toString(),
+        "zivotinjaid": selectedItemZivotinja.id.toString()
+      };
+    } else if(selectedItemZivotinja != null &&
+        selectedItemZivotinja.id != 0) {
+      queryParams = {
+        "naziv": pretragaController.text,
+        "zivotinjaid": selectedItemZivotinja.id.toString()
+      };
+    }else if (pretragaController.text.isNotEmpty) {
       queryParams = {"naziv": pretragaController.text};
     } else {
       queryParams = null;
@@ -113,6 +152,28 @@ class _ProizvodiState extends State<Proizvodi> {
     return proizvodjaciList;
   }
 
+  Future<List<Zivotinja>?> GetZivotinje(Zivotinja? _selectedItem) async {
+    var Zivotinje = await APIService.Get('Zivotinja', null);
+    var zivotinjeList = Zivotinje?.map((i) => Zivotinja.fromJson(i)).toList();
+
+    itemsZivotinje = zivotinjeList!.map((item) {
+      return DropdownMenuItem<Zivotinja>(
+        child: Text(item.naziv!),
+        value: item,
+      );
+    }).toList();
+
+    itemsZivotinje
+        .add(const DropdownMenuItem<Zivotinja>(child: Text("Sve zivotinje")));
+
+    if (_selectedItem != null && _selectedItem.id != 0) {
+      _selectedZivotinja = zivotinjeList
+          .where((element) => element.id == _selectedItem.id)
+          .first;
+    }
+    return zivotinjeList;
+  }
+
   Future<void> DodajKorpa(proizvod) async {
     narudzbaProizvodRequest = NarudzbaProizvod(
         id: null,
@@ -155,11 +216,13 @@ class _ProizvodiState extends State<Proizvodi> {
 
   Widget bodyWidget() {
     return FutureBuilder<List<Proizvod>?>(
-      future: GetProizvodi(_selectedKategorija, _selectedProizvodjac),
+      future: GetProizvodi(_selectedKategorija, _selectedProizvodjac, _selectedZivotinja),
       builder: (BuildContext context, AsyncSnapshot<List<Proizvod>?> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: CircularProgressIndicator(color: Colors.orange,),
+            child: CircularProgressIndicator(
+              color: Colors.orange,
+            ),
           );
         } else {
           if (snapshot.hasError) {
@@ -169,9 +232,10 @@ class _ProizvodiState extends State<Proizvodi> {
           } else {
             return Column(
               children: [
+                Container(width: double.infinity,margin: EdgeInsets.only(left: 100, right: 100),child: dropdownWidgetZivotinje()),
                 Row(
                   children: [
-                    Expanded(flex: 19, child: dropdownWidget()),
+                    Expanded(flex: 19, child: dropdownWidgetKategorije()),
                     Expanded(flex: 20, child: dropdownWidgetProizvodjaci()),
                   ],
                 ),
@@ -199,14 +263,16 @@ class _ProizvodiState extends State<Proizvodi> {
     );
   }
 
-  Widget dropdownWidget() {
+  Widget dropdownWidgetKategorije() {
     return FutureBuilder<List<Kategorija>?>(
         future: GetKategorije(_selectedKategorija),
         builder:
             (BuildContext context, AsyncSnapshot<List<Kategorija>?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: CircularProgressIndicator(color: Colors.orange,),
+              child: CircularProgressIndicator(
+                color: Colors.orange,
+              ),
             );
           } else {
             if (snapshot.hasError) {
@@ -246,7 +312,9 @@ class _ProizvodiState extends State<Proizvodi> {
             (BuildContext context, AsyncSnapshot<List<Proizvodjac>?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: CircularProgressIndicator(color: Colors.orange,),
+              child: CircularProgressIndicator(
+                color: Colors.orange,
+              ),
             );
           } else {
             if (snapshot.hasError) {
@@ -272,6 +340,48 @@ class _ProizvodiState extends State<Proizvodi> {
                     });
                   },
                   value: _selectedProizvodjac,
+                ),
+              );
+            }
+          }
+        });
+  }
+
+  Widget dropdownWidgetZivotinje() {
+    return FutureBuilder<List<Zivotinja>?>(
+        future: GetZivotinje(_selectedZivotinja),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Zivotinja>?> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Colors.orange,
+              ),
+            );
+          } else {
+            if (snapshot.hasError) {
+              return Center(
+                child: Text("Greska na serveru, pokusajte ponovo"),
+              );
+            } else {
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                child: DropdownButton<dynamic>(
+                  underline: const SizedBox(),
+                  hint: const Text('Odaberite zivotinju'),
+                  style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                  isExpanded: true,
+                  items: itemsZivotinje,
+                  onChanged: (newVal) {
+                    setState(() {
+                      _selectedZivotinja = newVal as Zivotinja?;
+                      GetZivotinje(_selectedZivotinja);
+                    });
+                  },
+                  value: _selectedZivotinja,
                 ),
               );
             }
@@ -363,12 +473,18 @@ class _ProizvodiState extends State<Proizvodi> {
                             await ProizvodProvjera(proizvod.id)
                                 .then((value) async {
                               if (proizvodUKorpi) {
-                                ShowAlertDialog.showAlertDialog(context, "NEUSPJESNO !",
-                                    "Proizvod se vec nalazi u vasoj korpi", false);
+                                ShowAlertDialog.showAlertDialog(
+                                    context,
+                                    "NEUSPJESNO !",
+                                    "Proizvod se vec nalazi u vasoj korpi",
+                                    false);
                               } else {
                                 await DodajKorpa(proizvod).then((value) {
-                                  ShowAlertDialog.showAlertDialog(context, "USPJESNO !",
-                                      "Odabrani proizvod je uspjesno dodan u korpu", false);
+                                  ShowAlertDialog.showAlertDialog(
+                                      context,
+                                      "USPJESNO !",
+                                      "Odabrani proizvod je uspjesno dodan u korpu",
+                                      false);
                                 });
                               }
                             });
@@ -397,7 +513,7 @@ class _ProizvodiState extends State<Proizvodi> {
               padding: const EdgeInsets.only(bottom: 5),
               child: TextField(
                 onChanged: (value) async {
-                  await GetProizvodi(_selectedKategorija, _selectedProizvodjac)
+                  await GetProizvodi(_selectedKategorija, _selectedProizvodjac, _selectedZivotinja)
                       .then((value) {
                     setState(() {});
                   });

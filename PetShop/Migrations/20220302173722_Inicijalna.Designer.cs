@@ -10,7 +10,7 @@ using PetShop.Database;
 namespace PetShop.Migrations
 {
     [DbContext(typeof(PetShopContext))]
-    [Migration("20220223041313_Inicijalna")]
+    [Migration("20220302173722_Inicijalna")]
     partial class Inicijalna
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -363,11 +363,16 @@ namespace PetShop.Migrations
                     b.Property<byte[]>("Slika")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<int>("ZivotinjaId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("KategorijaId");
 
                     b.HasIndex("ProizvodjacId");
+
+                    b.HasIndex("ZivotinjaId");
 
                     b.ToTable("Proizvod");
                 });
@@ -516,6 +521,22 @@ namespace PetShop.Migrations
                     b.HasIndex("PoslovnicaId");
 
                     b.ToTable("Uposlenik");
+                });
+
+            modelBuilder.Entity("PetShop.Database.Zivotinja", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Zivotinja");
                 });
 
             modelBuilder.Entity("PetShop.Database.Grad", b =>
@@ -667,9 +688,17 @@ namespace PetShop.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("PetShop.Database.Zivotinja", "Zivotinja")
+                        .WithMany("Proizvods")
+                        .HasForeignKey("ZivotinjaId")
+                        .HasConstraintName("FK_Proizvod_Zivotinja")
+                        .IsRequired();
+
                     b.Navigation("Kategorija");
 
                     b.Navigation("Proizvodjac");
+
+                    b.Navigation("Zivotinja");
                 });
 
             modelBuilder.Entity("PetShop.Database.Proizvodjac", b =>
@@ -816,6 +845,11 @@ namespace PetShop.Migrations
             modelBuilder.Entity("PetShop.Database.Spol", b =>
                 {
                     b.Navigation("Korisniks");
+                });
+
+            modelBuilder.Entity("PetShop.Database.Zivotinja", b =>
+                {
+                    b.Navigation("Proizvods");
                 });
 #pragma warning restore 612, 618
         }

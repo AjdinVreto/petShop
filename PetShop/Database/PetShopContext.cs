@@ -36,6 +36,7 @@ namespace PetShop.Database
         public virtual DbSet<Spol> Spols { get; set; }
         public virtual DbSet<Transakcija> Transakcijas { get; set; }
         public virtual DbSet<Uposlenik> Uposleniks { get; set; }
+        public virtual DbSet<Zivotinja> Zivotinjas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -248,6 +249,12 @@ namespace PetShop.Database
                     .HasForeignKey(d => d.ProizvodjacId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Proizvod_Proizvodjac");
+
+                entity.HasOne(d => d.Zivotinja)
+                    .WithMany(p => p.Proizvods)
+                    .HasForeignKey(d => d.ZivotinjaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Proizvod_Zivotinja");
             });
 
             modelBuilder.Entity<Proizvodjac>(entity =>
@@ -339,6 +346,13 @@ namespace PetShop.Database
                     .HasForeignKey(d => d.PoslovnicaId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Uposlenik_Poslovnica");
+            });
+
+            modelBuilder.Entity<Zivotinja>(entity =>
+            {
+                entity.ToTable("Zivotinja");
+
+                entity.Property(e => e.Naziv).IsRequired();
             });
 
             OnModelCreatingPartial(modelBuilder);

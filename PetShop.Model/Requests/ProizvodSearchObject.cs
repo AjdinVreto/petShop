@@ -9,5 +9,6 @@ namespace PetShop.Model.Requests
         public string Naziv { get; set; }
         public int? KategorijaId { get; set; }
         public int? ProizvodjacId { get; set; }
+        public int? ZivotinjaId { get; set; }
     }
 }

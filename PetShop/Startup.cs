@@ -83,6 +83,7 @@ namespace PetShop
             services.AddScoped<ITransakcijaService, TransakcijaService>();
             services.AddScoped<IReadService<Model.Rola, object>, BaseReadService<Model.Rola, Database.Rola, object>>();
             services.AddScoped<IReadService<Model.Drzava, object>, BaseReadService<Model.Drzava, Database.Drzava, object>>();
+            services.AddScoped<IReadService<Model.Zivotinja, object>, BaseReadService<Model.Zivotinja, Database.Zivotinja, object>>();
 
             services.AddAuthentication("BasicAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);

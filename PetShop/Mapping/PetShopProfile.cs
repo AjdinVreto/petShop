@@ -30,6 +30,7 @@ namespace PetShop.Mapping
             CreateMap<Database.Transakcija, Model.Transakcija>();
             CreateMap<Database.Uposlenik, Model.Uposlenik>();
             CreateMap<Database.Spol, Model.Spol>().ReverseMap();
+            CreateMap<Database.Zivotinja, Model.Zivotinja>().ReverseMap();
 
             CreateMap<ProizvodInsertRequest, Database.Proizvod>();
             CreateMap<ProizvodUpdateRequest, Database.Proizvod>();

@@ -21,9 +21,11 @@ namespace PetShop.Database
         public byte[] Slika { get; set; }
         public int KategorijaId { get; set; }
         public int ProizvodjacId { get; set; }
+        public int ZivotinjaId { get; set; }
 
         public virtual Kategorija Kategorija { get; set; }
         public virtual Proizvodjac Proizvodjac { get; set; }
+        public virtual Zivotinja Zivotinja { get; set; }
         public virtual ICollection<Komentar> Komentars { get; set; }
         public virtual ICollection<NarudzbaProizvod> NarudzbaProizvods { get; set; }
         public virtual ICollection<Recenzija> Recenzijas { get; set; }

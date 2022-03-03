@@ -119,6 +119,18 @@ namespace PetShop
                 context.SaveChanges();
             }
 
+            if (!context.Zivotinjas.Any())
+            {
+                context.Zivotinjas.Add(new Zivotinja { Naziv = "Macke" });
+                context.SaveChanges();
+                context.Zivotinjas.Add(new Zivotinja { Naziv = "Psi" });
+                context.SaveChanges();
+                context.Zivotinjas.Add(new Zivotinja { Naziv = "Ptice" });
+                context.SaveChanges();
+                context.Zivotinjas.Add(new Zivotinja { Naziv = "Ribe" });
+                context.SaveChanges();
+            }
+
             if (!context.Proizvodjacs.Any())
             {
                 context.Proizvodjacs.Add(new Proizvodjac { Naziv = "Whiskas", DrzavaId = 1 });
@@ -145,45 +157,45 @@ namespace PetShop
 
             if (!context.Proizvods.Any())
             {
-                context.Proizvods.Add(new Proizvod { Naziv = "Whiskas hrana za macke 150g", KategorijaId = 1, Opis = "Kompletna hrana za macke. Formulirana za zadovoljavanje povecanih prehrambenih potreba aktivnih macaka, ukljucujuci i gravidne mace.", Cijena = (decimal)4.90, ProizvodjacId = 1, Slika = File.ReadAllBytes("Images/whiskashranazamacke.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "Whiskas hrana za macke 150g", KategorijaId = 1, Opis = "Kompletna hrana za macke. Formulirana za zadovoljavanje povecanih prehrambenih potreba aktivnih macaka, ukljucujuci i gravidne mace.", Cijena = (decimal)4.90, ProizvodjacId = 1, ZivotinjaId = 1, Slika = File.ReadAllBytes("Images/whiskashranazamacke.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "Beaphar igracka za macke - Plisana ribica", KategorijaId = 2, Opis = "Odlicna plisana igracka za vasu macku.", Cijena = (decimal)6.00, ProizvodjacId = 5, Slika = File.ReadAllBytes("Images/beapharigrackazamacke.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "Beaphar igracka za macke - Plisana ribica", KategorijaId = 2, Opis = "Odlicna plisana igracka za vasu macku.", Cijena = (decimal)6.00, ProizvodjacId = 5, ZivotinjaId = 1, Slika = File.ReadAllBytes("Images/beapharigrackazamacke.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "Kras hrana za pse 100g", KategorijaId = 1, Opis = "Kompletna hrana za pse. Formulirana za zadovoljavanje povecanih prehrambenih potreba aktivnih pasa, ukljucujuci i gravidne pse.", Cijena = (decimal)3.90, ProizvodjacId = 2, Slika = File.ReadAllBytes("Images/krashranazapse.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "Kras hrana za pse 100g", KategorijaId = 1, Opis = "Kompletna hrana za pse. Formulirana za zadovoljavanje povecanih prehrambenih potreba aktivnih pasa, ukljucujuci i gravidne pse.", Cijena = (decimal)3.90, ProizvodjacId = 2, ZivotinjaId = 2, Slika = File.ReadAllBytes("Images/krashranazapse.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "Trixie dzemper za pse", KategorijaId = 3, Opis = "Veoma ugodan dzemper za vaseg najboljeg prijatelja.", Cijena = (decimal)9.00, ProizvodjacId = 4, Slika = File.ReadAllBytes("Images/trixiedzemperzapse.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "Trixie dzemper za pse", KategorijaId = 3, Opis = "Veoma ugodan dzemper za vaseg najboljeg prijatelja.", Cijena = (decimal)9.00, ProizvodjacId = 4, ZivotinjaId = 2, Slika = File.ReadAllBytes("Images/trixiedzemperzapse.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "ErbaGatta hrana za ptice 50g", KategorijaId = 1, Opis = "Zdrava i sadrzajna hrana za vase ptice.", Cijena = (decimal)1.50, ProizvodjacId = 6, Slika = File.ReadAllBytes("Images/erbagattahranazaptice.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "ErbaGatta hrana za ptice 50g", KategorijaId = 1, Opis = "Zdrava i sadrzajna hrana za vase ptice.", Cijena = (decimal)1.50, ProizvodjacId = 6, ZivotinjaId = 3, Slika = File.ReadAllBytes("Images/erbagattahranazaptice.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "OASY igracka za pse - Cuddle Ball", KategorijaId = 2, Opis = "Zive i izdrzljive, stvorene su za pse, pune energije, igracke aktivnog psa izradene su od mjesavine koja ih cini zabavnim za igru.", Cijena = (decimal)3.50, ProizvodjacId = 3, Slika = File.ReadAllBytes("Images/oasyigrackazapse.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "OASY igracka za pse - Cuddle Ball", KategorijaId = 2, Opis = "Zive i izdrzljive, stvorene su za pse, pune energije, igracke aktivnog psa izradene su od mjesavine koja ih cini zabavnim za igru.", Cijena = (decimal)3.50, ProizvodjacId = 3, ZivotinjaId = 2, Slika = File.ReadAllBytes("Images/oasyigrackazapse.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "Whiskas hrana za pse 200g", KategorijaId = 1, Opis = "Idealno za pse s tendencijom prekomjerne tjelesne tezine, sadrzi smanjenu razinu masnoce", Cijena = (decimal)7.00, ProizvodjacId = 1, Slika = File.ReadAllBytes("Images/whiskashranazapse.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "Whiskas hrana za pse 200g", KategorijaId = 1, Opis = "Idealno za pse s tendencijom prekomjerne tjelesne tezine, sadrzi smanjenu razinu masnoce", Cijena = (decimal)7.00, ProizvodjacId = 1, ZivotinjaId = 2, Slika = File.ReadAllBytes("Images/whiskashranazapse.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "OASY hrana za ptice 100g", KategorijaId = 1, Opis = "Vrhunska i sadrzajna hrana za vase ptice.", Cijena = (decimal)2.50, ProizvodjacId = 3, Slika = File.ReadAllBytes("Images/oasyhranazaptice.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "OASY hrana za ptice 100g", KategorijaId = 1, Opis = "Vrhunska i sadrzajna hrana za vase ptice.", Cijena = (decimal)2.50, ProizvodjacId = 3, ZivotinjaId = 3, Slika = File.ReadAllBytes("Images/oasyhranazaptice.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "Beaphar Desinfektos spray za macke", KategorijaId = 4, Opis = "Brzo i ucinkovito uklanja 99,9% bakterija oko pasa i macaka. Takoder se pouzdano bori protiv virusa.", Cijena = (decimal)3.00, ProizvodjacId = 5, Slika = File.ReadAllBytes("Images/beapharsprayzamacke.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "Beaphar Desinfektos spray za macke", KategorijaId = 4, Opis = "Brzo i ucinkovito uklanja 99,9% bakterija oko pasa i macaka. Takoder se pouzdano bori protiv virusa.", Cijena = (decimal)3.00, ProizvodjacId = 5, ZivotinjaId = 1, Slika = File.ReadAllBytes("Images/beapharsprayzamacke.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "Trixie hrana za ribe 30g", KategorijaId = 1, Opis = "Hrana u boji koja se sastoji od polako tonucih mekih granula.", Cijena = (decimal)1.50, ProizvodjacId = 4, Slika = File.ReadAllBytes("Images/trixiehranazaribe.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "Trixie hrana za ribe 30g", KategorijaId = 1, Opis = "Hrana u boji koja se sastoji od polako tonucih mekih granula.", Cijena = (decimal)1.50, ProizvodjacId = 4, ZivotinjaId = 4, Slika = File.ReadAllBytes("Images/trixiehranazaribe.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "Trixie hrana za pse 100g", KategorijaId = 1, Opis = "Trixie hrana je cjeloviti prehrambeni proizvod za odrasle pse sa normalnom tjelesnom aktivnoscu, sadrzi najbolje sastojke za zdravu i uravnotezenu prehranu: losos, tuna i riza osiguravaju pravi unos kalorija i proteina te visoku probavljivost.", Cijena = (decimal)5.00, ProizvodjacId = 4, Slika = File.ReadAllBytes("Images/trixiehranazapse.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "Trixie hrana za pse 100g", KategorijaId = 1, Opis = "Trixie hrana je cjeloviti prehrambeni proizvod za odrasle pse sa normalnom tjelesnom aktivnoscu, sadrzi najbolje sastojke za zdravu i uravnotezenu prehranu: losos, tuna i riza osiguravaju pravi unos kalorija i proteina te visoku probavljivost.", Cijena = (decimal)5.00, ProizvodjacId = 4, ZivotinjaId = 2, Slika = File.ReadAllBytes("Images/trixiehranazapse.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "Kras hrana za macke 50g", KategorijaId = 1, Opis = "Kras hrana je cjeloviti prehrambeni proizvod za odrasle macke sa normalnom tjelesnom aktivnoscu, sadrzi najbolje sastojke za zdravu i uravnotezenu prehranu: losos, tuna i riza osiguravaju pravi unos kalorija i proteina te visoku probavljivost.", Cijena = (decimal)4.20, ProizvodjacId = 2, Slika = File.ReadAllBytes("Images/krashranazamacke.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "Kras hrana za macke 50g", KategorijaId = 1, Opis = "Kras hrana je cjeloviti prehrambeni proizvod za odrasle macke sa normalnom tjelesnom aktivnoscu, sadrzi najbolje sastojke za zdravu i uravnotezenu prehranu: losos, tuna i riza osiguravaju pravi unos kalorija i proteina te visoku probavljivost.", Cijena = (decimal)4.20, ProizvodjacId = 2, ZivotinjaId = 1, Slika = File.ReadAllBytes("Images/krashranazamacke.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "Beaphar sampon za pse", KategorijaId = 4, Opis = "Beaphar šampon posebno formuliran za sve vrste pasa za prekrasno hidratiziranu, super mekanu i sjajnu dlaku.", Cijena = (decimal)3.00, ProizvodjacId = 5, Slika = File.ReadAllBytes("Images/beapharsamponzapse.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "Beaphar sampon za pse", KategorijaId = 4, Opis = "Beaphar šampon posebno formuliran za sve vrste pasa za prekrasno hidratiziranu, super mekanu i sjajnu dlaku.", Cijena = (decimal)3.00, ProizvodjacId = 5, ZivotinjaId = 2, Slika = File.ReadAllBytes("Images/beapharsamponzapse.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "OASY lezaljka za macke", KategorijaId = 5, Opis = "Dizajniran kako bi upotpunio dekor vaše kuce, ovaj krevet nudi maksimalnu udobnost za Vašu macku.", Cijena = (decimal)12.00, ProizvodjacId = 3, Slika = File.ReadAllBytes("Images/oasylezaljkazamacke.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "OASY lezaljka za macke", KategorijaId = 5, Opis = "Dizajniran kako bi upotpunio dekor vaše kuce, ovaj krevet nudi maksimalnu udobnost za Vašu macku.", Cijena = (decimal)12.00, ProizvodjacId = 3, ZivotinjaId = 1, Slika = File.ReadAllBytes("Images/oasylezaljkazamacke.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "ErbaGatta transporter", KategorijaId = 1, Opis = "Dimenzije 28,5 x 44 x 29,5 cm U nekoliko varijanti boja.", Cijena = (decimal)20.00, ProizvodjacId = 6, Slika = File.ReadAllBytes("Images/erbagattatransporterzamacke.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "ErbaGatta transporter", KategorijaId = 1, Opis = "Dimenzije 28,5 x 44 x 29,5 cm U nekoliko varijanti boja.", Cijena = (decimal)20.00, ProizvodjacId = 6, ZivotinjaId = 1, Slika = File.ReadAllBytes("Images/erbagattatransporterzamacke.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "OASY ogrlica za pse", KategorijaId = 5, Opis = "Ogrlica protiv parazita za pse s prirodnim sastojcima i podesivom duzinom.", Cijena = (decimal)3.00, ProizvodjacId = 3, Slika = File.ReadAllBytes("Images/oasyogrlicazapse.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "OASY ogrlica za pse", KategorijaId = 5, Opis = "Ogrlica protiv parazita za pse s prirodnim sastojcima i podesivom duzinom.", Cijena = (decimal)3.00, ProizvodjacId = 3, ZivotinjaId = 2, Slika = File.ReadAllBytes("Images/oasyogrlicazapse.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "Kras Joint Sticks za pse", KategorijaId = 1, Opis = "Poslastica za zdrave zglobove i glatke pokrete Vaseg ljubimca. Potpuna hrana za pse je ukusna mesna poslastica.", Cijena = (decimal)1.20, ProizvodjacId = 2, Slika = File.ReadAllBytes("Images/krasjointstickszapse.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "Kras Joint Sticks za pse", KategorijaId = 1, Opis = "Poslastica za zdrave zglobove i glatke pokrete Vaseg ljubimca. Potpuna hrana za pse je ukusna mesna poslastica.", Cijena = (decimal)1.20, ProizvodjacId = 2, ZivotinjaId = 2, Slika = File.ReadAllBytes("Images/krasjointstickszapse.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "Beaphar dzemper za macke", KategorijaId = 3, Opis = "Udoban i topao dzemper za vasu macku.", Cijena = (decimal)7.00, ProizvodjacId = 5, Slika = File.ReadAllBytes("Images/beaphardzemperzamacke.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "Beaphar dzemper za macke", KategorijaId = 3, Opis = "Udoban i topao dzemper za vasu macku.", Cijena = (decimal)7.00, ProizvodjacId = 5, ZivotinjaId = 1, Slika = File.ReadAllBytes("Images/beaphardzemperzamacke.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "Beaphar gel za pse", KategorijaId = 4, Opis = "Beaphar gel za zube za pse 100g je brz i jednostavan nacin da svom ljubimcu osigurate dobru oralnu higijenu", Cijena = (decimal)6.20, ProizvodjacId = 5, Slika = File.ReadAllBytes("Images/beaphargelzapse.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "Beaphar gel za pse", KategorijaId = 4, Opis = "Beaphar gel za zube za pse 100g je brz i jednostavan nacin da svom ljubimcu osigurate dobru oralnu higijenu", Cijena = (decimal)6.20, ProizvodjacId = 5, ZivotinjaId = 2, Slika = File.ReadAllBytes("Images/beaphargelzapse.jpg") });
                 context.SaveChanges();
-                context.Proizvods.Add(new Proizvod { Naziv = "ErbaGatta povodac za macke", KategorijaId = 5, Opis = "Veoma kvalitetan i fleksibilan povodac za macke", Cijena = (decimal)2.50, ProizvodjacId = 6, Slika = File.ReadAllBytes("Images/erbagattapovodaczamacke.jpg") });
+                context.Proizvods.Add(new Proizvod { Naziv = "ErbaGatta povodac za macke", KategorijaId = 5, Opis = "Veoma kvalitetan i fleksibilan povodac za macke", Cijena = (decimal)2.50, ProizvodjacId = 6, ZivotinjaId = 1, Slika = File.ReadAllBytes("Images/erbagattapovodaczamacke.jpg") });
                 context.SaveChanges();
             }
 

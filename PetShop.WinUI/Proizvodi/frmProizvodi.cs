@@ -19,6 +19,7 @@ namespace PetShop.WinUI.Proizvodi
         APIService _serviceProizvodi = new APIService("Proizvod");
         APIService _serviceKategorije = new APIService("Kategorija");
         APIService _serviceProizvodjaci = new APIService("Proizvodjac");
+        APIService _serviceZivotinja = new APIService("Zivotinja");
 
         private Proizvod _proizvod;
         public frmProizvodi()
@@ -64,9 +65,20 @@ namespace PetShop.WinUI.Proizvodi
 
         private async Task LoadData()
         {
+            await LoadZivotinje();
             await LoadKategorije();
             await LoadProizvodjaci();
             await LoadProizvodi();
+        }
+
+        private async Task LoadZivotinje()
+        {
+            var zivotinje = await _serviceZivotinja.Get<List<Model.Zivotinja>>(null);
+
+            zivotinje.Insert(0, new Zivotinja());
+            cmbZivotinje.DataSource = zivotinje;
+            cmbZivotinje.DisplayMember = "Naziv";
+            cmbZivotinje.ValueMember = "Id";
         }
 
         private async Task LoadKategorije()
@@ -105,6 +117,7 @@ namespace PetShop.WinUI.Proizvodi
             txtOpis.Text = proizvod.Opis;
             cmbKategorija.SelectedValue = proizvod.KategorijaId;
             cmbProizvodjac.SelectedValue = proizvod.ProizvodjacId;
+            cmbZivotinje.SelectedValue = proizvod.ZivotinjaId;
             if(_proizvod.Slika.Length != 0)
             {
                 pbxSlika.Image = ByteToImage(_proizvod.Slika);
@@ -121,10 +134,11 @@ namespace PetShop.WinUI.Proizvodi
             {
                 if (ValidirajCijenu())
                 {
-                    if (cmbKategorija.SelectedValue != null && cmbProizvodjac.SelectedValue != null && (int)cmbKategorija.SelectedValue > 0 && (int)cmbProizvodjac.SelectedValue > 0)
+                    if (cmbKategorija.SelectedValue != null && cmbProizvodjac.SelectedValue != null && (int)cmbKategorija.SelectedValue > 0 && (int)cmbProizvodjac.SelectedValue > 0 && cmbZivotinje.SelectedValue != null && (int)cmbZivotinje.SelectedValue > 0)
                     {
                         var kategorijaObj = cmbKategorija.SelectedValue;
                         var proizvodjacObj = cmbProizvodjac.SelectedValue;
+                        var zivotinjaObj = cmbZivotinje.SelectedValue;
 
                         if (int.TryParse(kategorijaObj.ToString(), out int kategorijaId))
                         {
@@ -136,6 +150,12 @@ namespace PetShop.WinUI.Proizvodi
                         {
                             insert.ProizvodjacId = proizvodjacId;
                             update.ProizvodjacId = proizvodjacId;
+                        }
+
+                        if (int.TryParse(zivotinjaObj.ToString(), out int zivotinjaId))
+                        {
+                            insert.ZivotinjaId = zivotinjaId;
+                            update.ZivotinjaId = zivotinjaId;
                         }
 
                         if (decimal.TryParse(txtCijena.Text, out decimal cijena))
@@ -165,7 +185,7 @@ namespace PetShop.WinUI.Proizvodi
                     }
                     else
                     {
-                        MessageBox.Show("Niste oznacili kategoriju ili proizvodjaca", "Greska",
+                        MessageBox.Show("Nisu sva polja oznacena", "Greska",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -222,6 +242,7 @@ namespace PetShop.WinUI.Proizvodi
             txtOpis.Clear();
             cmbKategorija.SelectedIndex = 0;
             cmbProizvodjac.SelectedIndex = 0;
+            cmbZivotinje.SelectedIndex = 0;
             pbxSlika.Image = null;
             insert.Slika = update.Slika = null;
         }

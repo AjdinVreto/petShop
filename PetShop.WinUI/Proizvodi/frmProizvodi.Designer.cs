@@ -55,6 +55,8 @@ namespace PetShop.WinUI.Proizvodi
             this.btnSacuvajProizvod = new System.Windows.Forms.Button();
             this.ofdSlika = new System.Windows.Forms.OpenFileDialog();
             this.label12 = new System.Windows.Forms.Label();
+            this.cmbZivotinje = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxSlika)).BeginInit();
             this.gbxProizvodi.SuspendLayout();
@@ -67,7 +69,7 @@ namespace PetShop.WinUI.Proizvodi
             this.panel1.Controls.Add(this.lblNavigacija);
             this.panel1.Location = new System.Drawing.Point(12, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(866, 45);
+            this.panel1.Size = new System.Drawing.Size(916, 45);
             this.panel1.TabIndex = 36;
             // 
             // lblNavigacija
@@ -158,7 +160,7 @@ namespace PetShop.WinUI.Proizvodi
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label11.Location = new System.Drawing.Point(192, 199);
+            this.label11.Location = new System.Drawing.Point(191, 196);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(95, 21);
             this.label11.TabIndex = 46;
@@ -168,7 +170,7 @@ namespace PetShop.WinUI.Proizvodi
             // 
             this.cmbProizvodjac.Font = new System.Drawing.Font("Segoe UI", 14.25F);
             this.cmbProizvodjac.FormattingEnabled = true;
-            this.cmbProizvodjac.Location = new System.Drawing.Point(146, 223);
+            this.cmbProizvodjac.Location = new System.Drawing.Point(146, 219);
             this.cmbProizvodjac.Name = "cmbProizvodjac";
             this.cmbProizvodjac.Size = new System.Drawing.Size(174, 33);
             this.cmbProizvodjac.TabIndex = 45;
@@ -195,9 +197,9 @@ namespace PetShop.WinUI.Proizvodi
             // gbxProizvodi
             // 
             this.gbxProizvodi.Controls.Add(this.dgvProizvodi);
-            this.gbxProizvodi.Location = new System.Drawing.Point(9, 316);
+            this.gbxProizvodi.Location = new System.Drawing.Point(8, 345);
             this.gbxProizvodi.Name = "gbxProizvodi";
-            this.gbxProizvodi.Size = new System.Drawing.Size(871, 324);
+            this.gbxProizvodi.Size = new System.Drawing.Size(923, 324);
             this.gbxProizvodi.TabIndex = 49;
             this.gbxProizvodi.TabStop = false;
             this.gbxProizvodi.Text = "Proizvodi";
@@ -222,7 +224,7 @@ namespace PetShop.WinUI.Proizvodi
             this.dgvProizvodi.ReadOnly = true;
             this.dgvProizvodi.RowTemplate.Height = 25;
             this.dgvProizvodi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProizvodi.Size = new System.Drawing.Size(865, 305);
+            this.dgvProizvodi.Size = new System.Drawing.Size(917, 305);
             this.dgvProizvodi.TabIndex = 0;
             this.dgvProizvodi.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProizvodi_CellContentClick);
             this.dgvProizvodi.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProizvodi_CellDoubleClick);
@@ -286,7 +288,7 @@ namespace PetShop.WinUI.Proizvodi
             this.btnSacuvajProizvod.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnSacuvajProizvod.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnSacuvajProizvod.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSacuvajProizvod.Location = new System.Drawing.Point(376, 265);
+            this.btnSacuvajProizvod.Location = new System.Drawing.Point(376, 294);
             this.btnSacuvajProizvod.Name = "btnSacuvajProizvod";
             this.btnSacuvajProizvod.Size = new System.Drawing.Size(163, 45);
             this.btnSacuvajProizvod.TabIndex = 1;
@@ -308,11 +310,32 @@ namespace PetShop.WinUI.Proizvodi
             this.label12.TabIndex = 50;
             this.label12.Text = "Slika";
             // 
+            // cmbZivotinje
+            // 
+            this.cmbZivotinje.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.cmbZivotinje.FormattingEnabled = true;
+            this.cmbZivotinje.Location = new System.Drawing.Point(146, 283);
+            this.cmbZivotinje.Name = "cmbZivotinje";
+            this.cmbZivotinje.Size = new System.Drawing.Size(174, 33);
+            this.cmbZivotinje.TabIndex = 51;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(197, 259);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 21);
+            this.label1.TabIndex = 52;
+            this.label1.Text = "Zivotinja";
+            // 
             // frmProizvodi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(891, 648);
+            this.ClientSize = new System.Drawing.Size(943, 679);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cmbZivotinje);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.btnSacuvajProizvod);
             this.Controls.Add(this.gbxProizvodi);
@@ -370,5 +393,7 @@ namespace PetShop.WinUI.Proizvodi
         private System.Windows.Forms.DataGridViewTextBoxColumn Kategorija;
         private System.Windows.Forms.DataGridViewTextBoxColumn Proizvodjac;
         private System.Windows.Forms.DataGridViewButtonColumn Obrisi;
+        private System.Windows.Forms.ComboBox cmbZivotinje;
+        private System.Windows.Forms.Label label1;
     }
 }

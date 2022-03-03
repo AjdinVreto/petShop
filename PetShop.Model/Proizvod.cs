@@ -13,10 +13,13 @@ namespace PetShop.Model
         public byte[] Slika { get; set; }
         public int KategorijaId { get; set; }
         public int ProizvodjacId { get; set; }
+        public int ZivotinjaId { get; set; }
 
         public virtual Kategorija Kategorija { get; set; }
         public virtual Proizvodjac Proizvodjac { get; set; }
+        public virtual Zivotinja Zivotinja { get; set; }
         public string KategorijaNaziv => Kategorija?.Naziv;
         public string ProizvodjacNaziv => Proizvodjac?.Naziv;
+        public string ZivotinjaNaziv => Zivotinja?.Naziv;
     }
 }
