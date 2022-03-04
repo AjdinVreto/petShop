@@ -38,7 +38,7 @@ namespace PetShop.WinUI.Izvjestaji
             {
                 //Priprema podataka za prikaz
                 int god = int.Parse(txtGodina.Text);
-                var tList = transakcije.GroupBy(x => x.Datum.Month).Where(y => y.First().Datum.Year == god).Select(g => g.Count()).ToList();
+                var tList = transakcije.Where(x => x.Datum.Year == god).GroupBy(y => y.Datum.Month).Select(z => z.Count()).ToList();
 
                 string godina = txtGodina.Text;
 
@@ -46,6 +46,7 @@ namespace PetShop.WinUI.Izvjestaji
                 {
                     MessageBox.Show("Ne postoje podaci za unesenu godinu");
                 }
+
 
                 if (tList.Count < 12)
                 {
@@ -76,7 +77,7 @@ namespace PetShop.WinUI.Izvjestaji
                 objChart.AxisY.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
                 objChart.AxisY.Title = "Broj narudzbi";
                 objChart.AxisY.Minimum = 0;
-                objChart.AxisY.Maximum = 50;
+                objChart.AxisY.Maximum = 10;
 
                 chart.Series.Clear();
 

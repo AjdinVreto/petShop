@@ -34,68 +34,79 @@ class _ProizvodiState extends State<Proizvodi> {
 
   bool proizvodUKorpi = false;
 
-  Future<List<Proizvod>?> GetProizvodi(Kategorija? selectedItemKategorija,
-      Proizvodjac? selectedItemProizvodjac, Zivotinja? selectedItemZivotinja) async {
+  Future<List<Proizvod>?> GetProizvodi(
+      Kategorija? selectedItemKategorija,
+      Proizvodjac? selectedItemProizvodjac,
+      Zivotinja? selectedItemZivotinja) async {
     Map<String, String>? queryParams = null;
 
     if (selectedItemKategorija != null &&
         selectedItemKategorija.id != 0 &&
         selectedItemProizvodjac != null &&
-        selectedItemProizvodjac.id != 0) {
+        selectedItemProizvodjac.id != 0 &&
+        (selectedItemZivotinja == null || selectedItemZivotinja == 0)) {
       queryParams = {
         "naziv": pretragaController.text,
         "proizvodjacid": selectedItemProizvodjac.id.toString(),
         "kategorijaid": selectedItemKategorija.id.toString()
       };
     } else if (selectedItemProizvodjac != null &&
-        selectedItemProizvodjac.id != 0) {
+        selectedItemProizvodjac.id != 0 &&
+        (selectedItemZivotinja == null || selectedItemZivotinja == 0) &&
+        (selectedItemKategorija == null || selectedItemKategorija == 0)) {
       queryParams = {
         "naziv": pretragaController.text,
         "proizvodjacid": selectedItemProizvodjac.id.toString()
       };
     } else if (selectedItemKategorija != null &&
-        selectedItemKategorija.id != 0) {
+        selectedItemKategorija.id != 0 &&
+        (selectedItemZivotinja == null || selectedItemZivotinja == 0) &&
+        (selectedItemProizvodjac == null || selectedItemProizvodjac == 0)) {
       queryParams = {
         "naziv": pretragaController.text,
         "kategorijaid": selectedItemKategorija.id.toString()
       };
-    }else if(selectedItemKategorija != null &&
+    } else if (selectedItemKategorija != null &&
         selectedItemKategorija.id != 0 &&
         selectedItemProizvodjac != null &&
         selectedItemProizvodjac.id != 0 &&
         selectedItemZivotinja != null &&
-        selectedItemZivotinja.id != 0){
+        selectedItemZivotinja.id != 0) {
       queryParams = {
         "naziv": pretragaController.text,
         "proizvodjacid": selectedItemProizvodjac.id.toString(),
         "kategorijaid": selectedItemKategorija.id.toString(),
         "zivotinjaid": selectedItemZivotinja.id.toString()
       };
-    }  else if(selectedItemKategorija != null &&
+    } else if (selectedItemKategorija != null &&
         selectedItemKategorija.id != 0 &&
         selectedItemZivotinja != null &&
-        selectedItemZivotinja.id != 0) {
+        selectedItemZivotinja.id != 0 &&
+        (selectedItemProizvodjac == null || selectedItemProizvodjac == 0)) {
       queryParams = {
         "naziv": pretragaController.text,
         "kategorijaid": selectedItemKategorija.id.toString(),
         "zivotinjaid": selectedItemZivotinja.id.toString()
       };
-    } else if(selectedItemProizvodjac != null &&
+    } else if (selectedItemProizvodjac != null &&
         selectedItemProizvodjac.id != 0 &&
         selectedItemZivotinja != null &&
-        selectedItemZivotinja.id != 0){
+        selectedItemZivotinja.id != 0 &&
+        (selectedItemKategorija == null || selectedItemKategorija == 0)) {
       queryParams = {
         "naziv": pretragaController.text,
         "proizvodjacid": selectedItemProizvodjac.id.toString(),
         "zivotinjaid": selectedItemZivotinja.id.toString()
       };
-    } else if(selectedItemZivotinja != null &&
-        selectedItemZivotinja.id != 0) {
+    } else if (selectedItemZivotinja != null &&
+        selectedItemZivotinja.id != 0 &&
+        (selectedItemKategorija == null || selectedItemKategorija == 0) &&
+        (selectedItemProizvodjac == null || selectedItemProizvodjac == 0)) {
       queryParams = {
         "naziv": pretragaController.text,
         "zivotinjaid": selectedItemZivotinja.id.toString()
       };
-    }else if (pretragaController.text.isNotEmpty) {
+    } else if (pretragaController.text.isNotEmpty) {
       queryParams = {"naziv": pretragaController.text};
     } else {
       queryParams = null;
@@ -216,7 +227,8 @@ class _ProizvodiState extends State<Proizvodi> {
 
   Widget bodyWidget() {
     return FutureBuilder<List<Proizvod>?>(
-      future: GetProizvodi(_selectedKategorija, _selectedProizvodjac, _selectedZivotinja),
+      future: GetProizvodi(
+          _selectedKategorija, _selectedProizvodjac, _selectedZivotinja),
       builder: (BuildContext context, AsyncSnapshot<List<Proizvod>?> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -232,7 +244,10 @@ class _ProizvodiState extends State<Proizvodi> {
           } else {
             return Column(
               children: [
-                Container(width: double.infinity,margin: EdgeInsets.only(left: 100, right: 100),child: dropdownWidgetZivotinje()),
+                Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.only(left: 100, right: 100),
+                    child: dropdownWidgetZivotinje()),
                 Row(
                   children: [
                     Expanded(flex: 19, child: dropdownWidgetKategorije()),
@@ -513,7 +528,8 @@ class _ProizvodiState extends State<Proizvodi> {
               padding: const EdgeInsets.only(bottom: 5),
               child: TextField(
                 onChanged: (value) async {
-                  await GetProizvodi(_selectedKategorija, _selectedProizvodjac, _selectedZivotinja)
+                  await GetProizvodi(_selectedKategorija, _selectedProizvodjac,
+                          _selectedZivotinja)
                       .then((value) {
                     setState(() {});
                   });

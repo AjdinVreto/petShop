@@ -8,5 +8,6 @@ namespace PetShop.Services
 {
     public interface IProizvodService : ICRUDService<Model.Proizvod, ProizvodSearchObject, ProizvodInsertRequest, ProizvodUpdateRequest>
     {
+        List<Model.Proizvod> Recommend(int id);
     }
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:petshop_mobile/models/NarudzbaProizvod.dart';
+import 'package:petshop_mobile/models/Proizvod.dart';
 import 'package:petshop_mobile/models/Recenzija.dart';
 import 'package:petshop_mobile/models/Requests/RecenzijaUpdate.dart';
 import 'package:petshop_mobile/services/APIService.dart';
@@ -58,6 +59,16 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
     });
   }
 
+  Future<List<Proizvod>?> getPreporuceniProizvodi() async {
+    var preporuceniProizvodi =
+        await APIService.Get("Proizvod/Recommend/${widget.proizvod.id}", null);
+
+    var preporuceniProizvodiList =
+        preporuceniProizvodi?.map((i) => Proizvod.fromJson(i)).toList();
+
+    return preporuceniProizvodiList;
+  }
+
   Future<void> DodajKorpa() async {
     await APIService.Post(
         "NarudzbaProizvod", json.encode(narudzbaProizvodRequest?.toJson()));
@@ -106,7 +117,9 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
           (BuildContext context, AsyncSnapshot<List<Recenzija>?> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: CircularProgressIndicator(color: Colors.orange,),
+            child: CircularProgressIndicator(
+              color: Colors.orange,
+            ),
           );
         } else {
           if (snapshot.hasError) {
@@ -216,6 +229,29 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
                         height: 5,
                       ),
                       proizvodOpis(),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Divider(
+                        thickness: 1,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Preporuceni proizvodi",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      preporuceniProizvodi(),
+                      SizedBox(
+                        height: 15,
+                      ),
                     ],
                   ),
                 ),
@@ -336,6 +372,88 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget preporuceniProizvodi() {
+    return FutureBuilder<List<Proizvod>?>(
+      future: getPreporuceniProizvodi(),
+      builder: (BuildContext context, AsyncSnapshot<List<Proizvod>?> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Colors.orange,
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            return const Center(
+              child: Text("Greska na serveru, pokusajte ponovo"),
+            );
+          } else {
+            return Container(
+              height: 220,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: snapshot.data?.length,
+                      itemBuilder: (ctx, i) =>
+                          preporuceniProizvod(snapshot.data![i]),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+        }
+      },
+    );
+  }
+
+  Widget preporuceniProizvod(proizvod) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProizvodDetalji(proizvod),
+          ),
+        );
+      },
+      child: Container(
+        height: 220,
+        width: 200,
+        color: Colors.white70,
+        margin: EdgeInsets.only(right: 15),
+        child: Column(
+          children: [
+            Image(
+              image: MemoryImage(proizvod.slika),
+              fit: BoxFit.fill,
+              height: 150,
+              width: double.infinity,
+            ),
+            SizedBox(height: 10),
+            Chip(
+              backgroundColor: Colors.purple,
+              label: Text(
+                proizvod.naziv,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
+                softWrap: true,
+                maxLines: 2,
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -11,6 +11,7 @@ class Proizvod {
   final int? kategorijaId;
   final int? proizvodjacId;
   final Proizvodjac? proizvodjac;
+  final int? zivotinjaId;
 
   Proizvod({
     required this.id,
@@ -21,6 +22,7 @@ class Proizvod {
     required this.kategorijaId,
     required this.proizvodjacId,
     required this.proizvodjac,
+    required this.zivotinjaId,
   });
 
   factory Proizvod.fromJson(Map<String, dynamic> json) {
@@ -32,6 +34,7 @@ class Proizvod {
         kategorijaId: int.parse(json["kategorijaId"].toString()),
         proizvodjacId: int.parse(json["proizvodjacId"].toString()),
         proizvodjac: Proizvodjac.fromJson(json["proizvodjac"]),
+        zivotinjaId: int.parse(json["zivotinjaId"].toString()),
         slika: json["slika"] != null
             ? base64.decode(json['slika'] as String)
             : null);
@@ -45,5 +48,6 @@ class Proizvod {
         "slika": slika != null ? base64.encode(slika!) : slika,
         "kategorijaId": kategorijaId,
         "proizvodjacId": proizvodjacId,
+        "zivotinjaId": zivotinjaId,
       };
 }
