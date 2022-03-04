@@ -38,7 +38,7 @@
     ```
     git clone https://github.com/AjdinVreto/petShop.git
     ```
-2. Otvoriti klonirani repozitoriji u konzoli
+2. Otvoriti klonirani repozitorij u konzoli
 
 3. Pokretanje dokerizovanog API-ja i DB-a
 
@@ -47,7 +47,7 @@
     docker-compose up
     ```
     
-4. Otovriti petshop_mobile folder
+4. Otvoriti petshop_mobile folder
 
     ```
     cd petshop_mobile
