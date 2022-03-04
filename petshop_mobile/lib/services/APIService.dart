@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:petshop_mobile/models/Korisnik.dart';
 
 class APIService {
-  static const String _baseRoute = "http://192.168.1.5:5013/api/";
+  static const String _baseRoute = "http://10.0.2.2:5013/api/";
 
   static late int korisnikId;
   static late int narudzbaId;

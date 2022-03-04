@@ -142,6 +142,7 @@ class _PromjenaPasswordState extends State<PromjenaPassword> {
     return Container(
       margin: const EdgeInsets.only(right: 50, left: 50),
       child: TextFormField(
+        obscureText: true,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         /* autovalidate is disabled */
         controller: controller,

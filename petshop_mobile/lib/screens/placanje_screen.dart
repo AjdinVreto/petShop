@@ -237,7 +237,7 @@ class _PlacanjeState extends State<Placanje> {
           child: TextFormField(
             controller: popustKuponController,
             decoration: const InputDecoration(
-              labelText: "Unesite kupon kod",
+              labelText: "Unesite kupon kod (probati ""Discount"")",
               counterText: "",
               filled: true,
               fillColor: Colors.white,
