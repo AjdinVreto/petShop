@@ -710,6 +710,12 @@ namespace PetShop
                 context.Transakcijas.Add(new Transakcija { NarudzbaId = 40, NacinPlacanja = "Kartica", Datum = new DateTime(2021, 12, 7), PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)10.40 });
                 context.SaveChanges();
             }
+
+            if (!context.Kontakts.Any())
+            {
+                context.Kontakts.Add(new Kontakt { Ime = "Abdulah Proho", Odgovoreno = false, Tekst = "Gdje imate poslovnice u Sarajevu ? ", Email = "proxy@gmail.com", KorisnikId = 4 });
+                context.SaveChanges();
+            }
         }
 
         public static string GenerateSalt()

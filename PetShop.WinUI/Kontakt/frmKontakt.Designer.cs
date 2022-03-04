@@ -33,16 +33,16 @@ namespace PetShop.WinUI.Kontakt
             this.lblNavigacija = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvKontakt = new System.Windows.Forms.DataGridView();
-            this.ImePrezime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tekst = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Odgovoreno = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Obris = new System.Windows.Forms.DataGridViewButtonColumn();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtOdgovor = new System.Windows.Forms.TextBox();
             this.lblGrad = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnOdgovor = new System.Windows.Forms.Button();
+            this.ImePrezime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tekst = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Odgovoreno = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Obrisi = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKontakt)).BeginInit();
@@ -88,7 +88,7 @@ namespace PetShop.WinUI.Kontakt
             this.Email,
             this.Tekst,
             this.Odgovoreno,
-            this.Obris});
+            this.Obrisi});
             this.dgvKontakt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvKontakt.Location = new System.Drawing.Point(3, 16);
             this.dgvKontakt.Name = "dgvKontakt";
@@ -100,43 +100,6 @@ namespace PetShop.WinUI.Kontakt
             this.dgvKontakt.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKontakt_CellContentClick);
             this.dgvKontakt.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKontakt_CellDoubleClick);
             this.dgvKontakt.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvKontakt_DataError);
-            // 
-            // ImePrezime
-            // 
-            this.ImePrezime.DataPropertyName = "ImePrezime";
-            this.ImePrezime.HeaderText = "Ime i prezime";
-            this.ImePrezime.Name = "ImePrezime";
-            this.ImePrezime.ReadOnly = true;
-            // 
-            // Email
-            // 
-            this.Email.DataPropertyName = "Email";
-            this.Email.HeaderText = "Email";
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
-            // 
-            // Tekst
-            // 
-            this.Tekst.DataPropertyName = "Tekst";
-            this.Tekst.HeaderText = "Tekst poruke";
-            this.Tekst.Name = "Tekst";
-            this.Tekst.ReadOnly = true;
-            // 
-            // Odgovoreno
-            // 
-            this.Odgovoreno.DataPropertyName = "Odgovoreno";
-            this.Odgovoreno.HeaderText = "Odgovoreno";
-            this.Odgovoreno.Name = "Odgovoreno";
-            this.Odgovoreno.ReadOnly = true;
-            // 
-            // Obris
-            // 
-            this.Obris.DataPropertyName = "Obrisi";
-            this.Obris.HeaderText = "Obrisi";
-            this.Obris.Name = "Obris";
-            this.Obris.ReadOnly = true;
-            this.Obris.Text = "Obrisi";
-            this.Obris.UseColumnTextForButtonValue = true;
             // 
             // txtEmail
             // 
@@ -188,6 +151,43 @@ namespace PetShop.WinUI.Kontakt
             this.btnOdgovor.UseVisualStyleBackColor = false;
             this.btnOdgovor.Click += new System.EventHandler(this.btnOdgovor_Click);
             // 
+            // ImePrezime
+            // 
+            this.ImePrezime.DataPropertyName = "Ime";
+            this.ImePrezime.HeaderText = "Ime i prezime";
+            this.ImePrezime.Name = "ImePrezime";
+            this.ImePrezime.ReadOnly = true;
+            // 
+            // Email
+            // 
+            this.Email.DataPropertyName = "Email";
+            this.Email.HeaderText = "Email";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            // 
+            // Tekst
+            // 
+            this.Tekst.DataPropertyName = "Tekst";
+            this.Tekst.HeaderText = "Tekst poruke";
+            this.Tekst.Name = "Tekst";
+            this.Tekst.ReadOnly = true;
+            // 
+            // Odgovoreno
+            // 
+            this.Odgovoreno.DataPropertyName = "Odgovoreno";
+            this.Odgovoreno.HeaderText = "Odgovoreno";
+            this.Odgovoreno.Name = "Odgovoreno";
+            this.Odgovoreno.ReadOnly = true;
+            // 
+            // Obrisi
+            // 
+            this.Obrisi.DataPropertyName = "Obrisi";
+            this.Obrisi.HeaderText = "Obrisi";
+            this.Obrisi.Name = "Obrisi";
+            this.Obrisi.ReadOnly = true;
+            this.Obrisi.Text = "Obrisi";
+            this.Obrisi.UseColumnTextForButtonValue = true;
+            // 
             // frmKontakt
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -227,6 +227,6 @@ namespace PetShop.WinUI.Kontakt
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tekst;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Odgovoreno;
-        private System.Windows.Forms.DataGridViewButtonColumn Obris;
+        private System.Windows.Forms.DataGridViewButtonColumn Obrisi;
     }
 }
