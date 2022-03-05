@@ -229,27 +229,27 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
                         height: 5,
                       ),
                       proizvodOpis(),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 1,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text(
+                      const Text(
                         "Preporuceni proizvodi",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       preporuceniProizvodi(),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                     ],
@@ -280,7 +280,7 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
         await ProizvodProvjera(widget.proizvod.id).then((value) async {
           if (proizvodUKorpi) {
             ShowAlertDialog.showAlertDialog(context, "NEUSPJESNO !",
-                "Proizvod se vec nalazi u vasoj korpi", false);
+                "Proizvod se vec nalazi u vasoj korpi, kolicinu mozete mjenjati u korpi.", false);
           } else {
             await DodajKorpa().then((value) {
               ShowAlertDialog.showAlertDialog(context, "USPJESNO !",
@@ -400,7 +400,7 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
                   Expanded(
                     child: ListView.builder(
                       shrinkWrap: true,
-                      physics: ScrollPhysics(),
+                      physics: const ScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemCount: snapshot.data?.length,
                       itemBuilder: (ctx, i) =>
@@ -430,7 +430,7 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
         height: 220,
         width: 200,
         color: Colors.white70,
-        margin: EdgeInsets.only(right: 15),
+        margin: const EdgeInsets.only(right: 15),
         child: Column(
           children: [
             Image(
@@ -439,13 +439,13 @@ class _ProizvodDetaljiState extends State<ProizvodDetalji> {
               height: 150,
               width: double.infinity,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Chip(
               backgroundColor: Colors.purple,
               label: Text(
                 proizvod.naziv,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white,
                 ),

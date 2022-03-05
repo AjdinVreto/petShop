@@ -112,6 +112,9 @@ class _KontaktScreenState extends State<KontaktScreen> {
                           setState(() {
                             ShowAlertDialog.showAlertDialog(context, "Uspjesno",
                                 "Vasa poruka je uspjesno poslana", false);
+                            tekstController.clear();
+                            emailController.clear();
+                            imePrezimeController.clear();
                           });
                         });
                       } else {
@@ -208,7 +211,7 @@ class _KontaktScreenState extends State<KontaktScreen> {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
       ],

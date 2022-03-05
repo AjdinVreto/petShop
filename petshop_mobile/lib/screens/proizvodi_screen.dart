@@ -33,6 +33,8 @@ class _ProizvodiState extends State<Proizvodi> {
   Icon customIcon = const Icon(Icons.search);
 
   bool proizvodUKorpi = false;
+  bool sortAscending = false;
+  bool sortDescending = false;
 
   Future<List<Proizvod>?> GetProizvodi(
       Kategorija? selectedItemKategorija,
@@ -114,7 +116,19 @@ class _ProizvodiState extends State<Proizvodi> {
 
     var proizvodi = await APIService.Get("Proizvod", queryParams);
 
-    return proizvodi?.map((i) => Proizvod.fromJson(i)).toList();
+    var proizvodiList = proizvodi?.map((i) => Proizvod.fromJson(i)).toList();
+
+    if(sortAscending == true && sortDescending == false){
+      proizvodiList?.sort((a, b) => a.cijena!.compareTo(b.cijena!));
+      return proizvodiList;
+    }
+
+    if(sortAscending == false && sortDescending == true){
+      proizvodiList?.sort((a, b) => a.cijena!.compareTo(b.cijena!));
+      return proizvodiList?.reversed.toList();
+    }
+
+    return proizvodiList;
   }
 
   Future<List<Kategorija>?> GetKategorije(Kategorija? _selectedItem) async {
@@ -218,7 +232,7 @@ class _ProizvodiState extends State<Proizvodi> {
     return Scaffold(
       appBar: AppBar(
         title: customSearchBar,
-        actions: [SearchBar()],
+        actions: [SortAscending(), SortDescending(), SearchBar()],
       ),
       drawer: AppDrawer(),
       body: bodyWidget(),
@@ -246,7 +260,7 @@ class _ProizvodiState extends State<Proizvodi> {
               children: [
                 Container(
                     width: double.infinity,
-                    margin: EdgeInsets.only(left: 100, right: 100),
+                    margin: const EdgeInsets.only(left: 100, right: 100),
                     child: dropdownWidgetZivotinje()),
                 Row(
                   children: [
@@ -254,22 +268,32 @@ class _ProizvodiState extends State<Proizvodi> {
                     Expanded(flex: 20, child: dropdownWidgetProizvodjaci()),
                   ],
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: GridView.builder(
-                      itemCount: snapshot.data?.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 0.55,
-                              crossAxisSpacing: 10,
-                              mainAxisSpacing: 25),
-                      itemBuilder: (ctx, i) =>
-                          ProizvodWidget(snapshot.data![i]),
-                    ),
-                  ),
-                ),
+                snapshot.data?.length == 0
+                    ? const Center(
+                        child: Text(
+                          "Nema proizovida za odabrane filtere",
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red),
+                        ),
+                      )
+                    : Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: GridView.builder(
+                            itemCount: snapshot.data?.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 0.55,
+                                    crossAxisSpacing: 10,
+                                    mainAxisSpacing: 25),
+                            itemBuilder: (ctx, i) =>
+                                ProizvodWidget(snapshot.data![i]),
+                          ),
+                        ),
+                      ),
               ],
             );
           }
@@ -333,7 +357,7 @@ class _ProizvodiState extends State<Proizvodi> {
             );
           } else {
             if (snapshot.hasError) {
-              return Center(
+              return const Center(
                 child: Text("Greska na serveru, pokusajte ponovo"),
               );
             } else {
@@ -375,7 +399,7 @@ class _ProizvodiState extends State<Proizvodi> {
             );
           } else {
             if (snapshot.hasError) {
-              return Center(
+              return const Center(
                 child: Text("Greska na serveru, pokusajte ponovo"),
               );
             } else {
@@ -491,7 +515,7 @@ class _ProizvodiState extends State<Proizvodi> {
                                 ShowAlertDialog.showAlertDialog(
                                     context,
                                     "NEUSPJESNO !",
-                                    "Proizvod se vec nalazi u vasoj korpi",
+                                    "Proizvod se vec nalazi u vasoj korpi, kolicinu mozete mjenjati u korpi.",
                                     false);
                               } else {
                                 await DodajKorpa(proizvod).then((value) {
@@ -554,6 +578,30 @@ class _ProizvodiState extends State<Proizvodi> {
         });
       },
       icon: customIcon,
+    );
+  }
+
+  Widget SortAscending() {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          sortAscending = true;
+          sortDescending = false;
+        });
+      },
+      icon: const Icon(Icons.arrow_upward_rounded),
+    );
+  }
+
+  Widget SortDescending() {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          sortAscending = false;
+          sortDescending = true;
+        });
+      },
+      icon: const Icon(Icons.arrow_downward_rounded),
     );
   }
 }

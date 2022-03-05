@@ -110,6 +110,9 @@ class _PromjenaPasswordState extends State<PromjenaPassword> {
                                 "USPJESNO !",
                                 "Vas password je uspjesno izmjenjen",
                                 false);
+                            stariPasswordController.clear();
+                            noviPasswordController.clear();
+                            potvrdaNovogPasswordaController.clear();
                           });
                         });
                       } else {
