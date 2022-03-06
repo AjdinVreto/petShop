@@ -146,7 +146,56 @@ namespace PetShop.Services
         private static ITransformer model = null;
         public List<Model.Proizvod> Recommend(int id)
         {
-            if(mlContext == null)
+            bool provjera = false;
+
+            var allNarudzbe = ctx.Narudzbas.Include("NarudzbaProizvods").ToList();
+
+            foreach (var item in allNarudzbe)
+            {
+                if (item.NarudzbaProizvods.Count > 1)
+                {
+                    var itemId = item.NarudzbaProizvods.Select(x => x.ProizvodId).ToList();
+                    itemId.ForEach(y =>
+                    {
+                        if (y == id)
+                        {
+                            provjera = true;
+                        }
+                    });
+                }
+
+                if (provjera == true)
+                {
+                    break;
+                }
+            }
+
+            if (!provjera)
+            {
+                var proizvod = ctx.Proizvods.Where(x => x.Id == id).FirstOrDefault();
+                var allProizvodi = ctx.Proizvods.Include(x => x.Proizvodjac).Include(x => x.Proizvodjac.Drzava).Where(x => x.KategorijaId == proizvod.KategorijaId).ToList();
+
+                var recenzija = ctx.Recenzijas.Where(y => y.Proizvod.KategorijaId == proizvod.KategorijaId && y.ProizvodId != proizvod.Id).GroupBy(x => x.Proizvod.Id).Select(g => new Recenzija { ProizvodId = g.Key, Ocjena = g.Sum(s => s.Ocjena) }).OrderByDescending(z => z.Ocjena).Take(3).ToList();
+
+                if (recenzija.Count > 1)
+                {
+                    List<Proizvod> proizvodiList = new List<Proizvod>();
+                    foreach (var r in recenzija)
+                    {
+                        foreach (var p in allProizvodi)
+                        {
+                            if (r.ProizvodId == p.Id)
+                            {
+                                proizvodiList.Add(p);
+                            }
+                        }
+                    }
+
+                    return _mapper.Map<List<Model.Proizvod>>(proizvodiList);
+                }
+            }
+
+            if (mlContext == null)
             {
                 mlContext = new MLContext();
 
@@ -195,10 +244,10 @@ namespace PetShop.Services
                 model = est.Fit(trainData);
             }
 
-            var allItems = ctx.Proizvods.Include(x => x.Proizvodjac).Include(x => x.Proizvodjac.Drzava).Where(x => x.ProizvodjacId != id).ToList();
+            var allItems = ctx.Proizvods.Include(x => x.Proizvodjac).Include(x => x.Proizvodjac.Drzava).Where(x => x.Id != id).ToList();
             var predictionResult = new List<Tuple<Database.Proizvod, float>>();
 
-            foreach(var item in allItems)
+            foreach (var item in allItems)
             {
                 var predictionEngine = mlContext.Model.CreatePredictionEngine<ProductEntry, Copurchase_prediction>(model);
 
@@ -211,7 +260,7 @@ namespace PetShop.Services
                 predictionResult.Add(new Tuple<Database.Proizvod, float>(item, prediction.Score));
             }
 
-            var finalResult = predictionResult.OrderBy(x => x.Item2).Select(x => x.Item1).Take(3).ToList();
+            var finalResult = predictionResult.OrderByDescending(x => x.Item2).Select(x => x.Item1).Take(3).ToList();
 
             return _mapper.Map<List<Model.Proizvod>>(finalResult);
         }
@@ -223,10 +272,10 @@ namespace PetShop.Services
 
         public class ProductEntry
         {
-            [KeyType(count: 20)]
+            [KeyType(count: 100)]
             public uint ProductID { get; set; }
 
-            [KeyType(count: 20)]
+            [KeyType(count: 100)]
             public uint CoPurchaseProductID { get; set; }
 
             public float Label { get; set; }

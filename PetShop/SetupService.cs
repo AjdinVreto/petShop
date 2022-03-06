@@ -205,6 +205,8 @@ namespace PetShop
                 context.SaveChanges();
                 context.Proizvods.Add(new Proizvod { Naziv = "ErbaGatta povodac za macke", KategorijaId = 5, Opis = "Veoma kvalitetan i fleksibilan povodac za macke", Cijena = (decimal)2.50, ProizvodjacId = 6, ZivotinjaId = 1, Slika = File.ReadAllBytes("Images/erbagattapovodaczamacke.jpg") });
                 context.SaveChanges();
+                context.Proizvods.Add(new Proizvod { Naziv = "Trixie kavez za ptice", KategorijaId = 5, Opis = "Kvalitetan i od odlicnog materijala kavez za ptice", Cijena = (decimal)17.50, ProizvodjacId = 4, ZivotinjaId = 3, Slika = File.ReadAllBytes("Images/kavezzaptice.jpg") });
+                context.SaveChanges();
             }
 
             if (!context.PopustKupons.Any())
@@ -435,6 +437,8 @@ namespace PetShop
                 context.SaveChanges();
                 context.Narudzbas.Add(new Narudzba { KorisnikId = 4, Zavrsena = true, Aktivna = false, Datum = new DateTime(2021, 12, 7) });
                 context.SaveChanges();
+                context.Narudzbas.Add(new Narudzba { KorisnikId = 6, Zavrsena = true, Aktivna = false, Datum = new DateTime(2021, 12, 8) });
+                context.SaveChanges();
             }
 
             if (!context.NarudzbaProizvods.Any())
@@ -625,6 +629,8 @@ namespace PetShop
                 context.SaveChanges();
                 context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 40, ProizvodId = 19, Kolicina = 1 });
                 context.SaveChanges();
+                context.NarudzbaProizvods.Add(new NarudzbaProizvod { NarudzbaId = 41, ProizvodId = 21, Kolicina = 1 });
+                context.SaveChanges();
             }
 
             if (!context.Transakcijas.Any())
@@ -708,6 +714,8 @@ namespace PetShop
                 context.Transakcijas.Add(new Transakcija { NarudzbaId = 39, NacinPlacanja = "Kartica", Datum = new DateTime(2021, 11, 6), PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)13.90 });
                 context.SaveChanges();
                 context.Transakcijas.Add(new Transakcija { NarudzbaId = 40, NacinPlacanja = "Kartica", Datum = new DateTime(2021, 12, 7), PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)10.40 });
+                context.SaveChanges();
+                context.Transakcijas.Add(new Transakcija { NarudzbaId = 41, NacinPlacanja = "Kartica", Datum = new DateTime(2021, 12, 8), PopustKuponId = null, StripePaymentId = "paymentid", Iznos = (decimal)17.50 });
                 context.SaveChanges();
             }
 
