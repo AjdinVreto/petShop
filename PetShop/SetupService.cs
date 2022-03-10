@@ -69,22 +69,31 @@ namespace PetShop
                 string passwordSalt = GenerateSalt();
                 context.Korisniks.Add(new Korisnik { Ime = "Ajdin", Prezime = "Vreto", DatumRodjenja = DateTime.Now, Adresa = "Rukodol 7", Email = "ajdintotti5@gmail.com", GradId = 1, KorisnickoIme = "admin", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
                 context.SaveChanges();
+                passwordSalt = GenerateSalt();
+                context.Korisniks.Add(new Korisnik { Ime = "Admin", Prezime = "Desktop", DatumRodjenja = DateTime.Now, Adresa = "Rukodol 7", Email = "admindesktop@gmail.com", GradId = 1, KorisnickoIme = "desktop", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
+                context.SaveChanges();
+                passwordSalt = GenerateSalt();
                 context.Korisniks.Add(new Korisnik { Ime = "John", Prezime = "Doe", DatumRodjenja = DateTime.Now, Adresa = "NY 1", Email = "john@gmail.com", GradId = 1, KorisnickoIme = "uposlenik", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
                 context.SaveChanges();
-                context.Korisniks.Add(new Korisnik { Ime = "Tammy", Prezime = "Abraham", DatumRodjenja = DateTime.Now, Adresa = "Roma 22", Email = "tammy@gmail.com", GradId = 1, KorisnickoIme = "korisnik", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "roma") });
+                passwordSalt = GenerateSalt();
+                context.Korisniks.Add(new Korisnik { Ime = "Tammy", Prezime = "Abraham", DatumRodjenja = DateTime.Now, Adresa = "Roma 22", Email = "tammy@gmail.com", GradId = 1, KorisnickoIme = "korisnik", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
                 context.SaveChanges();
-                context.Korisniks.Add(new Korisnik { Ime = "Admir", Prezime = "Vreto", DatumRodjenja = DateTime.Now, Adresa = "Rukdol 77", Email = "admir@gmail.com", GradId = 1, KorisnickoIme = "admirvreto", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
+                passwordSalt = GenerateSalt();
+                context.Korisniks.Add(new Korisnik { Ime = "Abdulah", Prezime = "Proho", DatumRodjenja = DateTime.Now, Adresa = "Rukdol 77", Email = "proxy@gmail.com", GradId = 1, KorisnickoIme = "proxy", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
                 context.SaveChanges();
+                passwordSalt = GenerateSalt();
                 context.Korisniks.Add(new Korisnik { Ime = "Samir", Prezime = "Sinanovic", DatumRodjenja = DateTime.Now, Adresa = "Zelenih beretki 213", Email = "samke@gmail.com", GradId = 2, KorisnickoIme = "samke", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
                 context.SaveChanges();
+                passwordSalt = GenerateSalt();
                 context.Korisniks.Add(new Korisnik { Ime = "Tarik", Prezime = "Vreto", DatumRodjenja = DateTime.Now, Adresa = "Bistricki put 12", Email = "Tare@gmail.com", GradId = 3, KorisnickoIme = "tarikv", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
                 context.SaveChanges();
+                passwordSalt = GenerateSalt();
                 context.Korisniks.Add(new Korisnik { Ime = "Kenan", Prezime = "Taranis", DatumRodjenja = DateTime.Now, Adresa = "Kakrinjski put 213", Email = "keno@gmail.com", GradId = 1, KorisnickoIme = "kenan", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
                 context.SaveChanges();
-                context.Korisniks.Add(new Korisnik { Ime = "Nirmel", Prezime = "Misic", DatumRodjenja = DateTime.Now, Adresa = "Stanjevac 2", Email = "niki12@gmail.com", GradId = 3, KorisnickoIme = "niki", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
-                context.SaveChanges();
+                passwordSalt = GenerateSalt();
                 context.Korisniks.Add(new Korisnik { Ime = "Edin", Prezime = "Dzeko", DatumRodjenja = DateTime.Now, Adresa = "Sarajevska 123", Email = "dzeko@hotmail.com", GradId = 1, KorisnickoIme = "edzeko", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
                 context.SaveChanges();
+                passwordSalt = GenerateSalt();
                 context.Korisniks.Add(new Korisnik { Ime = "Lara", Prezime = "Croft", DatumRodjenja = DateTime.Now, Adresa = "142, Abbingdon Road", Email = "lara@gmail.com", GradId = 2, KorisnickoIme = "mobile", SpolId = 1, PasswordSalt = passwordSalt, PasswordHash = GenerateHash(passwordSalt, "test") });
                 context.SaveChanges();
             }
@@ -93,9 +102,9 @@ namespace PetShop
             {
                 context.KorisnikRolas.Add(new KorisnikRola { KorisnikId = 1, RolaId = 1 });
                 context.SaveChanges();
-                context.KorisnikRolas.Add(new KorisnikRola { KorisnikId = 2, RolaId = 2 });
+                context.KorisnikRolas.Add(new KorisnikRola { KorisnikId = 2, RolaId = 1 });
                 context.SaveChanges();
-                context.KorisnikRolas.Add(new KorisnikRola { KorisnikId = 3, RolaId = 3 });
+                context.KorisnikRolas.Add(new KorisnikRola { KorisnikId = 3, RolaId = 2 });
                 context.SaveChanges();
                 context.KorisnikRolas.Add(new KorisnikRola { KorisnikId = 4, RolaId = 3 });
                 context.SaveChanges();
@@ -227,7 +236,7 @@ namespace PetShop
 
             if (!context.Uposleniks.Any())
             {
-                context.Uposleniks.Add(new Uposlenik { KorisnikId = 2, PoslovnicaId = 1, DatumZaposlenja = DateTime.Now, Aktivan = true });
+                context.Uposleniks.Add(new Uposlenik { KorisnikId = 3, PoslovnicaId = 1, DatumZaposlenja = DateTime.Now, Aktivan = true });
                 context.SaveChanges();
             }
 
@@ -721,7 +730,7 @@ namespace PetShop
 
             if (!context.Kontakts.Any())
             {
-                context.Kontakts.Add(new Kontakt { Ime = "Abdulah Proho", Odgovoreno = false, Tekst = "Gdje imate poslovnice u Sarajevu ? ", Email = "proxy@gmail.com", KorisnikId = 4 });
+                context.Kontakts.Add(new Kontakt { Ime = "Abdulah Proho", Odgovoreno = false, Tekst = "Gdje imate poslovnice u Sarajevu ? ", Email = "proxy@gmail.com", KorisnikId = 5 });
                 context.SaveChanges();
             }
         }
